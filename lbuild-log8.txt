@@ -1,0 +1,365 @@
+Sencha Cmd v4.0.0.203
+[DBG] Loading configuration from C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\EasyTreaty
+[DBG] Scanning for extensions in C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions
+[DBG] Loaded extension: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-cordova-packager
+[DBG] Loaded extension: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-phonegap-packager
+[DBG] Loaded extension: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-compass
+[DBG] Loaded extension: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io
+[DBG] Framework dependency detected
+[DBG] Loading framework touch from C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\EasyTreaty\touch
+[DBG] Detecting framework plugin
+[DBG] Resolving framework config overrides for 'touch'
+[DBG] Detected framework version 2.3.0
+[DBG] Detected framework override at 'C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\plugins\touch\2.3'
+[DBG] using framework plugin located at 'C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\plugins\touch\2.3'
+[DBG] Loaded framework from C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\EasyTreaty\touch
+[DBG] Loading CommandProviders
+[DBG] Scanning extensions directory C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-cordova-packager for extensions
+[DBG] Scanning extensions directory C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-phonegap-packager for extensions
+[DBG] Scanning extensions directory C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-compass for extensions
+[DBG] Located C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-compass\sencha-compass.jar
+[DBG] loading manifest for jar C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-compass\sencha-compass.jar
+[DBG] get value lib/slf4j-api-1.6.6.jar lib/ant-1.8.4.jar lib/ant-launcher-1.8.4.jar for manifest class path
+[DBG] loading manifest for jar C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-compass\lib\slf4j-api-1.6.6.jar
+[DBG] loading manifest for jar C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-compass\lib\ant-1.8.4.jar
+[DBG] loading manifest for jar C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-compass\lib\ant-launcher-1.8.4.jar
+[DBG] Add extension classpath entry 'sencha-compass' : jar:file:/C:/Users/Amaya/bin/Sencha/Cmd/4.0.0.203/extensions/sencha-compass/sencha-compass.jar!/
+[DBG] Add extension classpath entry 'sencha-compass' : jar:file:/C:/Users/Amaya/bin/Sencha/Cmd/4.0.0.203/extensions/sencha-compass/lib/slf4j-api-1.6.6.jar!/
+[DBG] Add extension classpath entry 'sencha-compass' : jar:file:/C:/Users/Amaya/bin/Sencha/Cmd/4.0.0.203/extensions/sencha-compass/lib/ant-1.8.4.jar!/
+[DBG] Add extension classpath entry 'sencha-compass' : jar:file:/C:/Users/Amaya/bin/Sencha/Cmd/4.0.0.203/extensions/sencha-compass/lib/ant-launcher-1.8.4.jar!/
+[DBG] Scanning extensions directory C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io for extensions
+[DBG] Located C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io\sencha-io.jar
+[DBG] loading manifest for jar C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io\sencha-io.jar
+[DBG] get value lib/httpclient-4.2.1.jar lib/commons-logging-1.1.1.jar lib/commons-codec-1.6.jar lib/httpclient-cache-4.2.1.jar lib/httpcore-4.2.1.jar lib/httpmime-4.2.1.jar lib/slf4j-api-1.6.6.jar lib/gson-2.2.1.jar for manifest class path
+[DBG] loading manifest for jar C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io\lib\httpclient-4.2.1.jar
+[DBG] loading manifest for jar C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io\lib\commons-logging-1.1.1.jar
+[DBG] loading manifest for jar C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io\lib\commons-codec-1.6.jar
+[DBG] loading manifest for jar C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io\lib\httpclient-cache-4.2.1.jar
+[DBG] loading manifest for jar C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io\lib\httpcore-4.2.1.jar
+[DBG] loading manifest for jar C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io\lib\httpmime-4.2.1.jar
+[DBG] loading manifest for jar C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io\lib\slf4j-api-1.6.6.jar
+[DBG] loading manifest for jar C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io\lib\gson-2.2.1.jar
+[DBG] Add extension classpath entry 'sencha-io' : jar:file:/C:/Users/Amaya/bin/Sencha/Cmd/4.0.0.203/extensions/sencha-io/sencha-io.jar!/
+[DBG] Add extension classpath entry 'sencha-io' : jar:file:/C:/Users/Amaya/bin/Sencha/Cmd/4.0.0.203/extensions/sencha-io/lib/httpclient-4.2.1.jar!/
+[DBG] Add extension classpath entry 'sencha-io' : jar:file:/C:/Users/Amaya/bin/Sencha/Cmd/4.0.0.203/extensions/sencha-io/lib/commons-logging-1.1.1.jar!/
+[DBG] Add extension classpath entry 'sencha-io' : jar:file:/C:/Users/Amaya/bin/Sencha/Cmd/4.0.0.203/extensions/sencha-io/lib/commons-codec-1.6.jar!/
+[DBG] Add extension classpath entry 'sencha-io' : jar:file:/C:/Users/Amaya/bin/Sencha/Cmd/4.0.0.203/extensions/sencha-io/lib/httpclient-cache-4.2.1.jar!/
+[DBG] Add extension classpath entry 'sencha-io' : jar:file:/C:/Users/Amaya/bin/Sencha/Cmd/4.0.0.203/extensions/sencha-io/lib/httpcore-4.2.1.jar!/
+[DBG] Add extension classpath entry 'sencha-io' : jar:file:/C:/Users/Amaya/bin/Sencha/Cmd/4.0.0.203/extensions/sencha-io/lib/httpmime-4.2.1.jar!/
+[DBG] Add extension classpath entry 'sencha-io' : jar:file:/C:/Users/Amaya/bin/Sencha/Cmd/4.0.0.203/extensions/sencha-io/lib/slf4j-api-1.6.6.jar!/
+[DBG] Add extension classpath entry 'sencha-io' : jar:file:/C:/Users/Amaya/bin/Sencha/Cmd/4.0.0.203/extensions/sencha-io/lib/gson-2.2.1.jar!/
+[DBG] Scanning for plugins in folder: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-cordova-packager
+[DBG] Loading plugin: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-cordova-packager\cmd-cordova-packager.plugin.xml
+[DBG] Resolving packages for : EasyTreatyApp
+[DBG] scanning directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\EasyTreaty/touch for packages
+[DBG] scanning directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\EasyTreaty/packages for packages
+[DBG] Loading plugin: C:\Users\Amaya\bin\Sencha\Cmd\repo\.sencha\repo\plugin.xml
+[DBG] Scanning for plugins in folder: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-phonegap-packager
+[DBG] Loading plugin: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-phonegap-packager\cmd-phonegap-packager.plugin.xml
+[DBG] Scanning for plugins in folder: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-compass
+[DBG] Scanning for plugins in folder: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io
+[DBG] Scanning for plugins in folder: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-cordova-packager
+[DBG] Loading plugin: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-cordova-packager\cmd-cordova-packager.plugin.xml
+[DBG] Scanning for plugins in folder: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-phonegap-packager
+[DBG] Loading plugin: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-phonegap-packager\cmd-phonegap-packager.plugin.xml
+[DBG] Scanning for plugins in folder: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-compass
+[DBG] Scanning for plugins in folder: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io
+[DBG] Scanning for plugins in folder: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-cordova-packager
+[DBG] Loading plugin: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-cordova-packager\cmd-cordova-packager.plugin.xml
+[DBG] Scanning for plugins in folder: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-phonegap-packager
+[DBG] Loading plugin: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\cmd-phonegap-packager\cmd-phonegap-packager.plugin.xml
+[DBG] Scanning for plugins in folder: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-compass
+[DBG] Scanning for plugins in folder: C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\extensions\sencha-io
+[DBG] using path C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\stbuild;C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\stbuild\bin;C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203;C:\Program Files (x86)\PC Connectivity Solution\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Objective Caml\bin;E:\runtime\win64;E:\bin;C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\Tools\Binn\;C:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files (x86)\Toshiba\Bluetooth Toshiba Stack\sys\;C:\Program Files (x86)\Toshiba\Bluetooth Toshiba Stack\sys\x64\;C:\PROGRA~2\PICC;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\QuickTime\QTSystem\;E:\Program Files\TortoiseSVN\bin;C:\wamp\bin\php\php5.3.13;C:\Ruby193\bin;C:\Program Files\Java\jdk1.7.0\bin
+[DBG] executable located at C:\Users\Amaya\bin\Sencha\Cmd\4.0.0.203\stbuild\stbuild.exe
+[DBG] using working directory .
+Created project directory: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\src\com\EasyTreatyApp
+Added file C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\src\com\EasyTreatyApp\STActivity.java
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\bin
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\libs
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\values
+Added file C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\values\strings.xml
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\layout
+Added file C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\layout\main.xml
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\drawable-xhdpi
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\drawable-hdpi
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\drawable-mdpi
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\drawable-ldpi
+Added file C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\AndroidManifest.xml
+Added file C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\build.xml
+Added file C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\proguard-project.txt
+A subdirectory or file ..\build\\\libs\ already exists.
+A subdirectory or file ..\build\\\assets\ already exists.
+Copy operation failed src=./\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\icons\greenmarker.png dst=../build/\\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\icons\greenmarker.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\icons\Icon~ipad@2x.png dst=../build/\\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\icons\Icon~ipad@2x.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\startup\1496x2048.png dst=../build/\\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\startup\1496x2048.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\startup\1536x2008.png dst=../build/\\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\startup\1536x2008.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\Default@2x.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\Default@2x.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\app.json dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\app.json
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\flag.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\flag.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\Icon.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\Icon.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\logo.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\logo.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\more.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\more.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\temp\package\EasyTreatyApp\sencha-compiler\cmd-packages.js dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\temp\package\EasyTreatyApp\sencha-compilThe full path of ..\build\\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\resources\css\ is too long.
+The full path of ..\build\\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\ is too long.
+Unable to locate tools.jar. Expected to find it in C:\Program Files (x86)\Java\jre7\lib\tools.jar
+Buildfile: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\build.xml
+
+-set-mode-check:
+
+-set-debug-files:
+
+-check-env:
+ [checkenv] Android SDK Tools Revision 22.3.0
+ [checkenv] Installed at E:\GSoC\Development\adt-bundle-windows-x86_64-20131030\sdk
+
+-setup:
+     [echo] Project Name: EasyTreatyApp
+  [gettype] Project Type: Application
+
+-set-debug-mode:
+
+-debug-obfuscation-check:
+
+-pre-build:
+
+-build-setup:
+[getbuildtools] Using latest Build Tools: 18.1.1
+     [echo] Resolving Build Target for EasyTreatyApp...
+[gettarget] Project Target:   Android 4.2.2
+[gettarget] API level:        17
+     [echo] ----------
+     [echo] Creating output directories if needed...
+    [mkdir] Created dir: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\bin\res
+    [mkdir] Created dir: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\bin\rsObj
+    [mkdir] Created dir: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\bin\rsLibs
+    [mkdir] Created dir: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\gen
+    [mkdir] Created dir: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\bin\classes
+    [mkdir] Created dir: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\bin\dexedLibs
+     [echo] ----------
+     [echo] Resolving Dependencies for EasyTreatyApp...
+[dependency] Library dependencies:
+[dependency] No Libraries
+[dependency] 
+[dependency] ------------------
+     [echo] ----------
+     [echo] Building Libraries with 'debug'...
+   [subant] No sub-builds to iterate on
+
+-code-gen:
+[mergemanifest] Merging AndroidManifest files into one.
+[mergemanifest] Manifest merger disabled. Using project manifest only.
+     [echo] Handling aidl files...
+     [aidl] No AIDL files to compile.
+     [echo] ----------
+     [echo] Handling RenderScript files...
+     [echo] ----------
+     [echo] Handling Resources...
+     [aapt] Generating resource IDs...
+     [echo] ----------
+     [echo] Handling BuildConfig class...
+[buildconfig] Generating BuildConfig class.
+
+-pre-compile:
+
+-compile:
+
+BUILD FAILED
+E:\GSoC\Development\adt-bundle-windows-x86_64-20131030\sdk\tools\ant\build.xml:720: The following error occurred while executing this line:
+E:\GSoC\Development\adt-bundle-windows-x86_64-20131030\sdk\tools\ant\build.xml:734: Unable to find a javac compiler;
+com.sun.tools.javac.Main is not on the classpath.
+Perhaps JAVA_HOME does not point to the JDK.
+It is currently set to "C:\Program Files (x86)\Java\jre7"
+
+Total time: 1 second
+""E:/GSoC/Development/adt-bundle-windows-x86_64-20131030/sdk\tools\android" create project --target android-17 --name EasyTreatyApp --activity STActivity --path "../build/\/" --package com.EasyTreatyApp"
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open source file
+Can not open source file
+Could not run ant with error: 1
+Failed to package application
+er\cmd-packages.js
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\bluemarker.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\bluemarker.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\Default@2x.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\Default@2x.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\Icon~ipad.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\Icon~ipad.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\redmarker.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\redmarker.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\model\User.js dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\model\User.js
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\store\User.js dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\store\User.js
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\view\Login.js dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\view\Login.js
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\view\Menu.js dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\view\Menu.js
+Copy operation failed src=./\\resources/icons/Icon_Android36.png dst=../build/\\res\drawable-ldpi\icon.png
+Copy operation failed src=./\\resources/icons/Icon_Android48.png dst=../build/\\res\drawable-mdpi\icon.png
+[DBG] exit code was : 7
+[DBG] exit code was : 7
+[ERR] 
+Created project directory: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\src\com\EasyTreatyApp
+Added file C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\src\com\EasyTreatyApp\STActivity.java
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\bin
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\libs
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\values
+Added file C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\values\strings.xml
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\layout
+Added file C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\layout\main.xml
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\drawable-xhdpi
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\drawable-hdpi
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\drawable-mdpi
+Created directory C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\res\drawable-ldpi
+Added file C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\AndroidManifest.xml
+Added file C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\build.xml
+Added file C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\proguard-project.txt
+A subdirectory or file ..\build\\\libs\ already exists.
+A subdirectory or file ..\build\\\assets\ already exists.
+Copy operation failed src=./\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\icons\greenmarker.png dst=../build/\\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\icons\greenmarker.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\icons\Icon~ipad@2x.png dst=../build/\\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\icons\Icon~ipad@2x.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\startup\1496x2048.png dst=../build/\\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\startup\1496x2048.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\startup\1536x2008.png dst=../build/\\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\resources\startup\1536x2008.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\Default@2x.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\Default@2x.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\app.json dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\app.json
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\flag.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\flag.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\Icon.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\Icon.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\logo.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\logo.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\more.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native-package-mobile\EasyTreatyApp\packager.json\EasyTreatyApp.app\webapp\more.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\temp\package\EasyTreatyApp\sencha-compiler\cmd-packages.js dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\temp\package\EasyTreatyApp\sencha-compilThe full path of ..\build\\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\resources\css\ is too long.
+The full path of ..\build\\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\ is too long.
+Unable to locate tools.jar. Expected to find it in C:\Program Files (x86)\Java\jre7\lib\tools.jar
+Buildfile: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\build.xml
+
+-set-mode-check:
+
+-set-debug-files:
+
+-check-env:
+ [checkenv] Android SDK Tools Revision 22.3.0
+ [checkenv] Installed at E:\GSoC\Development\adt-bundle-windows-x86_64-20131030\sdk
+
+-setup:
+     [echo] Project Name: EasyTreatyApp
+  [gettype] Project Type: Application
+
+-set-debug-mode:
+
+-debug-obfuscation-check:
+
+-pre-build:
+
+-build-setup:
+[getbuildtools] Using latest Build Tools: 18.1.1
+     [echo] Resolving Build Target for EasyTreatyApp...
+[gettarget] Project Target:   Android 4.2.2
+[gettarget] API level:        17
+     [echo] ----------
+     [echo] Creating output directories if needed...
+    [mkdir] Created dir: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\bin\res
+    [mkdir] Created dir: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\bin\rsObj
+    [mkdir] Created dir: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\bin\rsLibs
+    [mkdir] Created dir: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\gen
+    [mkdir] Created dir: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\bin\classes
+    [mkdir] Created dir: C:\Users\Amaya\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\build\bin\dexedLibs
+     [echo] ----------
+     [echo] Resolving Dependencies for EasyTreatyApp...
+[dependency] Library dependencies:
+[dependency] No Libraries
+[dependency] 
+[dependency] ------------------
+     [echo] ----------
+     [echo] Building Libraries with 'debug'...
+   [subant] No sub-builds to iterate on
+
+-code-gen:
+[mergemanifest] Merging AndroidManifest files into one.
+[mergemanifest] Manifest merger disabled. Using project manifest only.
+     [echo] Handling aidl files...
+     [aidl] No AIDL files to compile.
+     [echo] ----------
+     [echo] Handling RenderScript files...
+     [echo] ----------
+     [echo] Handling Resources...
+     [aapt] Generating resource IDs...
+     [echo] ----------
+     [echo] Handling BuildConfig class...
+[buildconfig] Generating BuildConfig class.
+
+-pre-compile:
+
+-compile:
+
+BUILD FAILED
+E:\GSoC\Development\adt-bundle-windows-x86_64-20131030\sdk\tools\ant\build.xml:720: The following error occurred while executing this line:
+E:\GSoC\Development\adt-bundle-windows-x86_64-20131030\sdk\tools\ant\build.xml:734: Unable to find a javac compiler;
+com.sun.tools.javac.Main is not on the classpath.
+Perhaps JAVA_HOME does not point to the JDK.
+It is currently set to "C:\Program Files (x86)\Java\jre7"
+
+Total time: 1 second
+""E:/GSoC/Development/adt-bundle-windows-x86_64-20131030/sdk\tools\android" create project --target android-17 --name EasyTreatyApp --activity STActivity --path "../build/\/" --package com.EasyTreatyApp"
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open destination file for writing
+Can not open source file
+Can not open source file
+Could not run ant with error: 1
+Failed to package application
+er\cmd-packages.js
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\bluemarker.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\bluemarker.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\Default@2x.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\Default@2x.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\Icon~ipad.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\Icon~ipad.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\redmarker.png dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\build\native\EasyTreatyApp\redmarker.png
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\model\User.js dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\model\User.js
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\store\User.js dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\store\User.js
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\view\Login.js dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\view\Login.js
+Copy operation failed src=./\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\view\Menu.js dst=../build/\\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\packages\android\assets\app\view\Menu.js
+Copy operation failed src=./\\resources/icons/Icon_Android36.png dst=../build/\\res\drawable-ldpi\icon.png
+Copy operation failed src=./\\resources/icons/Icon_Android48.png dst=../build/\\res\drawable-mdpi\icon.png
+
+[ERR] stbuild exited with non-zero code : 7
+     at com.sencha.command.app.AppPackageCommands$BasePackageCommand.execute(AppPackageCommands.java:46)
+     at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+     at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+     at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+     at java.lang.reflect.Method.invoke(Unknown Source)
+     at com.sencha.util.MethodInvoker$Arguments.invoke(MethodInvoker.java:174)
+     at com.sencha.cli.Command.dispatch(Command.java:42)
+     at com.sencha.cli.Commands.dispatch(Commands.java:68)
+     at com.sencha.cli.Commands.dispatch(Commands.java:68)
+     at com.sencha.cli.Commands.dispatch(Commands.java:68)
+     at com.sencha.command.Sencha.dispatch(Sencha.java:81)
+     at com.sencha.command.Sencha.main(Sencha.java:149)
+
