@@ -8,63 +8,18 @@ Ext.define('EasyTreatyApp.view.ListView', {
 
     config:
    {
-       /**
-         * cfg {Store} locStore To store locations data 
-         */
-       locStore: null,
-
-       /**
-        * cfg {Store} docStore To store doctors' data 
-        */
-       docStore: null,
-
-       /**
-        * cfg {Store} pharmacyStore To store pharmacies' data 
-        */
-       pharmacyStore: null,
        
        layout: 'vbox',
        styleHtmlContent: true,
        align: 'stretch',       
        cls: 'profile',
+       store:null,
        items: [
            {
-              xtype: 'label',
-              tpl: '<h1 class="header">{title}</h1>',
-              docked:'top',
-              maxHeight: '20%',
-              data: { title: 'Sorted' }
-           },
-           {
                xtype: 'list',
-               itemTpl: '{name}<br>{address1}<br>{distance} km',
+               itemTpl: '{name}<br>{formatted_address}',
                cls:'option-list',
                flex:7
-           },
-           {
-               xtype: 'toolbar',
-               docked: 'bottom',
-               items: [
-                   {
-                       xtype: 'label',
-                       tpl: '<h1>{title}</h1>',
-                       data: { title: 'Sort by: ' }
-                   },
-                   
-                   {
-                       xtype: 'button',
-                       text: 'Distance',
-                   },
-                   {
-                       xtype: 'button',
-                       text: 'Cost'
-                   },
-                   {
-                       xtype: 'button',
-                       text: 'Back',
-                       docked: 'right'
-                   },
-               ]
            }
        ]
 
@@ -81,71 +36,33 @@ Ext.define('EasyTreatyApp.view.ListView', {
                itemsingletap: this.onItemTap,
                scope: this,
            });
+
         
-        this.getBackButton().on('tap', function () {
-            me.fireEvent('back');
-        });
 
-        this.getDistanceButton().on('tap', function() {
-            me.fireEvent('sortondistance', me, me.getItemList().getData());
-        });
-
-        this.setAllStores();
     },
+   
+    onLocationAddition: function () {
+        console.log("list set data");
+        this.getItemList().setData(null);
+        this.getItemList().setData(this.extractData(this.getStore().getRange()));
+
+    },
+
+
     /**
-        * Create the three stores and set stores
+        * Extracts data from records
         * @method
         * @private
-       */
-    setAllStores: function () {
-        var locStore = Ext.create('EasyTreatyApp.store.Location', {
-            model: "EasyTreatyApp.model.Location",
-        });
-
-        this.setLocStore(locStore);
-
-        var docStore = Ext.create('EasyTreatyApp.store.Doctor', {
-            model: "EasyTreatyApp.model.Doctor",
-        });
-
-        this.setDocStore(docStore);
-
-        var pharStore = Ext.create('EasyTreatyApp.store.Pharmacy', {
-            model: "EasyTreatyApp.model.Pharmacy",
-        });
-
-        this.setPharmacyStore(pharStore);
-    },
-    
-
-  /**
-   * Sets the data of the list
-   * @method
-  */
-    setListData: function (data) {
-        this.getItemList().setData(data);
-        this.getItemList().getStore().setData(data);
-    },
-    
-
-    /**
-     * Sets the store of the list
-     * @method
-    */
-    setListStore: function (currentSearch) {
-        
-        switch(currentSearch) {
-            case 0:
-                this.getItemList().setStore(this.getLocStore());
-                break;
-            case 1:
-                this.getItemList().setStore(this.getDocStore());
-                break;
-            case 2:
-                this.getItemList().setStore(this.getPharmacyStore());
-                break;
-                
-        }
+        * @param [{Object}] records
+        * @return [{Object}] data
+        */
+    extractData: function (records) {
+        var data = [];
+        Ext.each(records, function (record, index) {
+            data.push(record.data);
+        }, this);
+        console.log(data);
+        return data;
     },
     
     /*
@@ -163,7 +80,7 @@ Ext.define('EasyTreatyApp.view.ListView', {
      * @return {List} 
      */
     getItemList: function() {
-        return this.getComponent(1);
+        return this.getComponent(0);
     },
     
     /**
@@ -173,26 +90,6 @@ Ext.define('EasyTreatyApp.view.ListView', {
     onItemTap: function (list, index, target, record, e, eOpts) {
         console.log("item select");
         this.fireEvent('itemselected', record.get('id'));
-    },
-    
-    /**
-     * Returns the back button
-     * @method
-     * @private
-     * @return {Button} 
-     */
-    getBackButton: function () {
-        return this.getComponent(2).getComponent(3);
-    },
-    
-    /**
-     * Returns the Distance button
-     * @method
-     * @private
-     * @return {Button} 
-     */
-    getDistanceButton: function () {
-        return this.getComponent(2).getComponent(1);
     }
 
 

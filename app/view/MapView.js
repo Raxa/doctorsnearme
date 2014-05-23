@@ -8,29 +8,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
     config: {
         layout: 'card',
-        
-        /**
-         * cfg {Store} locStore To store locations data 
-         */
-        locStore: null,
-        
-        /**
-         * cfg {Store} docStore To store doctors' data 
-         */
-        docStore: null,
-        
-        /**
-         * cfg {Store} pharmacyStore To store pharmacies' data 
-         */
-        pharmacyStore: null,
-        
-        /**
-         * cfg {Integer} currentSearch 
-         * 0 if current search is medical centers
-         * 1 if current search is doctors
-         * 2 if current search is pharmacies
-         */
-        currentSearch: null,
+
         
         /**
          * cfg {Object} filter values for the current search 
@@ -38,13 +16,14 @@ Ext.define('EasyTreatyApp.view.MapView', {
         filterValues: null,
         
         cls:'map-view',
-        
-            items:[ {
-                        xtype:'mappanel'
-                    },
-                    {
-                        xtype: 'mainmenu'
-                    }
+        store: null,
+        items: [
+            {
+              xtype:'locationmap'
+            },
+            {
+                xtype: 'listview'
+            }
                 
             ]
     },
@@ -55,56 +34,38 @@ Ext.define('EasyTreatyApp.view.MapView', {
      * @method
     */
     initialize: function () {
-        this.setFilterValues({ noOfResults: 'All' });
 
         this.addToolBar();
-
-        this.setAllStores();
         
         this.callParent();
+
+        var store = Ext.create('EasyTreatyApp.store.Location');
+        this.setStore(store);
+        this.down('locationmap').setStore(store);
+        this.down('listview').setStore(store);
+
+        console.log(this.down('locationmap').getStore().getId());
+        console.log(this.down('listview').getStore().getId());
+
+      //  var pyrmont = new google.maps.LatLng(15.949228, 77.507717);
+        //var pyrmont = this.getUserLocation();
+        store.on({
+            locationadded: this.onLocationAddition,
+            storecleared: this.onStoreClear,
+            scope: this
+        });
+      //  store.populate(pyrmont, 'hospital', 5000000, this.down('locationmap'));
     },
     
+    onLocationAddition: function(){
+        this.down('locationmap').onLocationAddition();
+        this.down('listview').onLocationAddition();
 
-    /**
-     * Create the three stores and set stores
-     * @method
-     * @private
-    */
-    setAllStores: function() {
-        var locStore = Ext.create('EasyTreatyApp.store.Location', {
-            model: "EasyTreatyApp.model.Location",
-        });
-
-        this.setLocStore(locStore);
-
-        var docStore = Ext.create('EasyTreatyApp.store.Doctor', {
-            model: "EasyTreatyApp.model.Doctor",
-        });
-
-        this.setDocStore(docStore);
-
-        var pharStore = Ext.create('EasyTreatyApp.store.Pharmacy', {
-            model: "EasyTreatyApp.model.Pharmacy",
-        });
-
-        this.setPharmacyStore(pharStore);
-
-        this.getLocStore().on({
-            load: this.onStoreLoad,
-            scope: this
-        });
-
-        this.getDocStore().on({
-            load: this.onStoreLoad,
-            scope: this
-        });
-
-        this.getPharmacyStore().on({
-            load: this.onStoreLoad,
-            scope: this
-        });
     },
-    
+
+    onStoreClear: function(){
+        this.down('locationmap').onStoreClear();
+    },
 
     /**
      * Add the two toolbars 
@@ -120,7 +81,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
                 {
                     iconCls: 'list',
                     handler: function() {
-                        me.getMenu().toggle();
+                        me.fireEvent('showmenu');
                     }
                 },
                 {
@@ -128,19 +89,36 @@ Ext.define('EasyTreatyApp.view.MapView', {
                     text: 'Done',
                     docked: 'right',
                     hidden: 'true'
+                },
+                {
+                    xtype: 'button',
+                    text: 'List',
+                    docked: 'right',
+                    handler: function () {
+                        switch (me.indexOf(me.getActiveItem())) {
+                            case 0: me.setActiveItem(1);
+                                this.setText('Back');
+                                break;
+
+                            case 1: me.setActiveItem(0);
+                                this.setText('List');
+                                break;
+                        }
+                        
+                    }
                 }
                  
                 
             ]
         });
 
-        toolbar.setTitle(this.getToolbarTitle());
+       // toolbar.setTitle(this.getToolbarTitle());
 
         this.add(toolbar);
 
-        toolbar.getComponent(1).on('tap', function () {
-            me.selectionDone();
-        });
+        //toolbar.getComponent(1).on('tap', function () {
+        //    me.selectionDone();
+        //});
         
         var bottomBar = Ext.create('Ext.Toolbar', {
             docked: 'bottom',
@@ -182,119 +160,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
     },
     
 
-    /**
-     * Get the title for the tool bar according to the current search
-     * @method
-     * @private
-     * @return {String}
-     */
-    getToolbarTitle: function() {
-        var currentSearch = this.getCurrentSearch();
-        
-        switch(currentSearch) {
-            case 0:
-                return 'Medical Centers';
-            case 1:
-                return 'Doctors';
-            case 2:
-                return 'Pharmacies';
-            default :
-                return 'nothing';
-        }
-    },
-    
-
-    /**
-     * Executed at store load
-     * @method
-     * @private
-     * @param {Store} store
-     */
-    onStoreLoad: function (store) {
-        console.log("map view on store load");
-        
-        var records = store.getRange();
-        var locations = this.extractData(records);
-
-        var finalArray = this.filter(locations);
-
-        console.log("final");
-        this.createOrClearMap(finalArray);
-
-        console.log(finalArray);
-        
-        this.setMasked(false);
-    },
-    
-
-    /**
-     * Filter the locations according to current filter values
-     * @method
-     * @private
-     * @param [{Object}] locations
-     * @return [{Object}]
-     */
-    filter: function(locations) {
-        var mapPanel = this.down('mappanel');
-
-        var relativePosition = mapPanel.getRelativeLocation();
-
-        console.log("relative location");
-        console.log(relativePosition.lat() + " " + relativePosition.lng());
-
-        Ext.Array.forEach(locations, function(location) {
-            location.distance = EasyTreatyApp.math.distanceCalculator(relativePosition.lat(), relativePosition.lng(), location.latitude, location.longitude, 'K');
-        });
-
-        var sorted = EasyTreatyApp.math.mergeSort(locations);
-
-
-        if (this.getFilterValues().noOfResults != 'All') {
-            var parsed = parseInt(this.getFilterValues().noOfResults);
-        } else {
-            parsed = 1000000;
-        }
-
-        var filtered = EasyTreatyApp.math.lengthFilter(sorted, parsed + 1);
-        
-        if (this.getFilterValues().maxDistance != null) {
-            var finalArray = EasyTreatyApp.math.valueFilter(filtered,this.getFilterValues().maxDistance);
-            return finalArray;
-        } else {
-            return filtered;
-        }
-        
-
-    },
-    
-
-    /**
-     * Extracts data from records
-     * @method
-     * @private
-     * @param [{Object}] records
-     * @return [{Object}] data
-     */
-    extractData: function (records) {
-        var data = [];
-        Ext.each(records, function (record, index) {
-            data.push(record.data);
-        }, this);
-        return data;
-    },
-
-
-    /**
-     * Calls createOrClearMap() method of the item MapPanel
-     * @method
-     * @public
-     * @param [{Object}] locations
-     */
-    createOrClearMap:function(locations) {
-        var map = this.down('mappanel');
-        
-        map.createOrClearMap(locations);
-    },
+   
     
 
     /**
@@ -304,20 +170,6 @@ Ext.define('EasyTreatyApp.view.MapView', {
      */
     refresh: function () {
 
-        this.setMasked({
-            xtype: 'loadmask'
-        });
-        
-        var currentSearch = this.getCurrentSearch();
-        var store;
-        switch (currentSearch) {
-            case 0: store = this.getLocStore(); break;
-            case 1: store=this.getDocStore(); break;
-            case 2: store = this.getPharmacyStore(); break;
-        }
-        if(store!=null) {
-            store.load();
-        }
     },
     
 
@@ -327,7 +179,6 @@ Ext.define('EasyTreatyApp.view.MapView', {
      * @private
      */
     updateFilterValues: function (newValue, oldValue) {
-
         this.refresh();
     },
  
@@ -339,7 +190,6 @@ Ext.define('EasyTreatyApp.view.MapView', {
      * @param Boolean visibility
      */
     toggleDoneButton: function(visibility) {
-        //var toolbar = this.down('toolbar');
         var doneButton = this.getDoneButton();
 
         doneButton.setHidden(visibility);
@@ -371,8 +221,8 @@ Ext.define('EasyTreatyApp.view.MapView', {
      * @method
      * @return {MapPanel}
     */
-    getMapPanel: function () {
-        return this.down('mappanel');
+    getLocationMap: function () {
+        return this.down('locationmap');
     },
  
     
@@ -385,42 +235,4 @@ Ext.define('EasyTreatyApp.view.MapView', {
     getMenu: function () {
         return this.down('mainmenu');
     },
-    
-
-    /**
-     * Calls changeTheRelativeLocationForSearch() of the item MapPanel and toogles Done button
-     * @method
-     * @public
-     */
-    changeTheRelativeLocationForSearch: function() {
-
-        var mapPanel = this.getMapPanel();
-
-        mapPanel.changeTheRelativeLocationForSearch();
-
-        this.toggleDoneButton(false);
-    },
-
-
-    /**
-     * Calls selectionDone() of the item MapPanel, toogles Done button and refresh
-     * @method
-     * @private
-     * @param [{Object}] records
-     * @return [{Object}] data
-     */
-    selectionDone: function () {
-
-        var mapPanel = this.getMapPanel();
-
-        mapPanel.selectionDone();
-
-        this.toggleDoneButton(true);
-
-        this.refresh();
-
-
-
-    }
-
 })

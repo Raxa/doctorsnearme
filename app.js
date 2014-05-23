@@ -19,17 +19,13 @@ Ext.application({
         'EasyTreatyApp.math.Algorithms'
     ],
 
-    views: [
-        'MapPanel', 'MapView', 'ChoiceView', 'LocationFilterView', 'UserProfile', 'DoctorFilterView', 'PharmacyFilterView', 'FilterView','Menu','DetailsView','Login','ListView'
-    ],
+    views: ['LocationMap','MapView','Menu','ListView'],
     
-    controllers:[
-      'Map', 'ChoiceView', 'FilterView', 'ProfileView','Menu','Login','ListView'
-    ],
+    controllers:['MapView'],
     
-    stores: ['User','Location','Doctor','Pharmacy'],
+    stores: ['Location'],
     
-    models: ['User', 'Location', 'Doctor', 'Pharmacy', 'DoctorFilter', 'LocationFilter','Pharmacy'],
+    models: ['Location'],
 
     icon: {
         '57': 'resources/icons/Icon.png',
@@ -53,11 +49,14 @@ Ext.application({
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
         
-        var choiceView = Ext.create('EasyTreatyApp.view.ChoiceView');
-        var locfilterview = Ext.create('EasyTreatyApp.view.LocationFilterView');
-        var docfilterview = Ext.create('EasyTreatyApp.view.DoctorFilterView');
-        var pharfilterview = Ext.create('EasyTreatyApp.view.PharmacyFilterView');
-        Ext.Viewport.add(choiceView);
+        //var myMap = Ext.create('EasyTreatyApp.view.LocationMap');
+        //Ext.Viewport.add(myMap);
+        var menu = Ext.create('EasyTreatyApp.view.Menu');
+        Ext.Viewport.add(menu);
+
+        var mapView = Ext.create('EasyTreatyApp.view.MapView');
+        Ext.Viewport.add(mapView);
+        Ext.Viewport.setActiveItem(mapView);
     },
 
     onUpdated: function() {
