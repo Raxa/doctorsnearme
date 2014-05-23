@@ -37,32 +37,14 @@ Ext.define('EasyTreatyApp.view.ListView', {
                scope: this,
            });
 
-        
-
-    },
-   
-    onLocationAddition: function () {
-        console.log("list set data");
-        this.getItemList().setData(null);
-        this.getItemList().setData(this.extractData(this.getStore().getRange()));
-
     },
 
+    setListStore: function(store){
+        this.getItemList().setStore(store);
+    },
 
-    /**
-        * Extracts data from records
-        * @method
-        * @private
-        * @param [{Object}] records
-        * @return [{Object}] data
-        */
-    extractData: function (records) {
-        var data = [];
-        Ext.each(records, function (record, index) {
-            data.push(record.data);
-        }, this);
-        console.log(data);
-        return data;
+    fillList: function () {
+        this.getItemList().refresh();
     },
     
     /*
@@ -89,7 +71,8 @@ Ext.define('EasyTreatyApp.view.ListView', {
    */
     onItemTap: function (list, index, target, record, e, eOpts) {
         console.log("item select");
-        this.fireEvent('itemselected', record.get('id'));
+        this.parent.fireEvent('itemselected', record);
+        //this.getItemList().setData(null);
     }
 
 

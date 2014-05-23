@@ -9,11 +9,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
     config: {
         layout: 'card',
 
-        
-        /**
-         * cfg {Object} filter values for the current search 
-         */
-        filterValues: null,
+        currentSearch:null,
         
         cls:'map-view',
         store: null,
@@ -42,24 +38,20 @@ Ext.define('EasyTreatyApp.view.MapView', {
         var store = Ext.create('EasyTreatyApp.store.Location');
         this.setStore(store);
         this.down('locationmap').setStore(store);
-        this.down('listview').setStore(store);
 
-        console.log(this.down('locationmap').getStore().getId());
-        console.log(this.down('listview').getStore().getId());
+        this.down('listview').setListStore(store);
 
-      //  var pyrmont = new google.maps.LatLng(15.949228, 77.507717);
-        //var pyrmont = this.getUserLocation();
         store.on({
             locationadded: this.onLocationAddition,
             storecleared: this.onStoreClear,
             scope: this
         });
-      //  store.populate(pyrmont, 'hospital', 5000000, this.down('locationmap'));
     },
     
-    onLocationAddition: function(){
+    onLocationAddition: function () {
+        console.log("map view onloactionaddition");
         this.down('locationmap').onLocationAddition();
-        this.down('listview').onLocationAddition();
+        this.down('listview').fillList();
 
     },
 
@@ -97,7 +89,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
                     handler: function () {
                         switch (me.indexOf(me.getActiveItem())) {
                             case 0: me.setActiveItem(1);
-                                this.setText('Back');
+                                this.setText('Map');
                                 break;
 
                             case 1: me.setActiveItem(0);
@@ -116,9 +108,9 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
         this.add(toolbar);
 
-        //toolbar.getComponent(1).on('tap', function () {
-        //    me.selectionDone();
-        //});
+        toolbar.getComponent(1).on('tap', function () {
+            me.selectionDone();
+        });
         
         var bottomBar = Ext.create('Ext.Toolbar', {
             docked: 'bottom',
@@ -132,6 +124,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
                     iconCls: 'home',
                     handler: function () {
                         console.log("home");
+                        me.setCurrentSearch(0);
                         me.fireEvent('choicedone', 0);
                     }
                 },
@@ -140,6 +133,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
                     iconCls: 'user',
                     handler: function () {
                         console.log("user");
+                        me.setCurrentSearch(1);
                         me.fireEvent('choicedone', 1);
                     }
                 },
@@ -147,6 +141,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
                     text: 'Pharmacies',
                     iconCls: 'add',
                     handler: function () {
+                        me.setCurrentSearch(2);
                         me.fireEvent('choicedone', 2);
                     }
                 }
@@ -160,26 +155,10 @@ Ext.define('EasyTreatyApp.view.MapView', {
     },
     
 
-   
-    
+    changeBaseLocationToSearch: function () {
 
-    /**
-     * Reloads the relevant store according to current search
-     * @method
-     * @private
-     */
-    refresh: function () {
-
-    },
-    
-
-    /**
-     * Executed when filterValues config is updated
-     * @method
-     * @private
-     */
-    updateFilterValues: function (newValue, oldValue) {
-        this.refresh();
+        this.down('locationmap').changeBaseLocation();
+        this.toggleDoneButton();
     },
  
     
@@ -235,4 +214,25 @@ Ext.define('EasyTreatyApp.view.MapView', {
     getMenu: function () {
         return this.down('mainmenu');
     },
+
+    /**
+       * Calls selectionDone() of the item MapPanel, toogles Done button and refresh
+       * @method
+       * @private
+       * @param [{Object}] records
+       * @return [{Object}] data
+       */
+    selectionDone: function () {
+
+        this.down('locationmap').selectionDone();
+
+        this.toggleDoneButton(true);
+
+        var currentSearch = this.getCurrentSearch();
+
+        if (currentSearch != null) {
+            this.fireEvent('choicedone', currentSearch);
+        }
+
+    }
 })

@@ -19,9 +19,9 @@ Ext.application({
         'EasyTreatyApp.math.Algorithms'
     ],
 
-    views: ['LocationMap','MapView','Menu','ListView'],
+    views: ['LocationMap','MapView','Menu','ListView','DetailsView'],
     
-    controllers:['MapView'],
+    controllers:['MapView','DetailsView','Menu'],
     
     stores: ['Location'],
     

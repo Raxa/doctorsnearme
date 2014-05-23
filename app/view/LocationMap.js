@@ -21,6 +21,8 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
         locations: null,
 
+        clickListener: null,
+
         store:null
                       
     },
@@ -30,18 +32,22 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         console.log("inside initialize");
 
         this.setLocationOfTheUser();
+        var me = this;
+        this.addListener({
+            element: 'element',
+            delegate: 'button.direction',
+            tap: function (event, node, options, eOpts) {
+                me.parent.fireEvent('getdirections', me, node.id);
+            }
+        });
 
-        //var store = Ext.create('EasyTreatyApp.store.Location');
-        //this.setStore(store);
-        //var pyrmont = new google.maps.LatLng(15.949228, 77.507717);
-        ////var pyrmont = this.getUserLocation();
-        //store.on({
-        //    locationadded: this.onLocationAddition,
-        //    storecleared:this.onStoreClear,
-        //    scope: this
-        //});
-        //store.populate(pyrmont, 'hospital', 5000000, this);
-
+        this.addListener({
+            element: 'element',
+            delegate: 'button.more-details',
+            tap: function (event, node, options, eOpts) {
+                me.parent.fireEvent('moredetails', me, node.id);
+            }
+        });
 
     },
     onStoreClear: function(){
@@ -55,6 +61,11 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         var me = this;
         var record = this.getStore().last();
         me.addLocationMarker(record.getData(), 'redmarker.png');
+
+        //this.getStore().getRange().forEach(function (record) {
+        //    me.addLocationMarker(record.getData(), 'redmarker.png');
+        //    //me.addLocationMarker(record, 'redmarker.png');
+        //});
     },
     /**
     * Add a Marker
@@ -94,6 +105,27 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         });
         this.getLocationMarkers().push(marker);
     },
+
+    //addLocationMarker: function (record, markerIcon) {
+    //    var me = this;
+    //    var marker = new google.maps.Marker({
+    //        map: me.getMap(),
+    //        animation: null,
+    //        position: record.getData().geometry.location,
+    //        icon: 'resources/icons/' + markerIcon
+    //    });
+
+      
+    //    console.log("inside add location marker");
+
+    //    google.maps.event.addListener(marker, 'click', function (pos) {
+    //        var infowindow = new google.maps.InfoWindow();
+
+    //        me.getStore().setDetailsForTheRecord(me, record,infowindow,marker);
+           
+    //    });
+    //    this.getLocationMarkers().push(marker);
+    //},
 
 
     clearLocationMarkers: function () {
@@ -245,7 +277,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
      * @method
      * @private
      */
-        addClickListnerOnMap: function () {
+        changeBaseLocation: function () {
 
             var marker;
             var me = this;
@@ -269,6 +301,20 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             });
 
             this.setClickListener(listener);
+
+        },
+
+        /**
+         * gets Called when the user has changed the relative location
+         * @method
+         * @public
+         */
+        selectionDone: function () {
+            google.maps.event.removeListener(this.getClickListener());
+
+            this.setBaseLocation(this.getBaseLocationMarker().position);
+
+            console.log("relative location setting");
 
         }
     

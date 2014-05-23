@@ -25,11 +25,23 @@ Ext.define('EasyTreatyApp.view.Menu', {
                 {
                     xtype: 'selectfield',
                     label: 'Distance',
+                    labelWidth:'45%',
                     ui: 'mainmenu',
                     options: [
                     { text: '100000', value: 'first' },
                     { text: '1000000', value: 'second' },
                     { text: '10000000', value: 'third' }
+                    ]
+                },
+                {
+                    xtype: 'selectfield',
+                    label: 'Specilty',
+                    labelWidth: '45%',
+                    ui: 'mainmenu',
+                    options: [
+                    { text: 'Cardiologist', value: 'first' },
+                    { text: 'Dentist', value: 'second' },
+                    { text: ' Immunologist', value: 'third' }
                     ]
                 },
                 {
@@ -66,7 +78,10 @@ Ext.define('EasyTreatyApp.view.Menu', {
      * @method
     */
     setHandlerFunctions: function () {
-       
+        var me = this;
+        this.getChangeLocationButton().on('tap', function (button, e, eOpts) {
+            me.fireEvent('changelocation');
+        });
     },
     
     /**
