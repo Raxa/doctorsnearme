@@ -17,6 +17,8 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
         locationMarkers: [],
 
+        directionMarkers: [],
+
         routes: [],
 
         locations: null,
@@ -30,6 +32,8 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
     initialize: function(){
         this.callParent();
         console.log("inside initialize");
+
+        //this.enableBubble('baselocationupdated');
 
         this.setLocationOfTheUser();
         var me = this;
@@ -51,7 +55,8 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
     },
     onStoreClear: function(){
-        this.clearLocationMarkers();
+        this.clearMarkers(this.getLocationMarkers());
+        this.clearMarkers(this.getDirectionMarkers());
         this.clearRoutes();
     },
 
@@ -128,9 +133,8 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
     //},
 
 
-    clearLocationMarkers: function () {
-        var me = this;
-        Ext.Array.forEach(me.getLocationMarkers(), function (marker) {
+    clearMarkers: function (markers) {
+        Ext.Array.forEach(markers, function (marker) {
             marker.setMap(null);
         });
     },
@@ -251,7 +255,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
                 map: map
             });
             this.attachInstructionText(marker, myRoute.steps[i].instructions, stepDisplay, map);
-            this.getMarkers().push(marker);
+            this.getDirectionMarkers().push(marker);
         }
     },
 
