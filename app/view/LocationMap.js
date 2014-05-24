@@ -33,7 +33,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         this.callParent();
         console.log("inside initialize");
 
-        //this.enableBubble('baselocationupdated');
+        this.enableBubble(['getdirections', 'moredetails', 'togglefavorite']);
 
         this.setLocationOfTheUser();
         var me = this;
@@ -41,7 +41,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             element: 'element',
             delegate: 'button.direction',
             tap: function (event, node, options, eOpts) {
-                me.parent.fireEvent('getdirections', me, node.id);
+                me.fireEvent('getdirections', me, node.id);
             }
         });
 
@@ -49,7 +49,24 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             element: 'element',
             delegate: 'button.more-details',
             tap: function (event, node, options, eOpts) {
-                me.parent.fireEvent('moredetails', me, node.id);
+                me.fireEvent('moredetails', me, node.id);
+            }
+        });
+
+        this.addListener({
+            element: 'element',
+            delegate: 'button.star',
+            tap: function (event, node, options, eOpts) {
+                var button = Ext.get(node.id);
+
+                if (button.hasCls('favorite')) {
+                    button.removeCls("favorite");
+                    me.fireEvent('togglefavorite', node.id,true);
+                }
+                else {
+                    button.addCls("favorite");
+                    me.fireEvent('togglefavorite',node.id, false);
+                }                               
             }
         });
 
@@ -97,12 +114,13 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             address = "";
         }
         var idString = location.id;
-        var tpl = name+'</br>'+address+'</br><button class="direction" id=' + idString + '>Get Directions</button><button class="more-details" id=' + idString + '>More Details</button>';
+        var tpl = name+'</br>'+address+'</br><button class="direction">Get Directions</button><button class="more-details">More Details</button>';
         console.log("inside add location marker");
         console.log(address);
         if (phoneNumber != null) {
             tpl = tpl + '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>' + phoneNumber;
-        } 
+        }
+        tpl = tpl + '<button class="star" id=' + idString + '></button>';
 
         google.maps.event.addListener(marker, 'click', function (pos) {
             var infowindow = new google.maps.InfoWindow();

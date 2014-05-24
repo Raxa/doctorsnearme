@@ -121,7 +121,10 @@ Ext.define('EasyTreatyApp.view.MapView', {
             scrollable:'horizontal',
             items: [
                 {
-                    iconCls:'search'
+                    iconCls: 'favorites',
+                    handler: function () {
+                        me.fireEvent('showfavorites');
+                    }
                 },
                 {
                     text:'Medical Centers',

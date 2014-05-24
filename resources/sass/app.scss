@@ -266,6 +266,19 @@ $list-active-color:rgb(8, 73, 118);
   border-radius:4px;
 }
 
+.favorite{
+	background: orange;	
+}
+
+.star{
+	background-image:url('images/star.png');
+	height:20px;
+	width:10px;
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
 .call{
 	background: rgb(8, 73, 118);
 	font-family:georgia;
