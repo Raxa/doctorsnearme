@@ -92,6 +92,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         var address = location.formatted_address;
         var name = location.name;
         var phoneNumber = location.international_phone_number;
+
         if (address == null) {
             address = "";
         }
@@ -99,8 +100,8 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         var tpl = name+'</br>'+address+'</br><button class="direction" id=' + idString + '>Get Directions</button><button class="more-details" id=' + idString + '>More Details</button>';
         console.log("inside add location marker");
         console.log(address);
-        if (location.phoneNumber != null) {
-            tpl = tpl + '</br><button class="call" type="button"><a href="tel:' + location.phoneNumber + '">Call</a></button>' + location.phoneNumber;
+        if (phoneNumber != null) {
+            tpl = tpl + '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>' + phoneNumber;
         } 
 
         google.maps.event.addListener(marker, 'click', function (pos) {

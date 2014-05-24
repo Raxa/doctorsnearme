@@ -21,7 +21,7 @@ Ext.application({
 
     views: ['LocationMap','MapView','Menu','ListView','DetailsView'],
     
-    controllers:['MapView','DetailsView','Menu'],
+    controllers:['MapView','DetailsView','Menu','Login'],
     
     stores: ['Location'],
     

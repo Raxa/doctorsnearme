@@ -7,10 +7,14 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
     config: {
         refs: {
             detailsView: 'detailsview',
-            mapView:'mapview'
+            mapView: 'mapview',
+            userProfile: 'userprofile'
         },
         control: {
             detailsView: {
+                back: "backToMapView"
+            },
+            userProfile: {
                 back: "backToMapView"
             }
 

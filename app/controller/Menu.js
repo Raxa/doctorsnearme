@@ -10,37 +10,17 @@ Ext.define('EasyTreatyApp.controller.Menu', {
         {
             sideMenu: 'mainmenu',
             mapView: 'mapview',
-            loginView: 'loginview',
+            userProfile:'userprofile'
         },
         
         control: {            
             sideMenu: {
                 changelocation: "onChangeLocation",
-                login: "onLoginButtonTap",
+                showprofile: "onShowProfile",
+                searchradiuschange:"onSearchRadiusChange"
             }
         }
-    },
-
-   
-    /**
-     * go to LogIn View
-     * @method
-     * @private
-     */
-    onLoginButtonTap: function () {
-        EasyTreatyApp.config.setLoggedIn(true);
-        var loginView = this.getLoginView();
-
-        if (loginView == undefined) {
-            loginView = Ext.create('EasyTreatyApp.view.Login');
-
-            Ext.Viewport.add(loginView);
-        }
-
-        Ext.Viewport.setActiveItem(loginView);
-    },
- 
-
+    }, 
 
     
     /**
@@ -51,6 +31,24 @@ Ext.define('EasyTreatyApp.controller.Menu', {
     onChangeLocation : function() {
         Ext.Msg.alert("Guide", "Click anywhere & press Done");
         this.getMapView().changeBaseLocationToSearch();
+    },
+
+    onShowProfile: function () {
+        var profileView = this.getUserProfile();
+
+        if (profileView == null) {
+            profileView = Ext.create('EasyTreatyApp.view.UserProfile');
+            profileView.setData(EasyTreatyApp.config.getUser().getData());
+            console.log("user: ");
+            console.log(EasyTreatyApp.config.getUser().getData());
+            Ext.Viewport.add(profileView);
+        }
+
+        Ext.Viewport.setActiveItem(profileView);
+    },
+
+    onSearchRadiusChange: function (newRadius) {
+        this.getMapView().setSearchRadius(newRadius);
     }
  
 

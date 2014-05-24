@@ -10,7 +10,8 @@ Ext.define('EasyTreatyApp.view.MapView', {
         layout: 'card',
 
         currentSearch:null,
-        
+        searchRadius: 1000,
+
         cls:'map-view',
         store: null,
         items: [
@@ -90,12 +91,15 @@ Ext.define('EasyTreatyApp.view.MapView', {
                         switch (me.indexOf(me.getActiveItem())) {
                             case 0: me.setActiveItem(1);
                                 this.setText('Map');
+                                me.fireEvent('togglemaplist',true);
                                 break;
 
                             case 1: me.setActiveItem(0);
                                 this.setText('List');
+                                me.fireEvent('togglemaplist',false);
                                 break;
                         }
+                        
                         
                     }
                 }
@@ -234,5 +238,13 @@ Ext.define('EasyTreatyApp.view.MapView', {
             this.fireEvent('choicedone', currentSearch);
         }
 
+    },
+
+    updateSearchRadius: function () {
+        var currentSearch = this.getCurrentSearch();
+
+        if (currentSearch != null) {
+            this.fireEvent('choicedone', currentSearch);
+        }
     }
 })

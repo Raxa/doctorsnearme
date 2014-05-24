@@ -28,9 +28,11 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     labelWidth:'45%',
                     ui: 'mainmenu',
                     options: [
-                    { text: '100000', value: 'first' },
-                    { text: '1000000', value: 'second' },
-                    { text: '10000000', value: 'third' }
+                    { text: '1000', value: '100000' },
+                    { text: '10000', value: '100000' },
+                    { text: '100000', value: '100000' },
+                    { text: '1000000', value: '1000000' },
+                    { text: '10000000', value: '10000000' }
                     ]
                 },
                 {
@@ -79,11 +81,36 @@ Ext.define('EasyTreatyApp.view.Menu', {
     */
     setHandlerFunctions: function () {
         var me = this;
+
+        this.getProfileButton().on('tap', function (button, e, eOpts) {
+            me.fireEvent('showprofile');
+        });
+
         this.getChangeLocationButton().on('tap', function (button, e, eOpts) {
             me.fireEvent('changelocation');
         });
+
+        this.getLogInButton().on('tap', function (button, e, eOpts) {
+            if (!EasyTreatyApp.config.getLoggedIn()) {
+                me.toggle();
+                me.fireEvent('loginpagerequested');
+            }
+            else {
+                me.fireEvent('logout');
+            }
+            
+        });
+
+        this.getDistanceSelectField().on('change',function(selectField,newValue,oldValue, eOpts){
+            me.fireEvent('searchradiuschange',parseInt(newValue));
+            console.log(newValue);
+        });
     },
     
+    getDistanceSelectField: function(){
+        return this.getComponent(1);
+    },
+
     /**
      * Returns the About button
      * @private
@@ -101,7 +128,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
      * @return {Button}
     */
     getLogInButton: function() {
-        return this.getComponent(5);
+        return this.getComponent(4);
     },
     
     
@@ -188,5 +215,10 @@ Ext.define('EasyTreatyApp.view.Menu', {
             targetEl.translate(0, 0, 0);
             this.maskCmp.hide();
         }
+    },
+
+    getDistanceValue: function () {
+        return parseInt(this.getDistanceSelectField().getRecord().get('value'));
     }
+
 });
