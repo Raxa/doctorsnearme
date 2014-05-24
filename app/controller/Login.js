@@ -58,7 +58,11 @@ Ext.define('EasyTreatyApp.controller.Login', {
     },
 
     authenticate: function () {
-        //TODO: implement login functionality
+
+        var values = this.getLoginView().getTheValues();
+
+        var encodedString = "Basic "+Base64.encode(values.userName + ":" + values.password);
+
         var me = this;
         Ext.Ajax.request({
             //url: 'https://api.raxa.io/login.htm',
@@ -77,7 +81,8 @@ Ext.define('EasyTreatyApp.controller.Login', {
             headers: {
                 'Accept': 'application/json',
                 'Content-type': 'application/json',
-                'Authorization': 'Basic Z2FyaXBwYS5oYXJvdW46YXNkZg=='
+                'Authorization': encodedString
+                //'Authorization': 'Basic Z2FyaXBwYS5oYXJvdW46YXNkZg=='
                 //'Authorization': 'Basic YW1heWE6ZWFzeXRyZWF0eTM0MjE'
                 //'Authorization': 'Basic amFtZXNraWVya2VnYWFyZDpIZWxsbzEyMw=='
             }

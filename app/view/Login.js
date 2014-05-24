@@ -88,6 +88,15 @@ Ext.define('EasyTreatyApp.view.Login', {
         });
 
         this.callParent();
+    },
+
+    getTheValues: function () {
+        var fieldSet = this.getComponent(2);
+
+        var userName = fieldSet.getComponent(0).getValue();
+        var password = fieldSet.getComponent(1).getValue();
+
+        return { userName: userName, password: password };
     }
 
 });
