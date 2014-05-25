@@ -27,12 +27,12 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     label: 'Distance',
                     labelWidth:'45%',
                     ui: 'mainmenu',
+                    autoSelect: false,
                     options: [
                     { text: '1000', value: '100000' },
                     { text: '10000', value: '100000' },
                     { text: '100000', value: '100000' },
-                    { text: '1000000', value: '1000000' },
-                    { text: '10000000', value: '10000000' }
+                    { text: '1000000', value: '1000000' }
                     ]
                 },
                 {
@@ -105,6 +105,10 @@ Ext.define('EasyTreatyApp.view.Menu', {
             me.fireEvent('searchradiuschange',parseInt(newValue));
             console.log(newValue);
         });
+
+        this.getAboutButton().on('tap', function (button, e, eOpts) {
+            Ext.Msg.alert("About Easy Treaty", "version 1.0");
+        });
     },
     
     getDistanceSelectField: function(){
@@ -118,7 +122,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
      * @return {Button}
     */
     getAboutButton: function () {
-        return this.getComponent(6);
+        return this.getComponent(5);
     },
     
     /**

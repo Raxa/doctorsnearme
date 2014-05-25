@@ -216,7 +216,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
                     me.setMapOptions({
                         center: location,
-                        zoom: 2
+                        zoom: 7
                     });
                     me.setUserLocationMarker(marker);
                     me.setBaseLocationMarker(marker);
