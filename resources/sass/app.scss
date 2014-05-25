@@ -270,6 +270,15 @@ $list-active-color:rgb(8, 73, 118);
 	background: orange;	
 }
 
+.color-star{
+	background-image:url('images/orangestar.png');
+	height:20px;
+	width:10px;
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
 .star{
 	background-image:url('images/star.png');
 	height:20px;
@@ -355,4 +364,170 @@ $list-active-color:rgb(8, 73, 118);
 
 .x-button-mainmenu.x-button-pressing, .x-button-mainmenu.x-button-pressing .x-button-label, .x-button-mainmenu.x-button-pressing .x-badge, .x-button-login.x-button-pressing, .x-button-login.x-button-pressing .x-button-label, .x-button-login.x-button-pressing .x-badge {
   color: #888;
+}
+
+//////////////////////
+.windows8 {
+    margin-bottom: 0.5em;
+    min-height: 2.7em;
+    position: relative;
+    width: 20px;
+    height:20px;
+}
+
+.windows8 .wBall {
+    position: absolute;
+    width: 19px;
+    height: 19px;
+    opacity: 0;
+    -moz-transform: rotate(225deg);
+    -moz-animation: orbit 4.95s infinite;
+    -webkit-transform: rotate(225deg);
+    -webkit-animation: orbit 4.95s infinite;
+}
+
+.windows8 .wBall .wInnerBall{
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #ffffff;
+    left:0px;
+    top:0px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+.windows8 #wBall_1 {
+    -moz-animation-delay: 1.08s;
+    -webkit-animation-delay: 1.08s;
+}
+
+.windows8 #wBall_2 {
+    -moz-animation-delay: 0.22s;
+    -webkit-animation-delay: 0.22s;
+}
+
+.windows8 #wBall_3 {
+    -moz-animation-delay: 0.43s;
+    -webkit-animation-delay: 0.43s;
+}
+
+.windows8 #wBall_4 {
+    -moz-animation-delay: 0.65s;
+    -webkit-animation-delay: 0.65s;
+}
+
+.windows8 #wBall_5 {
+    -moz-animation-delay: 0.86s;
+    -webkit-animation-delay: 0.86s;
+}
+
+@-moz-keyframes orbit {
+    0% {
+        opacity: 1;
+        z-index:99;
+        -moz-transform: rotate(180deg);
+        -moz-animation-timing-function: ease-out;
+    }
+
+    7% {
+        opacity: 1;
+        -moz-transform: rotate(300deg);
+        -moz-animation-timing-function: linear;
+        -moz-origin:0%;
+    }
+
+    30% {
+        opacity: 1;
+        -moz-transform:rotate(410deg);
+        -moz-animation-timing-function: ease-in-out;
+        -moz-origin:7%;
+    }
+
+    39% {
+        opacity: 1;
+        -moz-transform: rotate(645deg);
+        -moz-animation-timing-function: linear;
+        -moz-origin:30%;
+    }
+
+    70% {
+        opacity: 1;
+        -moz-transform: rotate(770deg);
+        -moz-animation-timing-function: ease-out;
+        -moz-origin:39%;
+    }
+
+    75% {
+        opacity: 1;
+        -moz-transform: rotate(900deg);
+        -moz-animation-timing-function: ease-out;
+        -moz-origin:70%;
+    }
+
+    76% {
+        opacity: 0;
+        -moz-transform:rotate(900deg);
+    }
+
+    100% {
+        opacity: 0;
+        -moz-transform: rotate(900deg);
+    }
+
+}
+
+@-webkit-keyframes orbit {
+    0% {
+        opacity: 1;
+        z-index: 99;
+        -webkit-transform: rotate(180deg);
+        -webkit-animation-timing-function: ease-out;
+    }
+
+    7% {
+        opacity: 1;
+        -webkit-transform: rotate(300deg);
+        -webkit-animation-timing-function: linear;
+        -webkit-origin: 0%;
+    }
+
+    30% {
+        opacity: 1;
+        -webkit-transform: rotate(410deg);
+        -webkit-animation-timing-function: ease-in-out;
+        -webkit-origin: 7%;
+    }
+
+    39% {
+        opacity: 1;
+        -webkit-transform: rotate(645deg);
+        -webkit-animation-timing-function: linear;
+        -webkit-origin: 30%;
+    }
+
+    70% {
+        opacity: 1;
+        -webkit-transform: rotate(770deg);
+        -webkit-animation-timing-function: ease-out;
+        -webkit-origin: 39%;
+    }
+
+    75% {
+        opacity: 1;
+        -webkit-transform: rotate(900deg);
+        -webkit-animation-timing-function: ease-out;
+        -webkit-origin: 70%;
+    }
+
+    76% {
+        opacity: 0;
+        -webkit-transform: rotate(900deg);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: rotate(900deg);
+    }
+
 }

@@ -118,6 +118,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
         
         var bottomBar = Ext.create('Ext.Toolbar', {
             docked: 'bottom',
+            //docked: 'right',
             scrollable:'horizontal',
             items: [
                 {

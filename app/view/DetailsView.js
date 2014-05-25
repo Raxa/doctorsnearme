@@ -21,6 +21,10 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                    xtype: 'button',
                    text: 'Back',
                    docked: 'right'
+               },
+               {
+                   iconCls: 'star',
+                   docked: 'left'
                }
            ]
        }
@@ -60,6 +64,19 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
             me.fireEvent('back');
         });
 
+        this.getFavoriteButton().on('tap', function () {
+            var isFavorite = false;
+            if (this.getIconCls() == 'star') {
+                this.setIconCls('color-star')
+                isFavorite = true;
+            }
+            else {
+                this.setIconCls('star');
+                isFavorite = false;
+            }
+            me.fireEvent('togglefavorite', me.getData().id, isFavorite);
+        });
+
         this.callParent();
     },
  
@@ -71,6 +88,10 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
      */
     getBackButton: function () {
         return this.getComponent(0).getComponent(0);
+    },
+
+    getFavoriteButton: function () {
+        return this.getComponent(0).getComponent(1);
     }
     
 

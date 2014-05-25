@@ -12,7 +12,10 @@ Ext.define('EasyTreatyApp.config.Runtime', {
 
         user:null,
 
-        loggedIn: false
+        loggedIn: false,
+
+        favorites:[],
+
     },
 
     constructor: function (config) {

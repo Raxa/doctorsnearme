@@ -61,11 +61,11 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
                 if (button.hasCls('favorite')) {
                     button.removeCls("favorite");
-                    me.fireEvent('togglefavorite', node.id,true);
+                    me.fireEvent('togglefavorite', node.id.slice(0,-4),false);
                 }
                 else {
                     button.addCls("favorite");
-                    me.fireEvent('togglefavorite',node.id, false);
+                    me.fireEvent('togglefavorite',node.id.slice(0,-4), true);
                 }                               
             }
         });
@@ -98,11 +98,29 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
     * @return {Marker} marker
     */
     addLocationMarker: function (location, markerIcon) {
+        //TODO: check if the location is in favorites. and change the class of the favorite icon.
+        //currently an error occurs if I put addItem instead of add in onShowFavorites of Mapview controller when viewing favorties because I guess when putting in the localstorage
+        //the values of lat lng become strings. By just checking if these are in favorites we can convert 
+        //them to numbers if needed. The error can be solved that way.
+        console.log("inside addlocation marker");
+        console.log(location)
+        
+        var latlng = location.geometry.location;
+        if (location.isFavorite) {
+            var loc = location.geometry.location;
+            var lat = parseFloat(loc.k);
+            var lng = parseFloat(loc.A);
+            console.log("lat: " + lat);
+            console.log("lng: " + lng);
+             latlng= new google.maps.LatLng(lat, lng);
+        }
+
         var me = this;
         var marker = new google.maps.Marker({
             map: me.getMap(),
             animation: null,
-            position: location.geometry.location,
+            //position: location.geometry.location,
+            position: latlng,
             icon: 'resources/icons/' + markerIcon
         });
 
@@ -114,13 +132,17 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             address = "";
         }
         var idString = location.id;
-        var tpl = name+'</br>'+address+'</br><button class="direction">Get Directions</button><button class="more-details">More Details</button>';
+        var tpl = name + '</br>' + address + '</br><button class="direction" id=' + idString + '>Get Directions</button><button class="more-details" id=' + idString + '>More Details</button>';
         console.log("inside add location marker");
         console.log(address);
         if (phoneNumber != null) {
             tpl = tpl + '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>' + phoneNumber;
         }
-        tpl = tpl + '<button class="star" id=' + idString + '></button>';
+        if (location.isFavorite) {
+            tpl = tpl + '<button class="star favorite" id=' + idString+'-fav' + '></button>';
+        } else {
+            tpl = tpl + '<button class="star" id=' + idString + '-fav' + '></button>';
+        }
 
         google.maps.event.addListener(marker, 'click', function (pos) {
             var infowindow = new google.maps.InfoWindow();

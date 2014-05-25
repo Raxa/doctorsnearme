@@ -65,10 +65,7 @@ Ext.define('EasyTreatyApp.store.Location', {
        
         console.log(this.getRange());
 
-        //this.setData(null);
-        this.removeAll();
-        console.log(this.getRange());
-        this.fireEvent('storecleared');
+        this.storeClear();
 
         var request = {
             location: latLng,
@@ -90,6 +87,29 @@ Ext.define('EasyTreatyApp.store.Location', {
         });
     },
 
+    storeClear: function(){
+        this.removeAll();
+        console.log(this.getRange());
+        this.fireEvent('storecleared');
+    },
+
+    addItem: function(record){
+        this.add(record);
+        if (this.isFavorite(record.reference)) {
+            //place.isFavorite=true;
+            console.log("favorite found");
+            this.last().set('isFavorite', true);
+            //this.findRecord('reference', record.reference).set('isFavorite', true);
+            console.log(this.last());
+        }
+        this.fireEvent("locationadded");
+    },
+
+    addFavoriteItem: function(record){
+        this.add(record);
+        this.fireEvent("locationadded");
+    },
+
     test: function (service, results,i) {
         var me = this;
 
@@ -101,8 +121,8 @@ Ext.define('EasyTreatyApp.store.Location', {
             }, function (place, status1) {
             if (status1 == google.maps.places.PlacesServiceStatus.OK) {
 
-                me.add(place);
-                me.fireEvent("locationadded");
+                me.addItem(place);
+               
             }
             else {
                 console.log("failed");
@@ -121,7 +141,25 @@ Ext.define('EasyTreatyApp.store.Location', {
         else {
             return;
         }
-},
+    },
+
+    isFavorite:function(reference){
+        var currentFav = EasyTreatyApp.config.getFavorites();
+        console.log("inside is favorite");
+        console.log(reference);
+        var newArray = Ext.Array.filter(currentFav, function (item) {
+            console.log(item.reference);
+            if (item.reference == reference) {
+                console.log("equal!!!!!!!!!!!!");
+                return true;
+            }
+        });
+
+        if (newArray.length != 0) {
+            console.log("length not zero");
+            return true;
+        }
+    },
     //use if you are going to make the request when clicking on a marker
     setDetailsForTheRecord: function (map, record, infowindow, marker) {
         var service = new google.maps.places.PlacesService(map.getMap());

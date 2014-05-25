@@ -23,9 +23,9 @@ Ext.application({
     
     controllers:['MapView','DetailsView','Menu','Login'],
     
-    stores: ['Location'],
+    stores: ['Location','Memory'],
     
-    models: ['Location'],
+    models: ['Location','Memory'],
 
     icon: {
         '57': 'resources/icons/Icon.png',
@@ -57,6 +57,20 @@ Ext.application({
         var mapView = Ext.create('EasyTreatyApp.view.MapView');
         Ext.Viewport.add(mapView);
         Ext.Viewport.setActiveItem(mapView);
+
+        var favoritesStore = Ext.create('EasyTreatyApp.store.Memory', {
+            storeId:'fav-store'
+        });
+
+        favoritesStore.load();
+
+        var currentFavorites = EasyTreatyApp.config.getFavorites();
+        favoritesStore.getRange().forEach(function (record) {
+            currentFavorites.push(Ext.JSON.decode(record.get('query')));
+        });
+        
+        console.log("current favorites");
+        console.log(currentFavorites);
     },
 
     onUpdated: function() {

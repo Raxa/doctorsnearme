@@ -17,7 +17,7 @@ Ext.define('EasyTreatyApp.view.ListView', {
        items: [
            {
                xtype: 'list',
-               itemTpl: '{name}<br>{formatted_address}',
+               // itemTpl: '{name}<br>{formatted_address}<br>{isFavorite}',
                cls:'option-list',
                flex:7
            }
@@ -25,11 +25,22 @@ Ext.define('EasyTreatyApp.view.ListView', {
 
    },
 
+    setTemplate: function(){
+        var template = new Ext.XTemplate(
+           '{name}<br>{formatted_address}',
+            '<tpl if="values.isFavorite==true">',
+            '</br><button class="star favorite"></button>',
+            '</tpl>'
+       );
+        this.getItemList().setItemTpl(template);
+    },
+
     /*
     * Initialize
     */
     initialize: function() {
         this.callParent();
+        this.setTemplate();
         var me = this;
         this.getItemList().on(
            {

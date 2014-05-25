@@ -2,7 +2,12 @@
     extend: 'Ext.data.Store',
 
     config: {
-        model: 'MaktoMobile.model.Memory',
+        model: 'EasyTreatyApp.model.Memory',
+
+        proxy: {
+            type: 'localstorage',
+            id: 'fav-locations'
+        }
     },
     
     /**
@@ -11,16 +16,22 @@
      * @param {String} token
      * @param {String} proxyId
      */
-    storeTokenInLocalStorage: function (token, proxyId) {
+    storeTokenInLocalStorage: function (token) {
+        console.log("store the token");
 
-        var proxy = Ext.create('Ext.data.proxy.LocalStorage', {
-            type: 'localstorage',
-            id: proxyId
-        });
+        this.load();
 
-        this.setProxy(proxy);
         this.add({ query: token });
-        console.log(token);
+
+        this.sync();
+    },
+
+    removeTokenFromLocalStorage: function (token) {
+        console.log("remove the token");
+        this.load();
+        
+        this.removeAt(this.findExact('query', token));
+
         this.sync();
     }
 
