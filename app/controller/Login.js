@@ -61,7 +61,7 @@ Ext.define('EasyTreatyApp.controller.Login', {
 
         var values = this.getLoginView().getTheValues();
 
-        var encodedString = "Basic "+Base64.encode(values.userName + ":" + values.password);
+        var encodedString = "Basic " + btoa(values.userName + ":" + values.password);
 
         var me = this;
         Ext.Ajax.request({

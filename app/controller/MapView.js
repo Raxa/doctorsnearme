@@ -78,7 +78,7 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         this.getListView().fillList();
 
 
-        var starButton = Ext.get(recordId + '-fav');;
+        var starButton = Ext.get(recordId + '-fav');
         if (starButton != null) {
             if (isFavorite) {
                 starButton.addCls('favorite');

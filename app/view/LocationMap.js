@@ -131,23 +131,58 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         if (address == null) {
             address = "";
         }
+        //var idString = location.id;
+        //var tpl = name + '</br>' + address + '</br><button class="direction" id=' + idString + '>Get Directions</button><button class="more-details" id=' + idString + '>More Details</button>';
+        //console.log("inside add location marker");
+        //console.log(address);
+        //if (phoneNumber != null) {
+        //    tpl = tpl + '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>' + phoneNumber;
+        //}
+        //if (location.isFavorite) {
+        //    tpl = tpl + '<button class="star favorite" id=' + idString+'-fav' + '></button>';
+        //} else {
+        //    tpl = tpl + '<button class="star" id=' + idString + '-fav' + '></button>';
+        //}
+
         var idString = location.id;
-        var tpl = name + '</br>' + address + '</br><button class="direction" id=' + idString + '>Get Directions</button><button class="more-details" id=' + idString + '>More Details</button>';
+        var tpl1 = name + '</br>' + address + '</br><button class="direction" id=' + idString + '>Get Directions</button><button class="more-details" id=' + idString + '>More Details</button>';
         console.log("inside add location marker");
         console.log(address);
-        if (phoneNumber != null) {
-            tpl = tpl + '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>' + phoneNumber;
-        }
-        if (location.isFavorite) {
-            tpl = tpl + '<button class="star favorite" id=' + idString+'-fav' + '></button>';
-        } else {
-            tpl = tpl + '<button class="star" id=' + idString + '-fav' + '></button>';
-        }
 
-        google.maps.event.addListener(marker, 'click', function (pos) {
+        var tpl2 = "";
+        if (phoneNumber != null) {
+            tpl2 = '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>' + phoneNumber;
+        }
+        
+
+        google.maps.event.addListener(marker, 'click', function (pos) {              
+            if (location.isFavorite) {
+                tpl = tpl1 + tpl2 + '<button class="star favorite" id=' + idString + '-fav' + '></button>';
+            } else {
+                tpl = tpl1 + tpl2 + '<button class="star" id=' + idString + '-fav' + '></button>';
+            }
+
             var infowindow = new google.maps.InfoWindow();
             infowindow.setContent('<div class="info-window">' + tpl + '</div>')
             infowindow.open(me.getMap(), marker);
+
+            ///NOT WORKING SOMETHING IS WRONG HERE
+            //var isFav = me.getStore().getById(idString).get('isFavorite');
+            //var starButton = Ext.get(idString + '-fav');
+            //console.log("inside listner");
+            //console.log(starButton);
+            //console.log(isFav);
+            //if (starButton != null) {
+            //    if (isFav) {
+            //        console.log("add class");
+            //        Ext.get(idString + '-fav').addCls('favorite');
+            //    }
+            //    else {
+            //        console.log("remove class");
+            //        Ext.get(idString + '-fav').removeCls('favorite');
+            //    }
+            //}
+            ///////////////////////
         });
         this.getLocationMarkers().push(marker);
     },
