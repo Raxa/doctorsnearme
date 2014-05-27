@@ -56,6 +56,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         this.addListener({
             element: 'element',
             delegate: 'button.star',
+            //delegate: 'div.star',
             tap: function (event, node, options, eOpts) {
                 var button = Ext.get(node.id);
 
@@ -98,10 +99,6 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
     * @return {Marker} marker
     */
     addLocationMarker: function (location, markerIcon) {
-        //TODO: check if the location is in favorites. and change the class of the favorite icon.
-        //currently an error occurs if I put addItem instead of add in onShowFavorites of Mapview controller when viewing favorties because I guess when putting in the localstorage
-        //the values of lat lng become strings. By just checking if these are in favorites we can convert 
-        //them to numbers if needed. The error can be solved that way.
         console.log("inside addlocation marker");
         console.log(location)
         
@@ -131,18 +128,6 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         if (address == null) {
             address = "";
         }
-        //var idString = location.id;
-        //var tpl = name + '</br>' + address + '</br><button class="direction" id=' + idString + '>Get Directions</button><button class="more-details" id=' + idString + '>More Details</button>';
-        //console.log("inside add location marker");
-        //console.log(address);
-        //if (phoneNumber != null) {
-        //    tpl = tpl + '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>' + phoneNumber;
-        //}
-        //if (location.isFavorite) {
-        //    tpl = tpl + '<button class="star favorite" id=' + idString+'-fav' + '></button>';
-        //} else {
-        //    tpl = tpl + '<button class="star" id=' + idString + '-fav' + '></button>';
-        //}
 
         var idString = location.id;
         var tpl1 = name + '</br>' + address + '</br><button class="direction" id=' + idString + '>Get Directions</button><button class="more-details" id=' + idString + '>More Details</button>';
@@ -158,34 +143,21 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         google.maps.event.addListener(marker, 'click', function (pos) {              
             if (location.isFavorite) {
                 tpl = tpl1 + tpl2 + '<button class="star favorite" id=' + idString + '-fav' + '></button>';
+                //tpl = tpl1 + tpl2 + '<div class="star favorite" id=' + idString + '-fav' + '></div>';
             } else {
                 tpl = tpl1 + tpl2 + '<button class="star" id=' + idString + '-fav' + '></button>';
+                //tpl = tpl1 + tpl2 + '<div class="star" id=' + idString + '-fav' + '></div>';
             }
 
             var infowindow = new google.maps.InfoWindow();
             infowindow.setContent('<div class="info-window">' + tpl + '</div>')
             infowindow.open(me.getMap(), marker);
-
-            ///NOT WORKING SOMETHING IS WRONG HERE
-            //var isFav = me.getStore().getById(idString).get('isFavorite');
-            //var starButton = Ext.get(idString + '-fav');
-            //console.log("inside listner");
-            //console.log(starButton);
-            //console.log(isFav);
-            //if (starButton != null) {
-            //    if (isFav) {
-            //        console.log("add class");
-            //        Ext.get(idString + '-fav').addCls('favorite');
-            //    }
-            //    else {
-            //        console.log("remove class");
-            //        Ext.get(idString + '-fav').removeCls('favorite');
-            //    }
-            //}
-            ///////////////////////
         });
         this.getLocationMarkers().push(marker);
     },
+
+    /// An alternative. What this does is sending a request only when the user clicks on a marker. But when viewing on
+    /// the list this is not possible because all the details 
 
     //addLocationMarker: function (record, markerIcon) {
     //    var me = this;

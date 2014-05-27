@@ -81,7 +81,7 @@ Ext.define('EasyTreatyApp.store.Location', {
         service.nearbySearch(request, function (results, status) {
 
             if (status == google.maps.places.PlacesServiceStatus.OK) {
-                me.test(service, results, 0);
+                me.getPlaceDetails(service, results, 0);
             }
 
         });
@@ -110,7 +110,7 @@ Ext.define('EasyTreatyApp.store.Location', {
         this.fireEvent("locationadded");
     },
 
-    test: function (service, results,i) {
+    getPlaceDetails: function (service, results,i) {
         var me = this;
 
         console.log("test...............");
@@ -132,7 +132,7 @@ Ext.define('EasyTreatyApp.store.Location', {
             });
         if (i < results.length - 1) {
             Ext.Function.defer(function () {
-                me.test(service, results, i + 1)
+                me.getPlaceDetails(service, results, i + 1)
                 //}, 290, me);
             }, 290, me);
             return;

@@ -29,7 +29,8 @@ Ext.define('EasyTreatyApp.view.ListView', {
         var template = new Ext.XTemplate(
            '{name}<br>{formatted_address}',
             '<tpl if="values.isFavorite==true">',
-            '</br><button class="star favorite"></button>',
+            //'</br><button class="star favorite"></button>',
+            '</br><div class="color-star"></div>',
             '</tpl>'
        );
         this.getItemList().setItemTpl(template);
