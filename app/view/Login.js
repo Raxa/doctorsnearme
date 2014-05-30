@@ -18,7 +18,7 @@ Ext.define('EasyTreatyApp.view.Login', {
             {
                  xtype: 'label',
                  tpl: '<h1 class="header">{title}</h1>',
-                 data: { title: 'Log In' },
+                 //data: { title: 'Log In' },
                  maxHeight: '20%'
             },
             {
@@ -28,12 +28,12 @@ Ext.define('EasyTreatyApp.view.Login', {
                     {
                         xtype: 'textfield',
                         name: 'username',
-                        placeHolder: 'username',
+                        //placeHolder: 'username',
                         required: true
                     },
                     {
                         xtype: 'passwordfield',
-                        placeHolder: 'password',
+                        //placeHolder: 'password',
                         name: 'password',
                         required: true
                     }
@@ -41,7 +41,7 @@ Ext.define('EasyTreatyApp.view.Login', {
             },
             {
                 xtype: 'button',
-                text:'Log In',
+                //text:'Log In',
                 padding: '8px',
                 width: '50%',
                 margin: '0 auto',
@@ -57,7 +57,7 @@ Ext.define('EasyTreatyApp.view.Login', {
                     {
                         xtype: 'checkboxfield',
                         name: 'checkin',
-                        label:'Keep me logged in',
+                        //label:'Keep me logged in',
                         labelAlign: 'right',
                         labelWidth: '80%',
                         labelCls: 'item'
@@ -66,7 +66,7 @@ Ext.define('EasyTreatyApp.view.Login', {
             },
             {
                 xtype: 'button',
-                text: 'Cancel',
+                //text: 'Cancel',
                 padding: '8px',
                 width: '50%',
                 margin: '5 auto',
@@ -88,6 +88,7 @@ Ext.define('EasyTreatyApp.view.Login', {
         });
 
         this.callParent();
+        this.setLanguage();
     },
 
     getTheValues: function () {
@@ -97,6 +98,23 @@ Ext.define('EasyTreatyApp.view.Login', {
         var password = fieldSet.getComponent(1).getValue();
 
         return { userName: userName, password: password };
+    },
+
+    
+    setLanguage: function () {
+        var firstFieldSet = this.getComponent(2);
+        var lang = EasyTreatyApp.config.getLanguage();
+
+        firstFieldSet.getComponent(0).setPlaceHolder(lang.USER_NAME);
+        firstFieldSet.getComponent(1).setPlaceHolder(lang.PASSWORD);
+
+        this.getComponent(1).setData({ title: lang.LOG_IN });
+
+        this.getComponent(3).setText(lang.LOG_IN);
+
+        this.getComponent(4).getComponent(0).setLabel(lang.REMEMBER_ME);
+
+        this.getComponent(5).setText(lang.CANCEL);
     }
 
 });

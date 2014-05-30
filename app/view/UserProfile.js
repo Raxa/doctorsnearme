@@ -19,7 +19,7 @@ Ext.define('EasyTreatyApp.view.UserProfile', {
             items: [
                 {
                     xtype: 'button',
-                    text: 'Back',
+                    //text: 'Back',
                     docked: 'right',
                     padding: '5 5 5 5'
                 }
@@ -41,31 +41,57 @@ Ext.define('EasyTreatyApp.view.UserProfile', {
         });
 
         this.callParent();
+
+        this.setLanguage();
     },
 
 
     constructor: function() {
         var template = new Ext.XTemplate(
             '<table>',
-             '<th colspan="2">My Profile&nbsp;&nbsp;&nbsp;<img src="resources/css/images/profile.png"></th>',
+             '<th colspan="2">{[this.getString("profile")]}&nbsp;&nbsp;&nbsp;<img src="resources/css/images/profile.png"></th>',
             '<tbody>',
             '<tr>',
-            '<td>First Name&nbsp;:</td><td>{firstName}</td>',
+            '<td>{[this.getString("firstname")]}&nbsp;:</td><td>{firstName}</td>',
             '</tr>',
             '<tr>',
-            '<td>Last Name&nbsp;:</td><td>{lastName}</td>',
+            '<td>{[this.getString("lastname")]}&nbsp;:</td><td>{lastName}</td>',
             '</tr>',
             '<tr>',
-            '<td>Gender&nbsp;:</td><td>{gender}</td>',
+            '<td>{[this.getString("gender")]}&nbsp;:</td><td>{gender}</td>',
             '</tr>',
             '<tr>',
-            '<td>Location&nbsp;:</td><td>{location}</td>',
+            '<td>{[this.getString("location")]}&nbsp;:</td><td>{location}</td>',
             '</tr>',
             '<tr>',
-            '<td>Patient Identifier&nbsp;:</td><td>{patientIdentifier}</td>',
+            '<td>{[this.getString("patientid")]}&nbsp;:</td><td>{patientIdentifier}</td>',
             '</tr>',
             '</tbody>',
-            '</table>'
+            '</table>', {
+
+                getString: function (string) {
+                    var lang = EasyTreatyApp.config.getLanguage();
+                    switch (string) {
+                        case 'profile': return lang.HEALTH_PROFILE;
+                            break;
+
+                        case 'firstname': return lang.FIRST_NAME;
+                            break;
+
+                        case 'lastname': return lang.ADDRESS;
+                            break;
+
+                        case 'gender': return lang.GENDER;
+                            break;
+
+                        case 'location': return lang.LOCATION;
+                            break;
+
+                        case 'patientid': return lang.PATIENT_ID;
+                            break;
+                    }
+                }
+            }
         );
         this.setTpl(template);
         this.callParent(arguments);
@@ -80,6 +106,21 @@ Ext.define('EasyTreatyApp.view.UserProfile', {
      */
     getBackButton: function() {
         return this.getComponent(0).getComponent(0);
+    },
+
+    setLanguage: function () {
+        var lang = EasyTreatyApp.config.getLanguage();
+
+        this.getBackButton().setText(lang.BACK);
+
+        var data = this.getData();
+        var tpl = this.getTpl();
+
+        this.setTpl(null);
+        this.setData(null);
+
+        this.setTpl(tpl);
+        this.setData(data);
     }
     
 

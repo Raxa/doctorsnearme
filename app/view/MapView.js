@@ -14,6 +14,11 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
         cls:'map-view',
         store: null,
+        
+        pharmacyStore: null,
+        doctorStore: null,
+        hospitalStore:null,
+
         items: [
             {
               xtype:'locationmap'
@@ -47,6 +52,9 @@ Ext.define('EasyTreatyApp.view.MapView', {
             storecleared: this.onStoreClear,
             scope: this
         });
+
+        var lang = EasyTreatyApp.config.getLanguage();
+        this.setLanguage(lang,lang);
     },
     
     onLocationAddition: function () {
@@ -79,23 +87,24 @@ Ext.define('EasyTreatyApp.view.MapView', {
                 },
                 {
                     xtype: 'button',
-                    text: 'Done',
+                   // text: 'Done',
                     docked: 'right',
                     hidden: 'true'
                 },
                 {
                     xtype: 'button',
-                    text: 'List',
+                   // text: 'List',
                     docked: 'right',
                     handler: function () {
+                        var lang = EasyTreatyApp.config.getLanguage();
                         switch (me.indexOf(me.getActiveItem())) {
                             case 0: me.setActiveItem(1);
-                                this.setText('Map');
+                                this.setText(lang.MAP);
                                 me.fireEvent('togglemaplist',true);
                                 break;
 
                             case 1: me.setActiveItem(0);
-                                this.setText('List');
+                                this.setText(lang.LIST);
                                 me.fireEvent('togglemaplist',false);
                                 break;
                         }
@@ -128,7 +137,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
                     }
                 },
                 {
-                    text:'Medical Centers',
+                  //  text: 'Medical Centers',
                     iconCls: 'home',
                     handler: function () {
                         console.log("home");
@@ -137,7 +146,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
                     }
                 },
                 {
-                    text: 'Doctors',
+                  //  text: 'Doctors',
                     iconCls: 'user',
                     handler: function () {
                         console.log("user");
@@ -146,7 +155,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
                     }
                 },
                 {
-                    text: 'Pharmacies',
+                  //  text: 'Pharmacies',
                     iconCls: 'add',
                     handler: function () {
                         me.setCurrentSearch(2);
@@ -159,7 +168,17 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
         this.add(bottomBar);
         
+        bottomBar.getComponent(1).on('check', function () {
+            me.setCurrentSearch(0);
+        });
 
+        bottomBar.getComponent(2).on('check', function () {
+            me.setCurrentSearch(1);
+        });
+
+        bottomBar.getComponent(3).on('check', function () {
+            me.setCurrentSearch(2);
+        });
     },
     
 
@@ -250,5 +269,27 @@ Ext.define('EasyTreatyApp.view.MapView', {
         if (currentSearch != null) {
             this.fireEvent('choicedone', currentSearch);
         }
+    },
+
+    setLanguage: function (newLang,oldLang) {
+        var lang = EasyTreatyApp.config.getLanguage();
+
+        var topBar = this.getTopToolBar();
+
+        var listBtn = topBar.getComponent(2);
+        if (listBtn.getText() == oldLang.MAP) {
+            listBtn.setText(lang.MAP);
+        }
+        else {
+            listBtn.setText(lang.LIST);
+        }
+
+        topBar.getComponent(1).setText(lang.DONE);
+
+        var bottomBar = this.getComponent(3);
+
+        bottomBar.getComponent(1).setText(lang.MEDICAL_CENTERS);
+        bottomBar.getComponent(2).setText(lang.DOCTORS);
+        bottomBar.getComponent(3).setText(lang.PHARMACIES);
     }
 })

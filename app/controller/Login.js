@@ -26,14 +26,14 @@ Ext.define('EasyTreatyApp.controller.Login', {
  
     onLogout: function (sideMenu) {
         //TODO: Implement logout functionality
-
+        var lang = EasyTreatyApp.config.getLanguage();
         var sideMenu = this.getSideMenu();
         sideMenu.atLogOut();
         EasyTreatyApp.config.setLoggedIn(false);
 
 
         sideMenu.getProfileButton().doSetHidden(true);
-        sideMenu.getLogInButton().setText('Log In');
+        sideMenu.getLogInButton().setText(lang.LOG_IN);
     },
 
     
@@ -91,7 +91,7 @@ Ext.define('EasyTreatyApp.controller.Login', {
 
     logInSuccess: function (loginResponse) {
         EasyTreatyApp.config.setLoggedIn(true);
-
+        var lang = EasyTreatyApp.config.getLanguage();
         var user = Ext.create('EasyTreatyApp.model.User');
 
         user.setData(loginResponse);
@@ -99,7 +99,7 @@ Ext.define('EasyTreatyApp.controller.Login', {
         EasyTreatyApp.config.setUser(user);
 
         this.getSideMenu().getProfileButton().doSetHidden(false);
-        this.getSideMenu().getLogInButton().setText('Log out');
+        this.getSideMenu().getLogInButton().setText(lang.LOG_OUT);
         this.proceed();
     }
 

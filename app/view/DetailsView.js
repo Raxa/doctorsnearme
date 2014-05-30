@@ -19,7 +19,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
            items: [
                {
                    xtype: 'button',
-                   text: 'Back',
+                 //  text: 'Back',
                    docked: 'right'
                },
                {
@@ -34,19 +34,37 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
     constructor: function () {
         var template = new Ext.XTemplate(
             '<table>',
-             '<th colspan="2">More Information</th>',
+             '<th colspan="2">{[this.getString("moreinfo")]}</th>',
             '<tbody>',
             '<tr>',
-            '<td>Name&nbsp;:</td><td>{name}</td>',
+            '<td>{[this.getString("name")]}&nbsp;:</td><td>{name}</td>',
             '</tr>',
             '<tr>',
-            '<td>Address&nbsp;:</td><td>{formatted_address}</td>',
+            '<td>{[this.getString("address")]}&nbsp;:</td><td>{formatted_address}</td>',
             '</tr>',
             '<tr>',
-            '<td>Phone Number&nbsp;:</td><td>{international_phone_number}</td>',
+            '<td>{[this.getString("phoneno")]}&nbsp;:</td><td>{international_phone_number}</td>',
             '</tr>',
             '</tbody>',
-            '</table>'
+            '</table>', {
+
+                getString: function (string) {
+                    var lang = EasyTreatyApp.config.getLanguage();
+                    switch (string) {
+                        case 'moreinfo': return lang.MORE_INFORMATION;
+                            break;
+
+                        case 'name': return lang.NAME;
+                            break;
+
+                        case 'address': return lang.ADDRESS;
+                            break;
+
+                        case 'phoneno': return lang.PHONE_NUMBER;
+                            break;
+                    }
+                }
+            }
         );
         this.setTpl(template);
         this.callParent(arguments);
@@ -78,6 +96,8 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         });
 
         this.callParent();
+
+        this.setLanguage();
     },
  
     /**
@@ -92,6 +112,21 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
     getFavoriteButton: function () {
         return this.getComponent(0).getComponent(1);
+    },
+
+    setLanguage: function () {
+        var lang = EasyTreatyApp.config.getLanguage();
+
+        this.getBackButton().setText(lang.BACK);
+
+        var data = this.getData();
+        var tpl = this.getTpl();
+
+        this.setTpl(null);
+        this.setData(null);
+
+        this.setTpl(tpl);
+        this.setData(data);
     }
     
 

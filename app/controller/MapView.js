@@ -159,4 +159,6 @@ Ext.define('EasyTreatyApp.controller.MapView', {
 
         mapview.getStore().populate(base, type, mapview.getSearchRadius(), locationmap);
     }
+
+
 });

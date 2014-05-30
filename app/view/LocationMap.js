@@ -129,18 +129,24 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             address = "";
         }
 
+        //var lang = EasyTreatyApp.config.getLanguage();
+        var lang;
         var idString = location.id;
-        var tpl1 = name + '</br>' + address + '</br><button class="direction" id=' + idString + '>Get Directions</button><button class="more-details" id=' + idString + '>More Details</button>';
-        console.log("inside add location marker");
-        console.log(address);
-
+        var tpl1 = "";
+        //var tpl1 = name + '</br>' + address + '</br><button class="direction" id=' + idString + '>'+lang.GET_DIRECTIONS+'</button><button class="more-details" id=' + idString + '>'+lang.MORE_DETAILS+'</button>';
+  
         var tpl2 = "";
-        if (phoneNumber != null) {
-            tpl2 = '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>' + phoneNumber;
-        }
+        //if (phoneNumber != null) {
+        //    tpl2 = '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>' + phoneNumber;
+        //}
         
 
-        google.maps.event.addListener(marker, 'click', function (pos) {              
+        google.maps.event.addListener(marker, 'click', function (pos) {
+            lang = EasyTreatyApp.config.getLanguage();
+            tpl1 = name + '</br>' + address + '</br><button class="direction" id=' + idString + '>' + lang.GET_DIRECTIONS + '</button><button class="more-details" id=' + idString + '>' + lang.MORE_DETAILS + '</button>';
+            if (phoneNumber != null) {
+                tpl2 = '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>' + phoneNumber;
+            }
             if (location.isFavorite) {
                 tpl = tpl1 + tpl2 + '<button class="star favorite" id=' + idString + '-fav' + '></button>';
                 //tpl = tpl1 + tpl2 + '<div class="star favorite" id=' + idString + '-fav' + '></div>';

@@ -42,4 +42,6 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
         Ext.Viewport.setActiveItem(mapview);
     }
 
+
+
 })

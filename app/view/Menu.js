@@ -18,13 +18,13 @@ Ext.define('EasyTreatyApp.view.Menu', {
         defaultType: 'button',
         items: [
                 {
-                    text: 'My Health Profile',
+                   // text: 'My Health Profile',
                     ui: 'mainmenu',
                     hidden:true
                 },  
                 {
                     xtype: 'selectfield',
-                    label: 'Distance',
+                   // label: 'Distance',
                     labelWidth:'45%',
                     ui: 'mainmenu',
                     autoSelect: false,
@@ -37,7 +37,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
                 },
                 {
                     xtype: 'selectfield',
-                    label: 'Specilty',
+                   // label: 'Specilty',
                     labelWidth: '45%',
                     ui: 'mainmenu',
                     options: [
@@ -47,19 +47,51 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     ]
                 },
                 {
-                    text: 'Change Location',
+                   // text: 'Change Location',
                     ui: 'mainmenu'
                 },              
                 {
-                    text: 'Log In',
+                 //   text: 'Log In',
                     ui: 'mainmenu'
                 },
                 {
-                    text: 'About',
+                   // text: 'About',
                     ui: 'mainmenu'
-                }
+                },
+                {
+                    xtype: 'selectfield',
+                   // label: 'Language',
+                    labelWidth: '45%',
+                    ui: 'mainmenu',
+                    options: [
+                    { text: 'En', value: 'en' },
+                    { text: 'Si', value: 'si' }
+                    ]
+                },
 
         ]
+    },
+
+    setLanguage: function () {
+        var lang = EasyTreatyApp.config.getLanguage();
+        this.getProfileButton().setText(lang.HEALTH_PROFILE);
+
+        this.getAboutButton().setText(lang.ABOUT);
+
+        this.getChangeLocationButton().setText(lang.CHANGE_LOCATION);
+
+        this.getDistanceSelectField().setLabel(lang.DISTANCE);
+
+        this.getLanguageSelectField().setLabel(lang.LANGUAGE);
+
+        this.getSpecialtySelectField().setLabel(lang.SPECIALTY);
+
+        if (EasyTreatyApp.config.getLoggedIn()) {
+            this.getLogInButton().setText(lang.LOG_OUT);
+        }
+        else {
+            this.getLogInButton().setText(lang.LOG_IN);
+        }       
     },
 
     /**
@@ -71,7 +103,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
 
         this.setHandlerFunctions();
 
-
+        this.setLanguage();
     },
     
     /**
@@ -106,11 +138,24 @@ Ext.define('EasyTreatyApp.view.Menu', {
             console.log(newValue);
         });
 
+        this.getLanguageSelectField().on('change', function (selectField, newValue, oldValue, eOpts) {
+            me.fireEvent('languagechange', newValue,oldValue);
+            console.log(newValue);
+        });
+
         this.getAboutButton().on('tap', function (button, e, eOpts) {
             Ext.Msg.alert("About Easy Treaty", "version 1.0");
         });
     },
     
+    getLanguageSelectField: function(){
+        return this.getComponent(6);
+    },
+
+    getSpecialtySelectField: function () {
+        return this.getComponent(2);
+    },
+
     getDistanceSelectField: function(){
         return this.getComponent(1);
     },
