@@ -110,6 +110,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
         var me = this;
 
         this.getProfileButton().on('tap', function (button, e, eOpts) {
+            me.toggle();
             me.fireEvent('showprofile');
         });
 
