@@ -112,7 +112,9 @@ Ext.define('EasyTreatyApp.view.UserProfile', {
         var lang = EasyTreatyApp.config.getLanguage();
 
         this.getBackButton().setText(lang.BACK);
+    },
 
+    refreshTemplate: function () {
         var data = this.getData();
         var tpl = this.getTpl();
 

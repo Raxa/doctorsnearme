@@ -63,10 +63,16 @@ Ext.define('EasyTreatyApp.view.Menu', {
                    // label: 'Language',
                     labelWidth: '45%',
                     ui: 'mainmenu',
-                    options: [
-                    { text: 'En', value: 'en' },
-                    { text: 'Si', value: 'si' }
-                    ]
+                    //store: {
+                    //    data:[
+                    //{ text: 'En', value: 'en' },
+                    //{ text: 'Si', value: 'si' }
+                    //]
+                    //}
+                    //options: [
+                    //{ text: 'En', value: 'en' },
+                    //{ text: 'Si', value: 'si' }
+                    //]
                 },
 
         ]
@@ -104,6 +110,8 @@ Ext.define('EasyTreatyApp.view.Menu', {
         this.setHandlerFunctions();
 
         this.setLanguage();
+
+        this.getLanguageSelectField().setStore(Ext.create('EasyTreatyApp.store.Language'));
     },
     
     /**

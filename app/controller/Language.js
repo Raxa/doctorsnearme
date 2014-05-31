@@ -43,12 +43,14 @@ Ext.define('EasyTreatyApp.controller.Language', {
 
         if(detailsview!=null){
             detailsview.setLanguage();
+            detailsview.refreshTemplate();
         }
 
         var profile = this.getUserProfile();
 
         if (profile != null) {
             profile.setLanguage();
+            profile.refreshTemplate();
         }
         
         this.getMapView().setLanguage(language,prevLanguage);

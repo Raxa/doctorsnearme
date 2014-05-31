@@ -119,6 +119,9 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
         this.getBackButton().setText(lang.BACK);
 
+    },
+
+    refreshTemplate: function () {
         var data = this.getData();
         var tpl = this.getTpl();
 
