@@ -63,6 +63,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
                    // label: 'Language',
                     labelWidth: '45%',
                     ui: 'mainmenu',
+                   // autoSelect:false
                     //store: {
                     //    data:[
                     //{ text: 'En', value: 'en' },
