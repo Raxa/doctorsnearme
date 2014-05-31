@@ -27,24 +27,13 @@ Ext.define('EasyTreatyApp.view.Menu', {
                    // label: 'Distance',
                     labelWidth:'45%',
                     ui: 'mainmenu',
-                    autoSelect: false,
-                    options: [
-                    { text: '1000', value: '100000' },
-                    { text: '10000', value: '100000' },
-                    { text: '100000', value: '100000' },
-                    { text: '1000000', value: '1000000' }
-                    ]
+                    autoSelect: false
                 },
                 {
                     xtype: 'selectfield',
                    // label: 'Specilty',
                     labelWidth: '45%',
-                    ui: 'mainmenu',
-                    options: [
-                    { text: 'Cardiologist', value: 'first' },
-                    { text: 'Dentist', value: 'second' },
-                    { text: ' Immunologist', value: 'third' }
-                    ]
+                    ui: 'mainmenu'
                 },
                 {
                    // text: 'Change Location',
@@ -62,18 +51,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     xtype: 'selectfield',
                    // label: 'Language',
                     labelWidth: '45%',
-                    ui: 'mainmenu',
-                   // autoSelect:false
-                    //store: {
-                    //    data:[
-                    //{ text: 'En', value: 'en' },
-                    //{ text: 'Si', value: 'si' }
-                    //]
-                    //}
-                    //options: [
-                    //{ text: 'En', value: 'en' },
-                    //{ text: 'Si', value: 'si' }
-                    //]
+                    ui: 'mainmenu'
                 },
 
         ]
@@ -112,7 +90,15 @@ Ext.define('EasyTreatyApp.view.Menu', {
 
         this.setLanguage();
 
+        this.setSelectFieldStores();
+    },
+
+    setSelectFieldStores: function(){
         this.getLanguageSelectField().setStore(Ext.create('EasyTreatyApp.store.Language'));
+
+        this.getSpecialtySelectField().setStore(Ext.create('EasyTreatyApp.store.Specialization'));
+
+        this.getDistanceSelectField().setStore(Ext.create('EasyTreatyApp.store.Radius'));
     },
     
     /**
