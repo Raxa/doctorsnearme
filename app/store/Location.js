@@ -72,7 +72,8 @@ Ext.define('EasyTreatyApp.store.Location', {
            // location: new google.maps.LatLng(9.877965, 77.025521),
             radius: radius,
             //radius: 50000,
-            types: [type]
+            types: [type],
+            keyword: 'Serologist'
         };
 
         var service = new google.maps.places.PlacesService(map.getMap());

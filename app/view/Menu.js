@@ -51,7 +51,8 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     xtype: 'selectfield',
                    // label: 'Language',
                     labelWidth: '45%',
-                    ui: 'mainmenu'
+                    ui: 'mainmenu',
+                    usePicker:true
                 },
 
         ]
