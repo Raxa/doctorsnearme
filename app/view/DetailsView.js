@@ -13,7 +13,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
        store: null,
        data: null,
        cls: 'profile',
-       items: {
+       items: [{
            xtype: 'toolbar',
            docked: 'top',
            items: [
@@ -25,9 +25,33 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                {
                    iconCls: 'star',
                    docked: 'left'
+               },
+               {
+                   xtype: 'button',
+                   cls: 'like',
+                   docked:'right'
+               }
+           ]
+       },
+       {
+           xtype:'container',
+           layout: 'vbox',          
+           docked: 'bottom',
+           items: [
+               {
+                   xtype: 'textareafield',
+                   placeHolder: 'Comment...',
+                   maxRows: 4,
+                   name: 'comment'
+               },
+               {
+                   xtype: 'button',
+                   text:'Comment'
                }
            ]
        }
+       
+       ]
 
    },
     
