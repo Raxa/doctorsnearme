@@ -4,20 +4,21 @@
 
 var http = require("http");
 var url= require("url");
+var querystring = require("querystring");
 
 function start(route, handle){
 	function onRequest(request,response){
         var postData = "";
 
-        var parsed = url.parse(request.url);
-        var pathname = parsed.pathname;
+        var parsedUrl = url.parse(request.url);
+        var pathname = parsedUrl.pathname;
 
-        var query = parsed.query;
+        var parsedQuery = querystring.parse(parsedUrl.query);
 
         console.log("Request for "+pathname+"received.");
-        console.log("got query: "+query);
+        console.log("got query: "+JSON.stringify(parsedQuery));
 
-        route(handle, pathname, query);
+        route(handle, pathname, parsedQuery);
 
 	}
 	http.createServer(onRequest).listen(8888);

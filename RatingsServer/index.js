@@ -8,7 +8,7 @@ var databaseService =  require("./databaseService");
 
 var handle = {};
 
-handle["/rate"] = databaseService.rate;
+handle["/like"] = databaseService.like;
 handle["/comment"] = databaseService.comment;
 
 server.start(router.route, handle);

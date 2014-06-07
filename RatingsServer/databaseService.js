@@ -18,11 +18,15 @@ function connect(host,user,password,database){
     return connection;
 }
 
- function rate(response, query){
+ function like(response, data){
 
-     var connection = connect('localhost','root','123','testdb');
+     var userId = data.user;
+     var locationId = data.location;
+     var like = data.like;
+     
+     var connection = connect('localhost','root','123','ratingsdb');
 
-    var strQuery = "select * from firsttable";
+    var strQuery = "select * from ratingsandcomments";
 
     connection.query(strQuery, function(err, rows){
         if(err){
@@ -43,5 +47,5 @@ function comment(response,query){
 
 }
 
-exports.rate = rate;
+exports.like = like;
 exports.comment=comment;
