@@ -17,8 +17,9 @@ function start(route, handle){
 
         console.log("Request for "+pathname+"received.");
         console.log("got query: "+JSON.stringify(parsedQuery));
+        console.log(parsedQuery.location);
 
-        route(handle, pathname, parsedQuery);
+        route(handle, pathname,response, parsedQuery);
 
 	}
 	http.createServer(onRequest).listen(8888);

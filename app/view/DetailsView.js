@@ -29,7 +29,8 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                {
                    xtype: 'button',
                    cls: 'like',
-                   docked:'right'
+                   docked: 'right',
+                   hidden: true,
                }
            ]
        },
@@ -37,6 +38,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
            xtype:'container',
            layout: 'vbox',          
            docked: 'bottom',
+           hidden:true,
            items: [
                {
                    xtype: 'textareafield',
@@ -138,6 +140,14 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         return this.getComponent(0).getComponent(1);
     },
 
+    getLikeButton: function () {
+        return this.getComponent(0).getComponent(2);
+    },
+
+    getCommentPanel: function(){
+        return this.getComponent(1);
+    },
+
     setLanguage: function () {
         var lang = EasyTreatyApp.config.getLanguage();
 
@@ -154,6 +164,14 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
         this.setTpl(tpl);
         this.setData(data);
+    },
+
+    toggleCommentAndLikeVisibility: function () {
+        var hidden = this.getCommentPanel().getHidden();
+
+        this.getCommentPanel().setHidden(!hidden);
+        this.getLikeButton().setHidden(!hidden);
+        
     }
     
 
