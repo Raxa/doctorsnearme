@@ -15,7 +15,8 @@ Ext.define("EasyTreatyApp.model.Location", {
             { name: 'types', type: 'auto' },
             { name: 'specialty', type: 'auto' },
             { name: 'reference', type: 'string' },
-            { name: 'isFavorite', type: 'boolean' }
+            { name: 'isFavorite', type: 'boolean' },
+            { name: 'likeCount', type: 'int' }
         ]
     }
 })

@@ -60,7 +60,21 @@ function connect(){
             }
             else{
                 strQuery1="update ratingsandcomments set likes="+like+" where userID="+userId+" && locationID="+locationId;
-                connection.query(strQuery1);
+                connection.query(strQuery1, function(err, result){
+                    if(err){
+                        setResponseHeaders(response);
+                        response.write("error");
+                        response.end();
+                        throw err;
+
+                    }else{
+                        setResponseHeaders(response);
+                        response.write(JSON.stringify(result));
+                        response.end();
+                        console.log(result);
+                    }
+
+                });
             }
         }
         connection.end();
@@ -143,7 +157,7 @@ function getLikes(response,data){
     console.log("loc id: "+locationId);
     var connection = connect();
 
-    var strQuery = "select count(*) from ratingsandcomments where locationID="+locationId+ " and Likes = 1";
+    var strQuery = "select count(*) as count from ratingsandcomments where locationID='"+locationId+ "' && Likes = 1";
 
     connection.query(strQuery, function(err, result){
         if(err){
@@ -154,9 +168,10 @@ function getLikes(response,data){
 
         }else{
             setResponseHeaders(response);
-            response.write(JSON.stringify(result));
+            response.write(JSON.stringify(result[0]));
+
             response.end();
-            console.log(result);
+            console.log(result[0].count);
 
         }
 
@@ -210,7 +225,7 @@ function checkLike(response,data){
         }else{
             console.log(result);
             setResponseHeaders(response);
-            response.write(JSON.stringify(result));
+            response.write(JSON.stringify(result[0]));
             response.end();
         }
 
@@ -222,6 +237,7 @@ function checkLike(response,data){
 function setResponseHeaders(response){
     response.setHeader('Access-Control-Allow-Origin','*');
     response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
+    //response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 }
 
 exports.like = like;

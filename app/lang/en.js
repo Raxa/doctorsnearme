@@ -32,5 +32,6 @@
         SINHALESE: 'Sinhalese',
         ENGLISH: 'English',
         COMMENT: 'Comment',
-        VIEW_COMMENTS:'View Comments'
+        VIEW_COMMENTS: 'View Comments',
+        LIKE_COUNT:'Number of people who like this place'
 }

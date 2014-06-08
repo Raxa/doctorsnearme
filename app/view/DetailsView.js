@@ -31,6 +31,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                    cls: 'like',
                    docked: 'right',
                    //hidden: true,
+                   disabled:true
                },
                {
                    xtype: 'button',
@@ -64,6 +65,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
    },
     
     constructor: function () {
+        var me = this;
         var template = new Ext.XTemplate(
             '<table>',
              '<th colspan="2">{[this.getString("moreinfo")]}</th>',
@@ -76,6 +78,9 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
             '</tr>',
             '<tr>',
             '<td>{[this.getString("phoneno")]}&nbsp;:</td><td>{international_phone_number}</td>',
+            '</tr>',
+            '<tr>',
+            '<td>{[this.getString("likecount")]}&nbsp;:</td><td>{likeCount}</td>',
             '</tr>',
             '</tbody>',
             '</table>', {
@@ -93,6 +98,9 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                             break;
 
                         case 'phoneno': return lang.PHONE_NUMBER;
+                            break;
+
+                        case 'likecount': return lang.LIKE_COUNT;
                             break;
                     }
                 }
@@ -137,9 +145,42 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
             me.fireEvent('comment',commentPanel.getComponent(0).getValue());
         });
 
+        this.getLikeButton().on('tap', function () {
+            me.fireEvent('like');
+        });
+
+        this.getLikeCount(1);
+
         this.callParent();
 
         this.setLanguage();
+    },
+
+    
+    getLikeCount: function (id) {
+        var me = this;
+        Ext.Ajax.request({
+            url: 'http://localhost:8888/getLikes',
+            method: 'GET',
+            params: {
+                location: id
+            },
+            success: function (response, opts) {
+                console.log("success");
+                console.log(Ext.JSON.decode(response.responseText).count);
+                me.getData().likeCount = Ext.JSON.decode(response.responseText).count;
+                me.setData(me.getData());
+
+            },
+            failure: function (response, opts) {
+                console.log("failure");
+                console.log(response);
+            }
+        });
+    },
+
+    toggleLikeButtonState: function(value){
+        this.getLikeButton().setDisabled(value);
     },
 
     toggleLikeComment: function(value){

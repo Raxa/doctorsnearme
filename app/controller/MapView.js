@@ -139,9 +139,38 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         
         detailsView.toggleLikeComment(!loggedIn);
 
+        this.checkLiked(detailsView);
 
         Ext.Viewport.add(detailsView);
         Ext.Viewport.setActiveItem(detailsView);
+    },
+
+    checkLiked: function (detailsView) {
+        var me = this;
+        Ext.Ajax.request({
+            url: 'http://localhost:8888/checkLike',
+            method: 'GET',
+            params: {
+                location: 1,
+                user: 5
+            },
+            success: function (response, opts) {
+                console.log("success");
+                console.log(response);
+                var like = Ext.JSON.decode(response.responseText).likes;
+
+                if (like == 1) {
+                    detailsView.toggleLikeButtonState(true);
+                } else {
+                    detailsView.toggleLikeButtonState(false);
+                }
+
+            },
+            failure: function (response, opts) {
+                console.log("failure");
+                console.log(response);
+            }
+        });
     },
 
     showMenu: function () {

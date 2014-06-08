@@ -15,13 +15,38 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
             detailsView: {
                 back: "backToMapView",
                 showcomments: "showComments",
-                comment:"comment"
+                comment: "comment",
+                like: "like"
             },
             userProfile: {
                 back: "backToMapView"
             }
 
         }
+    },
+
+    like: function () {
+        var me = this;
+        Ext.Ajax.request({
+            // Ext.data.JsonP.request({
+            url: 'http://localhost:8888/like',
+            method: 'GET',
+            params: {
+                location: 1,
+                user: 5,
+                like: 1
+            },
+            success: function (response, opts) {
+                console.log("success");
+                console.log(response);
+                me.getDetailsView().toggleLikeButtonState(true);
+
+            },
+            failure: function (response, opts) {
+                console.log("failure");
+                console.log(response);
+            }
+        });
     },
 
     comment: function(theComment){
