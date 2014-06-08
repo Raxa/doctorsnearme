@@ -2,13 +2,15 @@
  * Created by Amaya on 6/7/2014.
  */
 var mysql = require('mysql');
+var config = require('./config.json');
 
-function connect(host,user,password,database){
+//function connect(host,user,password,database){
+function connect(){
     var connection = mysql.createConnection(({
-        host:host,
-        user:user,
-        password:password,
-        database:database
+        host:config.host,
+        user:config.user,
+        password:config.password,
+        database:config.database
     }));
 
     connection.connect(function(err){
@@ -24,7 +26,7 @@ function connect(host,user,password,database){
      var locationId = data.location;
      var like = data.like;
 
-     var connection = connect('localhost','root','123','ratingsdb');
+     var connection = connect();
 
     var strQuery = "select userID,locationID from ratingsandcomments where userID="+userId+" && locationID="+locationId;
     var strQuery1;
@@ -58,7 +60,7 @@ console.log("inside comment");
     var locationId = data.location;
     var comment = data.comment;
 
-    var connection = connect('localhost','root','123','ratingsdb');
+    var connection = connect();
 
     var strQuery = "select userID,locationID from ratingsandcomments where userID="+userId+" && locationID="+locationId;
     var strQuery1;
@@ -92,7 +94,7 @@ function getLikes(response,data){
     console.log(data);
     var locationId = data.location;
     console.log("loc id: "+locationId);
-    var connection = connect('localhost','root','123','ratingsdb');
+    var connection = connect();
 
     var strQuery = "select count(*) from ratingsandcomments where locationID="+locationId+ " and Likes = 1";
 
@@ -114,7 +116,7 @@ function getLikes(response,data){
 function getComments(response,data){
     var locationId = data.location;
 
-    var connection = connect('localhost','root','123','ratingsdb');
+    var connection = connect();
 
     var strQuery = "select comments from ratingsandcomments where locationID ="+ locationId;
 
@@ -124,7 +126,9 @@ function getComments(response,data){
             throw err;
 
         }else{
-            console.log(result);
+            console.log(JSON.stringify(result));
+            response.write(JSON.stringify(result));
+            response.end();
 
         }
 
@@ -137,7 +141,7 @@ function checkLike(response,data){
     var userId = data.user;
     var locationId = data.location;
 
-    var connection = connect('localhost','root','123','ratingsdb');
+    var connection = connect();
 
     var strQuery = "select likes from ratingsandcomments where userID="+userId+" && locationID="+locationId;
 

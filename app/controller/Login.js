@@ -25,17 +25,45 @@ Ext.define('EasyTreatyApp.controller.Login', {
     },
  
     onLogout: function (sideMenu) {
-        //TODO: Implement logout functionality
+        var me = this;
+        var encodedString = "Basic " + btoa(EasyTreatyApp.config.getUserName() + ":" + EasyTreatyApp.config.setPassword());
+
+        Ext.Ajax.request({
+            url: 'https://api.raxa.io/ws/rest/v1/session',
+            method: 'DELETE',
+            success: function (response, opts) {
+                console.log("success");
+
+                me.logoutSuccess();
+
+            },
+            failure: function (response, opts) {
+                console.log("failure");
+            },
+            headers: {
+                'Accept': 'application/json',
+                'Content-type': 'application/json',
+                'Authorization': encodedString
+            }
+        });
+
+    },
+
+    logoutSuccess: function () {
+
         var lang = EasyTreatyApp.config.getLanguage();
         var sideMenu = this.getSideMenu();
         sideMenu.atLogOut();
         EasyTreatyApp.config.setLoggedIn(false);
 
-
         sideMenu.getProfileButton().doSetHidden(true);
         sideMenu.getLogInButton().setText(lang.LOG_IN);
-    },
 
+        EasyTreatyApp.config.setUser(null);
+
+        EasyTreatyApp.config.setUserName(null);
+        EasyTreatyApp.config.setPassword(null);
+    },
     
     proceed: function() {
         var mapview = this.getMapView();
@@ -72,7 +100,7 @@ Ext.define('EasyTreatyApp.controller.Login', {
             success: function (response, opts) {
                 console.log("success");
 
-                me.logInSuccess(Ext.JSON.decode(response.responseText));
+                me.logInSuccess(Ext.JSON.decode(response.responseText),values);
                 
             },
             failure: function (response, opts) {
@@ -89,7 +117,7 @@ Ext.define('EasyTreatyApp.controller.Login', {
         });
     },
 
-    logInSuccess: function (loginResponse) {
+    logInSuccess: function (loginResponse,values) {
         EasyTreatyApp.config.setLoggedIn(true);
         var lang = EasyTreatyApp.config.getLanguage();
         var user = Ext.create('EasyTreatyApp.model.User');
@@ -97,6 +125,9 @@ Ext.define('EasyTreatyApp.controller.Login', {
         user.setData(loginResponse);
 
         EasyTreatyApp.config.setUser(user);
+
+        EasyTreatyApp.config.setUserName(values.userName);
+        EasyTreatyApp.config.setPassword(values.password);
 
         this.getSideMenu().getProfileButton().doSetHidden(false);
         this.getSideMenu().getLogInButton().setText(lang.LOG_OUT);

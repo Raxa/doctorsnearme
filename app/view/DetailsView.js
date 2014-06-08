@@ -30,7 +30,12 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                    xtype: 'button',
                    cls: 'like',
                    docked: 'right',
-                   hidden: true,
+                   //hidden: true,
+               },
+               {
+                   xtype: 'button',
+                   text: 'View Comments',
+                   docked:'right'
                }
            ]
        },
@@ -121,6 +126,10 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
             me.fireEvent('togglefavorite', me.getData().id, isFavorite);
         });
 
+        this.getViewCommentsButton().on('tap', function () {
+            me.fireEvent('showcomments');
+        });
+
         this.callParent();
 
         this.setLanguage();
@@ -142,6 +151,10 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
     getLikeButton: function () {
         return this.getComponent(0).getComponent(2);
+    },
+
+    getViewCommentsButton:function(){
+        return this.getComponent(0).getComponent(3);
     },
 
     getCommentPanel: function(){

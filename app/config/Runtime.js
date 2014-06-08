@@ -16,7 +16,11 @@ Ext.define('EasyTreatyApp.config.Runtime', {
 
         favorites: [],
 
-        language:EN
+        language: EN,
+
+        userName: null,
+
+        password:null
 
     },
 

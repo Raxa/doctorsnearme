@@ -12,13 +12,33 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
         },
         control: {
             detailsView: {
-                back: "backToMapView"
+                back: "backToMapView",
+                showcomments:"showComments"
             },
             userProfile: {
                 back: "backToMapView"
             }
 
         }
+    },
+
+    showComments: function(){
+        Ext.Ajax.request({
+            url: 'http://localhost:8888/getComments',
+            method: 'GET',
+            params:{
+                location:1
+            },
+            success: function (response, opts) {
+                console.log("success");
+                console.log(response);
+
+            },
+            failure: function (response, opts) {                
+                console.log("failure");
+                console.log(response);
+            }
+        });
     },
     
     backToMapView: function () {
