@@ -30,5 +30,7 @@
         CANCEL:'Cancel',
         LANGUAGE: 'Language',
         SINHALESE: 'Sinhalese',
-        ENGLISH: 'English'
+        ENGLISH: 'English',
+        COMMENT: 'Comment',
+        VIEW_COMMENTS:'View Comments'
 }

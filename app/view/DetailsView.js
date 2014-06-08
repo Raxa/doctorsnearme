@@ -141,6 +141,11 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
         this.setLanguage();
     },
+
+    toggleLikeComment: function(value){
+        this.getLikeButton().setHidden(value);
+        this.getCommentPanel().setHidden(value);
+    },
  
     /**
      * Returns the back button
@@ -172,6 +177,8 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         var lang = EasyTreatyApp.config.getLanguage();
 
         this.getBackButton().setText(lang.BACK);
+        this.getCommentPanel().getComponent(1).setText(lang.COMMENT);
+        this.getViewCommentsButton().setText(lang.VIEW_COMMENTS);
 
     },
 
@@ -184,14 +191,6 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
         this.setTpl(tpl);
         this.setData(data);
-    },
-
-    toggleCommentAndLikeVisibility: function () {
-        var hidden = this.getCommentPanel().getHidden();
-
-        this.getCommentPanel().setHidden(!hidden);
-        this.getLikeButton().setHidden(!hidden);
-        
     }
     
 

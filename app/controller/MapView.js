@@ -135,6 +135,11 @@ Ext.define('EasyTreatyApp.controller.MapView', {
             favoriteButton.setIconCls('star');
         }
 
+        var loggedIn = EasyTreatyApp.config.getLoggedIn();
+        
+        detailsView.toggleLikeComment(!loggedIn);
+
+
         Ext.Viewport.add(detailsView);
         Ext.Viewport.setActiveItem(detailsView);
     },

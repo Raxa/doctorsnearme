@@ -8,7 +8,8 @@ Ext.define('EasyTreatyApp.controller.Login', {
         refs: {
             mapView: 'mapview',
             loginView: 'loginview',
-            sideMenu:"mainmenu"
+            sideMenu: "mainmenu",
+            detailsView:'detailsview'
         },
 
         control: {
@@ -58,6 +59,11 @@ Ext.define('EasyTreatyApp.controller.Login', {
 
         sideMenu.getProfileButton().doSetHidden(true);
         sideMenu.getLogInButton().setText(lang.LOG_IN);
+        
+        var detailsView = this.getDetailsView();
+        if (detailsView != null) {
+            detailsView.toggleLikeComment(true);
+        }
 
         EasyTreatyApp.config.setUser(null);
 
@@ -131,6 +137,11 @@ Ext.define('EasyTreatyApp.controller.Login', {
 
         this.getSideMenu().getProfileButton().doSetHidden(false);
         this.getSideMenu().getLogInButton().setText(lang.LOG_OUT);
+
+        var detailsView = this.getDetailsView();
+        if (detailsView != null) {
+            detailsView.toggleLikeComment(false);
+        }
         this.proceed();
     }
 

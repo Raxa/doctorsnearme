@@ -30,5 +30,7 @@
     CANCEL:'අවලංගු කරන්න',
     LANGUAGE: 'භාෂාව',
     SINHALESE: 'සිංහල',
-    ENGLISH:'ඉංග්‍රීසි'
+    ENGLISH: 'ඉංග්‍රීසි',
+    COMMENT: 'ප්‍රතිචාර දක්වන්න',
+    VIEW_COMMENTS: 'ප්‍රතිචාර පෙන්වන්න'
 }
