@@ -3,6 +3,7 @@
  */
 Ext.define('EasyTreatyApp.controller.DetailsView', {
     extend: 'Ext.app.Controller',
+    requires:'Ext.data.JsonP',
 
     config: {
         refs: {
@@ -13,7 +14,8 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
         control: {
             detailsView: {
                 back: "backToMapView",
-                showcomments:"showComments"
+                showcomments: "showComments",
+                comment:"comment"
             },
             userProfile: {
                 back: "backToMapView"
@@ -22,10 +24,34 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
         }
     },
 
+    comment: function(theComment){
+         Ext.Ajax.request({
+       // Ext.data.JsonP.request({
+            url: 'http://localhost:8888/comment',
+            method: 'GET',
+            params: {
+                location: 20,
+                user: 18,
+                comment:theComment
+            },
+            success: function (response, opts) {
+                console.log("success");
+                console.log(response);
+
+            },
+            failure: function (response, opts) {
+                console.log("failure");
+                console.log(response);
+            }
+        });
+    },
+
     showComments: function(){
         Ext.Ajax.request({
+      //  Ext.data.JsonP.request({
             url: 'http://localhost:8888/getComments',
             method: 'GET',
+           // method: 'POST',
             params:{
                 location:1
             },

@@ -43,7 +43,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
            xtype:'container',
            layout: 'vbox',          
            docked: 'bottom',
-           hidden:true,
+          // hidden: true,          
            items: [
                {
                    xtype: 'textareafield',
@@ -53,7 +53,8 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                },
                {
                    xtype: 'button',
-                   text:'Comment'
+                   text: 'Comment',
+                   bubbleEvents:'tap'
                }
            ]
        }
@@ -128,6 +129,12 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
         this.getViewCommentsButton().on('tap', function () {
             me.fireEvent('showcomments');
+        });
+
+        var commentPanel = this.getCommentPanel();
+        
+        commentPanel.on('tap', function () {
+            me.fireEvent('comment',commentPanel.getComponent(0).getValue());
         });
 
         this.callParent();

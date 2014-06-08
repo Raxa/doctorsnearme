@@ -32,7 +32,9 @@ function connect(){
     var strQuery1;
     connection.query(strQuery, function(err, rows){
         if(err){
-
+            setResponseHeaders(response);
+            response.write("error");
+            response.end();
             throw err;
 
         }else{
@@ -40,7 +42,21 @@ function connect(){
             if(rows.length==0){
                 console.log('rows.length: '+rows.length);
                 strQuery1="insert into ratingsandcomments set userID ="+ userId+", locationID="+locationId+", likes="+like;
-                connection.query(strQuery1);
+                connection.query(strQuery1, function(err, result){
+                    if(err){
+                        setResponseHeaders(response);
+                        response.write("error");
+                        response.end();
+                        throw err;
+
+                    }else{
+                        setResponseHeaders(response);
+                        response.write(JSON.stringify(result));
+                        response.end();
+                        console.log(result);
+                    }
+
+                });
             }
             else{
                 strQuery1="update ratingsandcomments set likes="+like+" where userID="+userId+" && locationID="+locationId;
@@ -66,7 +82,10 @@ console.log("inside comment");
     var strQuery1;
     connection.query(strQuery, function(err, rows){
         if(err){
-    console.log("error..........");
+            setResponseHeaders(response);
+            response.write("error");
+            response.end();
+            console.log("error..........");
             throw err;
 
         }else{
@@ -75,12 +94,40 @@ console.log("inside comment");
             if(rows.length==0){
                 console.log("rows.length 0");
                 strQuery1="insert into ratingsandcomments set userID ="+ userId+", locationID="+locationId+", comments='"+comment+"'";
-                connection.query(strQuery1);
+                connection.query(strQuery1, function(err, result){
+                    if(err){
+                        setResponseHeaders(response);
+                        response.write("error");
+                        response.end();
+                        throw err;
+
+                    }else{
+                        setResponseHeaders(response);
+                        response.write(JSON.stringify(result));
+                        response.end();
+                        console.log(result);
+                    }
+
+                });
             }
             else{
                 console.log("rows.length not zero");
                 strQuery1="update ratingsandcomments set comments='"+comment+"' where userID="+userId+" && locationID="+locationId;
-                connection.query(strQuery1);
+                connection.query(strQuery1, function(err, result){
+                    if(err){
+                        setResponseHeaders(response);
+                        response.write("error");
+                        response.end();
+                        throw err;
+
+                    }else{
+                        setResponseHeaders(response);
+                        response.write(JSON.stringify(result));
+                        response.end();
+                        console.log(result);
+                    }
+
+                });
             }
         }
         connection.end();
@@ -100,10 +147,15 @@ function getLikes(response,data){
 
     connection.query(strQuery, function(err, result){
         if(err){
-
+            setResponseHeaders(response);
+            response.write("error");
+            response.end();
             throw err;
 
         }else{
+            setResponseHeaders(response);
+            response.write(JSON.stringify(result));
+            response.end();
             console.log(result);
 
         }
@@ -115,18 +167,21 @@ function getLikes(response,data){
 
 function getComments(response,data){
     var locationId = data.location;
-
+    console.log("location: "+locationId);
     var connection = connect();
 
     var strQuery = "select comments from ratingsandcomments where locationID ="+ locationId;
 
     connection.query(strQuery, function(err, result){
         if(err){
-
+            setResponseHeaders(response);
+            response.write("error");
+            response.end();
             throw err;
 
         }else{
             console.log(JSON.stringify(result));
+            setResponseHeaders(response);
             response.write(JSON.stringify(result));
             response.end();
 
@@ -147,17 +202,26 @@ function checkLike(response,data){
 
     connection.query(strQuery, function(err, result){
         if(err){
-
+            setResponseHeaders(response);
+            response.write("error");
+            response.end();
             throw err;
 
         }else{
             console.log(result);
-
+            setResponseHeaders(response);
+            response.write(JSON.stringify(result));
+            response.end();
         }
 
         connection.end();
 
     });
+}
+
+function setResponseHeaders(response){
+    response.setHeader('Access-Control-Allow-Origin','*');
+    response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
 }
 
 exports.like = like;
