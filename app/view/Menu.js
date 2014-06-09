@@ -34,11 +34,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
                    // label: 'Specilty',
                     labelWidth: '45%',
                     ui: 'mainmenu'
-                },
-                {
-                   // text: 'Change Location',
-                    ui: 'mainmenu'
-                },              
+                },             
                 {
                  //   text: 'Log In',
                     ui: 'mainmenu'
@@ -63,8 +59,6 @@ Ext.define('EasyTreatyApp.view.Menu', {
         this.getProfileButton().setText(lang.HEALTH_PROFILE);
 
         this.getAboutButton().setText(lang.ABOUT);
-
-        this.getChangeLocationButton().setText(lang.CHANGE_LOCATION);
 
         this.getDistanceSelectField().setLabel(lang.DISTANCE);
 
@@ -115,10 +109,6 @@ Ext.define('EasyTreatyApp.view.Menu', {
             me.fireEvent('showprofile');
         });
 
-        this.getChangeLocationButton().on('tap', function (button, e, eOpts) {
-            me.fireEvent('changelocation');
-        });
-
         this.getLogInButton().on('tap', function (button, e, eOpts) {
             if (!EasyTreatyApp.config.getLoggedIn()) {
                 me.toggle();
@@ -146,7 +136,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
     },
     
     getLanguageSelectField: function(){
-        return this.getComponent(6);
+        return this.getComponent(5);
     },
 
     getSpecialtySelectField: function () {
@@ -164,7 +154,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
      * @return {Button}
     */
     getAboutButton: function () {
-        return this.getComponent(5);
+        return this.getComponent(4);
     },
     
     /**
@@ -174,19 +164,9 @@ Ext.define('EasyTreatyApp.view.Menu', {
      * @return {Button}
     */
     getLogInButton: function() {
-        return this.getComponent(4);
-    },
-    
-    
-    /**
-     * Returns the Change Location button
-     * @private
-     * @method
-     * @return {Button}
-    */
-    getChangeLocationButton: function () {
         return this.getComponent(3);
     },
+    
     
     /**
      * Returns the Profile button

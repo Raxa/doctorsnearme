@@ -64,6 +64,15 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
     },
 
+    zoomMap: function () {
+        console.log("inside zoommap");
+        map =  this.down('locationmap');
+        map.setMapOptions({
+            zoom: 10,
+            center:map.getBaseLocation()
+        });
+    },
+
     onStoreClear: function(){
         this.down('locationmap').onStoreClear();
     },
@@ -87,12 +96,6 @@ Ext.define('EasyTreatyApp.view.MapView', {
                 },
                 {
                     xtype: 'button',
-                   // text: 'Done',
-                    docked: 'right',
-                    hidden: 'true'
-                },
-                {
-                    xtype: 'button',
                    // text: 'List',
                     docked: 'right',
                     handler: function () {
@@ -111,6 +114,13 @@ Ext.define('EasyTreatyApp.view.MapView', {
                         
                         
                     }
+                },
+                {
+                    iconCls: 'locate',
+                    docked:'right',
+                    handler: function () {
+                        me.resetLocation();
+                    }
                 }
                  
                 
@@ -120,10 +130,6 @@ Ext.define('EasyTreatyApp.view.MapView', {
        // toolbar.setTitle(this.getToolbarTitle());
 
         this.add(toolbar);
-
-        toolbar.getComponent(1).on('tap', function () {
-            me.selectionDone();
-        });
         
         var bottomBar = Ext.create('Ext.Toolbar', {
             docked: 'bottom',
@@ -182,26 +188,6 @@ Ext.define('EasyTreatyApp.view.MapView', {
     },
     
 
-    changeBaseLocationToSearch: function () {
-
-        this.down('locationmap').changeBaseLocation();
-        this.toggleDoneButton();
-    },
- 
-    
-    /**
-     * Toggles the visibility of the Done button
-     * @method
-     * @private
-     * @param Boolean visibility
-     */
-    toggleDoneButton: function(visibility) {
-        var doneButton = this.getDoneButton();
-
-        doneButton.setHidden(visibility);
-    },
-    
-
     /**
      * Returns the top tool bar
      * @method
@@ -209,16 +195,6 @@ Ext.define('EasyTreatyApp.view.MapView', {
     */
     getTopToolBar: function () {
         return this.down('toolbar');
-    },
-    
-
-    /**
-     * Returns the Done button
-     * @method
-     * @return {Button}
-    */
-    getDoneButton: function() {
-        return this.getTopToolBar().getComponent(1);
     },
 
 
@@ -242,27 +218,6 @@ Ext.define('EasyTreatyApp.view.MapView', {
         return this.down('mainmenu');
     },
 
-    /**
-       * Calls selectionDone() of the item MapPanel, toogles Done button and refresh
-       * @method
-       * @private
-       * @param [{Object}] records
-       * @return [{Object}] data
-       */
-    selectionDone: function () {
-
-        this.down('locationmap').selectionDone();
-
-        this.toggleDoneButton(true);
-
-        var currentSearch = this.getCurrentSearch();
-
-        if (currentSearch != null) {
-            this.fireEvent('choicedone', currentSearch);
-        }
-
-    },
-
     updateSearchRadius: function () {
         var currentSearch = this.getCurrentSearch();
 
@@ -271,20 +226,22 @@ Ext.define('EasyTreatyApp.view.MapView', {
         }
     },
 
+    resetLocation: function(){
+        this.down('locationmap').getGeo().updateLocation();
+    },
+
     setLanguage: function (newLang,oldLang) {
         var lang = EasyTreatyApp.config.getLanguage();
 
         var topBar = this.getTopToolBar();
 
-        var listBtn = topBar.getComponent(2);
+        var listBtn = topBar.getComponent(1);
         if (listBtn.getText() == oldLang.MAP) {
             listBtn.setText(lang.MAP);
         }
         else {
             listBtn.setText(lang.LIST);
         }
-
-        topBar.getComponent(1).setText(lang.DONE);
 
         var bottomBar = this.getComponent(3);
 

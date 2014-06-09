@@ -20,13 +20,22 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 getdirections: "onGetDirections",
                 togglemaplist: "onMapListToggle",
                 togglefavorite: "onFavoriteToggle",
-                showfavorites: "onShowFavorites"
+                showfavorites: "onShowFavorites",
+                basechanged: "onBaseChange"
             },
             detailsView: {
                 togglefavorite: "onFavoriteToggle"
             }
         }
         
+    },
+
+    onBaseChange: function(){
+        var currentSearch = this.getMapView().getCurrentSearch();
+
+        if (currentSearch != null) {
+            this.onChoice(currentSearch);
+        }
     },
 
     onShowFavorites: function(){
@@ -192,6 +201,8 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         }
 
         mapview.getStore().populate(base, type, mapview.getSearchRadius(), locationmap);
+
+        this.getMapView().zoomMap();
     }
 
 

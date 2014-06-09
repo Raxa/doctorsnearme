@@ -15,23 +15,11 @@ Ext.define('EasyTreatyApp.controller.Menu', {
         
         control: {            
             sideMenu: {
-                changelocation: "onChangeLocation",
                 showprofile: "onShowProfile",
                 searchradiuschange:"onSearchRadiusChange"
             }
         }
     }, 
-
-    
-    /**
-     * On change location event
-     * @method
-     * @private
-     */
-    onChangeLocation : function() {
-        Ext.Msg.alert("Guide", "Click anywhere & press Done");
-        this.getMapView().changeBaseLocationToSearch();
-    },
 
     onShowProfile: function () {
         var profileView = this.getUserProfile();

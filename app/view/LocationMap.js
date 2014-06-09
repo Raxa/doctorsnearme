@@ -23,9 +23,9 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
         locations: null,
 
-        clickListener: null,
+        store: null,
 
-        store:null
+        geo:null
                       
     },
 
@@ -33,7 +33,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         this.callParent();
         console.log("inside initialize");
 
-        this.enableBubble(['getdirections', 'moredetails', 'togglefavorite']);
+        this.enableBubble(['getdirections', 'moredetails', 'togglefavorite','basechanged']);
 
         this.setLocationOfTheUser();
         var me = this;
@@ -213,6 +213,16 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
                 locationupdate: function (geo) {
                     console.log("location update");
 
+                    var user = me.getUserLocationMarker();
+                    var base = me.getBaseLocationMarker();
+
+                    if (user != null) {
+                        user.setMap(null);
+                    }
+                    if (base != null) {
+                        base.setMap(null);
+                    }
+
                     var currentLat = geo.getLatitude();
                     var currentLng = geo.getLongitude();
                     var location = new google.maps.LatLng(currentLat, currentLng);
@@ -224,8 +234,17 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
                         map: me.getMap(),
                         animation: null,
                         position: location,
+                        draggable: true,
                         icon: 'resources/icons/bluemarker.png'
                     });
+                    /////////////////
+                    google.maps.event.addListener(marker, 'dragend', function (event) {
+                        console.log("dragend");
+                        console.log(event);
+                        me.setBaseLocation(me.getBaseLocationMarker().position);
+                        me.fireEvent('basechanged');
+                    });
+                    /////////////////
 
                     me.setMapOptions({
                         center: location,
@@ -233,6 +252,8 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
                     });
                     me.setUserLocationMarker(marker);
                     me.setBaseLocationMarker(marker);
+
+                    me.fireEvent('basechanged');
 
                 },
                 locationerror: function (geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
@@ -245,6 +266,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         });
 
         geo.updateLocation();
+        this.setGeo(geo);
     },
 
     /**
@@ -328,52 +350,6 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             stepDisplay.setContent('<div class="info-window">' + text + '</div>');
             stepDisplay.open(map, marker);
         });
-    },
-
-    /**
-     * Sets the click listner 
-     * @method
-     * @private
-     */
-        changeBaseLocation: function () {
-
-            var marker;
-            var me = this;
-            var map = this.getMap();
-
-            var listener = google.maps.event.addListener(map, 'click', function (event) {
-
-                var baseMarker = me.getBaseLocationMarker();
-                console.log("tapped");
-
-                baseMarker.setMap(null);
-
-                var marker = new google.maps.Marker({
-                    map: me.getMap(),
-                    animation: null,
-                    position: event.latLng,
-                    icon: 'resources/icons/flag.png'
-                });
-                me.setBaseLocationMarker(marker);
-
-            });
-
-            this.setClickListener(listener);
-
-        },
-
-        /**
-         * gets Called when the user has changed the relative location
-         * @method
-         * @public
-         */
-        selectionDone: function () {
-            google.maps.event.removeListener(this.getClickListener());
-
-            this.setBaseLocation(this.getBaseLocationMarker().position);
-
-            console.log("relative location setting");
-
-        }
+    }
     
 })
