@@ -59,7 +59,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
     
     onLocationAddition: function () {
         console.log("map view onloactionaddition");
-        this.down('locationmap').onLocationAddition();
+        this.down('locationmap').onLocationAddition(this.getCurrentSearch());
         this.down('listview').fillList();
 
     },

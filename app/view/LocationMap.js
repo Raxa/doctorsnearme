@@ -78,12 +78,19 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         this.clearRoutes();
     },
 
-    onLocationAddition: function () {
+    onLocationAddition: function (type) {
+        var markerImg = 'redmarker.png';
+        switch (type) {
+            case 1: markerImg = 'greenmarker.png'
+                break;
+            case 2: markerImg = 'yellowmarker.png'
+                break;
+        }
         console.log("oh yeah location added!!!! ");
 
         var me = this;
         var record = this.getStore().last();
-        me.addLocationMarker(record.getData(), 'redmarker.png');
+        me.addLocationMarker(record.getData(), markerImg);
 
         //this.getStore().getRange().forEach(function (record) {
         //    me.addLocationMarker(record.getData(), 'redmarker.png');
