@@ -16,7 +16,8 @@ Ext.define('EasyTreatyApp.controller.Menu', {
         control: {            
             sideMenu: {
                 showprofile: "onShowProfile",
-                searchradiuschange:"onSearchRadiusChange"
+                searchradiuschange: "onSearchRadiusChange",
+                specialtychange: "onSpecialtyChange"
             }
         }
     }, 
@@ -37,6 +38,10 @@ Ext.define('EasyTreatyApp.controller.Menu', {
 
     onSearchRadiusChange: function (newRadius) {
         this.getMapView().setSearchRadius(newRadius);
+    },
+
+    onSpecialtyChange: function (newSpecialtyArray) {
+        this.getMapView().setSpecialties(newSpecialtyArray);
     }
  
 

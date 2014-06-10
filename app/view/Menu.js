@@ -1,8 +1,14 @@
 /**
  * Authored by Amaya
  */
+
 Ext.define('EasyTreatyApp.view.Menu', {
     extend: 'Ext.Container',
+
+    requires: [
+       'EasyTreatyApp.ux.Multiselect'
+    ],
+
     xtype: 'mainmenu',
     config: {
         cls: 'mainmenu',
@@ -16,24 +22,27 @@ Ext.define('EasyTreatyApp.view.Menu', {
         open: false,
         scrollable: 'vertical',
         defaultType: 'button',
+
         items: [
                 {
                    // text: 'My Health Profile',
                     ui: 'mainmenu',
                     hidden:true
-                },  
+                },
                 {
                     xtype: 'selectfield',
                    // label: 'Distance',
                     labelWidth:'45%',
                     ui: 'mainmenu',
-                    autoSelect: false
+                    autoSelect: false,
+                    usePicker: false
                 },
                 {
-                    xtype: 'selectfield',
+                    xtype: 'multiselectfield',
                    // label: 'Specilty',
                     labelWidth: '45%',
-                    ui: 'mainmenu'
+                    ui: 'mainmenu',
+                    autoSelect: false
                 },             
                 {
                  //   text: 'Log In',
@@ -48,8 +57,9 @@ Ext.define('EasyTreatyApp.view.Menu', {
                    // label: 'Language',
                     labelWidth: '45%',
                     ui: 'mainmenu',
-                    usePicker:true
-                },
+                    autoSelect: false,
+                    usePicker:false
+                }
 
         ]
     },
@@ -127,6 +137,12 @@ Ext.define('EasyTreatyApp.view.Menu', {
 
         this.getLanguageSelectField().on('change', function (selectField, newValue, oldValue, eOpts) {
             me.fireEvent('languagechange', newValue,oldValue);
+            console.log(newValue);
+        });
+
+        this.getSpecialtySelectField().on('change', function (selectField, newValue, oldValue, eOpts) {
+            me.fireEvent('specialtychange', newValue);
+            console.log("change specilty select");
             console.log(newValue);
         });
 
@@ -219,7 +235,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
     },
     
     toggle: function () {
-        console.log(this);
+        //console.log(this);
         this.setOpen(!this.getOpen());
     },
     

@@ -10,6 +10,7 @@
     will need to resolve manually.
 */
 
+
 Ext.application({
     name: 'EasyTreatyApp',
 

@@ -200,7 +200,7 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 break;
         }
 
-        mapview.getStore().populate(base, type, mapview.getSearchRadius(), locationmap);
+        mapview.getStore().populate(base, type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
 
         this.getMapView().zoomMap();
     }

@@ -9,8 +9,9 @@ Ext.define('EasyTreatyApp.view.MapView', {
     config: {
         layout: 'card',
 
-        currentSearch:null,
+        currentSearch: null,
         searchRadius: 1000,
+        specialties:[],
 
         cls:'map-view',
         store: null,
@@ -219,6 +220,14 @@ Ext.define('EasyTreatyApp.view.MapView', {
     },
 
     updateSearchRadius: function () {
+        var currentSearch = this.getCurrentSearch();
+
+        if (currentSearch != null) {
+            this.fireEvent('choicedone', currentSearch);
+        }
+    },
+
+    updateSpecialties: function(){
         var currentSearch = this.getCurrentSearch();
 
         if (currentSearch != null) {
