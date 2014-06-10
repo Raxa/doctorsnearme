@@ -67,14 +67,24 @@ Ext.define('EasyTreatyApp.store.Location', {
 
         this.storeClear();
 
-        var request = {
-            location: latLng,
-           // location: new google.maps.LatLng(9.877965, 77.025521),
-            radius: radius,
-            //radius: 50000,
-            types: [type],
-            keyword: keywords
-        };
+        var request;
+        if (type == 'pharmacy' || keywords.length==0) {
+            request = {
+                location: latLng,
+                radius: radius,
+                types: [type]
+            };
+        } else {
+            console.log("inside else");
+            request = {
+                location: latLng,
+                // location: new google.maps.LatLng(9.877965, 77.025521),
+                radius: radius,
+                //radius: 50000,
+                types: [type],
+                keyword: keywords
+            };
+        }
 
         var service = new google.maps.places.PlacesService(map.getMap());
 
@@ -82,6 +92,7 @@ Ext.define('EasyTreatyApp.store.Location', {
 
         //   var detailRequest;
         service.nearbySearch(request, function (results, status) {
+       // service.textSearch(request, function (results, status) {
 
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 console.log("no of results: " + results.length);

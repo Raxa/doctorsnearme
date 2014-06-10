@@ -190,15 +190,28 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         var mapview = this.getMapView();
         var locationmap =mapview.getLocationMap();
         var base = locationmap.getBaseLocation();
-        var type;
+        var type,title;
         switch (choice) {
-            case 0: type = 'doctor';
+            case 0: type = 'hospital';
+                title = 'Medical Centers';
                 break;
-            case 1: type = 'hospital';
+            case 1: type = 'doctor';
+                title = 'Doctors'
                 break;
             case 2: type = 'pharmacy';
+                title = 'Pharmacies'
                 break;
         }
+
+       
+        var combined = mapview.getSpecialties().join(' , ');
+        if (mapview.getSpecialties().length > 0 && type!='pharmacy') {
+            mapview.getTopToolBar().setTitle(title + "-" + combined);
+        }
+        else {
+            mapview.getTopToolBar().setTitle(title);
+        }
+        
 
         mapview.getStore().populate(base, type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
 
