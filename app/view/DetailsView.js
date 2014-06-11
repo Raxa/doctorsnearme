@@ -14,6 +14,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
        data: null,
        cls: 'profile',
        commentsVisible: false,
+       liked:false,
        items: [{
            xtype: 'toolbar',
            docked: 'top',
@@ -32,7 +33,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                    cls: 'like',
                    docked: 'right',
                    //hidden: true,
-                   disabled:true
+                   //disabled:true
                },
                {
                    xtype: 'button',
@@ -201,7 +202,19 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
     },
 
     toggleLikeButtonState: function(value){
-        this.getLikeButton().setDisabled(value);
+       // this.getLikeButton().setDisabled(value);
+        ////////////
+        var likeButton = this.getLikeButton();
+        if (value) {
+            console.log("set class unlike");
+            likeButton.setCls('unlike');
+            this.setLiked(true);
+        }
+        else {
+            console.log("set class like");
+            likeButton.setCls('like');
+            this.setLiked(false);
+        }
     },
 
     toggleLikeComment: function(value){

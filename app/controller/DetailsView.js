@@ -3,7 +3,7 @@
  */
 Ext.define('EasyTreatyApp.controller.DetailsView', {
     extend: 'Ext.app.Controller',
-    requires:'Ext.data.JsonP',
+   // requires:'Ext.data.JsonP',
 
     config: {
         refs: {
@@ -27,6 +27,8 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
 
     like: function (data) {
         var me = this;
+        var detailsView = this.getDetailsView();
+        var previouslyLiked = detailsView.getLiked();
         Ext.Ajax.request({
             // Ext.data.JsonP.request({
             url: 'http://localhost:8888/like',
@@ -34,14 +36,26 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
             params: {
                 location: data.id,
                 user: EasyTreatyApp.config.getUser().get('personUuid'),
-                like: 1
+                //like: 1
+                like:previouslyLiked==true?0:1
             },
             success: function (response, opts) {
+                //console.log("success");
+                //console.log(response);
+                //detailsView.toggleLikeButtonState(true);
+                //data.likeCount = data.likeCount + 1;
+                //detailsView.setData(data);
+
                 console.log("success");
                 console.log(response);
-                me.getDetailsView().toggleLikeButtonState(true);
-                data.likeCount = data.likeCount + 1;
-                me.getDetailsView().setData(data);
+                if (previouslyLiked) {
+                    detailsView.toggleLikeButtonState(false);
+                    data.likeCount = data.likeCount - 1;
+                } else {
+                    detailsView.toggleLikeButtonState(true);
+                    data.likeCount = data.likeCount + 1;
+                }
+                detailsView.setData(data);
 
             },
             failure: function (response, opts) {

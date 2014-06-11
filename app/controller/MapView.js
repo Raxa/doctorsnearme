@@ -173,10 +173,19 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 console.log(response);
                 var like = Ext.JSON.decode(response.responseText).likes;
 
+                //if (like == 1) {
+                //    detailsView.toggleLikeButtonState(true);
+                //} else {
+                //    detailsView.toggleLikeButtonState(false);
+                //}
                 if (like == 1) {
+                    console.log("like==1");
                     detailsView.toggleLikeButtonState(true);
+                    detailsView.setLiked(true);
                 } else {
+                    console.log("like!=1");
                     detailsView.toggleLikeButtonState(false);
+                    detailsView.setLiked(false);
                 }
 
             },
