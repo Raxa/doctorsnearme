@@ -19,6 +19,10 @@ function connect(){
     return connection;
 }
 
+function responseObject (success,data,message,error){
+    return {success:success,data:data,message:message,error:error};
+}
+
 function like(response, data){
 
     var userId = data.user;
@@ -30,19 +34,7 @@ function like(response, data){
     var strQuery = "INSERT INTO likes (openmrs_uuid, location_id, status) VALUES ('"+userId+"','"+ locationId+"',"+ like+") ON DUPLICATE KEY UPDATE status="+like;
 
     connection.query(strQuery, function(err, result){
-        if(err){
-            setResponseHeaders(response);
-            response.write("error");
-            response.end();
-            console.log("error..........");
-            throw err;
-        }
-        else{
-            setResponseHeaders(response);
-            response.write(JSON.stringify(result));
-            response.end();
-            console.log(result);
-        }
+        respond(err,response,result,"Successful");
         connection.end();
 
     });
@@ -60,20 +52,8 @@ function comment(response,data){
     var strQuery ="INSERT INTO comments (openmrs_uuid, location_id, comment) VALUES ('"+userId+"','"+ locationId+"','"+ comment+"')";
 
     connection.query(strQuery, function(err, result){
-        if(err){
-            setResponseHeaders(response);
-            response.write("Error");
-            response.end();
-            console.log("error..........");
-            throw err;
-        }
-        else{
-            setResponseHeaders(response);
-            response.write(JSON.stringify(result));
-            response.end();
-            console.log(result);
-        }
-        connection.end();;
+        respond(err,response,result,"Successful");
+        connection.end();
 
     });
 }
@@ -85,24 +65,11 @@ function getLikes(response,data){
     console.log("loc id: "+locationId);
     var connection = connect();
 
-    var strQuery = "SELECT COUNT(*) AS count FROM likes WHERE location_id='"+locationId+ "' && status = 1";
+    var strQuery = "SELECT COUNT(*) AS likeCount FROM likes WHERE location_id='"+locationId+ "' && status = 1";
 
     connection.query(strQuery, function(err, result){
-        if(err){
-            setResponseHeaders(response);
-            response.write("error");
-            response.end();
-            throw err;
-
-        }else{
-            setResponseHeaders(response);
-            response.write(JSON.stringify(result[0]));
-
-            response.end();
-            console.log(result[0].count);
-
-        }
-
+        console.log("inside connectio.query");
+        respond(err,response,result,"Successful");
         connection.end();
 
     });
@@ -116,32 +83,14 @@ function getComments(response,data){
     var strQuery = "SELECT comment FROM comments WHERE location_id ='"+ locationId+"'";
 
     connection.query(strQuery, function(err, result){
-        if(err){
-            setResponseHeaders(response);
-            response.write("Error");
-            response.end();
-            throw err;
-
-        }else{
-            console.log(JSON.stringify(result));
-            setResponseHeaders(response);
-            if(result.length!=0)
-            {
-                response.write(JSON.stringify(result));
-            }
-            else{
-                response.write("Empty result");
-            }
-            response.end();
-
-        }
-
+        respond(err,response,result,"Successful");
         connection.end();
 
     });
 }
 
 function checkLike(response,data){
+    console.log("inside check like");
     var userId = data.user;
     var locationId = data.location;
 
@@ -150,28 +99,30 @@ function checkLike(response,data){
     var strQuery = "SELECT status FROM likes WHERE openmrs_uuid='"+userId+"' && location_id='"+locationId+"'";
 
     connection.query(strQuery, function(err, result){
-        if(err){
-            setResponseHeaders(response);
-            response.write("Error");
-            response.end();
-            throw err;
-
-        }else{
-            console.log(result);
-            setResponseHeaders(response);
-            if(result.length!=0)
-            {
-                response.write(JSON.stringify(result[0]));
-            }
-            else{
-                response.write("Empty result");
-            }
-            response.end();
-        }
-
+        respond(err,response,result,"Successful");
         connection.end();
 
     });
+}
+
+function respond(err,response,result,successMessage){
+    if(err){
+        console.log("error..........");
+        setResponseHeaders(response);
+        response.write(JSON.stringify(responseObject(false,null,"Error occurred",err)));
+        response.end();
+
+        throw err;
+
+    }else{
+        console.log("no error");
+        setResponseHeaders(response);
+        response.write(JSON.stringify(responseObject(true,result,successMessage,null)));
+        response.end();
+
+        console.log(result);
+
+    }
 }
 
 function setResponseHeaders(response){

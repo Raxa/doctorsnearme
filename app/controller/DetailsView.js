@@ -14,7 +14,7 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
         control: {
             detailsView: {
                 back: "backToMapView",
-                showcomments: "showComments",
+                showcomments: "showOrHideComments",
                 comment: "comment",
                 like: "like"
             },
@@ -25,21 +25,23 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
         }
     },
 
-    like: function () {
+    like: function (data) {
         var me = this;
         Ext.Ajax.request({
             // Ext.data.JsonP.request({
             url: 'http://localhost:8888/like',
             method: 'GET',
             params: {
-                location: 1,
-                user: 5,
+                location: data.id,
+                user: EasyTreatyApp.config.getUser().get('personUuid'),
                 like: 1
             },
             success: function (response, opts) {
                 console.log("success");
                 console.log(response);
                 me.getDetailsView().toggleLikeButtonState(true);
+                data.likeCount = data.likeCount + 1;
+                me.getDetailsView().setData(data);
 
             },
             failure: function (response, opts) {
@@ -49,20 +51,30 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
         });
     },
 
-    comment: function(theComment){
+    comment: function (commentField, detailsView) {
+        console.log("inside comment");
+        var me = this;
          Ext.Ajax.request({
        // Ext.data.JsonP.request({
             url: 'http://localhost:8888/comment',
             method: 'GET',
             params: {
-                location: 20,
-                user: 18,
-                comment:theComment
+                location:detailsView.getData().id,
+                user: EasyTreatyApp.config.getUser().get('personUuid'),
+                comment:commentField.getValue()
             },
             success: function (response, opts) {
                 console.log("success");
-                console.log(response);
-
+                console.log(response.responseText);
+                //me.showOrHideComments(detailsView);
+                if (detailsView.getCommentsVisible()) {
+                    me.hideComments(detailsView);
+                    me.showComments(detailsView);
+                }
+                else {
+                    me.showComments(detailsView);
+                }
+                commentField.setValue("");
             },
             failure: function (response, opts) {
                 console.log("failure");
@@ -71,18 +83,58 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
         });
     },
 
-    showComments: function(){
+    showOrHideComments: function (detailsView){//, button, oldCommentPanel) {
+      //  console.log(button.getItemId());
+        
+        var commentsVisible = detailsView.getCommentsVisible();
+        console.log(commentsVisible);
+        if (commentsVisible) {
+
+            this.hideComments(detailsView);
+            
+        }
+        else {
+            this.showComments(detailsView);
+        }
+    },
+
+    hideComments: function (detailsView) {
+        detailsView.getViewCommentsButton().setText("View Comments");
+        detailsView.setCommentsVisible(false);
+        detailsView.getOldCommentsPanel().removeAll(true, true);
+        
+    },
+
+    showComments: function (detailsView) {
+        var comments;
+
+        detailsView.getViewCommentsButton().setText("Hide Comments");
+        detailsView.setCommentsVisible(true);
+
         Ext.Ajax.request({
       //  Ext.data.JsonP.request({
             url: 'http://localhost:8888/getComments',
             method: 'GET',
            // method: 'POST',
             params:{
-                location:1
+                location: detailsView.getData().id
             },
             success: function (response, opts) {
                 console.log("success");
-                console.log(response);
+                console.log(Ext.JSON.decode(response.responseText).data);
+                comments = Ext.JSON.decode(response.responseText).data;
+                if (comments.length == 0) {
+                    if (!EasyTreatyApp.config.getLoggedIn()) {
+                        detailsView.addComment("No Comments Yet.. Be the first. Log in to comment");
+                    } else {
+                        detailsView.addComment("No Comments Yet.. Be the first.");
+                    }                   
+                } else {
+
+                    Ext.Array.forEach(comments, function (item) {
+                        detailsView.addComment(item.comment);
+                    });
+                }
 
             },
             failure: function (response, opts) {                
@@ -95,6 +147,10 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
     backToMapView: function () {
             var mapview = this.getMapView();
             Ext.Viewport.setActiveItem(mapview);
+
+            var detailsView = this.getDetailsView();
+        
+            this.hideComments(detailsView);
     },
 
     /**
@@ -102,16 +158,16 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
      * @method
      * @private
      */
-    onBackButtonTap: function () {
-        var mapview = this.getMapView();
+    //onBackButtonTap: function () {
+    //    var mapview = this.getMapView();
 
-        if (mapview === null) {
-            mapview = Ext.create('EasyTreatyApp.view.MapView');
-        }
+    //    if (mapview === null) {
+    //        mapview = Ext.create('EasyTreatyApp.view.MapView');
+    //    }
 
-        Ext.Viewport.add(mapview);
-        Ext.Viewport.setActiveItem(mapview);
-    }
+    //    Ext.Viewport.add(mapview);
+    //    Ext.Viewport.setActiveItem(mapview);
+    //}
 
 
 

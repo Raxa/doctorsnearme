@@ -127,14 +127,16 @@ Ext.define('EasyTreatyApp.controller.MapView', {
   */
     onLocationSelect: function (record) {
         console.log("on location select");
-       
+        console.log(record);
         var detailsView = this.getDetailsView();
 
         if (detailsView == undefined) {
-            detailsView = Ext.create('EasyTreatyApp.view.DetailsView');
+            detailsView = Ext.create('EasyTreatyApp.view.DetailsView', { data: record.getData() });
+        } else {
+            detailsView.setData(record.getData());
         }
 
-        detailsView.setData(record.getData());
+        //detailsView.setData(record.getData());
 
         var favoriteButton = detailsView.getFavoriteButton();
         if (detailsView.getData().isFavorite) {
@@ -148,20 +150,23 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         
         detailsView.toggleLikeComment(!loggedIn);
 
-        this.checkLiked(detailsView);
+        if(loggedIn){
+            this.checkLiked(detailsView,record);
+        }
+        detailsView.getLikeCount(detailsView.getData().id);
 
         Ext.Viewport.add(detailsView);
         Ext.Viewport.setActiveItem(detailsView);
     },
 
-    checkLiked: function (detailsView) {
+    checkLiked: function (detailsView,record) {
         var me = this;
         Ext.Ajax.request({
             url: 'http://localhost:8888/checkLike',
             method: 'GET',
             params: {
-                location: 1,
-                user: 5
+                location: record.get('id'),
+                user: EasyTreatyApp.config.getUser().get('personUuid')
             },
             success: function (response, opts) {
                 console.log("success");

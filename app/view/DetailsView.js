@@ -13,6 +13,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
        store: null,
        data: null,
        cls: 'profile',
+       commentsVisible: false,
        items: [{
            xtype: 'toolbar',
            docked: 'top',
@@ -36,7 +37,8 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                {
                    xtype: 'button',
                    text: 'View Comments',
-                   docked:'right'
+                   docked: 'right',
+                   //mode:'VIEW'
                }
            ]
        },
@@ -58,6 +60,11 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                    bubbleEvents:'tap'
                }
            ]
+       },
+       {
+           xtype: 'container',
+           layout: 'vbox',
+           docked: 'bottom'
        }
        
        ]
@@ -135,28 +142,40 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
             me.fireEvent('togglefavorite', me.getData().id, isFavorite);
         });
 
-        this.getViewCommentsButton().on('tap', function () {
-            me.fireEvent('showcomments');
+        var viewCommentsButton = this.getViewCommentsButton();
+        
+        var oldCommentsPanel = this.getOldCommentsPanel();
+        viewCommentsButton.on('tap', function () { 
+            me.fireEvent('showcomments', me);
         });
 
         var commentPanel = this.getCommentPanel();
         
         commentPanel.on('tap', function () {
-            me.fireEvent('comment',commentPanel.getComponent(0).getValue());
+            me.fireEvent('comment', commentPanel.getComponent(0), me);
         });
 
         this.getLikeButton().on('tap', function () {
-            me.fireEvent('like');
+            me.fireEvent('like',me.getData());
         });
 
-        this.getLikeCount(1);
+        //this.getLikeCount(me.getData().id);
 
         this.callParent();
+       // this.getLikeCount(me.getData().id);
 
         this.setLanguage();
     },
 
-    
+    addComment: function(comment){
+        this.getOldCommentsPanel().add({
+            xtype: 'textfield',
+            value: comment,
+            name: 'comment',
+            readOnly:true
+        })
+    },
+
     getLikeCount: function (id) {
         var me = this;
         Ext.Ajax.request({
@@ -167,9 +186,11 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
             },
             success: function (response, opts) {
                 console.log("success");
-                console.log(Ext.JSON.decode(response.responseText).count);
-                me.getData().likeCount = Ext.JSON.decode(response.responseText).count;
-                me.setData(me.getData());
+                console.log(response.responseText);
+                console.log(Ext.JSON.decode(response.responseText).data[0].likeCount);
+                //console.log(Ext.JSON.decode(response.responseText).data);
+                me.getData().likeCount = Ext.JSON.decode(response.responseText).data[0].likeCount;
+                me.setData(me.getData());                
 
             },
             failure: function (response, opts) {
@@ -212,6 +233,10 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
     getCommentPanel: function(){
         return this.getComponent(1);
+    },
+
+    getOldCommentsPanel: function(){
+        return this.getComponent(2);
     },
 
     setLanguage: function () {
