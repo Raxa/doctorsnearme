@@ -4,7 +4,6 @@
 var mysql = require('mysql');
 var config = require('./config.json');
 
-//function connect(host,user,password,database){
 function connect(){
     var connection = mysql.createConnection(({
         host:config.host,
@@ -20,134 +19,63 @@ function connect(){
     return connection;
 }
 
- function like(response, data){
+function like(response, data){
 
-     var userId = data.user;
-     var locationId = data.location;
-     var like = data.like;
-
-     var connection = connect();
-
-    var strQuery = "select userID,locationID from ratingsandcomments where userID="+userId+" && locationID="+locationId;
-    var strQuery1;
-    connection.query(strQuery, function(err, rows){
-        if(err){
-            setResponseHeaders(response);
-            response.write("error");
-            response.end();
-            throw err;
-
-        }else{
-            console.log(rows);
-            if(rows.length==0){
-                console.log('rows.length: '+rows.length);
-                strQuery1="insert into ratingsandcomments set userID ="+ userId+", locationID="+locationId+", likes="+like;
-                connection.query(strQuery1, function(err, result){
-                    if(err){
-                        setResponseHeaders(response);
-                        response.write("error");
-                        response.end();
-                        throw err;
-
-                    }else{
-                        setResponseHeaders(response);
-                        response.write(JSON.stringify(result));
-                        response.end();
-                        console.log(result);
-                    }
-
-                });
-            }
-            else{
-                strQuery1="update ratingsandcomments set likes="+like+" where userID="+userId+" && locationID="+locationId;
-                connection.query(strQuery1, function(err, result){
-                    if(err){
-                        setResponseHeaders(response);
-                        response.write("error");
-                        response.end();
-                        throw err;
-
-                    }else{
-                        setResponseHeaders(response);
-                        response.write(JSON.stringify(result));
-                        response.end();
-                        console.log(result);
-                    }
-
-                });
-            }
-        }
-        connection.end();
-
-    });
-//connection.end();
-
-}
-
-function comment(response,data){
-console.log("inside comment");
     var userId = data.user;
     var locationId = data.location;
-    var comment = data.comment;
+    var like = data.like;
 
     var connection = connect();
 
-    var strQuery = "select userID,locationID from ratingsandcomments where userID="+userId+" && locationID="+locationId;
-    var strQuery1;
-    connection.query(strQuery, function(err, rows){
+    var strQuery = "INSERT INTO likes (openmrs_uuid, location_id, status) VALUES ('"+userId+"','"+ locationId+"',"+ like+") ON DUPLICATE KEY UPDATE status="+like;
+
+    connection.query(strQuery, function(err, result){
         if(err){
             setResponseHeaders(response);
             response.write("error");
             response.end();
             console.log("error..........");
             throw err;
-
-        }else{
-            console.log("rows");
-            console.log(rows);
-            if(rows.length==0){
-                console.log("rows.length 0");
-                strQuery1="insert into ratingsandcomments set userID ="+ userId+", locationID="+locationId+", comments='"+comment+"'";
-                connection.query(strQuery1, function(err, result){
-                    if(err){
-                        setResponseHeaders(response);
-                        response.write("error");
-                        response.end();
-                        throw err;
-
-                    }else{
-                        setResponseHeaders(response);
-                        response.write(JSON.stringify(result));
-                        response.end();
-                        console.log(result);
-                    }
-
-                });
-            }
-            else{
-                console.log("rows.length not zero");
-                strQuery1="update ratingsandcomments set comments='"+comment+"' where userID="+userId+" && locationID="+locationId;
-                connection.query(strQuery1, function(err, result){
-                    if(err){
-                        setResponseHeaders(response);
-                        response.write("error");
-                        response.end();
-                        throw err;
-
-                    }else{
-                        setResponseHeaders(response);
-                        response.write(JSON.stringify(result));
-                        response.end();
-                        console.log(result);
-                    }
-
-                });
-            }
+        }
+        else{
+            setResponseHeaders(response);
+            response.write(JSON.stringify(result));
+            response.end();
+            console.log(result);
         }
         connection.end();
 
     });
-    //connection.end();
+
+}
+
+function comment(response,data){
+    console.log("inside comment");
+    var userId = data.user;
+    var locationId = data.location;
+    var comment = data.comment;
+
+    var connection = connect();
+
+    var strQuery ="INSERT INTO comments (openmrs_uuid, location_id, comment) VALUES ('"+userId+"','"+ locationId+"','"+ comment+"')";
+
+    connection.query(strQuery, function(err, result){
+        if(err){
+            setResponseHeaders(response);
+            response.write("Error");
+            response.end();
+            console.log("error..........");
+            throw err;
+        }
+        else{
+            setResponseHeaders(response);
+            response.write(JSON.stringify(result));
+            response.end();
+            console.log(result);
+        }
+        connection.end();;
+
+    });
 }
 
 function getLikes(response,data){
@@ -157,7 +85,7 @@ function getLikes(response,data){
     console.log("loc id: "+locationId);
     var connection = connect();
 
-    var strQuery = "select count(*) as count from ratingsandcomments where locationID='"+locationId+ "' && Likes = 1";
+    var strQuery = "SELECT COUNT(*) AS count FROM likes WHERE location_id='"+locationId+ "' && status = 1";
 
     connection.query(strQuery, function(err, result){
         if(err){
@@ -185,19 +113,25 @@ function getComments(response,data){
     console.log("location: "+locationId);
     var connection = connect();
 
-    var strQuery = "select comments from ratingsandcomments where locationID ="+ locationId;
+    var strQuery = "SELECT comment FROM comments WHERE location_id ='"+ locationId+"'";
 
     connection.query(strQuery, function(err, result){
         if(err){
             setResponseHeaders(response);
-            response.write("error");
+            response.write("Error");
             response.end();
             throw err;
 
         }else{
             console.log(JSON.stringify(result));
             setResponseHeaders(response);
-            response.write(JSON.stringify(result));
+            if(result.length!=0)
+            {
+                response.write(JSON.stringify(result));
+            }
+            else{
+                response.write("Empty result");
+            }
             response.end();
 
         }
@@ -213,19 +147,25 @@ function checkLike(response,data){
 
     var connection = connect();
 
-    var strQuery = "select likes from ratingsandcomments where userID="+userId+" && locationID="+locationId;
+    var strQuery = "SELECT status FROM likes WHERE openmrs_uuid='"+userId+"' && location_id='"+locationId+"'";
 
     connection.query(strQuery, function(err, result){
         if(err){
             setResponseHeaders(response);
-            response.write("error");
+            response.write("Error");
             response.end();
             throw err;
 
         }else{
             console.log(result);
             setResponseHeaders(response);
-            response.write(JSON.stringify(result[0]));
+            if(result.length!=0)
+            {
+                response.write(JSON.stringify(result[0]));
+            }
+            else{
+                response.write("Empty result");
+            }
             response.end();
         }
 
