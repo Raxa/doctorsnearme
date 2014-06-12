@@ -162,13 +162,15 @@ Ext.define('EasyTreatyApp.controller.MapView', {
     checkLiked: function (detailsView,record) {
         var me = this;
         Ext.Ajax.request({
-            url: 'http://localhost:8888/checkLike',
+            // url: 'http://localhost:8888/checkLike',
+            url: 'http://192.168.1.2:8888/checkLike',
             method: 'GET',
             params: {
                 location: record.get('id'),
                 user: EasyTreatyApp.config.getUser().get('personUuid')
             },
             success: function (response, opts) {
+                Ext.Msg.alert("like success");
                 console.log("success");
                 console.log(response);
                 var like = Ext.JSON.decode(response.responseText).likes;
@@ -190,6 +192,7 @@ Ext.define('EasyTreatyApp.controller.MapView', {
 
             },
             failure: function (response, opts) {
+                Ext.Msg.alert("like failure");
                 console.log("failure");
                 console.log(response);
             }

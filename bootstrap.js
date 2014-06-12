@@ -19,38 +19,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js"
 });
 Ext.ClassManager.addNameAlternateMappings({
-  "EasyTreatyApp.config.Runtime": [],
-  "EasyTreatyApp.controller.ChoiceView": [],
-  "EasyTreatyApp.controller.FilterView": [],
-  "EasyTreatyApp.controller.ListView": [],
-  "EasyTreatyApp.controller.Login": [],
-  "EasyTreatyApp.controller.Map": [],
-  "EasyTreatyApp.controller.Menu": [],
-  "EasyTreatyApp.controller.ProfileView": [],
-  "EasyTreatyApp.math.Algorithms": [],
-  "EasyTreatyApp.model.Doctor": [],
-  "EasyTreatyApp.model.DoctorFilter": [],
-  "EasyTreatyApp.model.Location": [],
-  "EasyTreatyApp.model.LocationFilter": [],
-  "EasyTreatyApp.model.Pharmacy": [],
-  "EasyTreatyApp.model.PharmacyFilter": [],
-  "EasyTreatyApp.model.User": [],
-  "EasyTreatyApp.store.Doctor": [],
-  "EasyTreatyApp.store.Location": [],
-  "EasyTreatyApp.store.Pharmacy": [],
-  "EasyTreatyApp.store.User": [],
-  "EasyTreatyApp.view.ChoiceView": [],
-  "EasyTreatyApp.view.DetailsView": [],
-  "EasyTreatyApp.view.DoctorFilterView": [],
-  "EasyTreatyApp.view.FilterView": [],
-  "EasyTreatyApp.view.ListView": [],
-  "EasyTreatyApp.view.LocationFilterView": [],
-  "EasyTreatyApp.view.Login": [],
-  "EasyTreatyApp.view.MapPanel": [],
-  "EasyTreatyApp.view.MapView": [],
-  "EasyTreatyApp.view.Menu": [],
-  "EasyTreatyApp.view.PharmacyFilterView": [],
-  "EasyTreatyApp.view.UserProfile": [],
+  "EasyTreatyApp.view.Main": [],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],
   "Ext.AbstractPlugin": [],
@@ -674,61 +643,8 @@ Ext.ClassManager.addNameAlternateMappings({
   ]
 });
 Ext.ClassManager.addNameAliasMappings({
-  "EasyTreatyApp.config.Runtime": [],
-  "EasyTreatyApp.controller.ChoiceView": [],
-  "EasyTreatyApp.controller.FilterView": [],
-  "EasyTreatyApp.controller.ListView": [],
-  "EasyTreatyApp.controller.Login": [],
-  "EasyTreatyApp.controller.Map": [],
-  "EasyTreatyApp.controller.Menu": [],
-  "EasyTreatyApp.controller.ProfileView": [],
-  "EasyTreatyApp.math.Algorithms": [],
-  "EasyTreatyApp.model.Doctor": [],
-  "EasyTreatyApp.model.DoctorFilter": [],
-  "EasyTreatyApp.model.Location": [],
-  "EasyTreatyApp.model.LocationFilter": [],
-  "EasyTreatyApp.model.Pharmacy": [],
-  "EasyTreatyApp.model.PharmacyFilter": [],
-  "EasyTreatyApp.model.User": [],
-  "EasyTreatyApp.store.Doctor": [],
-  "EasyTreatyApp.store.Location": [],
-  "EasyTreatyApp.store.Pharmacy": [],
-  "EasyTreatyApp.store.User": [],
-  "EasyTreatyApp.view.ChoiceView": [
-    "widget.choiceview"
-  ],
-  "EasyTreatyApp.view.DetailsView": [
-    "widget.detailsview"
-  ],
-  "EasyTreatyApp.view.DoctorFilterView": [
-    "widget.docfilterview"
-  ],
-  "EasyTreatyApp.view.FilterView": [
-    "widget.filterview"
-  ],
-  "EasyTreatyApp.view.ListView": [
-    "widget.listview"
-  ],
-  "EasyTreatyApp.view.LocationFilterView": [
-    "widget.locfilterview"
-  ],
-  "EasyTreatyApp.view.Login": [
-    "widget.loginview"
-  ],
-  "EasyTreatyApp.view.MapPanel": [
-    "widget.mappanel"
-  ],
-  "EasyTreatyApp.view.MapView": [
-    "widget.mapview"
-  ],
-  "EasyTreatyApp.view.Menu": [
-    "widget.mainmenu"
-  ],
-  "EasyTreatyApp.view.PharmacyFilterView": [
-    "widget.pharfilterview"
-  ],
-  "EasyTreatyApp.view.UserProfile": [
-    "widget.userprofile"
+  "EasyTreatyApp.view.Main": [
+    "widget.main"
   ],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],

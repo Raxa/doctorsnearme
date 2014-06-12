@@ -16,7 +16,7 @@
 	"inputPath":"./",
 	/*"outputPath":"../build/",*/
 	/*"outputPath":"../EasyTreaty/packages/android/",*/
-	"outputPath":"../mytest2/",
+	"outputPath":"../buildApp/android",
 	"configuration":"Debug",
 	/**
 	 * @cfg  platform

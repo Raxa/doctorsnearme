@@ -40,11 +40,6 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
                 like:previouslyLiked==true?0:1
             },
             success: function (response, opts) {
-                //console.log("success");
-                //console.log(response);
-                //detailsView.toggleLikeButtonState(true);
-                //data.likeCount = data.likeCount + 1;
-                //detailsView.setData(data);
 
                 console.log("success");
                 console.log(response);
@@ -80,7 +75,6 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
             success: function (response, opts) {
                 console.log("success");
                 console.log(response.responseText);
-                //me.showOrHideComments(detailsView);
                 if (detailsView.getCommentsVisible()) {
                     me.hideComments(detailsView);
                     me.showComments(detailsView);
@@ -165,24 +159,5 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
             var detailsView = this.getDetailsView();
         
             this.hideComments(detailsView);
-    },
-
-    /**
-     * go back to MapView
-     * @method
-     * @private
-     */
-    //onBackButtonTap: function () {
-    //    var mapview = this.getMapView();
-
-    //    if (mapview === null) {
-    //        mapview = Ext.create('EasyTreatyApp.view.MapView');
-    //    }
-
-    //    Ext.Viewport.add(mapview);
-    //    Ext.Viewport.setActiveItem(mapview);
-    //}
-
-
-
+    }
 })
