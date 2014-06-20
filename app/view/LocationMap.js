@@ -242,7 +242,8 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
                         animation: null,
                         position: location,
                         draggable: true,
-                        icon: 'resources/icons/bluemarker.png'
+                        //icon: 'resources/icons/bluemarker.png'
+                        icon: 'resources/icons/bluedot.png'
                     });
                     /////////////////
                     google.maps.event.addListener(marker, 'dragend', function (event) {
