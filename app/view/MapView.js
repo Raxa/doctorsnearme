@@ -7,7 +7,10 @@ Ext.define('EasyTreatyApp.view.MapView', {
     xtype: 'mapview',
 
     config: {
-        layout: 'card',
+        layout: {
+            type: 'card',
+            animation: 'pop'
+        },
 
         currentSearch: null,
         searchRadius: 1000,
@@ -65,12 +68,23 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
     },
 
-    zoomMap: function () {
+    zoomMap: function (radius) {
         console.log("inside zoommap");
         map =  this.down('locationmap');
+       
+        var zoom=10;
+        if (radius > 75000) {
+            zoom = 10;
+        } else if (radius > 10000) {
+            zoom = 12;
+        }
+        else {
+            zoom=15
+        }
+
         map.setMapOptions({
-            zoom: 10,
-            center:map.getBaseLocation()
+            zoom: zoom,
+            center: map.getBaseLocation()
         });
     },
 
@@ -91,6 +105,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
             items: [
                 {
                     iconCls: 'list',
+                    docked:'right',
                     handler: function() {
                         me.fireEvent('showmenu');
                     }
@@ -104,12 +119,16 @@ Ext.define('EasyTreatyApp.view.MapView', {
                         switch (me.indexOf(me.getActiveItem())) {
                             case 0: me.setActiveItem(1);
                                 this.setText(lang.MAP);
-                                me.fireEvent('togglemaplist',true);
+                                // me.fireEvent('togglemaplist',true);
+                                //me.setLayout({
+                                //    type: 'card',
+                                //    animation:'slideright'
+                                //})
                                 break;
 
                             case 1: me.setActiveItem(0);
                                 this.setText(lang.LIST);
-                                me.fireEvent('togglemaplist',false);
+                                //me.fireEvent('togglemaplist',false);
                                 break;
                         }
                         
@@ -122,7 +141,16 @@ Ext.define('EasyTreatyApp.view.MapView', {
                     handler: function () {
                         me.resetLocation();
                     }
-                }
+                },
+                {
+                    xtype: 'multiselectfield',
+                    // label: 'Specilty',
+                    labelWidth: '45%',
+                    //ui: 'mainmenu',
+                    placeHolder:'Choose a Specialty',
+                    autoSelect: false,
+                    hidden:true
+                },
                  
                 
             ]
@@ -131,64 +159,18 @@ Ext.define('EasyTreatyApp.view.MapView', {
        // toolbar.setTitle(this.getToolbarTitle());
 
         this.add(toolbar);
-        
-        var bottomBar = Ext.create('Ext.Toolbar', {
-            docked: 'bottom',
-            //docked: 'right',
-            scrollable:'horizontal',
-            items: [
-                {
-                    iconCls: 'favorites',
-                    handler: function () {
-                        me.fireEvent('showfavorites');
-                    }
-                },
-                {
-                  //  text: 'Medical Centers',
-                    iconCls: 'home',
-                    handler: function () {
-                        console.log("home");
-                        me.setCurrentSearch(0);
-                        me.fireEvent('choicedone', 0);
-                    }
-                },
-                {
-                  //  text: 'Doctors',
-                    iconCls: 'user',
-                    handler: function () {
-                        console.log("user");
-                        me.setCurrentSearch(1);
-                        me.fireEvent('choicedone', 1);
-                    }
-                },
-                {
-                  //  text: 'Pharmacies',
-                    iconCls: 'add',
-                    handler: function () {
-                        me.setCurrentSearch(2);
-                        me.fireEvent('choicedone', 2);
-                    }
-                }
 
-            ]
-        });
+        this.getSpecialtySelectField().setStore(Ext.create('EasyTreatyApp.store.Specialization'));
 
-        this.add(bottomBar);
-        
-        bottomBar.getComponent(1).on('check', function () {
-            me.setCurrentSearch(0);
+        this.getSpecialtySelectField().on('change', function (selectField, newValue, oldValue, eOpts) {
+            me.setSpecialties(newValue);
         });
-
-        bottomBar.getComponent(2).on('check', function () {
-            me.setCurrentSearch(1);
-        });
-
-        bottomBar.getComponent(3).on('check', function () {
-            me.setCurrentSearch(2);
-        });
+       
     },
     
-
+    getSpecialtySelectField: function () {
+        return this.getTopToolBar().getComponent(3);
+    },
     /**
      * Returns the top tool bar
      * @method
@@ -235,6 +217,10 @@ Ext.define('EasyTreatyApp.view.MapView', {
         }
     },
 
+    updateCurrentSearch: function (newValue, oldValue) {
+        this.fireEvent('choicedone', newValue);
+    },
+
     resetLocation: function(){
         this.down('locationmap').getGeo().updateLocation();
     },
@@ -251,11 +237,5 @@ Ext.define('EasyTreatyApp.view.MapView', {
         else {
             listBtn.setText(lang.LIST);
         }
-
-        var bottomBar = this.getComponent(3);
-
-        bottomBar.getComponent(1).setText(lang.MEDICAL_CENTERS);
-        bottomBar.getComponent(2).setText(lang.DOCTORS);
-        bottomBar.getComponent(3).setText(lang.PHARMACIES);
     }
 })

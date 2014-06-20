@@ -7,6 +7,7 @@ Ext.define('EasyTreatyApp.view.Login', {
     requires: ['Ext.Img', 'Ext.form.FieldSet', 'Ext.field.Email', 'Ext.field.Password', 'Ext.field.Checkbox'],
     config: {
         layout: 'vbox',
+        scrollable:'vertical',
         cls:'login',
         items: [
             {

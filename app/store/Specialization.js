@@ -3,7 +3,7 @@
 
     config: {
         data: [
-                    { text: 'Cardiologist', value: 'Cardiologist' },
+                    { text: 'Cardiologist', value: ['cardiology'] },
                     { text: 'Dentist', value: 'Dentist' },
                     { text: ' Immunologist', value: 'Immunologist' }
         ]

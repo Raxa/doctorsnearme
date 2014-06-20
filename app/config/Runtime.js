@@ -6,9 +6,11 @@ Ext.define('EasyTreatyApp.config.Runtime', {
 
     config: {      
         domain: 'https://api.raxa.io/ws/rest/v1/',
-        openMRSUsername: 'jameskierkegaard',
 
-        openMRSPassword: 'Hello123',
+        ratingServerDomain: 'http://192.168.122.1:8888/',
+        //openMRSUsername: 'jameskierkegaard',
+
+        //openMRSPassword: 'Hello123',
 
         user:null,
 

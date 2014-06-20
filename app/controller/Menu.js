@@ -17,10 +17,15 @@ Ext.define('EasyTreatyApp.controller.Menu', {
             sideMenu: {
                 showprofile: "onShowProfile",
                 searchradiuschange: "onSearchRadiusChange",
-                specialtychange: "onSpecialtyChange"
+                specialtychange: "onSpecialtyChange",
+                choice:"onChoice"
             }
         }
     }, 
+
+    onChoice: function(choice){
+        this.getMapView().setCurrentSearch(choice);
+    },
 
     onShowProfile: function () {
         var profileView = this.getUserProfile();

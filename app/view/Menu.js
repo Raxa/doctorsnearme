@@ -12,9 +12,11 @@ Ext.define('EasyTreatyApp.view.Menu', {
     xtype: 'mainmenu',
     config: {
         cls: 'mainmenu',
-        docked: 'left',
+        //docked: 'left',
+        docked: 'right',
 		top: 0,
-        left: 0,
+        //left: 0,
+        right:0,
         bottom: 0,
         zIndex: 0,
 		width: 266,
@@ -26,39 +28,55 @@ Ext.define('EasyTreatyApp.view.Menu', {
         items: [
                 {
                    // text: 'My Health Profile',
-                    ui: 'mainmenu',
+                    //ui: 'mainmenu',
                     hidden:true
                 },
                 {
-                    xtype: 'selectfield',
-                   // label: 'Distance',
-                    labelWidth:'45%',
-                    ui: 'mainmenu',
-                    autoSelect: false,
-                    usePicker: false
+                    xtype: 'sliderfield',
+                    value: 50,
+                    minValue: 1000,
+                    maxValue: 1000000
                 },
                 {
-                    xtype: 'multiselectfield',
-                   // label: 'Specilty',
-                    labelWidth: '45%',
-                    ui: 'mainmenu',
-                    autoSelect: false
+                    xtype: 'textfield',
+                    labelAlign: 'right',
+                    label: 'm'
                 },             
                 {
                  //   text: 'Log In',
-                    ui: 'mainmenu'
+                    ui: 'menubtn'
                 },
                 {
                    // text: 'About',
-                    ui: 'mainmenu'
+                    ui: 'menubtn'
                 },
                 {
                     xtype: 'selectfield',
-                   // label: 'Language',
                     labelWidth: '45%',
-                    ui: 'mainmenu',
-                    autoSelect: false,
+                   // ui: 'mainmenu',
+                    //autoSelect: false,
                     usePicker:false
+                },
+                {
+                    xtype: 'radiofield',
+                    name: 'search',
+                    value: 'hospital',
+                  //  label: 'Hospitals',
+                    labelWidth:'75%'
+                },
+                {
+                    xtype: 'radiofield',
+                    name: 'search',
+                    value: 'doctor',
+                   // label: 'Doctors',
+                    labelWidth: '75%'
+                },
+                {
+                    xtype: 'radiofield',
+                    name: 'search',
+                    value: 'pharmacy',
+                   // label: 'Pharmacies',
+                    labelWidth: '75%'
                 }
 
         ]
@@ -74,7 +92,9 @@ Ext.define('EasyTreatyApp.view.Menu', {
 
         this.getLanguageSelectField().setLabel(lang.LANGUAGE);
 
-        this.getSpecialtySelectField().setLabel(lang.SPECIALTY);
+        this.getHospitalField().setLabel(lang.MEDICAL_CENTERS);
+        this.getDoctorField().setLabel(lang.DOCTORS);
+        this.getPharmacyField().setLabel(lang.PHARMACIES);
 
         if (EasyTreatyApp.config.getLoggedIn()) {
             this.getLogInButton().setText(lang.LOG_OUT);
@@ -101,9 +121,8 @@ Ext.define('EasyTreatyApp.view.Menu', {
     setSelectFieldStores: function(){
         this.getLanguageSelectField().setStore(Ext.create('EasyTreatyApp.store.Language'));
 
-        this.getSpecialtySelectField().setStore(Ext.create('EasyTreatyApp.store.Specialization'));
 
-        this.getDistanceSelectField().setStore(Ext.create('EasyTreatyApp.store.Radius'));
+      //  this.getDistanceSelectField().setStore(Ext.create('EasyTreatyApp.store.Radius'));
     },
     
     /**
@@ -131,8 +150,10 @@ Ext.define('EasyTreatyApp.view.Menu', {
         });
 
         this.getDistanceSelectField().on('change',function(selectField,newValue,oldValue, eOpts){
-            me.fireEvent('searchradiuschange',parseInt(newValue));
-            console.log(newValue);
+            //  me.fireEvent('searchradiuschange',parseInt(newValue));
+            me.fireEvent('searchradiuschange', this.getValue()[0]);
+            me.getDistaceField().setValue(this.getValue()[0]);
+            console.log(this.getValue()[0]);
         });
 
         this.getLanguageSelectField().on('change', function (selectField, newValue, oldValue, eOpts) {
@@ -140,22 +161,42 @@ Ext.define('EasyTreatyApp.view.Menu', {
             console.log(newValue);
         });
 
-        this.getSpecialtySelectField().on('change', function (selectField, newValue, oldValue, eOpts) {
-            me.fireEvent('specialtychange', newValue);
-            console.log("change specilty select");
-            console.log(newValue);
-        });
 
         this.getAboutButton().on('tap', function (button, e, eOpts) {
             Ext.Msg.alert("About Easy Treaty", "version 1.0");
         });
+
+        this.getHospitalField().on('change', function (selectField, newValue, oldValue, eOpts) {
+            if (newValue) {
+                me.fireEvent('choice', 0);
+            }
+            
+            console.log(newValue);
+        });
+
+        this.getDoctorField().on('change', function (selectField, newValue, oldValue, eOpts) {
+            if (newValue) {
+                me.fireEvent('choice', 1);
+            }
+
+            console.log(newValue);
+        });
+
+        this.getPharmacyField().on('change', function (selectField, newValue, oldValue, eOpts) {
+            if (newValue) {
+                me.fireEvent('choice', 2);
+            }
+
+            console.log(newValue);
+        });
+
     },
     
     getLanguageSelectField: function(){
         return this.getComponent(5);
     },
 
-    getSpecialtySelectField: function () {
+    getDistaceField: function () {
         return this.getComponent(2);
     },
 
@@ -213,7 +254,8 @@ Ext.define('EasyTreatyApp.view.Menu', {
             zIndex  : 5000,
             hidden  : true,
 			width   : 9999,
-			left    : this.getWidth(),
+            //left    : this.getWidth(),
+			right: this.getWidth(),
 			bottom  : 0
         });
         
@@ -250,7 +292,8 @@ Ext.define('EasyTreatyApp.view.Menu', {
         targetEl = parentCt.innerElement;
         
         if (open) {
-			targetEl.translate(this.getWidth(), 0, 0);
+            //targetEl.translate(this.getWidth(), 0, 0);
+            targetEl.translate(-this.getWidth(),0, 0);
             this.maskCmp.show();
         }
         else {
@@ -261,6 +304,18 @@ Ext.define('EasyTreatyApp.view.Menu', {
 
     getDistanceValue: function () {
         return parseInt(this.getDistanceSelectField().getRecord().get('value'));
+    },
+
+    getHospitalField: function () {
+        return this.getComponent(6);
+    },
+
+    getDoctorField: function () {
+        return this.getComponent(7);
+    },
+
+    getPharmacyField: function () {
+        return this.getComponent(8);
     }
 
 });

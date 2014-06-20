@@ -65,7 +65,9 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
        {
            xtype: 'container',
            layout: 'vbox',
-           docked: 'bottom'
+           docked: 'bottom',
+           //flex:1,
+           scrollable:'vertical'
        }
        
        ]

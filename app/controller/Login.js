@@ -30,7 +30,8 @@ Ext.define('EasyTreatyApp.controller.Login', {
         var encodedString = "Basic " + btoa(EasyTreatyApp.config.getUserName() + ":" + EasyTreatyApp.config.setPassword());
 
         Ext.Ajax.request({
-            url: 'https://api.raxa.io/ws/rest/v1/session',
+            // url: 'https://api.raxa.io/ws/rest/v1/session',
+            url:EasyTreatyApp.config.getDomain()+'session',
             method: 'DELETE',
             success: function (response, opts) {
                 console.log("success");
@@ -99,13 +100,13 @@ Ext.define('EasyTreatyApp.controller.Login', {
 
         var me = this;
         Ext.Ajax.request({
-            //url: 'https://api.raxa.io/login.htm',
-            url: 'http://api.raxa.io/ws/rest/v1/raxacore/login',
+            url: 'https://api.raxa.io/ws/rest/v1/raxacore/login',
+          // url:EasyTreatyApp.config.getDomain()+'raxacore/login',
             method: 'GET',
            // withCredentials: true,
             success: function (response, opts) {
                 console.log("success");
-                Ext.Msg.alert("success");
+               // Ext.Msg.alert("success");
                 me.logInSuccess(Ext.JSON.decode(response.responseText),values);
                 
             },

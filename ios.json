@@ -1,14 +1,14 @@
 {
 
-	"applicationName":"EasyTreatyApp",
+	"applicationName":"Doctors Near Me",
 
-	"applicationId":"com.EasyTreatyApp",
+	"applicationId":"com.raxa.DoctorsNearMe",
 
 	/**
 	 * @cfg  bundleSeedId
 	 * A ten character string which stands before aplication ID in Apple Provisioning Portal
 	 */
-	/*"bundleSeedId":"",*/
+	"bundleSeedId":"85YL7Q6854",
 
 	"versionString":"1.0",
 
@@ -23,7 +23,9 @@
 
 	"inputPath":"./",
 
-	"outputPath":"../EasyTreaty/packages/iOS/",
+	/*"outputPath":"../buildApp/iOS2",*/
+
+	"outputPath":"C:/Users/TOSHIBA/Desktop/iosbuild1",
 
 	"configuration":"Debug",
 
@@ -31,20 +33,15 @@
 
 	"deviceType":"Universal",
 
-	"certificatePath":"",
+	"certificatePath":"../certificates/RaxaDevCertificates.p12",
 
-	/*"certificateAlias":"iPhone Developer",*/
+	"certificateAlias":"iPhone Developer: Raxa Developers",
 
-	"certificatePassword":"",
+	"certificatePassword":"RaxaCare123",
 
-	/*"provisionProfile":"",*/
-
-	"notificationConfiguration":"",
+	"provisionProfile":"../certificates/Doctors_Near_Me_Dev_Profile.mobileprovision",
 
 	"orientations": [
-		"portrait",
-		"landscapeLeft",
-		"landscapeRight",
-		"portraitUpsideDown"
+		"portrait"
 	]
 }

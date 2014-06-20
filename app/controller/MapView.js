@@ -18,7 +18,7 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 itemselected: "onLocationSelect",
                 moredetails: "onMoreDetails",
                 getdirections: "onGetDirections",
-                togglemaplist: "onMapListToggle",
+              //  togglemaplist: "onMapListToggle",
                 togglefavorite: "onFavoriteToggle",
                 showfavorites: "onShowFavorites",
                 basechanged: "onBaseChange"
@@ -98,11 +98,11 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         
     },
 
-    onMapListToggle: function (hide) {
-        var menu = this.getMenu();
+    //onMapListToggle: function (hide) {
+    //    var menu = this.getMenu();
 
-        menu.getChangeLocationButton().setHidden(hide);
-    },
+    //    menu.getChangeLocationButton().setHidden(hide);
+    //},
 
     onMoreDetails: function(map,recordId){
         var record = this.getMapView().getStore().getById(recordId);
@@ -157,20 +157,22 @@ Ext.define('EasyTreatyApp.controller.MapView', {
 
         Ext.Viewport.add(detailsView);
         Ext.Viewport.setActiveItem(detailsView);
+        
     },
 
     checkLiked: function (detailsView,record) {
         var me = this;
         Ext.Ajax.request({
             // url: 'http://localhost:8888/checkLike',
-            url: 'http://192.168.1.2:8888/checkLike',
+            // url: 'http://192.168.122.1:8888/checkLike',
+            url:EasyTreatyApp.config.getRatingServerDomain()+'checkLike',
             method: 'GET',
             params: {
                 location: record.get('id'),
                 user: EasyTreatyApp.config.getUser().get('personUuid')
             },
             success: function (response, opts) {
-                Ext.Msg.alert("like success");
+               // Ext.Msg.alert("like success");
                 console.log("success");
                 console.log(response);
                 var like = Ext.JSON.decode(response.responseText).likes;
@@ -207,32 +209,31 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         var mapview = this.getMapView();
         var locationmap =mapview.getLocationMap();
         var base = locationmap.getBaseLocation();
-        var type,title;
+        var type, title;
+
+        var specialtyField=mapview.getSpecialtySelectField();
         switch (choice) {
             case 0: type = 'hospital';
                 title = 'Medical Centers';
+                specialtyField.setHidden(false);
                 break;
             case 1: type = 'doctor';
-                title = 'Doctors'
+                title = 'Doctors';
+                specialtyField.setHidden(false);
                 break;
             case 2: type = 'pharmacy';
-                title = 'Pharmacies'
+                title = 'Pharmacies';
+                specialtyField.setHidden(true);
                 break;
         }
 
-       
-        var combined = mapview.getSpecialties().join(' , ');
-        if (mapview.getSpecialties().length > 0 && type!='pharmacy') {
-            mapview.getTopToolBar().setTitle(title + "-" + combined);
-        }
-        else {
             mapview.getTopToolBar().setTitle(title);
-        }
+        
         
 
         mapview.getStore().populate(base, type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
 
-        this.getMapView().zoomMap();
+        this.getMapView().zoomMap(parseInt(mapview.getSearchRadius()));
     }
 
 

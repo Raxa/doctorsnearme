@@ -31,7 +31,8 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
         var previouslyLiked = detailsView.getLiked();
         Ext.Ajax.request({
             // Ext.data.JsonP.request({
-            url: 'http://localhost:8888/like',
+            // url: 'http://192.168.122.1:8888/like',
+            url:EasyTreatyApp.config.getRatingServerDomain()+'like',
             method: 'GET',
             params: {
                 location: data.id,
@@ -63,32 +64,38 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
     comment: function (commentField, detailsView) {
         console.log("inside comment");
         var me = this;
-         Ext.Ajax.request({
-       // Ext.data.JsonP.request({
-            url: 'http://localhost:8888/comment',
-            method: 'GET',
-            params: {
-                location:detailsView.getData().id,
-                user: EasyTreatyApp.config.getUser().get('personUuid'),
-                comment:commentField.getValue()
-            },
-            success: function (response, opts) {
-                console.log("success");
-                console.log(response.responseText);
-                if (detailsView.getCommentsVisible()) {
-                    me.hideComments(detailsView);
-                    me.showComments(detailsView);
+        var comment = commentField.getValue();
+
+        if (comment.replace(/\s/g, '').length) {
+            Ext.Ajax.request({
+                // Ext.data.JsonP.request({
+                // url: 'http://192.168.122.1:8888/comment',
+                url:EasyTreatyApp.config.getRatingServerDomain()+'comment',
+                method: 'GET',
+                params: {
+                    location: detailsView.getData().id,
+                    user: EasyTreatyApp.config.getUser().get('personUuid'),
+                    comment: commentField.getValue()
+                },
+                success: function (response, opts) {
+                    console.log("success");
+                    console.log(response.responseText);
+                    if (detailsView.getCommentsVisible()) {
+                        me.hideComments(detailsView);
+                        me.showComments(detailsView);
+                    }
+                    else {
+                        me.showComments(detailsView);
+                    }
+                    commentField.setValue("");
+                },
+                failure: function (response, opts) {
+                    console.log("failure");
+                    console.log(response);
                 }
-                else {
-                    me.showComments(detailsView);
-                }
-                commentField.setValue("");
-            },
-            failure: function (response, opts) {
-                console.log("failure");
-                console.log(response);
-            }
-        });
+            });
+        } 
+        
     },
 
     showOrHideComments: function (detailsView){//, button, oldCommentPanel) {
@@ -121,7 +128,8 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
 
         Ext.Ajax.request({
       //  Ext.data.JsonP.request({
-            url: 'http://localhost:8888/getComments',
+            //url: 'http://192.168.122.1:8888/getComments',
+            url:EasyTreatyApp.config.getRatingServerDomain()+'getComments',
             method: 'GET',
            // method: 'POST',
             params:{

@@ -7,8 +7,20 @@ $base-gradient:'glossy';
 $base-color: rgb(17, 113, 178);
 
 $list-active-color:rgb(8, 73, 118);
-@import 'sencha-touch/default';
-@import 'sencha-touch/default/all';
+//@import 'sencha-touch/default';
+//@import 'sencha-touch/default/all';
+
+//@import 'sencha-touch/windows';
+//@import 'sencha-touch/windows/all';
+
+//@import 'sencha-touch/flat';
+//@import 'sencha-touch/flat/all';
+
+//@import 'sencha-touch/mountainview';
+//@import 'sencha-touch/mountainview/all';
+
+@import 'sencha-touch/cupertino';
+@import 'sencha-touch/cupertino/all';
 
 // Custom code goes here..
 
@@ -356,8 +368,14 @@ background-image:url('images/home.png');
   transition: all 0.2s;
 }
 
+.menubtn{
+	background: white;
+	border:1px solid white;
+}
+
 .mainmenu {
-  background: #1d1d1d;
+	background: white;
+  //background: #1d1d1d;
   //background:#80B2E6;
   font-family:georgia;
 }
@@ -366,7 +384,9 @@ background-image:url('images/home.png');
   font-size: 0.7em;
   color: #a3a3a3;
   padding: 0.2em 1em;
-  border-bottom: 1px solid #161616;
+  //border-bottom: 1px solid #161616;
+  border-bottom: 1px solid white;
+  //background: white;
   background: #1d1d1d;
   //background:#80B2E6;
 }
@@ -378,7 +398,8 @@ background-image:url('images/home.png');
   -o-border-radius: 0;
   border-radius: 0;
   background-image: none;
-  background-color: #262626;
+  background-color: white;
+  //background-color: #262626;
   //background-color:#80B2E6;
   border-top: 1px solid #313131;
   border-bottom: 1px solid #161616;

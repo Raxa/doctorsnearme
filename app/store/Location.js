@@ -80,9 +80,10 @@ Ext.define('EasyTreatyApp.store.Location', {
                 location: latLng,
                 // location: new google.maps.LatLng(9.877965, 77.025521),
                 radius: radius,
-                //radius: 50000,
+                //radius: 500,
                 types: [type],
                 keyword: keywords
+               // query:'cardiology doctor'
             };
         }
 
@@ -91,9 +92,9 @@ Ext.define('EasyTreatyApp.store.Location', {
         var me = this;
 
         //   var detailRequest;
-        service.nearbySearch(request, function (results, status) {
-       // service.textSearch(request, function (results, status) {
-
+        //service.nearbySearch(request, function (results, status) {
+       //  service.textSearch(request, function (results, status) {
+        service.radarSearch(request, function (results, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 console.log("no of results: " + results.length);
                 me.getPlaceDetails(service, results, 0);
