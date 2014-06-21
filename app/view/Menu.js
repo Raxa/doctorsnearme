@@ -11,7 +11,8 @@ Ext.define('EasyTreatyApp.view.Menu', {
 
     xtype: 'mainmenu',
     config: {
-        cls: 'mainmenu',
+        //cls: 'mainmenu',
+        cls:'menu',
         //docked: 'left',
         docked: 'right',
 		top: 0,
@@ -20,64 +21,79 @@ Ext.define('EasyTreatyApp.view.Menu', {
         bottom: 0,
         zIndex: 0,
 		width: 266,
-        padding: '97 0 0 0',
+        padding: '50 10 0 10',
         open: false,
         scrollable: 'vertical',
         defaultType: 'button',
+        border: 3,
+        style: 'border-color: gray; border-style: solid;',
 
         items: [
                 {
-                   // text: 'My Health Profile',
+                    // text: 'My Health Profile',
                     //ui: 'mainmenu',
-                    hidden:true
-                },
-                {
-                    xtype: 'sliderfield',
-                    value: 50,
-                    minValue: 1000,
-                    maxValue: 1000000
-                },
-                {
-                    xtype: 'textfield',
-                    labelAlign: 'right',
-                    label: 'm'
-                },             
-                {
-                 //   text: 'Log In',
-                    ui: 'menubtn'
-                },
-                {
-                   // text: 'About',
-                    ui: 'menubtn'
-                },
-                {
-                    xtype: 'selectfield',
-                    labelWidth: '45%',
-                   // ui: 'mainmenu',
-                    //autoSelect: false,
-                    usePicker:false
-                },
+                    hidden: true,
+                    padding: '5 0 5 0',
+                    ui: 'menu',
+                },                                              
                 {
                     xtype: 'radiofield',
                     name: 'search',
                     value: 'hospital',
-                  //  label: 'Hospitals',
-                    labelWidth:'75%'
+                    //  label: 'Hospitals',
+                    labelWidth: '75%',
+                    padding: '5 0 5 0'
                 },
                 {
                     xtype: 'radiofield',
                     name: 'search',
                     value: 'doctor',
-                   // label: 'Doctors',
-                    labelWidth: '75%'
+                    // label: 'Doctors',
+                    labelWidth: '75%',
+                    padding: '5 0 5 0'
                 },
                 {
                     xtype: 'radiofield',
                     name: 'search',
                     value: 'pharmacy',
-                   // label: 'Pharmacies',
-                    labelWidth: '75%'
-                }
+                    // label: 'Pharmacies',
+                    labelWidth: '75%',
+                    padding: '5 0 5 0'
+                },
+                {
+                    xtype: 'sliderfield',
+                    value: 50,
+                    minValue: 1000,
+                    maxValue: 1000000,
+                    labelWidth: '45%',
+                },
+                {
+                    xtype: 'textfield',
+                    labelAlign: 'right',
+                    label: 'm',
+                    readOnly: true,
+                    padding: '5 0 5 0'
+                },
+                {
+                    xtype: 'selectfield',
+                    labelWidth: '45%',
+                    // ui: 'mainmenu',
+                    //autoSelect: false,
+                    usePicker: false,
+                    padding: '5 0 5 0'
+                },
+                 {
+                     //   text: 'Log In',
+                     //  ui: 'menubtn'
+                     ui: 'menu',
+                     padding: '5 0 5 0'
+                 },
+                {
+                    // text: 'About',
+                    // ui: 'menubtn'
+                    ui: 'menu',
+                    padding: '5 0 5 0'
+                },
 
         ]
     },
@@ -178,7 +194,6 @@ Ext.define('EasyTreatyApp.view.Menu', {
             if (newValue) {
                 me.fireEvent('choice', 1);
             }
-
             console.log(newValue);
         });
 
@@ -193,15 +208,15 @@ Ext.define('EasyTreatyApp.view.Menu', {
     },
     
     getLanguageSelectField: function(){
-        return this.getComponent(5);
+        return this.getComponent(6);
     },
 
     getDistaceField: function () {
-        return this.getComponent(2);
+        return this.getComponent(5);
     },
 
     getDistanceSelectField: function(){
-        return this.getComponent(1);
+        return this.getComponent(4);
     },
 
     /**
@@ -211,7 +226,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
      * @return {Button}
     */
     getAboutButton: function () {
-        return this.getComponent(4);
+        return this.getComponent(8);
     },
     
     /**
@@ -221,7 +236,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
      * @return {Button}
     */
     getLogInButton: function() {
-        return this.getComponent(3);
+        return this.getComponent(7);
     },
     
     
@@ -307,15 +322,15 @@ Ext.define('EasyTreatyApp.view.Menu', {
     },
 
     getHospitalField: function () {
-        return this.getComponent(6);
+        return this.getComponent(2);
     },
 
     getDoctorField: function () {
-        return this.getComponent(7);
+        return this.getComponent(1);
     },
 
     getPharmacyField: function () {
-        return this.getComponent(8);
+        return this.getComponent(3);
     }
 
 });

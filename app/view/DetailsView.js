@@ -13,8 +13,11 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
        store: null,
        data: null,
        cls: 'profile',
+       border: 3,
+       style: 'border-color: gray; border-style: solid;',
        commentsVisible: false,
-       liked:false,
+       liked: false,
+
        items: [{
            xtype: 'toolbar',
            docked: 'top',
@@ -22,16 +25,19 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                {
                    xtype: 'button',
                  //  text: 'Back',
-                   docked: 'right'
+                   docked: 'right',
+                   margin: '5 5 5 5'
                },
                {
                    iconCls: 'star',
-                   docked: 'left'
+                   docked: 'left',
+                   margin: '5 5 5 5'
                },
                {
                    xtype: 'button',
                    cls: 'like',
                    docked: 'right',
+                   margin: '5 5 5 5'
                    //hidden: true,
                    //disabled:true
                },
@@ -39,6 +45,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                    xtype: 'button',
                    text: 'View Comments',
                    docked: 'right',
+                   margin: '5 5 5 5'
                    //mode:'VIEW'
                }
            ]
@@ -67,7 +74,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
            layout: 'vbox',
            docked: 'bottom',
            //flex:1,
-           scrollable:'vertical'
+         //  scrollable:'vertical'
        }
        
        ]

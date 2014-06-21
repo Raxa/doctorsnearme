@@ -150,9 +150,10 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
         google.maps.event.addListener(marker, 'click', function (pos) {
             lang = EasyTreatyApp.config.getLanguage();
-            tpl1 = name + '</br>' + address + '</br><button class="direction" id=' + idString + '>' + lang.GET_DIRECTIONS + '</button><button class="more-details" id=' + idString + '>' + lang.MORE_DETAILS + '</button>';
+            tpl1 = name + '</br>' + address + '</br><button class="direction" id=' + idString + '><img src = "resources/icons/arrow.png" width=50px height=50px>' + lang.GET_DIRECTIONS + '</button><button class="more-details" id=' + idString + '>' + lang.MORE_DETAILS + '</button>';
             if (phoneNumber != null) {
-                tpl2 = '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>' + phoneNumber;
+                tpl2 = '</br><button class="call" type="button"><img src = "resources/icons/phone.png" width=50px height=50px><a href="tel:' + phoneNumber + '">Call</a></button>';// + phoneNumber;
+               // tpl2 = '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>';
             }
             if (location.isFavorite) {
                 tpl = tpl1 + tpl2 + '<button class="star favorite" id=' + idString + '-fav' + '></button>';
@@ -163,7 +164,10 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             }
 
             var infowindow = new google.maps.InfoWindow();
-            infowindow.setContent('<div class="info-window">' + tpl + '</div>')
+
+            //var infowindow = new InfoBox();
+            //infowindow.setContent('<div class="info-window">' + tpl + '</div>')
+            infowindow.setContent('<div>' + tpl + '</div>')
             infowindow.open(me.getMap(), marker);
         });
         this.getLocationMarkers().push(marker);

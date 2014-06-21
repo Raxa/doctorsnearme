@@ -227,9 +227,9 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 break;
         }
 
-            mapview.getTopToolBar().setTitle(title);
+           // mapview.getTopToolBar().setTitle(title);
         
-        
+        mapview.getBottomBar().setTitle(title);
 
         mapview.getStore().populate(base, type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
 

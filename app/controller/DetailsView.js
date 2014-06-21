@@ -148,6 +148,7 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
                 } else {
 
                     Ext.Array.forEach(comments, function (item) {
+                        console.log("adding comment");
                         detailsView.addComment(item.comment);
                     });
                 }

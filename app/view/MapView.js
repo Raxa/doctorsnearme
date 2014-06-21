@@ -16,7 +16,10 @@ Ext.define('EasyTreatyApp.view.MapView', {
         searchRadius: 1000,
         specialties:[],
 
-        cls:'map-view',
+        cls: 'map-view',
+        border: 3,
+        style: 'border-color: gray; border-style: solid;',
+
         store: null,
         
         pharmacyStore: null,
@@ -105,6 +108,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
             items: [
                 {
                     iconCls: 'list',
+                    margin: '5 5 5 5',
                     docked:'right',
                     handler: function() {
                         me.fireEvent('showmenu');
@@ -114,6 +118,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
                     xtype: 'button',
                    // text: 'List',
                     docked: 'right',
+                    margin: '5 5 5 5',
                     handler: function () {
                         var lang = EasyTreatyApp.config.getLanguage();
                         switch (me.indexOf(me.getActiveItem())) {
@@ -137,7 +142,8 @@ Ext.define('EasyTreatyApp.view.MapView', {
                 },
                 {
                     iconCls: 'locate',
-                    docked:'right',
+                    docked: 'right',
+                    margin: '5 5 5 5',
                     handler: function () {
                         me.resetLocation();
                     }
@@ -150,7 +156,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
                     placeHolder:'Choose a Specialty',
                     autoSelect: false,
                     hidden:true
-                },
+                }
                  
                 
             ]
@@ -165,7 +171,13 @@ Ext.define('EasyTreatyApp.view.MapView', {
         this.getSpecialtySelectField().on('change', function (selectField, newValue, oldValue, eOpts) {
             me.setSpecialties(newValue);
         });
+
+        this.add({ xtype: 'toolbar', docked: 'bottom' });
        
+    },
+
+    getBottomBar: function(){
+        return this.getComponent(3);
     },
     
     getSpecialtySelectField: function () {

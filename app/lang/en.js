@@ -10,7 +10,7 @@
         DOCTORS: 'Doctors',
         PHARMACIES: 'Pharmacies',
         DONE:'Done',
-        GET_DIRECTIONS: 'Get Directions',
+        GET_DIRECTIONS: 'Direct Me',
         MORE_DETAILS: 'More Details',
         LIST: 'List',
         MAP: 'Map',

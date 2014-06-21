@@ -100,7 +100,7 @@ Ext.define('EasyTreatyApp.controller.Login', {
 
         var me = this;
         Ext.Ajax.request({
-            url: 'https://api.raxa.io/ws/rest/v1/raxacore/login',
+            url: 'http://api.raxa.io/ws/rest/v1/raxacore/login',
           // url:EasyTreatyApp.config.getDomain()+'raxacore/login',
             method: 'GET',
            // withCredentials: true,

@@ -24,19 +24,21 @@ Ext.define('EasyTreatyApp.view.Login', {
             },
             {
                 xtype: 'fieldset',
-                cls:'item',
+              //  cls:'item',
                 items: [
                     {
                         xtype: 'textfield',
                         name: 'username',
                         //placeHolder: 'username',
-                        required: true
+                        required: true,
+                        margin:'5 5 5 5'
                     },
                     {
                         xtype: 'passwordfield',
                         //placeHolder: 'password',
                         name: 'password',
-                        required: true
+                        required: true,
+                        margin: '5 5 5 5'
                     }
                 ]
             },
@@ -46,14 +48,15 @@ Ext.define('EasyTreatyApp.view.Login', {
                 padding: '8px',
                 width: '50%',
                 margin: '0 auto',
-                cls: 'button-look'
+              //  cls: 'button-look'
 
             },
             {
                 xtype: 'fieldset',
                 width: '80%', 
                 margin: '10 auto',
-                styleHtmlContent:true,
+                styleHtmlContent: true,
+                //cls:'item',
                 items: [
                     {
                         xtype: 'checkboxfield',
@@ -61,7 +64,7 @@ Ext.define('EasyTreatyApp.view.Login', {
                         //label:'Keep me logged in',
                         labelAlign: 'right',
                         labelWidth: '80%',
-                        labelCls: 'item'
+                       // labelCls: 'item'
                     }
                 ]
             },
@@ -71,7 +74,7 @@ Ext.define('EasyTreatyApp.view.Login', {
                 padding: '8px',
                 width: '50%',
                 margin: '5 auto',
-                cls: 'button-look'
+            //    cls: 'button-look'
             }
         ]
     },
