@@ -30,8 +30,8 @@ Ext.define('EasyTreatyApp.controller.Login', {
         var encodedString = "Basic " + btoa(EasyTreatyApp.config.getUserName() + ":" + EasyTreatyApp.config.setPassword());
 
         Ext.Ajax.request({
-            // url: 'https://api.raxa.io/ws/rest/v1/session',
-            url:EasyTreatyApp.config.getDomain()+'session',
+             url: 'http://api.raxa.io/ws/rest/v1/session',
+           // url:EasyTreatyApp.config.getDomain()+'session',
             method: 'DELETE',
             success: function (response, opts) {
                 console.log("success");

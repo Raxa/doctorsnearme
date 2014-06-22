@@ -60,7 +60,60 @@ Ext.define('EasyTreatyApp.store.Location', {
     //    });
     //},
 
-    populate: function (latLng, type, radius, map,keywords) {
+
+    populate: function (latLng, type, radius, map, keywords) {
+        console.log("inside store");
+        console.log(keywords);
+        console.log(this.getRange());
+
+        this.storeClear();
+
+        var request;
+        var service = new google.maps.places.PlacesService(map.getMap());
+        var me = this;
+
+        if (type == 'pharmacy' || keywords.length == 0) {        
+
+            service.radarSearch({
+                location: latLng,
+                radius: radius,
+                types: [type]
+            }, function (results, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    console.log("no of results: " + results.length);
+                    me.getPlaceDetails(service, results, 0);
+                }
+
+            });
+        } else {
+            console.log("inside else");           
+
+            Ext.Array.forEach(keywords, function (keyword) {                
+
+                service.radarSearch({
+                    location: latLng,
+                    radius: radius,
+                    types: [type],
+                    keyword: keyword
+                }, function (results, status) {
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                        console.log("no of results: " + results.length);
+                        me.getPlaceDetails(service, results, 0);
+                    }
+
+                });
+            });
+           
+        }
+
+      
+        //   var detailRequest;
+        //service.nearbySearch(request, function (results, status) {
+        //  service.textSearch(request, function (results, status) {
+      
+    },
+
+    /*populate: function (latLng, type, radius, map,keywords) {
         console.log("inside store");
         console.log(keywords);
         console.log(this.getRange());
@@ -101,7 +154,7 @@ Ext.define('EasyTreatyApp.store.Location', {
             }
 
         });
-    },
+    },*/
 
     storeClear: function(){
         this.removeAll();
@@ -206,16 +259,6 @@ Ext.define('EasyTreatyApp.store.Location', {
             else {
                 console.log("failed");
                 console.log(status1);
-            }
-        });
-    },
-
-    applySpecialtyFilter: function (specialty) {
-
-        this.filterBy(function (record) {
-
-            if (Ext.Array.contains(record.specialty,specialty)) {
-                return true;
             }
         });
     }

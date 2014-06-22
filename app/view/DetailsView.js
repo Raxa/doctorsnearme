@@ -29,7 +29,8 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                    margin: '5 5 5 5'
                },
                {
-                   iconCls: 'star',
+                   // iconCls: 'star',
+                   iconCls: 'detail-view-star',
                    docked: 'left',
                    margin: '5 5 5 5'
                },
@@ -141,12 +142,14 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
         this.getFavoriteButton().on('tap', function () {
             var isFavorite = false;
-            if (this.getIconCls() == 'star') {
+            //if (this.getIconCls() == 'star') {
+            if (this.getIconCls() == 'detail-view-star') {
                 this.setIconCls('color-star')
                 isFavorite = true;
             }
             else {
-                this.setIconCls('star');
+                //this.setIconCls('star');
+                this.setIconCls('detail-view-star');
                 isFavorite = false;
             }
             me.fireEvent('togglefavorite', me.getData().id, isFavorite);

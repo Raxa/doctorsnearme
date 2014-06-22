@@ -146,20 +146,27 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         //if (phoneNumber != null) {
         //    tpl2 = '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>' + phoneNumber;
         //}
-        
+        var tpl0 = "";
+        var tpl3 = "";
 
         google.maps.event.addListener(marker, 'click', function (pos) {
             lang = EasyTreatyApp.config.getLanguage();
-            tpl1 = name + '</br>' + address + '</br><button class="direction" id=' + idString + '><img src = "resources/icons/arrow.png" width=50px height=50px>' + lang.GET_DIRECTIONS + '</button><button class="more-details" id=' + idString + '>' + lang.MORE_DETAILS + '</button>';
+
+            tpl0 = name + '</br>' + address;
+            tpl1 = '<button class="more-details" id=' + idString + '>' + lang.MORE_DETAILS + '</button>';
+            tpl2 = '<button class="direction" id=' + idString + '><img src = "resources/icons/arrow.png" width=30px height=30px>' + lang.GET_DIRECTIONS + '</button>';
+
             if (phoneNumber != null) {
-                tpl2 = '</br><button class="call" type="button"><img src = "resources/icons/phone.png" width=50px height=50px><a href="tel:' + phoneNumber + '">Call</a></button>';// + phoneNumber;
+                tpl3 = '<button class="call" type="button"><img src = "resources/icons/phone.png" width=30px height=30px><a href="tel:' + phoneNumber + '">Call</a></button>';// + phoneNumber;
                // tpl2 = '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>';
             }
+
+            
             if (location.isFavorite) {
-                tpl = tpl1 + tpl2 + '<button class="star favorite" id=' + idString + '-fav' + '></button>';
+                tpl = tpl0 + '</br>' + '<span>' + '<button class="star favorite" id=' + idString + '-fav' + '></button>' + tpl1 + '</span>'+'</br>' + '<span>' + tpl2 + tpl3 + '</span>'
                 //tpl = tpl1 + tpl2 + '<div class="star favorite" id=' + idString + '-fav' + '></div>';
             } else {
-                tpl = tpl1 + tpl2 + '<button class="star" id=' + idString + '-fav' + '></button>';
+                tpl = tpl0 + '</br>' + '<span>'+'<button class="star" id=' + idString + '-fav' + '></button>' +tpl1+'</span>'+'</br>'+ '<span>' + tpl2 + tpl3 + '</span>';
                 //tpl = tpl1 + tpl2 + '<div class="star" id=' + idString + '-fav' + '></div>';
             }
 

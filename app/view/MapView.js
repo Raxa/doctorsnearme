@@ -32,8 +32,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
             },
             {
                 xtype: 'listview'
-            }
-                
+            }                
             ]
     },
     
@@ -114,7 +113,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
                         me.fireEvent('showmenu');
                     }
                 },
-                {
+               /* {
                     xtype: 'button',
                    // text: 'List',
                     docked: 'right',
@@ -124,16 +123,10 @@ Ext.define('EasyTreatyApp.view.MapView', {
                         switch (me.indexOf(me.getActiveItem())) {
                             case 0: me.setActiveItem(1);
                                 this.setText(lang.MAP);
-                                // me.fireEvent('togglemaplist',true);
-                                //me.setLayout({
-                                //    type: 'card',
-                                //    animation:'slideright'
-                                //})
                                 break;
 
                             case 1: me.setActiveItem(0);
                                 this.setText(lang.LIST);
-                                //me.fireEvent('togglemaplist',false);
                                 break;
                         }
                         
@@ -147,15 +140,15 @@ Ext.define('EasyTreatyApp.view.MapView', {
                     handler: function () {
                         me.resetLocation();
                     }
-                },
+                },*/
                 {
                     xtype: 'multiselectfield',
                     // label: 'Specilty',
-                    labelWidth: '45%',
-                    //ui: 'mainmenu',
+                  //  labelWidth: '45%',
                     placeHolder:'Choose a Specialty',
                     autoSelect: false,
-                    hidden:true
+                    hidden: true,
+                    docked: 'right'
                 }
                  
                 
@@ -168,11 +161,54 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
         this.getSpecialtySelectField().setStore(Ext.create('EasyTreatyApp.store.Specialization'));
 
+        var specialtyArray;
         this.getSpecialtySelectField().on('change', function (selectField, newValue, oldValue, eOpts) {
-            me.setSpecialties(newValue);
+            console.log("spec change");
+            console.log(newValue.length);
+            console.log(newValue);
+            specialtyArray = [];
+            Ext.Array.forEach(newValue, function (itemArray) {
+                Ext.Array.forEach(itemArray, function (keyword) {
+                    specialtyArray.push(keyword);
+                });
+            });
+            
+            me.setSpecialties(specialtyArray);
+            console.log(specialtyArray);
         });
 
-        this.add({ xtype: 'toolbar', docked: 'bottom' });
+        var bottombar = Ext.create('Ext.Toolbar', {
+            docked: 'bottom',
+           // cls: 'toolbar-style',
+            items: [{
+                xtype: 'button',
+                docked: 'right',
+                margin: '5 5 5 5',
+                handler: function () {
+                    var lang = EasyTreatyApp.config.getLanguage();
+                    switch (me.indexOf(me.getActiveItem())) {
+                        case 0: me.setActiveItem(1);
+                            this.setText(lang.MAP);
+                            break;
+
+                        case 1: me.setActiveItem(0);
+                            this.setText(lang.LIST);
+                            break;
+                    }
+
+
+                }
+            },
+                {
+                    iconCls: 'locate',
+                    docked: 'right',
+                    margin: '5 5 5 5',
+                    handler: function () {
+                        me.resetLocation();
+                    }
+                }]
+        });
+        this.add(bottombar);
        
     },
 
@@ -181,7 +217,8 @@ Ext.define('EasyTreatyApp.view.MapView', {
     },
     
     getSpecialtySelectField: function () {
-        return this.getTopToolBar().getComponent(3);
+        // return this.getTopToolBar().getComponent(3);
+        return this.getTopToolBar().getComponent(1);
     },
     /**
      * Returns the top tool bar
@@ -240,9 +277,13 @@ Ext.define('EasyTreatyApp.view.MapView', {
     setLanguage: function (newLang,oldLang) {
         var lang = EasyTreatyApp.config.getLanguage();
 
-        var topBar = this.getTopToolBar();
+        //var topBar = this.getTopToolBar();
+        
+       // var listBtn = topBar.getComponent(1);
 
-        var listBtn = topBar.getComponent(1);
+        var bottomBar = this.getBottomBar();
+        var listBtn = bottomBar.getComponent(0);
+
         if (listBtn.getText() == oldLang.MAP) {
             listBtn.setText(lang.MAP);
         }

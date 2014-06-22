@@ -12,8 +12,8 @@ Ext.define('EasyTreatyApp.view.Login', {
         items: [
             {
                 xtype: 'image',
-                src: 'resources/icons/logo.png',
-                style: 'width:200px;height:100px;background-size:contain',
+                src: 'resources/icons/colorlogo.png',
+                style: 'width:100px;height:100px;background-size:contain',
                 margin:'10 auto'
             },
             {
@@ -23,22 +23,27 @@ Ext.define('EasyTreatyApp.view.Login', {
                  maxHeight: '20%'
             },
             {
-                xtype: 'fieldset',
-              //  cls:'item',
+                xtype: 'container',
+                width: '60%',
+                margin: '5 auto',
+                // style: 'border-color: white; border-style: solid; border-width: 0px',
+                
                 items: [
                     {
                         xtype: 'textfield',
                         name: 'username',
                         //placeHolder: 'username',
                         required: true,
-                        margin:'5 5 5 5'
+                        margin: '5 5 5 5',
+                        cls: 'username-pwd',
                     },
                     {
                         xtype: 'passwordfield',
                         //placeHolder: 'password',
                         name: 'password',
                         required: true,
-                        margin: '5 5 5 5'
+                        margin: '5 5 5 5',
+                        cls: 'username-pwd',
                     }
                 ]
             },
@@ -46,33 +51,26 @@ Ext.define('EasyTreatyApp.view.Login', {
                 xtype: 'button',
                 //text:'Log In',
                 padding: '8px',
-                width: '50%',
-                margin: '0 auto',
+                width: '40%',
+                margin: '5 auto',
               //  cls: 'button-look'
 
             },
             {
-                xtype: 'fieldset',
-                width: '80%', 
-                margin: '10 auto',
-                styleHtmlContent: true,
-                //cls:'item',
-                items: [
-                    {
-                        xtype: 'checkboxfield',
-                        name: 'checkin',
-                        //label:'Keep me logged in',
-                        labelAlign: 'right',
-                        labelWidth: '80%',
-                       // labelCls: 'item'
-                    }
-                ]
+                xtype: 'checkboxfield',
+                name: 'checkin',
+                //label:'Keep me logged in',
+                labelAlign: 'right',
+                labelWidth: '70%',
+                width: '80%',
+                margin: '5 auto',
+                labelCls: 'remember-me'
             },
             {
                 xtype: 'button',
                 //text: 'Cancel',
                 padding: '8px',
-                width: '50%',
+                width: '40%',
                 margin: '5 auto',
             //    cls: 'button-look'
             }
@@ -116,7 +114,8 @@ Ext.define('EasyTreatyApp.view.Login', {
 
         this.getComponent(3).setText(lang.LOG_IN);
 
-        this.getComponent(4).getComponent(0).setLabel(lang.REMEMBER_ME);
+        //this.getComponent(4).getComponent(0).setLabel(lang.REMEMBER_ME);
+        this.getComponent(4).setLabel(lang.REMEMBER_ME);
 
         this.getComponent(5).setText(lang.CANCEL);
     }

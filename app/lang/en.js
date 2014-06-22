@@ -6,7 +6,7 @@
         LOG_OUT: 'Log Out',
         HEALTH_PROFILE:'MY Health Profile',
         ABOUT: 'About',
-        MEDICAL_CENTERS: 'Medical Centers',
+        MEDICAL_CENTERS: 'Hospitals',
         DOCTORS: 'Doctors',
         PHARMACIES: 'Pharmacies',
         DONE:'Done',
