@@ -108,9 +108,9 @@ Ext.define('EasyTreatyApp.view.Menu', {
 
         this.getLanguageSelectField().setLabel(lang.LANGUAGE);
 
-        this.getHospitalField().setLabel('<img src = "resources/icons/hospital.png" width=35px height=35px aligh=top>'+lang.MEDICAL_CENTERS);
-        this.getDoctorField().setLabel('<img src = "resources/icons/doctor.png" width=35px height=35px aligh=top>'+lang.DOCTORS);
-        this.getPharmacyField().setLabel('<img src = "resources/icons/pharmacy.png" width=35px height=35px aligh=top>'+lang.PHARMACIES);
+        this.getHospitalField().setLabel('<img src = "resources/icons/Medical centers.png" width=35px height=35px aligh=top>'+lang.MEDICAL_CENTERS);
+        this.getDoctorField().setLabel('<img src = "resources/icons/Doctors.png" width=35px height=35px aligh=top>'+lang.DOCTORS);
+        this.getPharmacyField().setLabel('<img src = "resources/icons/Pharmacies.png" width=35px height=35px aligh=top>'+lang.PHARMACIES);
 
         if (EasyTreatyApp.config.getLoggedIn()) {
             this.getLogInButton().setText(lang.LOG_OUT);
