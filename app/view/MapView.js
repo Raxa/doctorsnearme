@@ -201,12 +201,19 @@ Ext.define('EasyTreatyApp.view.MapView', {
             },
                 {
                     iconCls: 'locate',
-                    docked: 'right',
+                    docked: 'left',
                     margin: '5 5 5 5',
                     handler: function () {
                         me.resetLocation();
-                    }
-                }]
+                    },
+
+                },
+            {
+            iconCls: 'favorites',
+            handler: function () {
+                me.fireEvent('showfavorites');
+            }
+        },]
         });
         this.add(bottombar);
        
