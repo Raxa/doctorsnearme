@@ -154,19 +154,23 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
             tpl0 = name + '</br>' + address;
             tpl1 = '<button class="more-details" id=' + idString + '>' + lang.MORE_DETAILS + '</button>';
-            tpl2 = '<button class="direction" id=' + idString + '><img src = "resources/icons/arrow.png" width=30px height=30px>' + lang.GET_DIRECTIONS + '</button>';
+            tpl2 = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/arrow4.png">    ' + lang.GET_DIRECTIONS + '</button>';
 
             if (phoneNumber != null) {
-                tpl3 = '<button class="call" type="button"><img src = "resources/icons/phone.png" width=30px height=30px><a href="tel:' + phoneNumber + '">Call</a></button>';// + phoneNumber;
+                tpl3 = '<button class="call" type="button"><img class="call-img" src = "resources/icons/phone.png"><a href="tel:' + phoneNumber + '">    Call</a></button>';// + phoneNumber;
                // tpl2 = '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>';
             }
 
             
             if (location.isFavorite) {
-                tpl = tpl0 + '</br>' + '<span>' + '<button class="star favorite" id=' + idString + '-fav' + '></button>' + tpl1 + '</span>'+'</br>' + '<span>' + tpl2 + tpl3 + '</span>'
+               // tpl = tpl0 + '</br>' + '<span>' + '<button class="star favorite" id=' + idString + '-fav' + '></button>' + tpl1 + '</span>'+'</br>' + '<span>' + tpl2 + tpl3 + '</span>'
+
+                tpl = tpl0 + '</br>' + '<div style="padding:0px 0px;margin:0">' + '<button class="star favorite" id=' + idString + '-fav' + '></button>' + tpl1 + '</div>' + '</br>' + tpl2 + tpl3;
                 //tpl = tpl1 + tpl2 + '<div class="star favorite" id=' + idString + '-fav' + '></div>';
             } else {
-                tpl = tpl0 + '</br>' + '<span>'+'<button class="star" id=' + idString + '-fav' + '></button>' +tpl1+'</span>'+'</br>'+ '<span>' + tpl2 + tpl3 + '</span>';
+                //tpl = tpl0 + '</br>' + '<span>'+'<button class="star" id=' + idString + '-fav' + '></button>' +tpl1+'</span>'+'</br>'+ '<span>' + tpl2 + tpl3 + '</span>';
+
+                tpl = tpl0 + '</br>'  + '<button class="star" id=' + idString + '-fav' + '></button>' + tpl1 + '</br>' + tpl2 + tpl3 ;
                 //tpl = tpl1 + tpl2 + '<div class="star" id=' + idString + '-fav' + '></div>';
             }
 

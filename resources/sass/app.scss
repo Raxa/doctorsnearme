@@ -169,9 +169,15 @@ border:1px solid #157efb;
 	color:#0d66f2;
 	-webkit-border-radius: 0px;
 	border-radius:0px;
-	padding: 11px 22px;
+	height: 40px;
 	border: 1px solid #0d66f2;
 	background: white;
+}
+
+.direction-img{
+	vertical-align:middle;
+	 width:30px;
+	  height:30px;
 }
 
 .more-details{
@@ -180,7 +186,8 @@ border:1px solid #157efb;
 	color:white;
 	-webkit-border-radius: 0px;
 	border-radius:0px;
-	padding: 11px 22px;
+	height: 40px;
+	//padding: 11px 22px;
 	border: 1px solid #0d66f2;
 	background: #0d66f2;
 }
@@ -202,12 +209,16 @@ border:1px solid #157efb;
 .star{
 
 	background-image:url('images/star.png');
-	background-size: 25px 25px;
+	//background-size: 25px 25px;
+	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
 	-webkit-border-radius: 0px;
 	border-radius:0px;
-	padding: 15px 15px;
+	//padding: 15px 15px;
+	//padding: 20px 20px;
+	height:40px;
+	//width:40px;
 	border: 1px solid #0d66f2;
 }
 
@@ -227,21 +238,25 @@ border:1px solid #157efb;
 	color:#0d66f2;
 	-webkit-border-radius: 0px;
 	border-radius:0px;
-	padding: 11px 22px;
+	height: 40px;
+	//padding: 11px 22px;
 	border: 1px solid #0d66f2;
 	background: white;
   a{
   color:#0d66f2;
+  text-decoration: none;
 }
 }
 
-.phone-icon{
-	background-image:url('images/phone.png');
+.call-img{
+	//background-image:url('images/phone.png');
+	vertical-align:middle;
 	height:20px;
 	width:20px;
 	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
+
 }
 
 .doctor{

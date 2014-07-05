@@ -72,6 +72,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     labelAlign: 'right',
                     label: 'm',
                     readOnly: true,
+                    value:'1000',
                     padding: '5 0 5 0'
                 },
                 {

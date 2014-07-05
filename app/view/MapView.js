@@ -183,7 +183,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
             items: [{
                 xtype: 'button',
                 docked: 'right',
-                margin: '5 5 5 5',
+                margin: '15 5 5 5',
                 handler: function () {
                     var lang = EasyTreatyApp.config.getLanguage();
                     switch (me.indexOf(me.getActiveItem())) {
@@ -202,7 +202,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
                 {
                     iconCls: 'locate',
                     docked: 'left',
-                    margin: '5 5 5 5',
+                    margin: '15 5 5 5',
                     handler: function () {
                         me.resetLocation();
                     },
