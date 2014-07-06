@@ -60,7 +60,10 @@ Ext.define('EasyTreatyApp.view.MapView', {
         });
 
         var lang = EasyTreatyApp.config.getLanguage();
-        this.setLanguage(lang,lang);
+        this.setLanguage(lang, lang);
+
+        //to start search at the app startup
+        this.setCurrentSearch(0);
     },
     
     onLocationAddition: function () {
