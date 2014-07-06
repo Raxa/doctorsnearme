@@ -5,7 +5,12 @@ Ext.define('EasyTreatyApp.store.Location', {
     extend: 'Ext.data.Store',
 
     config: {
-        model: 'EasyTreatyApp.model.Location',        
+        model: 'EasyTreatyApp.model.Location',
+
+        //test
+        service: null,
+        searchCount: 0
+        //test
     },
 
     //populate: function (latLng, type, radius, map) {
@@ -62,6 +67,10 @@ Ext.define('EasyTreatyApp.store.Location', {
 
 
     populate: function (latLng, type, radius, map, keywords) {
+        //test
+        this.setSearchCount(this.getSearchCount() + 1);
+        var searchCount = this.getSearchCount();
+        //test
         console.log("inside store");
         console.log(keywords);
         console.log(this.getRange());
@@ -81,7 +90,7 @@ Ext.define('EasyTreatyApp.store.Location', {
             }, function (results, status) {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
                     console.log("no of results: " + results.length);
-                    me.getPlaceDetails(service, results, 0);
+                    me.getPlaceDetails(service, results, 0,searchCount);
                 }
 
             });
@@ -179,9 +188,11 @@ Ext.define('EasyTreatyApp.store.Location', {
         this.fireEvent("locationadded");
     },
 
-    getPlaceDetails: function (service, results,i) {
+    getPlaceDetails: function (service, results,i,searchCount) {
         var me = this;
-
+        //test
+       
+        //test
         console.log("test...............");
         service.getDetails(
             {
@@ -199,15 +210,20 @@ Ext.define('EasyTreatyApp.store.Location', {
             }
             
             });
-        if (i < results.length - 1) {
+        // if (i < results.length - 1) {
+        //test
+        console.log("SearchCount: " + searchCount);
+        if (i < results.length - 1 && searchCount==this.getSearchCount()) {
+        //test
             Ext.Function.defer(function () {
-                me.getPlaceDetails(service, results, i + 1)
+                me.getPlaceDetails(service, results, i + 1,searchCount)
                 //}, 290, me);
             }, 290, me);
             return;
 
         }
         else {
+            console.log("returned..:" + this.getSearchCount());
             return;
         }
     },
@@ -231,8 +247,8 @@ Ext.define('EasyTreatyApp.store.Location', {
     },
     //use if you are going to make the request when clicking on a marker
     setDetailsForTheRecord: function (map, record, infowindow, marker) {
-        var service = new google.maps.places.PlacesService(map.getMap());
-
+      //  var service = new google.maps.places.PlacesService(map.getMap());
+        var service = this.getService();
         var me = this;
 
         service.getDetails(

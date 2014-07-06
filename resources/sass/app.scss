@@ -184,11 +184,12 @@ border:1px solid #157efb;
 	font-family:georgia;
 	text-align:center;
 	color:white;
+	-webkit-border-radius: 0px;
 	border-radius:0px;
 	height: 40px;
+	//padding: 11px 22px;
 	border: 1px solid #0d66f2;
 	background: #0d66f2;
-	margin:10px;
 }
 
 .favorite{
@@ -208,14 +209,17 @@ border:1px solid #157efb;
 .star{
 
 	background-image:url('images/star.png');
-	background-size: 40px 40px;
+	//background-size: 25px 25px;
+	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
+	-webkit-border-radius: 0px;
 	border-radius:0px;
+	//padding: 15px 15px;
+	//padding: 20px 20px;
 	height:40px;
-	width:40px;
+	//width:40px;
 	border: 1px solid #0d66f2;
-	margin:10px;
 }
 
 .detail-view-star{

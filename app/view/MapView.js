@@ -58,12 +58,11 @@ Ext.define('EasyTreatyApp.view.MapView', {
             storecleared: this.onStoreClear,
             scope: this
         });
+        //test
+        store.setService(new google.maps.places.PlacesService(this.down('locationmap').getMap()));
 
         var lang = EasyTreatyApp.config.getLanguage();
-        this.setLanguage(lang, lang);
-
-        //to start search at the app startup
-        this.setCurrentSearch(0);
+        this.setLanguage(lang,lang);
     },
     
     onLocationAddition: function () {

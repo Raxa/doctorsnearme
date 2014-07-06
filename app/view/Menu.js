@@ -63,16 +63,18 @@ Ext.define('EasyTreatyApp.view.Menu', {
                 {
                     xtype: 'sliderfield',
                     value: 50,
-                    minValue: 1000,
-                    maxValue: 1000000,
+                    //minValue: 1000,
+                    //maxValue: 1000000,
+                    minValue: 1,
+                    maxValue: 1000,
                     labelWidth: '45%',
                 },
                 {
                     xtype: 'textfield',
                     labelAlign: 'right',
-                    label: 'm',
+                    label: 'km',
                     readOnly: true,
-                    value:'1000',
+                    value:'1',
                     padding: '5 0 5 0'
                 },
                 {

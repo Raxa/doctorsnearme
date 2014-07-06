@@ -163,14 +163,14 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
             
             if (location.isFavorite) {
-                tpl = tpl0 + '</br>' + '<div>' + '<button class="star favorite" id=' + idString + '-fav' + '></button>' + tpl1 + '</div>' + '</br>' + '<span>' + tpl2 + tpl3 + '</span>'
+               // tpl = tpl0 + '</br>' + '<span>' + '<button class="star favorite" id=' + idString + '-fav' + '></button>' + tpl1 + '</span>'+'</br>' + '<span>' + tpl2 + tpl3 + '</span>'
 
-               // tpl = tpl0 + '</br>' + '<div>' + '<button class="star favorite" id=' + idString + '-fav' + '></button>' + tpl1 + '</div>' + '</br>' + tpl2 + tpl3;
+                tpl = tpl0 + '</br>' + '<div style="padding:0px 0px;margin:0">' + '<button class="star favorite" id=' + idString + '-fav' + '></button>' + tpl1 + '</div>' + '</br>' + tpl2 + tpl3;
                 //tpl = tpl1 + tpl2 + '<div class="star favorite" id=' + idString + '-fav' + '></div>';
             } else {
-                tpl = tpl0 + '</br>' +'<button class="star" id=' + idString + '-fav' + '></button>' +tpl1+'</br>'+ '<span>' + tpl2 + tpl3 + '</span>';
+                //tpl = tpl0 + '</br>' + '<span>'+'<button class="star" id=' + idString + '-fav' + '></button>' +tpl1+'</span>'+'</br>'+ '<span>' + tpl2 + tpl3 + '</span>';
 
-               // tpl = tpl0 + '</br>'  + '<button class="star" id=' + idString + '-fav' + '></button>' + tpl1 + '</br>' + tpl2 + tpl3 ;
+                tpl = tpl0 + '</br>'  + '<button class="star" id=' + idString + '-fav' + '></button>' + tpl1 + '</br>' + tpl2 + tpl3 ;
                 //tpl = tpl1 + tpl2 + '<div class="star" id=' + idString + '-fav' + '></div>';
             }
 
