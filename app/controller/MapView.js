@@ -50,7 +50,7 @@ Ext.define('EasyTreatyApp.controller.MapView', {
             console.log("decoded...");
             console.log(location);
             locationStore.addFavoriteItem(location);
-        })
+        });
 
     },
 
@@ -208,6 +208,7 @@ Ext.define('EasyTreatyApp.controller.MapView', {
     },
 
     onChoice: function (choice) {
+        console.log("inside on choice");
         var mapview = this.getMapView();
         var locationmap =mapview.getLocationMap();
         var base = locationmap.getBaseLocation();

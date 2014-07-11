@@ -25,10 +25,13 @@ Ext.define('EasyTreatyApp.controller.Menu', {
     },
 
     onShowFavorites: function () {
+        console.log("on show favorites");
         var store = Ext.data.StoreManager.lookup('fav-store');
 
         store.load();
-        var locationStore = this.getMapView().getStore();
+
+        var mapview = this.getMapView();
+        var locationStore = mapview.getStore();
         locationStore.storeClear();
         var location;
         store.getRange().forEach(function (record) {
@@ -36,7 +39,11 @@ Ext.define('EasyTreatyApp.controller.Menu', {
             console.log("decoded...");
             console.log(location);
             locationStore.addFavoriteItem(location);
-        })
+        });
+
+        mapview.setActiveItem(1);
+        mapview.getSearchField().setHidden(true);
+        mapview.getSpecialtySelectField().setHidden(true);
 
     },
 
