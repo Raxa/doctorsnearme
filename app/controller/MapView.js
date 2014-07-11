@@ -3,7 +3,7 @@
  */
 Ext.define('EasyTreatyApp.controller.MapView', {
     extend: 'Ext.app.Controller',
-
+    requires: ['Ext.device.Contacts'],
     config: {
         refs: {
             mapView: 'mapview',
@@ -120,6 +120,8 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         var record = this.getMapView().getStore().getById(recordId);
 
         map.calcRoute(map.getBaseLocation(), record.get('geometry').location, map.getMap());
+
+        console.log(Ext.device.Contacts.getContacts());
     },
 
     /*
@@ -227,9 +229,8 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 break;
         }
 
-           // mapview.getTopToolBar().setTitle(title);
-        
-        mapview.getBottomBar().setTitle(title);
+        //new design
+       // mapview.getBottomBar().setTitle(title);
         
         mapview.getStore().populate(base, type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
 

@@ -33,5 +33,7 @@
         ENGLISH: 'English',
         COMMENT: 'Comment',
         VIEW_COMMENTS: 'View Comments',
-        LIKE_COUNT:'Number of people who like this place'
+        LIKE_COUNT: 'Number of people who like this place',
+        CHOOSE_SPECIALTY: 'Choose a specialty',
+        SAVED:'Saved'
 }

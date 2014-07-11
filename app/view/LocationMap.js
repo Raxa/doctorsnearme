@@ -41,13 +41,15 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             element: 'element',
             delegate: 'button.direction',
             tap: function (event, node, options, eOpts) {
+                console.log("get directions");
                 me.fireEvent('getdirections', me, node.id);
             }
         });
 
         this.addListener({
             element: 'element',
-            delegate: 'button.more-details',
+            //delegate: 'button.more-details',
+            delegate: 'img.more-details',
             tap: function (event, node, options, eOpts) {
                 me.fireEvent('moredetails', me, node.id);
             }
@@ -70,6 +72,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
                 }                               
             }
         });
+        
 
     },
     onStoreClear: function(){
@@ -79,11 +82,12 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
     },
 
     onLocationAddition: function (type) {
-        var markerImg = 'redmarker.png';
+        // var markerImg = 'redmarker.png';
+        var markerImg = 'Medical centers.png';
         switch (type) {
-            case 1: markerImg = 'greenmarker.png'
+            case 1: markerImg = 'Doctors.png'
                 break;
-            case 2: markerImg = 'yellowmarker.png'
+            case 2: markerImg = 'Pharmacies.png'
                 break;
         }
         console.log("oh yeah location added!!!! ");
@@ -152,35 +156,47 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         google.maps.event.addListener(marker, 'click', function (pos) {
             lang = EasyTreatyApp.config.getLanguage();
 
-            tpl0 = name + '</br>' + address;
-            tpl1 = '<button class="more-details" id=' + idString + '>' + lang.MORE_DETAILS + '</button>';
-            tpl2 = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/arrow4.png">    ' + lang.GET_DIRECTIONS + '</button>';
 
-            if (phoneNumber != null) {
-                tpl3 = '<button class="call" type="button"><img class="call-img" src = "resources/icons/phone.png"><a href="tel:' + phoneNumber + '">    Call</a></button>';// + phoneNumber;
-               // tpl2 = '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>';
-            }
-
+            var userimg = '<img class="user-img" src="test.png">';
             
-            if (location.isFavorite) {
-               // tpl = tpl0 + '</br>' + '<span>' + '<button class="star favorite" id=' + idString + '-fav' + '></button>' + tpl1 + '</span>'+'</br>' + '<span>' + tpl2 + tpl3 + '</span>'
-
-                tpl = tpl0 + '</br>' + '<div style="padding:0px 0px;margin:0">' + '<button class="star favorite" id=' + idString + '-fav' + '></button>' + tpl1 + '</div>' + '</br>' + tpl2 + tpl3;
-                //tpl = tpl1 + tpl2 + '<div class="star favorite" id=' + idString + '-fav' + '></div>';
-            } else {
-                //tpl = tpl0 + '</br>' + '<span>'+'<button class="star" id=' + idString + '-fav' + '></button>' +tpl1+'</span>'+'</br>'+ '<span>' + tpl2 + tpl3 + '</span>';
-
-                tpl = tpl0 + '</br>'  + '<button class="star" id=' + idString + '-fav' + '></button>' + tpl1 + '</br>' + tpl2 + tpl3 ;
-                //tpl = tpl1 + tpl2 + '<div class="star" id=' + idString + '-fav' + '></div>';
+            var moredetails = '<img class="more-details" id =' + idString + ' src = "resources/icons/i_30_30.png">';
+            var like = '<img class="like-img" src = "resources/icons/Tellafriend.png">';
+            var doctorname = '<div>' + '<p style="padding:2px;word-wrap:break-word;">' + name + '</p>' + moredetails + like + '</div>';
+            var call ="";
+            if (phoneNumber != null) {
+                call = '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="call"><a href="tel:' + phoneNumber + '">Call</a></button>';
             }
+            var directions = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
 
             var infowindow = new google.maps.InfoWindow();
 
-            //var infowindow = new InfoBox();
-            //infowindow.setContent('<div class="info-window">' + tpl + '</div>')
-            infowindow.setContent('<div>' + tpl + '</div>')
-            infowindow.open(me.getMap(), marker);
+            var tpl = '<table><tr><td>' + userimg +'</td><td>'+ doctorname + '</td></tr></table>'+'<table><tr><td>'+call+'</td>'+'<td>'+directions+'</td>'+'</tr>'+'</table>';
+           
+            infowindow.setContent(tpl);
+             infowindow.open(me.getMap(), marker);
+
+           /* var infoBubble2 = new InfoBubble({
+                map: me.getMap(),
+                content: tpl,
+                position: marker.position,
+                shadowStyle: 1,
+                padding: 0,
+                backgroundColor: 'white',
+                borderRadius: 0,
+                arrowSize: 0,
+                borderWidth: 1,
+                borderColor: 'white',
+                disableAutoPan: true,
+                hideCloseButton: true,
+                arrowPosition: 50,
+                backgroundClassName: 'phoney',
+                arrowStyle: 2,
+                maxWidth:300
+            });
+            infoBubble2.open();*/
         });
+        
+        
         this.getLocationMarkers().push(marker);
     },
 

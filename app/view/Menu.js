@@ -35,7 +35,12 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     hidden: true,
                     padding: '5 0 5 0',
                     ui: 'menu',
-                },                                              
+                },
+                {
+                    //saved
+                    ui: 'menu',
+                    padding: '5 0 5 0'
+                },
                 {
                     xtype: 'radiofield',
                     name: 'search',
@@ -105,15 +110,17 @@ Ext.define('EasyTreatyApp.view.Menu', {
         var lang = EasyTreatyApp.config.getLanguage();
         this.getProfileButton().setText(lang.HEALTH_PROFILE);
 
+        this.getSavedButton().setText('<img class="menu-heart" src = "resources/icons/Heart_40_40.png" width=20px height=20px align=left>' + lang.SAVED);
+
         this.getAboutButton().setText(lang.ABOUT);
 
         this.getDistanceSelectField().setLabel(lang.DISTANCE);
 
         this.getLanguageSelectField().setLabel(lang.LANGUAGE);
 
-        this.getHospitalField().setLabel('<img src = "resources/icons/Medical centers.png" width=35px height=35px aligh=top>'+lang.MEDICAL_CENTERS);
-        this.getDoctorField().setLabel('<img src = "resources/icons/Doctors.png" width=35px height=35px aligh=top>'+lang.DOCTORS);
-        this.getPharmacyField().setLabel('<img src = "resources/icons/Pharmacies.png" width=35px height=35px aligh=top>'+lang.PHARMACIES);
+        this.getHospitalField().setLabel('<img src = "resources/icons/Medical centers.png" width=35px height=35px align=top>'+lang.MEDICAL_CENTERS);
+        this.getDoctorField().setLabel('<img src = "resources/icons/Doctors.png" width=35px height=35px align=top>'+lang.DOCTORS);
+        this.getPharmacyField().setLabel('<img src = "resources/icons/Pharmacies.png" width=35px height=35px align=top>'+lang.PHARMACIES);
 
         if (EasyTreatyApp.config.getLoggedIn()) {
             this.getLogInButton().setText(lang.LOG_OUT);
@@ -157,6 +164,10 @@ Ext.define('EasyTreatyApp.view.Menu', {
             me.fireEvent('showprofile');
         });
 
+        this.getSavedButton().on('tap', function (button, e, eOpts) {
+            me.fireEvent('showfavorites');
+        });
+
         this.getLogInButton().on('tap', function (button, e, eOpts) {
             if (!EasyTreatyApp.config.getLoggedIn()) {
                 me.toggle();
@@ -185,41 +196,42 @@ Ext.define('EasyTreatyApp.view.Menu', {
             Ext.Msg.alert("About Easy Treaty", "version 1.0");
         });
 
-        this.getHospitalField().on('change', function (selectField, newValue, oldValue, eOpts) {
-            if (newValue) {
-                me.fireEvent('choice', 0);
-            }
+        //this.getHospitalField().on('change', function (selectField, newValue, oldValue, eOpts) {
+        //    if (newValue) {
+        //        me.fireEvent('choice', 0);
+        //    }
             
-            console.log(newValue);
-        });
+        //    console.log(newValue);
+        //});
 
-        this.getDoctorField().on('change', function (selectField, newValue, oldValue, eOpts) {
-            if (newValue) {
-                me.fireEvent('choice', 1);
-            }
-            console.log(newValue);
-        });
+        //this.getDoctorField().on('change', function (selectField, newValue, oldValue, eOpts) {
+        //    if (newValue) {
+        //        me.fireEvent('choice', 1);
+        //    }
+        //    console.log(newValue);
+        //});
 
-        this.getPharmacyField().on('change', function (selectField, newValue, oldValue, eOpts) {
-            if (newValue) {
-                me.fireEvent('choice', 2);
-            }
+        //this.getPharmacyField().on('change', function (selectField, newValue, oldValue, eOpts) {
+        //    if (newValue) {
+        //        me.fireEvent('choice', 2);
+        //    }
 
-            console.log(newValue);
-        });
+        //    console.log(newValue);
+        //});
+
 
     },
     
     getLanguageSelectField: function(){
-        return this.getComponent(6);
+        return this.getComponent(7);
     },
 
     getDistaceField: function () {
-        return this.getComponent(5);
+        return this.getComponent(6);
     },
 
     getDistanceSelectField: function(){
-        return this.getComponent(4);
+        return this.getComponent(5);
     },
 
     /**
@@ -229,7 +241,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
      * @return {Button}
     */
     getAboutButton: function () {
-        return this.getComponent(8);
+        return this.getComponent(9);
     },
     
     /**
@@ -239,7 +251,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
      * @return {Button}
     */
     getLogInButton: function() {
-        return this.getComponent(7);
+        return this.getComponent(8);
     },
     
     
@@ -251,6 +263,10 @@ Ext.define('EasyTreatyApp.view.Menu', {
     */
     getProfileButton: function () {
         return this.getComponent(0);
+    },
+
+    getSavedButton: function(){
+        return this.getComponent(1);
     },
     /**
      * Executed at log out
@@ -325,15 +341,15 @@ Ext.define('EasyTreatyApp.view.Menu', {
     },
 
     getHospitalField: function () {
-        return this.getComponent(2);
+        return this.getComponent(3);
     },
 
     getDoctorField: function () {
-        return this.getComponent(1);
+        return this.getComponent(2);
     },
 
     getPharmacyField: function () {
-        return this.getComponent(3);
+        return this.getComponent(4);
     }
 
 });

@@ -31,15 +31,16 @@ Sencha Cmd v4.0.4.84
 [DBG] Scanning for plugins in folder: C:\Users\TOSHIBA\bin\Sencha\Cmd\4.0.4.84\extensions\cmd-phonegap-packager
 [DBG] Loading plugin: C:\Users\TOSHIBA\bin\Sencha\Cmd\4.0.4.84\extensions\cmd-phonegap-packager\cmd-phonegap-packager.plugin.xml
 [DBG] Scanning for plugins in folder: C:\Users\TOSHIBA\bin\Sencha\Cmd\4.0.4.84\extensions\sencha-compass
-[DBG] using path C:\Users\TOSHIBA\bin\Sencha\Cmd\4.0.4.84\stbuild;C:\Users\TOSHIBA\bin\Sencha\Cmd\4.0.4.84\stbuild\bin;C:\Users\TOSHIBA\bin\Sencha\Cmd\4.0.4.84;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Toshiba\Bluetooth Toshiba Stack\sys\;C:\Program Files (x86)\Toshiba\Bluetooth Toshiba Stack\sys\x64\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\nodejs\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Users\TOSHIBA\AppData\Roaming\npm;C:\Ruby193\bin;C:\Program Files\Java\jdk1.8.0_05\
+[DBG] using path C:\Users\TOSHIBA\bin\Sencha\Cmd\4.0.4.84\stbuild;C:\Users\TOSHIBA\bin\Sencha\Cmd\4.0.4.84\stbuild\bin;C:\Users\TOSHIBA\bin\Sencha\Cmd\4.0.4.84;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Toshiba\Bluetooth Toshiba Stack\sys\;C:\Program Files (x86)\Toshiba\Bluetooth Toshiba Stack\sys\x64\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files\nodejs\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Users\TOSHIBA\AppData\Roaming\npm;C:\Ruby193\bin;C:\Program Files\Java\jdk1.8.0_05\;C:\Users\TOSHIBA\Documents\Development\adt-bundle-windows-x86_64-20131030\sdk\platform-tools
 [DBG] executable located at C:\Users\TOSHIBA\bin\Sencha\Cmd\4.0.4.84\stbuild\stbuild.exe
 [DBG] using working directory .
+A subdirectory or file C:\Users\TOSHIBA\Desktop\iosbuild1\Doctors Near Me.app\ already exists.
 Debug: Application name is: Doctors Near Me
 Debug: Application bundle name is: Doctors Near Me.app
 Debug: Application ID: com.raxa.DoctorsNearMe
 Debug: Platform: iOS
 Debug: Device type: Universal
-Debug: Output path: C:/Users/TOSHIBA/Desktop/buildtest\
+Debug: Output path: C:/Users/TOSHIBA/Desktop/iosbuild1\
 Debug: Webapp path: ./\
 Debug: Version: 1.0
 Debug: Raw config: 
@@ -49,6 +50,37 @@ Debug: Building for configuration: Debug
 Debug: Cleaning up previously built products
 Debug: Copying application template to output directory
 Debug: Copy web application into native shell
-[DBG] exit code was : -1073741510
-[DBG] exit code was : -1073741510
+Debug: Checking if provision profile specified in json configuration
+Debug: Copying provision profile into native shell
+Debug: Copy application entitlements template
+Debug: Composing application entitlements
+Debug: Copy application info.plist template
+Debug: Composing info.plist
+Debug: icon array size: 4
+Debug: Writing info.plist into native shell
+Debug: Move splash screens to the top level
+Debug: Move iTunesArtwork to the top level
+Debug: Move icons to the top level
+The application was successfully packaged
+Debug: Signing final application
+Debug: Signing app at C:/Users/TOSHIBA/Desktop/iosbuild1\Doctors Near Me.app with certificate at ../certificates/RaxaDevCertificates.p12, using password: "RaxaCare123"
+Entitlements: <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>application-identifier</key>
+	<string>85YL7Q6854.com.raxa.DoctorsNearMe</string>
+	<key>get-task-allow</key>
+	<true/>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>85YL7Q6854.*</string>
+	</array>
+</dict>
+</plist>
+
+Debug: Removing temporary entitlements file
+The application was successfully signed
+[DBG] exit code was : 0
+[DBG] exit code was : 0
 

@@ -18,12 +18,30 @@ Ext.define('EasyTreatyApp.controller.Menu', {
                 showprofile: "onShowProfile",
                 searchradiuschange: "onSearchRadiusChange",
                 specialtychange: "onSpecialtyChange",
-                choice:"onChoice"
+                choice: "onChoice",
+                showfavorites: "onShowFavorites",
             }
         }
-    }, 
+    },
 
-    onChoice: function(choice){
+    onShowFavorites: function () {
+        var store = Ext.data.StoreManager.lookup('fav-store');
+
+        store.load();
+        var locationStore = this.getMapView().getStore();
+        locationStore.storeClear();
+        var location;
+        store.getRange().forEach(function (record) {
+            location = Ext.JSON.decode(record.get('query'));
+            console.log("decoded...");
+            console.log(location);
+            locationStore.addFavoriteItem(location);
+        })
+
+    },
+
+    onChoice: function (choice) {
+        console.log("inside onchoice menu controller");
         this.getMapView().setCurrentSearch(choice);
     },
 
