@@ -21,13 +21,23 @@ Ext.define('EasyTreatyApp.controller.MapView', {
               //  togglemaplist: "onMapListToggle",
                 togglefavorite: "onFavoriteToggle",
                 showfavorites: "onShowFavorites",
-                basechanged: "onBaseChange"
+                basechanged: "onBaseChange",
+                backtomap:"onBackToMap"
             },
             detailsView: {
                 togglefavorite: "onFavoriteToggle"
             }
         }
         
+    },
+
+    onBackToMap: function () {
+        var mapview = this.getMapView();
+
+        mapview.getSearchField().setHidden(false);
+        mapview.getSpecialtySelectField().setHidden(false);
+
+        mapview.setActiveItem(0);
     },
 
     onBaseChange: function(){

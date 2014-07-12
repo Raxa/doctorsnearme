@@ -103,7 +103,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
     },
 
     addSpecialtyMenu: function(){
-
+        var me = this;
         var specStore = Ext.create('EasyTreatyApp.store.Specialization')
         this.add({
             xtype: 'multiselectfield',
@@ -181,98 +181,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
         });
     },
 
-    /**
-     * Add the two toolbars 
-     * @method
-     * @private
-    */
-    addToolBar: function() {
-        var me = this;
 
-        var toolbar = Ext.create('Ext.Toolbar', {
-            docked: 'top',
-            items: [
-                {
-                    iconCls: 'list',
-                    margin: '5 5 5 5',
-                    docked:'right',
-                    handler: function() {
-                        me.fireEvent('showmenu');
-                    }
-                }
-                 
-                
-            ]
-        });
-
-       // toolbar.setTitle(this.getToolbarTitle());
-
-        this.add(toolbar);
-
-        this.getSpecialtySelectField().setStore(Ext.create('EasyTreatyApp.store.Specialization'));
-
-        var specialtyArray;
-        this.getSpecialtySelectField().on('change', function (selectField, newValue, oldValue, eOpts) {
-            console.log("spec change");
-            console.log(newValue.length);
-            console.log(newValue);
-            specialtyArray = [];
-            Ext.Array.forEach(newValue, function (itemArray) {
-                Ext.Array.forEach(itemArray, function (keyword) {
-                    specialtyArray.push(keyword);
-                });
-            });
-            
-            me.setSpecialties(specialtyArray);
-            console.log(specialtyArray);
-        });
-
-        var bottombar = Ext.create('Ext.Toolbar', {
-            docked: 'bottom',
-           // cls: 'toolbar-style',
-            items: [{
-                xtype: 'button',
-                docked: 'right',
-                margin: '15 5 5 5',
-                handler: function () {
-                    var lang = EasyTreatyApp.config.getLanguage();
-                    switch (me.indexOf(me.getActiveItem())) {
-                        case 0: me.setActiveItem(1);
-                            this.setText(lang.MAP);
-                            break;
-
-                        case 1: me.setActiveItem(0);
-                            this.setText(lang.LIST);
-                            break;
-                    }
-
-
-                }
-            },
-                {
-                    iconCls: 'locate',
-                    docked: 'left',
-                    margin: '15 5 5 5',
-                    handler: function () {
-                        me.resetLocation();
-                    },
-
-                },
-            {
-                iconCls: 'favorites',
-                margin: '10 5 5 5',
-            handler: function () {
-                me.fireEvent('showfavorites');
-            }
-        },]
-        });
-        this.add(bottombar);
-       
-    },
-
-    getBottomBar: function(){
-        return this.getComponent(3);
-    },
 
     getSearchField:function(){
         return this.down('searchfield');
@@ -283,14 +192,6 @@ Ext.define('EasyTreatyApp.view.MapView', {
         //return this.getTopToolBar().getComponent(1);
         // return this.getComponent(2);
         return this.down('multiselectfield');
-    },
-    /**
-     * Returns the top tool bar
-     * @method
-     * @return {Toolbar}
-    */
-    getTopToolBar: function () {
-        return this.down('toolbar');
     },
 
 

@@ -39,7 +39,9 @@ Ext.define('EasyTreatyApp.view.ListView', {
     /*
     * Initialize
     */
-    initialize: function() {
+    initialize: function () {
+        this.enableBubble(['backtomap']);
+
         this.callParent();
         this.setTemplate();
         var me = this;
@@ -48,6 +50,8 @@ Ext.define('EasyTreatyApp.view.ListView', {
                itemsingletap: this.onItemTap,
                scope: this,
            });
+
+        this.addToolBar();
 
     },
 
@@ -85,6 +89,28 @@ Ext.define('EasyTreatyApp.view.ListView', {
         console.log("item select");
         this.parent.fireEvent('itemselected', record);
         //this.getItemList().setData(null);
+    },
+
+    addToolBar: function () {
+        var lang = EasyTreatyApp.config.getLanguage();
+        var me = this;
+        var toolbar = Ext.create('Ext.Toolbar', {
+            docked: 'top',
+            items: [
+                {
+                    xtype: 'button',
+                    ui: 'back',
+                    handler: function () {
+                        me.fireEvent("backtomap");
+                    }
+                }
+            ]
+        });
+
+        toolbar.setTitle(lang.SAVED);
+
+        this.add(toolbar);
+        
     }
 
 
