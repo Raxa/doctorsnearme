@@ -57,18 +57,20 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
         this.addListener({
             element: 'element',
-            delegate: 'button.star',
+            delegate: 'button.like-img',
             //delegate: 'div.star',
             tap: function (event, node, options, eOpts) {
                 var button = Ext.get(node.id);
 
-                if (button.hasCls('favorite')) {
-                    button.removeCls("favorite");
-                    me.fireEvent('togglefavorite', node.id.slice(0,-4),false);
+                if (button.hasCls('like')) {
+                    button.removeCls("like");
+                    button.addCls("dislike");
+                   // me.fireEvent('togglefavorite', node.id.slice(0,-4),false);
                 }
                 else {
-                    button.addCls("favorite");
-                    me.fireEvent('togglefavorite',node.id.slice(0,-4), true);
+                    button.removeCls("dislike");
+                    button.addCls("like");
+                  //  me.fireEvent('togglefavorite',node.id.slice(0,-4), true);
                 }                               
             }
         });
@@ -160,7 +162,8 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             var userimg = '<img class="user-img" src="test.png">';
             
             var moredetails = '<img class="more-details" id =' + idString + ' src = "resources/icons/i_30_30.png">';
-            var like = '<img class="like-img" src = "resources/icons/Tellafriend.png">';
+            // var like = '<img class="like-img like-in-map" id=like-'+idString+' src = "resources/icons/Tellafriend.png">';
+            var like = '<button class="like-img like" id=like-' + idString + '>';
             var doctorname = '<div>' + '<p style="padding:2px;word-wrap:break-word;">' + name + '</p>' + moredetails + like + '</div>';
             var call ="";
             if (phoneNumber != null) {

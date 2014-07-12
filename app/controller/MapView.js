@@ -148,24 +148,23 @@ Ext.define('EasyTreatyApp.controller.MapView', {
             detailsView.setData(record.getData());
         }
 
-        //detailsView.setData(record.getData());
+        // AFTER NEW DESIGN
+        //var favoriteButton = detailsView.getFavoriteButton();
+        //if (detailsView.getData().isFavorite) {
+        //    favoriteButton.setIconCls('color-star');
+        //}
+        //else {
+        //    favoriteButton.setIconCls('star');
+        //}
 
-        var favoriteButton = detailsView.getFavoriteButton();
-        if (detailsView.getData().isFavorite) {
-            favoriteButton.setIconCls('color-star');
-        }
-        else {
-            favoriteButton.setIconCls('star');
-        }
-
-        var loggedIn = EasyTreatyApp.config.getLoggedIn();
+        //var loggedIn = EasyTreatyApp.config.getLoggedIn();
         
-        detailsView.toggleLikeComment(!loggedIn);
+        //detailsView.toggleLikeComment(!loggedIn);
 
-        if(loggedIn){
-            this.checkLiked(detailsView,record);
-        }
-        detailsView.getLikeCount(detailsView.getData().id);
+        //if(loggedIn){
+        //    this.checkLiked(detailsView,record);
+        //}
+        //detailsView.getLikeCount(detailsView.getData().id);
 
         Ext.Viewport.add(detailsView);
         Ext.Viewport.setActiveItem(detailsView);

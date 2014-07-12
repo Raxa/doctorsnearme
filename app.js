@@ -24,9 +24,9 @@ Ext.application({
     
     controllers:['MapView','DetailsView','Menu','Login','Language'],
     
-    stores: ['Location','Memory'],
+    stores: ['Location','Memory','Comment'],
     
-    models: ['Location','Memory'],
+    models: ['Location','Memory','Comment'],
 
     icon: {
         '57': 'resources/icons/Icon.png',

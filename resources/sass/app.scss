@@ -43,6 +43,23 @@ $list-active-color:#157efb;
 	   color:#157efb ; 
 }
 
+//to make the comment field border radius zero
+.x-field-input{
+	border-radius:0;
+}
+
+//to remove the padding in details view
+.x-inner{
+	padding:0;
+}
+
+//.x-list .x-list-item{
+	//color:grey;
+//}
+
+.x-title{
+	color:#0d66f2;
+}
 
 .profile
 {
@@ -50,7 +67,10 @@ $list-active-color:#157efb;
 	font-size: 15px;
 	text-align: left;
 	border-collapse: collapse;
-	background-color: #157efb;
+	//background-color: #157efb;
+	background-color:white;
+
+	.x
 		th
 	{
 		font-size: 20px;
@@ -86,28 +106,11 @@ $list-active-color:#157efb;
 		}
 	}
 
-	.option-list{
+	.pro-list{
 		background-color: #157efb;
 		color:white;
 	}
 
-	.like{
-		background-image:url('images/like.png');
-		height:20px;
-		width:40px;
-		background-size: 20px 20px;
-		background-repeat: no-repeat;
-		background-position: center;
-	}
-
-	.unlike{
-		background-image:url('images/unlike.png');
-		height:20px;
-		width:40px;
-		background-size: 20px 20px;
-		background-repeat: no-repeat;
-		background-position: center;
-	}
 
 
 }
@@ -209,12 +212,33 @@ border:1px solid #157efb;
 }
 
 .like-img{
-	vertical-align:middle;
-	height: 20px;
-	width:20px;
-	padding:2px;
+	//vertical-align:middle;
+	//height: 20px;
+	//width:20px;
+	//padding:2px;
 }
 
+.like{
+	background-image:url('images/Tellafriend.png');
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	height:30px;
+	width:30px;
+	border:0;
+	background-color:white
+}
+
+.dislike{
+	background-image:url('images/dislike.png');
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	height:30px;
+	width:30px;
+	border:0;
+	background-color:white
+}
 
 .call{
 	vertical-align:middle;

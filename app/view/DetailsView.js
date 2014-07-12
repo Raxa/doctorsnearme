@@ -8,281 +8,225 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
     
     config:
    {
-       layout: 'fit',
+       layout: 'vbox',
        styleHtmlContent: true,
        store: null,
        data: null,
        cls: 'profile',
        border: 3,
-       style: 'border-color: gray; border-style: solid;',
+       style: 'border-color: gray; border-style: solid;background-color:#d3d3d3;',
+       scrollable:true,
        commentsVisible: false,
        liked: false,
+       //after new design
+       commentsStore:null,
 
-       items: [{
-           xtype: 'toolbar',
-           docked: 'top',
-           items: [
-               {
-                   xtype: 'button',
-                 //  text: 'Back',
-                   docked: 'right',
-                   margin: '5 5 5 5'
-               },
-               {
-                   // iconCls: 'star',
-                   iconCls: 'detail-view-star',
-                   docked: 'left',
-                   margin: '5 5 5 5'
-               },
-               {
-                   xtype: 'button',
-                   cls: 'like',
-                   docked: 'right',
-                   margin: '5 5 5 5'
-                   //hidden: true,
-                   //disabled:true
-               },
-               {
-                   xtype: 'button',
-                   text: 'View Comments',
-                   docked: 'right',
-                   margin: '5 5 5 5'
-                   //mode:'VIEW'
-               }
-           ]
-       },
-       {
-           xtype:'container',
-           layout: 'vbox',          
-           docked: 'bottom',
-          // hidden: true,          
-           items: [
-               {
-                   xtype: 'textareafield',
-                   placeHolder: 'Comment...',
-                   maxRows: 4,
-                   name: 'comment'
-               },
-               {
-                   xtype: 'button',
-                   text: 'Comment',
-                   bubbleEvents:'tap'
-               }
-           ]
-       },
+       items: [
+           {
+               xtype: 'toolbar',
+               docked: 'top',
+               style: 'border:2px solid #0d66f2;border-radius:0;',
+               items: [
+                   {
+                       xtype: 'button',
+                       //  text: 'Back',
+                       ui:'back'
+                   }
+               ]
+           },
+           {
+               xtype: 'container',
+               layout: 'hbox',
+               height: 100,
+               padding: 0,
+               //margin: 0,
+               style: 'background-color:white;margin:8px 0 0 0;',
+               items: [
+                   {
+                       xtype: 'image',
+                       height: '100%',
+                       width: 50,
+                       centered:true,
+                       src: 'resources/icons/empty.png'
+                   },
+                   //{
+                   //    xtype: 'button',
+                   //    docked: 'right',
+                   //    height: '100%',
+                   //    text: '<img src = "resources/icons/forward.png" width="25">',
+                   //    style: 'background:gray;border:1px solid #d3d3d3;border-radius:0;'
+                   //},
+                   {
+                       xtype: 'image',
+                       docked:'right',
+                       height: '100%',
+                       width: 40,
+                       margin:5,
+                       centered: true,
+                       src: 'resources/icons/forward.png'
+                   }
+               ]
+           },
+           {
+               xtype: 'container',
+               layout: 'fit',
+               data: {},
+               style: 'background-color:white;padding:20px;border:1px solid #d3d3d3;border-radius:0',
+               tpl: '{name}<br>{formatted_address}'
+           },
+             {
+                 xtype: 'toolbar',
+                 // top: '50%',
+                 //  height: '100%',
+                 height:80,
+                 width: '100%',
+                 style: 'border-top:1px solid #0d66f2;border-right:1px solid #0d66f2;border-bottom:1px solid #0d66f2;border-left:1px solid #0d66f2;border-radius:0;',
+              //   docked:'bottom',
+                 items: [
+                     {
+                         xtype: 'button',
+                         text: '<img src = "resources/icons/Phone_40_40.png" style="height:30px;width:30px;"></br>Call',
+                         width: '20%',
+                         height:'100%'
+                     },
+                     {
+                         xtype:'spacer',
+                         width:'6%'
+                     },
+                     {
+                         xtype: 'button',
+                         text: '<img src = "resources/icons/Arrow_40_40.png" style="height:30px;width:30px;"></br>Direct Me',
+                         width: '20%',
+                         height:'100%'
+                     },
+                     {
+                         xtype: 'spacer',
+                         width: '6%'
+                     },
+                     {
+                         xtype: 'button',
+                         text: '<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Save Me',
+                         width: '20%',
+                         height: '100%'
+                     },
+                     {
+                         xtype: 'spacer',
+                         width: '6%'
+                     },
+                     {
+                         xtype: 'button',
+                         cls: 'like',
+                         width: '20%'
+                     }
+                 ]
+             },
+        {
+            xtype: 'container',
+            layout: 'vbox',
+          //  docked: 'bottom',
+            // hidden: true,   
+            style: 'border-radius:0;margin:8px 0 8px 0;',
+            items: [
+                {
+                    xtype: 'textareafield',
+                    placeHolder: 'Comment...',
+                    maxRows: 4,
+                    name: 'comment',
+                    style:'border-radius:0;'
+                },
+                {
+                    xtype: 'button',
+                    text: 'Review',
+                    bubbleEvents: 'tap',
+                    style: 'border-radius:0;'
+                }
+            ]
+        },
+        {
+            xtype:'label',
+            html: 'Reviews',
+            style: 'font-size:20px;padding:10px;border-bottom:0;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;margin:8px 8px 0 8px;color:grey;background-color:white;',
+         //   height:20
+        },
        {
            xtype: 'container',
-           layout: 'vbox',
-           docked: 'bottom',
-           //flex:1,
-         //  scrollable:'vertical'
+           layout: 'fit',
+           //style: 'border:1px solid #d3d3d3;margin:8px auto auto auto;color:grey;',
+           style: 'border-top:0;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;margin:0 auto auto auto;color:grey;',
+           flex:1,
+           items: [
+              {
+                  xtype: 'list',
+                  itemTpl: '<p style="color:grey;">{timestamp}</br>{comment}<p>',
+                  style: 'margin-top:0px;margin-left:8px;margin-right:8px;'
+              }
+           ]
        }
        
        ]
 
    },
-    
-    constructor: function () {
-        var me = this;
-        var template = new Ext.XTemplate(
-            '<table>',
-             '<th colspan="2">{[this.getString("moreinfo")]}</th>',
-            '<tbody>',
-            '<tr>',
-            '<td>{[this.getString("name")]}&nbsp;:</td><td>{name}</td>',
-            '</tr>',
-            '<tr>',
-            '<td>{[this.getString("address")]}&nbsp;:</td><td>{formatted_address}</td>',
-            '</tr>',
-            '<tr>',
-            '<td>{[this.getString("phoneno")]}&nbsp;:</td><td>{international_phone_number}</td>',
-            '</tr>',
-            '<tr>',
-            '<td>{[this.getString("likecount")]}&nbsp;:</td><td>{likeCount}</td>',
-            '</tr>',
-            '</tbody>',
-            '</table>', {
 
-                getString: function (string) {
-                    var lang = EasyTreatyApp.config.getLanguage();
-                    switch (string) {
-                        case 'moreinfo': return lang.MORE_INFORMATION;
-                            break;
-
-                        case 'name': return lang.NAME;
-                            break;
-
-                        case 'address': return lang.ADDRESS;
-                            break;
-
-                        case 'phoneno': return lang.PHONE_NUMBER;
-                            break;
-
-                        case 'likecount': return lang.LIKE_COUNT;
-                            break;
-                    }
-                }
-            }
-        );
-        this.setTpl(template);
-        this.callParent(arguments);
-
-    },
-    
-    /**
-    * Initialize
-    * @method
-   */
-    initialize: function () {
-        var me = this;       
-
-        this.getBackButton().on('tap', function () {
-            me.fireEvent('back');
-        });
-
-        this.getFavoriteButton().on('tap', function () {
-            var isFavorite = false;
-            //if (this.getIconCls() == 'star') {
-            if (this.getIconCls() == 'detail-view-star') {
-                this.setIconCls('color-star')
-                isFavorite = true;
-            }
-            else {
-                //this.setIconCls('star');
-                this.setIconCls('detail-view-star');
-                isFavorite = false;
-            }
-            me.fireEvent('togglefavorite', me.getData().id, isFavorite);
-        });
-
-        var viewCommentsButton = this.getViewCommentsButton();
-        
-        var oldCommentsPanel = this.getOldCommentsPanel();
-        viewCommentsButton.on('tap', function () { 
-            me.fireEvent('showcomments', me);
-        });
-
-        var commentPanel = this.getCommentPanel();
-        
-        commentPanel.on('tap', function () {
-            me.fireEvent('comment', commentPanel.getComponent(0), me);
-        });
-
-        this.getLikeButton().on('tap', function () {
-            me.fireEvent('like',me.getData());
-        });
-
-        //this.getLikeCount(me.getData().id);
-
+    initialize: function(){
         this.callParent();
-       // this.getLikeCount(me.getData().id);
 
-        this.setLanguage();
-    },
+        this.getTopToolbar().setTitle('<p style="color:#0d66f2;">' + this.getData().name+'</p>');
 
-    addComment: function(comment){
-        this.getOldCommentsPanel().add({
-            xtype: 'textfield',
-            value: comment,
-            name: 'comment',
-            readOnly:true
+        this.setDetails();
+
+        var store = Ext.create('EasyTreatyApp.store.Comment');
+        var me=this;
+        store.on({
+            load: me.onStoreLoad,
+            scope:me
         })
+        store.setTheProxy(this.getData().id);
+
+        store.load();
+
+        this.setCommentsStore(store);      
+        
+
     },
 
-    getLikeCount: function (id) {
-        var me = this;
-        Ext.Ajax.request({
-            url: 'http://localhost:8888/getLikes',
-            method: 'GET',
-            params: {
-                location: id
-            },
-            success: function (response, opts) {
-                console.log("success");
-                console.log(response.responseText);
-                console.log(Ext.JSON.decode(response.responseText).data[0].likeCount);
-                //console.log(Ext.JSON.decode(response.responseText).data);
-                me.getData().likeCount = Ext.JSON.decode(response.responseText).data[0].likeCount;
-                me.setData(me.getData());                
-
-            },
-            failure: function (response, opts) {
-                console.log("failure");
-                console.log(response);
-            }
+    onStoreLoad: function(store){
+        store.each(function (record) {
+            console.log(record);
         });
+
+        this.getReviewContainer().getComponent(0).setData(this.collectData(store.getRange()));
     },
 
-    toggleLikeButtonState: function(value){
-       // this.getLikeButton().setDisabled(value);
-        ////////////
-        var likeButton = this.getLikeButton();
-        if (value) {
-            console.log("set class unlike");
-            likeButton.setCls('unlike');
-            this.setLiked(true);
-        }
-        else {
-            console.log("set class like");
-            likeButton.setCls('like');
-            this.setLiked(false);
-        }
+    collectData: function (records) {
+        var data = [];
+
+        Ext.each(records, function (record, index) {
+            data.push(record.data);
+        }, this);
+
+        return data;
     },
 
-    toggleLikeComment: function(value){
-        this.getLikeButton().setHidden(value);
-        this.getCommentPanel().setHidden(value);
-    },
- 
-    /**
-     * Returns the back button
-     * @method
-     * @private
-     * @return {Button} 
-     */
-    getBackButton: function () {
-        return this.getComponent(0).getComponent(0);
+    getTopToolbar: function () {
+        return this.getComponent(0);
     },
 
-    getFavoriteButton: function () {
-        return this.getComponent(0).getComponent(1);
-    },
-
-    getLikeButton: function () {
-        return this.getComponent(0).getComponent(2);
-    },
-
-    getViewCommentsButton:function(){
-        return this.getComponent(0).getComponent(3);
-    },
-
-    getCommentPanel: function(){
-        return this.getComponent(1);
-    },
-
-    getOldCommentsPanel: function(){
+    getDetailsContainer: function(){
         return this.getComponent(2);
     },
 
-    setLanguage: function () {
-        var lang = EasyTreatyApp.config.getLanguage();
-
-        this.getBackButton().setText(lang.BACK);
-        this.getCommentPanel().getComponent(1).setText(lang.COMMENT);
-        this.getViewCommentsButton().setText(lang.VIEW_COMMENTS);
-
+    getReviewContainer: function () {
+        console.log("review container");
+        return this.getComponent(6);
     },
 
-    refreshTemplate: function () {
-        var data = this.getData();
-        var tpl = this.getTpl();
-
-        this.setTpl(null);
-        this.setData(null);
-
-        this.setTpl(tpl);
-        this.setData(data);
+    setDetails: function () {
+        this.getDetailsContainer().setData(this.getData());
+      //  this.getDetailsContainer().setItemTpl('{name}<br>{formatted_address}');
     }
+
+
     
+   
 
 });

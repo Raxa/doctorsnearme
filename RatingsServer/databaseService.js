@@ -80,7 +80,8 @@ function getComments(response,data){
     console.log("location: "+locationId);
     var connection = connect();
 
-    var strQuery = "SELECT comment FROM comments WHERE location_id ='"+ locationId+"'";
+    //var strQuery = "SELECT comment FROM comments WHERE location_id ='"+ locationId+"'";
+    var strQuery = "SELECT timestamp,comment FROM comments WHERE location_id ='"+ locationId+"'";
 
     connection.query(strQuery, function(err, result){
         respond(err,response,result,"Successful");
