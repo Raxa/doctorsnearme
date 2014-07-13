@@ -129,37 +129,64 @@ $list-active-color:#157efb;
 }
 
 
-.login{
-	//background:url('images/blue2.jpg');
-	//background-color: rgb(8, 73, 118);
-	//background-color: #157efb;
-	background-color: white;
-	h1{
-		&.header{
-			padding: 10px;
-			text-align:center;
-			font-size:30px;
-			font-weight:bold;
-			color:#157efb;
-			//font-family:georgia;		
-		}
-	}
-
-.remember-me{
-	background: white;
-	font-weight:bold;
-	text-align:center;
-	color:#157efb;
-	border:1px solid #157efb;
+//new design login CSS
+.username-pwd{
+border:0;
+background-color:#FFCCFF;
+width:90%;
 }
 
-username-pwd{
-padding:0;
-border:1px solid #157efb;
+.signin-btn{
+background-color:#00CC66;
+border:0;border-radius:0;
+margin-left:5%;
+margin-right:5%;
+width:90%;
 }
 
-
+.signin-label{
+color:white;
 }
+
+.cancel-btn{
+border:0;
+background-color:#FFCCFF;
+margin-left:30%;
+margin-right:30%;
+}
+
+.cancel-label{
+color:black;
+margin-top:1%;
+}
+
+.signup-btn{
+background-color:#3366FF;
+border-radius:0;
+width:40%;
+margin-right:5%;
+margin-left:55%;
+margin-top:5%;
+color:white;
+}
+
+.signup-label{
+color:white;
+}
+
+.signin-fieldset-container{
+margin-left:30%;
+margin-top:5%;
+margin-left:5%;
+margin-right:5%;
+}
+
+.forgot-login{
+margin-left:50%;
+margin-top:1%;
+margin-bottom:2%;
+}
+//new design login CSS
 
 ////////////////////////
 
@@ -339,6 +366,7 @@ background-image:url('images/home.png');
 
 .menu{
 color:#157efb;
+
 }
 
 .menu-heart{
@@ -346,11 +374,27 @@ margin:4px;
 }
 
 .x-button-menu {
-//border:1px solid #C8C8C8 ;
 font-size: 1.1em;
 margin-top:5px;
 margin-bottom:5px;
 color:#157efb;
+border:0;
+}
+
+.menu-login{
+background-color:black;
+color:white;
+border:0;
+border-radius:0;
+margin-top:0
+}
+
+.name{
+color:black;
+backgorund-color:white;
+border:1px solid black;
+border-radius:0;
+margin:0;
 }
 
 

@@ -25,7 +25,9 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 backtomap:"onBackToMap"
             },
             detailsView: {
-                togglefavorite: "onFavoriteToggle"
+                togglefavorite: "onFavoriteToggle",
+                //after new design
+               // getdirections:""
             }
         }
         
@@ -142,11 +144,18 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         console.log(record);
         var detailsView = this.getDetailsView();
 
+        //if (detailsView == undefined) {
+        //    detailsView = Ext.create('EasyTreatyApp.view.DetailsView', { data: record.getData() });
+        //} else {
+        //    detailsView.setData(record.getData());
+        //}
+
         if (detailsView == undefined) {
-            detailsView = Ext.create('EasyTreatyApp.view.DetailsView', { data: record.getData() });
-        } else {
-            detailsView.setData(record.getData());
-        }
+            detailsView = Ext.create('EasyTreatyApp.view.DetailsView');
+        } 
+        detailsView.setData(record.getData());
+        
+
 
         // AFTER NEW DESIGN
         //var favoriteButton = detailsView.getFavoriteButton();

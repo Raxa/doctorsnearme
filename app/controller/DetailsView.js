@@ -164,9 +164,6 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
     backToMapView: function () {
             var mapview = this.getMapView();
             Ext.Viewport.setActiveItem(mapview);
-
-            var detailsView = this.getDetailsView();
-        
-            this.hideComments(detailsView);
+       
     }
 })

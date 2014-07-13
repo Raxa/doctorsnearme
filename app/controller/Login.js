@@ -133,11 +133,13 @@ Ext.define('EasyTreatyApp.controller.Login', {
         user.setData(loginResponse);
 
         EasyTreatyApp.config.setUser(user);
+        console.log(user);
 
         EasyTreatyApp.config.setUserName(values.userName);
         EasyTreatyApp.config.setPassword(values.password);
 
         this.getSideMenu().getProfileButton().doSetHidden(false);
+        this.getSideMenu().getProfileButton().setText(user.getData().display);
         this.getSideMenu().getLogInButton().setText(lang.LOG_OUT);
 
         var detailsView = this.getDetailsView();

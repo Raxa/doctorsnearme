@@ -22,7 +22,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
        commentsStore:null,
 
        items: [
-           {
+           {    //0
                xtype: 'toolbar',
                docked: 'top',
                style: 'border:2px solid #0d66f2;border-radius:0;',
@@ -30,11 +30,11 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                    {
                        xtype: 'button',
                        //  text: 'Back',
-                       ui:'back'
+                       ui: 'back'
                    }
                ]
            },
-           {
+           {    //1
                xtype: 'container',
                layout: 'hbox',
                height: 100,
@@ -49,13 +49,6 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                        centered:true,
                        src: 'resources/icons/empty.png'
                    },
-                   //{
-                   //    xtype: 'button',
-                   //    docked: 'right',
-                   //    height: '100%',
-                   //    text: '<img src = "resources/icons/forward.png" width="25">',
-                   //    style: 'background:gray;border:1px solid #d3d3d3;border-radius:0;'
-                   //},
                    {
                        xtype: 'image',
                        docked:'right',
@@ -67,14 +60,14 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                    }
                ]
            },
-           {
+           {    //2
                xtype: 'container',
                layout: 'fit',
                data: {},
                style: 'background-color:white;padding:20px;border:1px solid #d3d3d3;border-radius:0',
                tpl: '{name}<br>{formatted_address}'
            },
-             {
+             {  //3
                  xtype: 'toolbar',
                  // top: '50%',
                  //  height: '100%',
@@ -85,7 +78,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                  items: [
                      {
                          xtype: 'button',
-                         text: '<img src = "resources/icons/Phone_40_40.png" style="height:30px;width:30px;"></br>Call',
+                       //  text: '<div><img src = "resources/icons/Phone_40_40.png" style="height:30px;width:30px;"></br><a href="tel:' + phoneNumber + '"></div>',
                          width: '20%',
                          height:'100%'
                      },
@@ -120,7 +113,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                      }
                  ]
              },
-        {
+        {   //4
             xtype: 'container',
             layout: 'vbox',
           //  docked: 'bottom',
@@ -142,13 +135,13 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                 }
             ]
         },
-        {
+        {   //5
             xtype:'label',
             html: 'Reviews',
             style: 'font-size:20px;padding:10px;border-bottom:0;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;margin:8px 8px 0 8px;color:grey;background-color:white;',
          //   height:20
         },
-       {
+       {    //6
            xtype: 'container',
            layout: 'fit',
            //style: 'border:1px solid #d3d3d3;margin:8px auto auto auto;color:grey;',
@@ -170,31 +163,60 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
     initialize: function(){
         this.callParent();
 
-        this.getTopToolbar().setTitle('<p style="color:#0d66f2;">' + this.getData().name+'</p>');
+        //this.getTopToolbar().setTitle('<p style="color:#0d66f2;">' + this.getData().name+'</p>');
 
-        this.setDetails();
+       // this.setDetails();
 
         var store = Ext.create('EasyTreatyApp.store.Comment');
         var me=this;
         store.on({
             load: me.onStoreLoad,
-            scope:me
-        })
+            scope: me
+        });
+
+        // this.setCommentsStore(store);
+
+        this.getReviewList().setStore(store);
+        
+        this.setHandlers();
+
+        
+    },
+
+    //either when creating details view for the first time or not
+    onSwitchingToDetailsView: function () {
+        //var store = this.getCommentsStore();
+        var store = this.getReviewList().getStore();
         store.setTheProxy(this.getData().id);
 
+       // this.getReviewContainer().setMasked(true);
         store.load();
 
-        this.setCommentsStore(store);      
-        
+        var phoneno = this.getData().international_phone_number;
+        var callButton = this.getCallButton();
+        this.getCallButton().setText('<div><img src = "resources/icons/Phone_40_40.png" style="height:30px;width:30px;"></br><a href="tel:' + phoneno + '">Call</div>');
+
+        if (phoneno == null) {
+            callButton.setDisabled(true);
+        }
+        else {
+            callButton.setDisabled(false);
+        }
 
     },
 
-    onStoreLoad: function(store){
+    onStoreLoad: function (store) {
+        console.log("on store load");
+      //  this.getReviewContainer().setMasked(false);
         store.each(function (record) {
             console.log(record);
         });
 
-        this.getReviewContainer().getComponent(0).setData(this.collectData(store.getRange()));
+       // var data = this.collectData(store.getRange());
+        var reviewlist = this.getReviewList();
+     //   reviewlist.setData(data);
+        reviewlist.refresh();
+        
     },
 
     collectData: function (records) {
@@ -211,6 +233,30 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         return this.getComponent(0);
     },
 
+    getMiddleToolbar: function(){
+        return this.getComponent(3);
+    },
+
+    getCallButton: function(){
+        return this.getMiddleToolbar().getComponent(0);
+    },
+
+    getDirectionButton: function(){
+        return this.getMiddleToolbar().getComponent(1);
+    },
+
+    getSaveButton: function(){
+        return thie.getMiddleToolbar().getComponent(2);
+    },
+
+    getLikeButton: function(){
+        return this.getMiddleToolbar().getComponent(3);
+    },
+
+    getBackButton: function(){
+        return this.getTopToolbar().getComponent(0);
+    },
+
     getDetailsContainer: function(){
         return this.getComponent(2);
     },
@@ -220,9 +266,33 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         return this.getComponent(6);
     },
 
+    getReviewList:function(){
+        return this.getReviewContainer().getComponent(0);
+    },
+
     setDetails: function () {
         this.getDetailsContainer().setData(this.getData());
-      //  this.getDetailsContainer().setItemTpl('{name}<br>{formatted_address}');
+    },
+
+    setHandlers: function () {
+        var me = this;
+        console.log("inside set handlers");
+        this.getBackButton().on('tap', function () {
+            me.fireEvent('back');
+        });
+
+        //this.getDirectionButton().on('tap', function () {
+        //    me.fireEvent('')
+        //});
+
+    },
+
+    //this is the data set at the creation of the details view or when going to details view from another view
+    updateData: function () {
+        console.log("inside update data");
+        this.setDetails();
+        this.getTopToolbar().setTitle('<p style="color:#0d66f2;">' + this.getData().name + '</p>');
+        this.onSwitchingToDetailsView();
     }
 
 

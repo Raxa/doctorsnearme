@@ -3,7 +3,7 @@
 
     config: {
         model: 'EasyTreatyApp.model.Comment',
-        //autoLoad: true,
+        autoLoad: false,
     },
 
     setTheProxy: function (locationid) {

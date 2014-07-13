@@ -35,7 +35,9 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     //ui: 'mainmenu',
                     hidden: true,
                     padding: '5 0 5 0',
+                    docked:'top',
                     ui: 'menu',
+                    cls:'name'
                 },
                 {
                     //1
@@ -100,22 +102,20 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     //5
                     xtype: 'selectfield',
                     labelWidth: '45%',
-                    // ui: 'mainmenu',
-                    //autoSelect: false,
                     usePicker: false,
                     padding: '5 0 5 0'
                 },
                  {
                      //6
                      //   text: 'Log In',
-                     //  ui: 'menubtn'
                      ui: 'menu',
-                     padding: '5 0 5 0'
+                     padding: '5 0 5 0',
+                     cls: 'menu-login',
+                     docked:'top'
                  },
                 {
                     //7
                     // text: 'About',
-                    // ui: 'menubtn'
                     ui: 'menu',
                     padding: '5 0 5 0'
                 },
