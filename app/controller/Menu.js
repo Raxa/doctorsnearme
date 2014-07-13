@@ -44,6 +44,7 @@ Ext.define('EasyTreatyApp.controller.Menu', {
         mapview.setActiveItem(1);
         mapview.getSearchField().setHidden(true);
         mapview.getSpecialtySelectField().setHidden(true);
+        this.getSideMenu().toggle();
 
     },
 
