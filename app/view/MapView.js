@@ -122,11 +122,12 @@ Ext.define('EasyTreatyApp.view.MapView', {
             placeHolder: 'Choose a Specialty',
             autoSelect: false,
             hidden: false,
-            width: '90%',
+            width: '80%',
             left: '5%',
             top: '20%',
-            style: 'border-color: gray; border-style:2px solid;border-radius:8px;',
-            store: specStore
+            style: 'border:2px solid grey;border-radius:8px;color:black;',
+            store: specStore,
+            cls: 'spec-cls'
 
         });
 
@@ -152,13 +153,13 @@ Ext.define('EasyTreatyApp.view.MapView', {
             xtype: 'searchfield',
             label: '<img class="list" src="resources/icons/User_30_30.png">',
             labelAlign: 'right',
-            labelWidth:'5%',
+            labelWidth:'10%',
             name: 'search',
             top: '3%',
-            width: '90%',
-            height:'40px',
+            width: '85%',
+            height:'30px',
             left: '5%',
-            style: 'border-radius:8px'
+            style: 'border:0;border-radius:8px'
         });
 
         var me = this;

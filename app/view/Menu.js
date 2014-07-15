@@ -47,7 +47,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
                 },
                 {
                     xtype: 'fieldset',
-                    layout:'vbox',
+                    layout: 'vbox',
                     items: [
                           {
                               //2
@@ -56,7 +56,8 @@ Ext.define('EasyTreatyApp.view.Menu', {
                               value: 'hospital',
                               //  label: 'Hospitals',
                               labelWidth: '75%',
-                              padding: '5 0 5 0'
+                              padding: '5 0 5 0',
+                             
                           },
                 {
                     //3
