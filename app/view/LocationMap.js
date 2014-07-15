@@ -25,7 +25,9 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
         store: null,
 
-        geo:null
+        geo: null,
+
+        initialUserLocationSetting: true
                       
     },
 
@@ -295,7 +297,10 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
                     me.setUserLocationMarker(marker);
                     me.setBaseLocationMarker(marker);
 
-                    me.fireEvent('basechanged');
+                    me.fireEvent('basechanged', me.getInitialUserLocationSetting());
+                    if (me.getInitialUserLocationSetting()) {
+                        me.setInitialUserLocationSetting(false);
+                    }
 
                 },
                 locationerror: function (geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {

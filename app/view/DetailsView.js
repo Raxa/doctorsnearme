@@ -12,7 +12,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
        styleHtmlContent: true,
        store: null,
        data: null,
-       cls: 'profile',
+      // cls: 'profile',
        border: 3,
        style: 'border-color: gray; border-style: solid;background-color:#d3d3d3;',
        scrollable:true,
@@ -98,7 +98,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                      },
                      {
                          xtype: 'button',
-                         text: '<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Save Me',
+                        // text: '<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Save Me',
                          width: '20%',
                          height: '100%'
                      },
@@ -109,7 +109,8 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                      {
                          xtype: 'button',
                          cls: 'like',
-                         width: '20%'
+                         width: '20%',
+                         hidden:true
                      }
                  ]
              },
@@ -117,7 +118,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
             xtype: 'container',
             layout: 'vbox',
           //  docked: 'bottom',
-            // hidden: true,   
+             hidden: true,   
             style: 'border-radius:0;margin:8px 0 8px 0;',
             items: [
                 {
@@ -185,7 +186,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
     //either when creating details view for the first time or not
     onSwitchingToDetailsView: function () {
-        //var store = this.getCommentsStore();
+
         var store = this.getReviewList().getStore();
         store.setTheProxy(this.getData().id);
 
@@ -203,6 +204,24 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
             callButton.setDisabled(false);
         }
 
+        var isFavorite = this.getData().isFavorite;
+        console.log(this.getData().name);
+        console.log(this.getData().isFavorite);
+
+        var saveBtn = this.getSaveButton();
+        if (isFavorite == null || isFavorite == false) {
+            saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Save Me');
+            saveBtn.setCls('not-saved');
+        }
+        else {
+            saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Unsave Me');
+            saveBtn.setCls('saved');
+        }
+
+    },
+
+    reloadCommentStore: function(){
+        this.getReviewList().getStore().load();
     },
 
     onStoreLoad: function (store) {
@@ -242,15 +261,15 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
     },
 
     getDirectionButton: function(){
-        return this.getMiddleToolbar().getComponent(1);
+        return this.getMiddleToolbar().getComponent(2);
     },
 
     getSaveButton: function(){
-        return thie.getMiddleToolbar().getComponent(2);
+        return this.getMiddleToolbar().getComponent(4);
     },
 
     getLikeButton: function(){
-        return this.getMiddleToolbar().getComponent(3);
+        return this.getMiddleToolbar().getComponent(6);
     },
 
     getBackButton: function(){
@@ -270,6 +289,18 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         return this.getReviewContainer().getComponent(0);
     },
 
+    getCommentContainer: function(){
+        return this.getComponent(4);
+    },
+
+    getCommentField:function(){
+        return this.getCommentContainer().getComponent(0);
+    },
+
+    getReviewButton : function(){
+        return this.getCommentContainer().getComponent(1);
+    },
+
     setDetails: function () {
         this.getDetailsContainer().setData(this.getData());
     },
@@ -281,9 +312,37 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
             me.fireEvent('back');
         });
 
-        //this.getDirectionButton().on('tap', function () {
-        //    me.fireEvent('')
-        //});
+        this.getDirectionButton().on('tap', function () {
+            console.log("on direction tap");
+            me.fireEvent('getdirections',me.getData().id);
+        });
+
+        var saveBtn = this.getSaveButton();
+           saveBtn.on('tap', function () {
+               var saved = saveBtn.getCls() == 'saved' ? true : false;
+               console.log("saved:" + saved);
+               if (saved) {
+                   saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Save Me');
+                   saveBtn.setCls('not-saved');
+                   me.getData().isFavorite = false;
+               }
+               else {
+                   saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Unsave Me');
+                   saveBtn.setCls('saved');
+                   me.getData().isFavorite = true;
+               }
+                console.log("on save tap");
+                me.fireEvent('togglefavorite', me.getData().id, !saved);
+           });
+
+           this.getLikeButton().on('tap', function () {
+               console.log("clicked like");
+               me.fireEvent('like', me.getData());
+           });
+
+           this.getReviewButton().on('tap', function () {
+               me.fireEvent('comment', me.getCommentField(), me);
+           });
 
     },
 
@@ -293,9 +352,28 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         this.setDetails();
         this.getTopToolbar().setTitle('<p style="color:#0d66f2;">' + this.getData().name + '</p>');
         this.onSwitchingToDetailsView();
-    }
+    },
 
+    toggleLikeButtonState: function (value) {
+        // this.getLikeButton().setDisabled(value);
+        ////////////
+        var likeButton = this.getLikeButton();
+        if (value) {
+            console.log("set class dislike");
+            likeButton.setCls('dislike');
+            this.setLiked(true);
+        }
+        else {
+            console.log("set class like");
+            likeButton.setCls('like');
+            this.setLiked(false);
+        }
+    },
 
+    toggleLikeComment: function (value) {
+        this.getLikeButton().setHidden(value);
+        this.getCommentContainer().setHidden(value);
+    },
     
    
 

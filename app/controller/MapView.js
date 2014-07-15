@@ -19,18 +19,26 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 moredetails: "onMoreDetails",
                 getdirections: "onGetDirections",
               //  togglemaplist: "onMapListToggle",
-                togglefavorite: "onFavoriteToggle",
+              //  togglefavorite: "onFavoriteToggle",
                 showfavorites: "onShowFavorites",
                 basechanged: "onBaseChange",
                 backtomap:"onBackToMap"
             },
             detailsView: {
-                togglefavorite: "onFavoriteToggle",
+               // togglefavorite: "onFavoriteToggle",
                 //after new design
-               // getdirections:""
+                getdirections:"directToMapView"
             }
         }
         
+    },
+
+    directToMapView: function(id){
+       
+        var mapview = this.getMapView();
+        this.onGetDirections(mapview.getLocationMap(), id);
+        Ext.Viewport.setActiveItem(mapview);
+        this.onBackToMap();
     },
 
     onBackToMap: function () {
@@ -42,11 +50,13 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         mapview.setActiveItem(0);
     },
 
-    onBaseChange: function(){
+    onBaseChange: function(initialUserLocationSetting){
         var currentSearch = this.getMapView().getCurrentSearch();
 
         if (currentSearch != null) {
             this.onChoice(currentSearch);
+        } else if (initialUserLocationSetting) {
+            this.onChoice(0);
         }
     },
 
@@ -64,57 +74,7 @@ Ext.define('EasyTreatyApp.controller.MapView', {
             locationStore.addFavoriteItem(location);
         });
 
-    },
-
-    onFavoriteToggle: function (recordId, isFavorite) {
-        console.log("is favorite");
-        console.log(isFavorite);
-        var store = Ext.data.StoreManager.lookup('fav-store');
-
-        var record = this.getMapView().getStore().getById(recordId);
-
-        var string;
-
-        if (isFavorite) {
-            record.set('isFavorite', true);
-
-            string = Ext.JSON.encode(record.getData());
-            store.storeTokenInLocalStorage(string);
-            EasyTreatyApp.config.getFavorites().push(record.getData());
-        }
-        else {
-
-            string = Ext.JSON.encode(record.getData());
-            store.removeTokenFromLocalStorage(string);
-            record.set('isFavorite', false);
-            var newFav = Ext.Array.filter(EasyTreatyApp.config.getFavorites(), function (item) {
-                if (item.reference != record.get('reference')) {
-                    return true;
-                };
-            });
-            EasyTreatyApp.config.setFavorites(newFav);
-
-        }
-
-        this.getListView().fillList();
-
-
-        var starButton = Ext.get(recordId + '-fav');
-        if (starButton != null) {
-            if (isFavorite) {
-                starButton.addCls('favorite');
-            } else {
-                starButton.removeCls("favorite");
-            }
-        }
-        
-    },
-
-    //onMapListToggle: function (hide) {
-    //    var menu = this.getMenu();
-
-    //    menu.getChangeLocationButton().setHidden(hide);
-    //},
+    },    
 
     onMoreDetails: function(map,recordId){
         var record = this.getMapView().getStore().getById(recordId);
@@ -133,7 +93,7 @@ Ext.define('EasyTreatyApp.controller.MapView', {
 
         map.calcRoute(map.getBaseLocation(), record.get('geometry').location, map.getMap());
 
-        console.log(Ext.device.Contacts.getContacts());
+       // console.log(Ext.device.Contacts.getContacts());
     },
 
     /*
@@ -154,26 +114,16 @@ Ext.define('EasyTreatyApp.controller.MapView', {
             detailsView = Ext.create('EasyTreatyApp.view.DetailsView');
         } 
         detailsView.setData(record.getData());
+
+
+        var loggedIn = EasyTreatyApp.config.getLoggedIn();
         
+        detailsView.toggleLikeComment(!loggedIn);
 
-
-        // AFTER NEW DESIGN
-        //var favoriteButton = detailsView.getFavoriteButton();
-        //if (detailsView.getData().isFavorite) {
-        //    favoriteButton.setIconCls('color-star');
-        //}
-        //else {
-        //    favoriteButton.setIconCls('star');
-        //}
-
-        //var loggedIn = EasyTreatyApp.config.getLoggedIn();
-        
-        //detailsView.toggleLikeComment(!loggedIn);
-
-        //if(loggedIn){
-        //    this.checkLiked(detailsView,record);
-        //}
-        //detailsView.getLikeCount(detailsView.getData().id);
+        if(loggedIn){
+            this.checkLiked(detailsView,record);
+        }
+     //   detailsView.getLikeCount(detailsView.getData().id);
 
         Ext.Viewport.add(detailsView);
         Ext.Viewport.setActiveItem(detailsView);
@@ -195,13 +145,10 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                // Ext.Msg.alert("like success");
                 console.log("success");
                 console.log(response);
-                var like = Ext.JSON.decode(response.responseText).likes;
+                // var like = Ext.JSON.decode(response.responseText).likes;
+                var like = Ext.JSON.decode(response.responseText).data[0].status;
+                console.log("like: " + like);
 
-                //if (like == 1) {
-                //    detailsView.toggleLikeButtonState(true);
-                //} else {
-                //    detailsView.toggleLikeButtonState(false);
-                //}
                 if (like == 1) {
                     console.log("like==1");
                     detailsView.toggleLikeButtonState(true);
@@ -249,9 +196,12 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         }
 
         //new design
-       // mapview.getBottomBar().setTitle(title);
+        // mapview.getBottomBar().setTitle(title);
+
+        console.log("inside mapview controller, base: " + base);
         
-        mapview.getStore().populate(base, type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
+      //  mapview.getStore().populate(base, type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
+        mapview.getStore().populate(new google.maps.LatLng(6.897358, 79.863437), type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
 
         this.getMapView().zoomMap(parseInt(mapview.getSearchRadius()));
     }

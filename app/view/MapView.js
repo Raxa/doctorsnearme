@@ -48,7 +48,9 @@ Ext.define('EasyTreatyApp.view.MapView', {
         this.addSearchBox();
         this.addLocator();
 
+      //  this.addItems();
         this.callParent();
+        
 
         var store = Ext.create('EasyTreatyApp.store.Location');
         this.setStore(store);
@@ -68,8 +70,18 @@ Ext.define('EasyTreatyApp.view.MapView', {
         this.setLanguage(lang, lang);
 
         //to search soon at startup
-        this.setCurrentSearch(0);
+      //  this.setCurrentSearch(0);
     },
+
+    //addItems: function(){
+    //    this.add({
+    //        xtype: 'locationmap'
+    //    });
+
+    //    this.add({
+    //        xtype: 'listview'
+    //    });
+    //},
     
     onLocationAddition: function () {
         console.log("map view onloactionaddition");

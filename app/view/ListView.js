@@ -12,13 +12,13 @@ Ext.define('EasyTreatyApp.view.ListView', {
        layout: 'vbox',
        styleHtmlContent: true,
        align: 'stretch',       
-       cls: 'profile',
+       //cls: 'profile',
        store:null,
        items: [
            {
                xtype: 'list',
                // itemTpl: '{name}<br>{formatted_address}<br>{isFavorite}',
-               cls:'option-list',
+               cls:'favorite-list',
                flex:7
            }
        ]
@@ -26,15 +26,6 @@ Ext.define('EasyTreatyApp.view.ListView', {
    },
 
     setTemplate: function(){
-        /*var template = new Ext.XTemplate(
-           '{name}<br>{formatted_address}',
-            '<tpl if="values.isFavorite==true">',
-            //'</br><button class="star favorite"></button>',
-            '</br><div class="color-star"></div>',
-            '</tpl>'
-       );
-        this.getItemList().setItemTpl(template);*/
-
 
         var lang = EasyTreatyApp.config.getLanguage();
 
@@ -42,16 +33,22 @@ Ext.define('EasyTreatyApp.view.ListView', {
 
         var moredetails = '<img class="more-details" id ={id} src = "resources/icons/i_30_30.png">';
         var like = '<img class="like-img" src = "resources/icons/Tellafriend.png">';
-        var doctorname = '<div>' + '<p style="padding:2px;word-wrap:break-word;">' + '{name}' + '</p>' + moredetails + like + '</div>';
+        var doctorname = '<div  class="inlineblock">' + userimg + '</div>' +
+                         '<div class="inlineblock">' +
+                               '<div class="inlineblock">' + '{name}' + '</div>' +
+                               '<div class="inlineblock">' + moredetails + '</div>' +
+                               '<br>' +
+                               '<div>' + like + '</div>' +
+                         '</div>';
         var call = "";
         
             call = '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="call"><a href="tel:' + '{international_phone_number}' + '">Call</a></button>';
         
         var directions = '<button class="direction" id=' +'{id}' + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
 
-        var infowindow = new google.maps.InfoWindow();
+        //var tpl = '<table><tr><td>' + userimg + '</td><td>' + doctorname + '</td></tr></table>' + '<table><tr><td>' + call + '</td>' + '<td>' + directions + '</td>' + '</tr>' + '</table>';
+        var tpl = doctorname  + '<br>' + '<div>' + call + directions + '</div>';
 
-        var tpl = '<table><tr><td>' + userimg + '</td><td>' + doctorname + '</td></tr></table>' + '<table><tr><td>' + call + '</td>' + '<td>' + directions + '</td>' + '</tr>' + '</table>';
         this.getItemList().setItemTpl(tpl);
     },
 

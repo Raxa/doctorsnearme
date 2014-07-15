@@ -9,14 +9,15 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
         refs: {
             detailsView: 'detailsview',
             mapView: 'mapview',
-            userProfile: 'userprofile'
+            userProfile: 'userprofile',
+            listView:'listview'
         },
         control: {
             detailsView: {
                 back: "backToMapView",
-                showcomments: "showOrHideComments",
                 comment: "comment",
-                like: "like"
+                like: "like",
+                togglefavorite: "onFavoriteToggle"
             },
             userProfile: {
                 back: "backToMapView"
@@ -24,8 +25,42 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
 
         }
     },
+    onFavoriteToggle: function (recordId, isFavorite) {
+        console.log("is favorite");
+        console.log(isFavorite);
+        var store = Ext.data.StoreManager.lookup('fav-store');
+
+        var record = this.getMapView().getStore().getById(recordId);
+
+        var string;
+
+        if (isFavorite) {
+            record.set('isFavorite', true);
+
+            string = Ext.JSON.encode(record.getData());
+            store.storeTokenInLocalStorage(string);
+            EasyTreatyApp.config.getFavorites().push(record.getData());
+        }
+        else {
+
+            string = Ext.JSON.encode(record.getData());
+            store.removeTokenFromLocalStorage(string);
+            record.set('isFavorite', false);
+            var newFav = Ext.Array.filter(EasyTreatyApp.config.getFavorites(), function (item) {
+                if (item.reference != record.get('reference')) {
+                    return true;
+                };
+            });
+            EasyTreatyApp.config.setFavorites(newFav);
+
+        }
+
+        this.getListView().fillList();
+    },
+
 
     like: function (data) {
+        console.log("inside like");
         var me = this;
         var detailsView = this.getDetailsView();
         var previouslyLiked = detailsView.getLiked();
@@ -80,14 +115,8 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
                 success: function (response, opts) {
                     console.log("success");
                     console.log(response.responseText);
-                    if (detailsView.getCommentsVisible()) {
-                        me.hideComments(detailsView);
-                        me.showComments(detailsView);
-                    }
-                    else {
-                        me.showComments(detailsView);
-                    }
                     commentField.setValue("");
+                    detailsView.reloadCommentStore();
                 },
                 failure: function (response, opts) {
                     console.log("failure");
@@ -96,70 +125,7 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
             });
         } 
         
-    },
-
-    showOrHideComments: function (detailsView){//, button, oldCommentPanel) {
-      //  console.log(button.getItemId());
-        
-        var commentsVisible = detailsView.getCommentsVisible();
-        console.log(commentsVisible);
-        if (commentsVisible) {
-
-            this.hideComments(detailsView);
-            
-        }
-        else {
-            this.showComments(detailsView);
-        }
-    },
-
-    hideComments: function (detailsView) {
-        detailsView.getViewCommentsButton().setText("View Comments");
-        detailsView.setCommentsVisible(false);
-        detailsView.getOldCommentsPanel().removeAll(true, true);
-        
-    },
-
-    showComments: function (detailsView) {
-        var comments;
-
-        detailsView.getViewCommentsButton().setText("Hide Comments");
-        detailsView.setCommentsVisible(true);
-
-        Ext.Ajax.request({
-      //  Ext.data.JsonP.request({
-            //url: 'http://192.168.122.1:8888/getComments',
-            url:EasyTreatyApp.config.getRatingServerDomain()+'getComments',
-            method: 'GET',
-           // method: 'POST',
-            params:{
-                location: detailsView.getData().id
-            },
-            success: function (response, opts) {
-                console.log("success");
-                console.log(Ext.JSON.decode(response.responseText).data);
-                comments = Ext.JSON.decode(response.responseText).data;
-                if (comments.length == 0) {
-                    if (!EasyTreatyApp.config.getLoggedIn()) {
-                        detailsView.addComment("No Comments Yet.. Be the first. Log in to comment");
-                    } else {
-                        detailsView.addComment("No Comments Yet.. Be the first.");
-                    }                   
-                } else {
-
-                    Ext.Array.forEach(comments, function (item) {
-                        console.log("adding comment");
-                        detailsView.addComment(item.comment);
-                    });
-                }
-
-            },
-            failure: function (response, opts) {                
-                console.log("failure");
-                console.log(response);
-            }
-        });
-    },
+    },  
     
     backToMapView: function () {
             var mapview = this.getMapView();

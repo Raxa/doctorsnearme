@@ -53,66 +53,19 @@ $list-active-color:#157efb;
 	padding:0;
 }
 
-//.x-list .x-list-item{
-	//color:grey;
-//}
 
 .x-title{
 	color:#0d66f2;
 }
 
-.profile
-{
-	//font-family:georgia;	
-	font-size: 15px;
-	text-align: left;
-	border-collapse: collapse;
-	//background-color: #157efb;
+//for the favorite list in new design
+.favorite-list{
 	background-color:white;
+}
 
-	.x
-		th
-	{
-		font-size: 20px;
-		font-weight: normal;
-		padding: 8px;
-		background-color: #157efb;
-		color:white;
-		text-align: center;
-	}
-		td
-	{
-		padding: 8px; 
-		color:white;
-		//background:url('images/blue2.jpg');
-		//background-color: rgb(8, 73, 118);
-		background-color: #157efb;
-		width:50%;
-	}		
-	 
-	img{
-		height:50px;
-		width:50px;
-	}
-
-		h1{
-		&.header{
-			padding: 10px;
-			text-align:center;
-			font-size:30px;
-			font-weight:bold;
-			color:white;
-			font-family:georgia;		
-		}
-	}
-
-	.pro-list{
-		background-color: #157efb;
-		color:white;
-	}
-
-
-
+//inline class
+.inlineblock{
+	display:inline-block;
 }
 
 .item{
