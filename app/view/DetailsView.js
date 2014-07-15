@@ -190,7 +190,6 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         var store = this.getReviewList().getStore();
         store.setTheProxy(this.getData().id);
 
-       // this.getReviewContainer().setMasked(true);
         store.load();
 
         var phoneno = this.getData().international_phone_number;

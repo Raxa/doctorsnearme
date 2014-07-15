@@ -53,7 +53,8 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             //delegate: 'button.more-details',
             delegate: 'img.more-details',
             tap: function (event, node, options, eOpts) {
-                me.fireEvent('moredetails', me, node.id);
+                //me.fireEvent('moredetails', me, node.id);
+                me.fireEvent('moredetails', node.id);
             }
         });
 
@@ -179,26 +180,6 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
            
             infowindow.setContent(tpl);
              infowindow.open(me.getMap(), marker);
-
-           /* var infoBubble2 = new InfoBubble({
-                map: me.getMap(),
-                content: tpl,
-                position: marker.position,
-                shadowStyle: 1,
-                padding: 0,
-                backgroundColor: 'white',
-                borderRadius: 0,
-                arrowSize: 0,
-                borderWidth: 1,
-                borderColor: 'white',
-                disableAutoPan: true,
-                hideCloseButton: true,
-                arrowPosition: 50,
-                backgroundClassName: 'phoney',
-                arrowStyle: 2,
-                maxWidth:300
-            });
-            infoBubble2.open();*/
         });
         
         
@@ -394,7 +375,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
     attachInstructionText: function (marker, text, stepDisplay,map) {
         google.maps.event.addListener(marker, 'click', function() {
 
-            stepDisplay.setContent('<div class="info-window">' + text + '</div>');
+            stepDisplay.setContent('<div>' + text + '</div>');
             stepDisplay.open(map, marker);
         });
     }

@@ -28,6 +28,10 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                // togglefavorite: "onFavoriteToggle",
                 //after new design
                 getdirections:"directToMapView"
+            },
+            listView: {
+                moredetails: "onMoreDetails",
+                getdirections: "directToMapView"
             }
         }
         
@@ -46,6 +50,7 @@ Ext.define('EasyTreatyApp.controller.MapView', {
 
         mapview.getSearchField().setHidden(false);
         mapview.getSpecialtySelectField().setHidden(false);
+        mapview.getLocator().setHidden(false);
 
         mapview.setActiveItem(0);
     },
@@ -76,7 +81,8 @@ Ext.define('EasyTreatyApp.controller.MapView', {
 
     },    
 
-    onMoreDetails: function(map,recordId){
+    //onMoreDetails: function(map,recordId){
+    onMoreDetails: function (recordId) {
         var record = this.getMapView().getStore().getById(recordId);
 
         this.onLocationSelect(record);
@@ -91,9 +97,19 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         console.log(" onGetDirectionsButtonTap");
         var record = this.getMapView().getStore().getById(recordId);
 
-        map.calcRoute(map.getBaseLocation(), record.get('geometry').location, map.getMap());
+        //To fix the error that comes when getting directions from favorite list (list view)
+        var latlng = record.get('geometry').location;
+        if (record.get('isFavorite')) {
+            var loc = record.get('geometry').location;
+            var lat = parseFloat(loc.k);
+            var lng = parseFloat(loc.B);//I dunno what on earth is this! first its A now B you pumpkin head google maps
+            console.log("lat: " + lat);
+            console.log("lng: " + lng);
+            latlng = new google.maps.LatLng(lat, lng);
+        }
+        map.calcRoute(map.getBaseLocation(), latlng, map.getMap());
+        //map.calcRoute(map.getBaseLocation(), record.get('geometry').location, map.getMap());
 
-       // console.log(Ext.device.Contacts.getContacts());
     },
 
     /*

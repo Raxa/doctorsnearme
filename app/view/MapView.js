@@ -15,8 +15,6 @@ Ext.define('EasyTreatyApp.view.MapView', {
         currentSearch: null,
         searchRadius: 1000,
         specialties:[],
-
-        cls: 'map-view',
         border: 3,
         style: 'border-color: gray; border-style: solid;',
 
@@ -206,6 +204,9 @@ Ext.define('EasyTreatyApp.view.MapView', {
         return this.down('multiselectfield');
     },
 
+    getLocator: function(){
+        return this.down('image');
+    },
 
     /**
      * Returns the MapPanel
