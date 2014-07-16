@@ -18,14 +18,12 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 itemselected: "onLocationSelect",
                 moredetails: "onMoreDetails",
                 getdirections: "onGetDirections",
-              //  togglemaplist: "onMapListToggle",
-              //  togglefavorite: "onFavoriteToggle",
                 showfavorites: "onShowFavorites",
                 basechanged: "onBaseChange",
-                backtomap:"onBackToMap"
+                backtomap: "onBackToMap",
+                textsearch:"onTextSearch"
             },
             detailsView: {
-               // togglefavorite: "onFavoriteToggle",
                 //after new design
                 getdirections:"directToMapView"
             },
@@ -35,6 +33,21 @@ Ext.define('EasyTreatyApp.controller.MapView', {
             }
         }
         
+    },
+
+    onTextSearch: function(searchField){
+        console.log("inside on text search");
+        var mapview = this.getMapView();
+        var locationmap = mapview.getLocationMap();
+        var base = locationmap.getBaseLocation();
+        var types=['doctor','hospital','pharmacy'];       
+
+        var radius1 = mapview.getSearchRadius();
+        var radius2 = radius1 == null ? 2000 : radius1;
+
+        mapview.getStore().textSearch(base, types, radius2, locationmap, searchField.getValue());
+
+        this.getMapView().zoomMap(parseInt(radius2));
     },
 
     directToMapView: function(id){
@@ -224,8 +237,8 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         var specialties1 = mapview.getSpecialties();
         var specialties2 = specialties1 == null ? [] : specialties1;
         
-        mapview.getStore().populate(base, type, radius2, locationmap, specialties2);
-     //   mapview.getStore().populate(new google.maps.LatLng(6.897358, 79.863437), type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
+        mapview.getStore().radarSearch(base, type, radius2, locationmap, specialties2);
+        //mapview.getStore().populate(new google.maps.LatLng(6.897358, 79.863437), type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
 
         this.getMapView().zoomMap(parseInt(radius2));
     }

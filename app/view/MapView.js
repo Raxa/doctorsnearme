@@ -185,6 +185,15 @@ Ext.define('EasyTreatyApp.view.MapView', {
                 me.fireEvent('showmenu');
             }
         });
+
+        this.addListener({
+            element: 'element',
+            delegate: 'img.list',
+            tap: function (event, node, options, eOpts) {
+                console.log("text search");
+                me.fireEvent('textsearch',me.getSearchField());
+            }
+        })
     },
 
     addLocator: function(){

@@ -99,12 +99,11 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
         var me = this;
         var record = this.getStore().last();
-        me.addLocationMarker(record.getData(), markerImg);
 
-        //this.getStore().getRange().forEach(function (record) {
-        //    me.addLocationMarker(record.getData(), 'redmarker.png');
-        //    //me.addLocationMarker(record, 'redmarker.png');
-        //});
+        // me.addLocationMarker(record.getData(), markerImg);
+        //COMMENTED ABOVE LINE AND ADDDED THIS TO TEST FOR SENDING SEPARATE REQUESTS
+        me.addLocationMarker(record, markerImg);
+
     },
     /**
     * Add a Marker
@@ -114,101 +113,41 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
     * @param {String} makerIcon
     * @return {Marker} marker
     */
-    addLocationMarker: function (location, markerIcon) {
-        console.log("inside addlocation marker");
-        console.log(location)
-        
-        var latlng = location.geometry.location;
-        if (location.isFavorite) {
-            var loc = location.geometry.location;
-            var lat = parseFloat(loc.k);
-            var lng = parseFloat(loc.A);
-            console.log("lat: " + lat);
-            console.log("lng: " + lng);
-             latlng= new google.maps.LatLng(lat, lng);
-        }
-
-        var me = this;
-        var marker = new google.maps.Marker({
-            map: me.getMap(),
-            animation: null,
-            //position: location.geometry.location,
-            position: latlng,
-            icon: 'resources/icons/' + markerIcon
-        });
-
-        var address = location.formatted_address;
-        var name = location.name;
-        var phoneNumber = location.international_phone_number;
-
-        if (address == null) {
-            address = "";
-        }
-
-        //var lang = EasyTreatyApp.config.getLanguage();
-        var lang;
-        var idString = location.id;
-        var tpl1 = "";
-        //var tpl1 = name + '</br>' + address + '</br><button class="direction" id=' + idString + '>'+lang.GET_DIRECTIONS+'</button><button class="more-details" id=' + idString + '>'+lang.MORE_DETAILS+'</button>';
-  
-        var tpl2 = "";
-        //if (phoneNumber != null) {
-        //    tpl2 = '</br><button class="call" type="button"><a href="tel:' + phoneNumber + '">Call</a></button>' + phoneNumber;
-        //}
-        var tpl0 = "";
-        var tpl3 = "";
-
-        google.maps.event.addListener(marker, 'click', function (pos) {
-            lang = EasyTreatyApp.config.getLanguage();
-
-
-            var userimg = '<img class="user-img" src="test.png">';
-            
-            var moredetails = '<img class="more-details" id =' + idString + ' src = "resources/icons/i_30_30.png">';
-            // var like = '<img class="like-img like-in-map" id=like-'+idString+' src = "resources/icons/Tellafriend.png">';
-            var like = '<button class="like-img like" id=like-' + idString + '>';
-            var doctorname = '<div>' + '<p style="padding:2px;word-wrap:break-word;">' + name + '</p>' + moredetails + like + '</div>';
-            var call ="";
-            if (phoneNumber != null) {
-                call = '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="call"><a href="tel:' + phoneNumber + '">Call</a></button>';
-            }
-            var directions = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
-
-            var infowindow = new google.maps.InfoWindow();
-
-            var tpl = '<table><tr><td>' + userimg +'</td><td>'+ doctorname + '</td></tr></table>'+'<table><tr><td>'+call+'</td>'+'<td>'+directions+'</td>'+'</tr>'+'</table>';
-           
-            infowindow.setContent(tpl);
-             infowindow.open(me.getMap(), marker);
-        });
-        
-        
-        this.getLocationMarkers().push(marker);
-    },
 
     /// An alternative. What this does is sending a request only when the user clicks on a marker. But when viewing on
     /// the list this is not possible because all the details 
 
-    //addLocationMarker: function (record, markerIcon) {
-    //    var me = this;
-    //    var marker = new google.maps.Marker({
-    //        map: me.getMap(),
-    //        animation: null,
-    //        position: record.getData().geometry.location,
-    //        icon: 'resources/icons/' + markerIcon
-    //    });
+    addLocationMarker: function (record, markerIcon) {
+        var me = this;
+
+        var latlng = record.get('geometry').location;
+        if (record.get('isFavorite')) {
+            var loc = record.get('geometry').location;
+            var lat = parseFloat(loc.k);
+            var lng = parseFloat(loc.A);
+            console.log("lat: " + lat);
+            console.log("lng: " + lng);
+            latlng = new google.maps.LatLng(lat, lng);
+        }
+
+        var marker = new google.maps.Marker({
+            map: me.getMap(),
+            animation: null,
+            position: latlng,
+            icon: 'resources/icons/' + markerIcon
+        });
 
       
-    //    console.log("inside add location marker");
+        console.log("inside add location marker");
 
-    //    google.maps.event.addListener(marker, 'click', function (pos) {
-    //        var infowindow = new google.maps.InfoWindow();
+        google.maps.event.addListener(marker, 'click', function (pos) {
+            var infowindow = new google.maps.InfoWindow();
 
-    //        me.getStore().setDetailsForTheRecord(me, record,infowindow,marker);
+            me.getStore().setDetailsForTheRecord(me, record,infowindow,marker);
            
-    //    });
-    //    this.getLocationMarkers().push(marker);
-    //},
+        });
+        this.getLocationMarkers().push(marker);
+    },
 
 
     clearMarkers: function (markers) {
