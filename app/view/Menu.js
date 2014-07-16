@@ -58,6 +58,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
                 {
                     xtype: 'fieldset',
                     layout: 'vbox',
+                    cls:'radio-set',
                     items: [
                           {
                               //2
