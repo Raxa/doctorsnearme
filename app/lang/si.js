@@ -6,7 +6,7 @@
     LOG_OUT: 'ඉවත් වන්න',
     HEALTH_PROFILE: 'මගේ තොරතුරු',
     ABOUT: 'තොරතුරු',
-    MEDICAL_CENTERS: 'සෞඛ්‍ය මධ්‍යස්ථාන',
+    MEDICAL_CENTERS: 'රෝහල්',
     DOCTORS: 'වෛද්‍යවරු',
     PHARMACIES: 'ඖෂධාගාර',
     DONE:'තෝරා අවසන්',

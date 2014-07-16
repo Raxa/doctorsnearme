@@ -9,7 +9,8 @@ Ext.define('EasyTreatyApp.controller.Language', {
             sideMenu: 'mainmenu',
             detailsView: 'detailsview',
             mapView: 'mapview',
-            userProfile: 'userprofile'
+            userProfile: 'userprofile',
+            listView:'listview'
         },
         control: {
             sideMenu: {
@@ -61,6 +62,12 @@ Ext.define('EasyTreatyApp.controller.Language', {
 
         if (mapview != null) {
             mapview.setLanguage(language, prevLanguage);
+        }
+
+        var listview = this.getListView();
+
+        if (listview != null) {
+            listview.setLanguage(language, prevLanguage);
         }
         
 

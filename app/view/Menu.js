@@ -39,12 +39,22 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     ui: 'menu',
                     cls:'name'
                 },
-                {
-                    //1
-                    //saved
-                    ui: 'menu',
-                    padding: '5 0 5 0'
-                },
+                //{
+                //    //1
+                //    //saved
+                //    ui: 'menu',
+                //    padding: '5 0 5 0',
+                //    style: 'border-bottom:1px solid gray;border-radius:0;margin-left:0;marign-right:0;',
+                //    docked: 'top'
+                //},
+                 {
+                     //6
+                     //   text: 'Log In',
+                     ui: 'menu',
+                     padding: '5 0 5 0',
+                     cls: 'menu-login',
+                     docked: 'top'
+                 },
                 {
                     xtype: 'fieldset',
                     layout: 'vbox',
@@ -107,14 +117,22 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     usePicker: false,
                     padding: '5 0 5 0'
                 },
-                 {
-                     //6
-                     //   text: 'Log In',
-                     ui: 'menu',
-                     padding: '5 0 5 0',
-                     cls: 'menu-login',
-                     docked:'top'
-                 },
+                 //{
+                 //    //6
+                 //    //   text: 'Log In',
+                 //    ui: 'menu',
+                 //    padding: '5 0 5 0',
+                 //    cls: 'menu-login',
+                 //    docked:'top'
+                 //},
+                  {
+                      //1
+                      //saved
+                      ui: 'menu',
+                      padding: '5 0 5 0',
+                      style: 'border-bottom:1px solid gray;border-radius:0;margin-left:0;marign-right:0;',
+                      docked: 'top'
+                  },
                 {
                     //7
                     // text: 'About',
@@ -129,7 +147,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
         var lang = EasyTreatyApp.config.getLanguage();
         this.getProfileButton().setText(lang.HEALTH_PROFILE);
 
-        this.getSavedButton().setText('<img class="menu-heart" src = "resources/icons/Heart_40_40.png" width=20px height=20px align=left>' + lang.SAVED);
+        this.getSavedButton().setText('<img class="menu-heart" src = "resources/icons/Heart_40_40.png" width=20px height=20px align=left style="margin-right:20px;margin-left:10px;"><p align=left>' + lang.SAVED + '<img class="menu-heart" src = "resources/icons/code3.png" width=20px height=20px align=right></p>');
 
         this.getAboutButton().setText(lang.ABOUT);
 
@@ -137,9 +155,9 @@ Ext.define('EasyTreatyApp.view.Menu', {
 
         this.getLanguageSelectField().setLabel(lang.LANGUAGE);
 
-        this.getHospitalField().setLabel('<img src = "resources/icons/Medical centers.png" width=35px height=35px align=top>' + lang.MEDICAL_CENTERS);
-        this.getDoctorField().setLabel('<img src = "resources/icons/Doctors.png" width=35px height=35px align=top>' + lang.DOCTORS);
-        this.getPharmacyField().setLabel('<img src = "resources/icons/Pharmacies.png" width=35px height=35px align=top>' + lang.PHARMACIES);
+        this.getHospitalField().setLabel('<img src = "resources/icons/Medical centers.png" width=35px height=35px align=top style="margin-right:20px;">' + lang.MEDICAL_CENTERS);
+        this.getDoctorField().setLabel('<img src = "resources/icons/Doctors.png" width=35px height=35px align=top style="margin-right:20px;">' + lang.DOCTORS);
+        this.getPharmacyField().setLabel('<img src = "resources/icons/Pharmacies.png" width=35px height=35px align=top style="margin-right:20px;">' + lang.PHARMACIES);
 
         if (EasyTreatyApp.config.getLoggedIn()) {
             this.getLogInButton().setText(lang.LOG_OUT);
@@ -267,7 +285,8 @@ Ext.define('EasyTreatyApp.view.Menu', {
      * @return {Button}
     */
     getLogInButton: function () {
-        return this.getComponent(6);
+        //return this.getComponent(6);
+        return this.getComponent(1);
     },
 
 
@@ -282,7 +301,8 @@ Ext.define('EasyTreatyApp.view.Menu', {
     },
 
     getSavedButton: function () {
-        return this.getComponent(1);
+        //return this.getComponent(1);
+        return this.getComponent(6);
     },
     /**
      * Executed at log out

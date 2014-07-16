@@ -151,6 +151,16 @@ Ext.define('EasyTreatyApp.view.ListView', {
 
         this.add(toolbar);
         
+    },
+
+    getToolBar: function(){
+        return this.getComponent(1);
+    },
+
+    setLanguage: function () {
+
+        var lang = EasyTreatyApp.config.getLanguage();
+        this.getToolBar().setTitle('<p style="color:#0d66f2;">' + lang.SAVED + '</p>');
     }
 
 

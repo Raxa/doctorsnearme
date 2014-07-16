@@ -163,21 +163,23 @@ Ext.define('EasyTreatyApp.view.MapView', {
     addSearchBox: function(){
         this.add({
             xtype: 'searchfield',
-            label: '<img class="list" src="resources/icons/User_30_30.png">',
+            label: '<div><img class="list" src="resources/icons/User_30_30.png"><img class="more" src="resources/icons/moreArrow.png"></div>',
             labelAlign: 'right',
-            labelWidth:'10%',
+            // labelWidth:'10%',
+            labelWidth: '65px',
             name: 'search',
             top: '3%',
             width: '85%',
             height:'30px',
             left: '5%',
+            cls:'search-box',
             style: 'border:0;border-radius:8px'
         });
 
         var me = this;
         this.addListener({
             element: 'element',
-            delegate: 'img.list',
+            delegate: 'img.more',
             tap: function (event, node, options, eOpts) {
                 console.log("show menu");
                 me.fireEvent('showmenu');
