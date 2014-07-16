@@ -79,37 +79,38 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                      {
                          xtype: 'button',
                        //  text: '<div><img src = "resources/icons/Phone_40_40.png" style="height:30px;width:30px;"></br><a href="tel:' + phoneNumber + '"></div>',
-                         width: '20%',
+                      //   width: '20%',
                          height:'100%'
                      },
                      {
                          xtype:'spacer',
-                         width:'6%'
+                      //   width:'6%'
                      },
                      {
                          xtype: 'button',
                          text: '<img src = "resources/icons/Arrow_40_40.png" style="height:30px;width:30px;"></br>Direct Me',
-                         width: '20%',
+                     //    width: '20%',
                          height:'100%'
                      },
                      {
                          xtype: 'spacer',
-                         width: '6%'
+                      //   width: '6%'
                      },
                      {
                          xtype: 'button',
                         // text: '<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Save Me',
-                         width: '20%',
+                      //   width: '20%',
                          height: '100%'
                      },
                      {
                          xtype: 'spacer',
-                         width: '6%'
+                         //   width: '6%'
+                         hidden: true
                      },
                      {
                          xtype: 'button',
                          cls: 'like',
-                         width: '20%',
+                      //   width: '20%',
                          hidden:true
                      }
                  ]
@@ -271,6 +272,10 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         return this.getMiddleToolbar().getComponent(6);
     },
 
+    getLikeSpacer: function () {
+        return this.getMiddleToolbar().getComponent(5);
+    },
+
     getBackButton: function(){
         return this.getTopToolbar().getComponent(0);
     },
@@ -371,6 +376,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
     toggleLikeComment: function (value) {
         this.getLikeButton().setHidden(value);
+        this.getLikeSpacer().setHidden(value);
         this.getCommentContainer().setHidden(value);
     },
     
