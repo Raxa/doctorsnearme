@@ -98,16 +98,16 @@ Ext.define('EasyTreatyApp.view.MapView', {
         var map = this.down('locationmap');
         console.log(map.getBaseLocation());
        
-        var zoom=10;
+        var zoom=15;
         
 
-        if (radius < 5) {
-            zoom = 20;
-        }
-        else if (radius < 20) {
+        if (radius < 5000) {
             zoom = 15;
         }
-        else if (radius < 50) {
+        else if (radius < 2000) {
+            zoom = 14;
+        }
+        else if (radius < 50000) {
             zoom = 13;
         }
         else {
