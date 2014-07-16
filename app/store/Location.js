@@ -149,6 +149,12 @@ Ext.define('EasyTreatyApp.store.Location', {
 
                 var idString = record.get('id');
 
+              /*  var tpl = record.get('name') + '</br>' + record.get('formatted_address') + '</br><button class="direction" id=' + idString + '>Get Directions</button><button class="more-details" id=' + idString + '>More Details</button>';
+                tpl = tpl + '</br><button class="call" type="button"><a href="tel:' + record.get('international_phone_number') + '">Call</a></button>' + record.get('international_phone_number');
+
+                infowindow.setContent('<div class="info-window">' + tpl + '</div>')
+                infowindow.open(map.getMap(), marker);*/
+
                 lang = EasyTreatyApp.config.getLanguage();
 
                 var name = place.name;
@@ -159,6 +165,7 @@ Ext.define('EasyTreatyApp.store.Location', {
 
                 var moredetails = '<img class="more-details" id =' + idString + ' src = "resources/icons/i_30_30.png">';
                 var like = '<button class="like-img like" id=like-' + idString + '>';
+                var doctorname = '<div>' + '<p style="padding:2px;word-wrap:break-word;">' + name + '</p>' + moredetails + like + '</div>';
                 var call = "";
                 if (phoneNumber != null) {
                     call = '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="call"><a href="tel:' + phoneNumber + '">Call</a></button>';
@@ -167,18 +174,7 @@ Ext.define('EasyTreatyApp.store.Location', {
 
                 var infowindow = new google.maps.InfoWindow();
 
-               // var tpl = '<table><tr><td>' + userimg + '</td><td>' + doctorname + '</td></tr></table>' + '<table><tr><td>' + call + '</td>' + '<td>' + directions + '</td>' + '</tr>' + '</table>';
-
-                var firstRow = '<div  class="inlineblock">' + userimg + '</div>' +
-                         '<div class="inlineblock">' +
-                               '<div class="inlineblock"><p class="wordstyle">' + name + '</p></div>' +
-                               '<div class="inlineblock">' + moredetails + '</div>' +
-                               '<div>' + like + '</div>' +
-                         '</div>';
-
-                var secondRow = '<div class="inlineblock">' + call + '</div>' +
-                               '<div class="inlineblock">' + directions + '</div>';
-                var tpl = '<div display="table-column-group">' + firstRow + '</div>' + '<div display="table-column-group">' + secondRow + '</div>';
+                var tpl = '<table><tr><td>' + userimg + '</td><td>' + doctorname + '</td></tr></table>' + '<table><tr><td>' + call + '</td>' + '<td>' + directions + '</td>' + '</tr>' + '</table>';
 
                 infowindow.setContent(tpl);
                 infowindow.open(map.getMap(), marker);
