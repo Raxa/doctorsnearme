@@ -12,9 +12,11 @@ Ext.define('EasyTreatyApp.view.MapView', {
             animation: 'pop'
         },
 
+        // currentSearch: null,
         currentSearch: null,
-        searchRadius: 1000,
-        specialties:[],
+        searchRadius: null,
+        //specialties:[],
+        specialties: null,
         border: 3,
         style: 'border-color: gray; border-style: solid;',
 
@@ -90,16 +92,26 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
     zoomMap: function (radius) {
         console.log("inside zoommap");
-        map =  this.down('locationmap');
+        console.log("radius: " + radius);
+        
+
+        var map = this.down('locationmap');
+        console.log(map.getBaseLocation());
        
         var zoom=10;
-        if (radius > 75000) {
-            zoom = 10;
-        } else if (radius > 10000) {
-            zoom = 12;
+        
+
+        if (radius < 5) {
+            zoom = 20;
+        }
+        else if (radius < 20) {
+            zoom = 15;
+        }
+        else if (radius < 50) {
+            zoom = 13;
         }
         else {
-            zoom=15
+            zoom = 12;
         }
 
         map.setMapOptions({
@@ -230,10 +242,13 @@ Ext.define('EasyTreatyApp.view.MapView', {
     },
 
     updateSearchRadius: function () {
+        console.log("inside update search radius");
         var currentSearch = this.getCurrentSearch();
 
         if (currentSearch != null) {
             this.fireEvent('choicedone', currentSearch);
+        } else {
+            this.fireEvent('choicedone', 0);
         }
     },
 
@@ -242,6 +257,8 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
         if (currentSearch != null) {
             this.fireEvent('choicedone', currentSearch);
+        } else {
+            this.fireEvent('choicedone', 0);
         }
     },
 

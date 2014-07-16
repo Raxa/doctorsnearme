@@ -55,12 +55,14 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         mapview.setActiveItem(0);
     },
 
-    onBaseChange: function(initialUserLocationSetting){
+    onBaseChange: function (initialUserLocationSetting) {
+        console.log("in mapview controller :base changed");
         var currentSearch = this.getMapView().getCurrentSearch();
 
         if (currentSearch != null) {
             this.onChoice(currentSearch);
         } else if (initialUserLocationSetting) {
+            console.log("initial one");
             this.onChoice(0);
         }
     },
@@ -215,11 +217,17 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         // mapview.getBottomBar().setTitle(title);
 
         console.log("inside mapview controller, base: " + base);
-        
-      //  mapview.getStore().populate(base, type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
-        mapview.getStore().populate(new google.maps.LatLng(6.897358, 79.863437), type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
 
-        this.getMapView().zoomMap(parseInt(mapview.getSearchRadius()));
+        var radius1 = mapview.getSearchRadius();
+        var radius2 = radius1 == null ? 2000 : radius1;
+
+        var specialties1 = mapview.getSpecialties();
+        var specialties2 = specialties1 == null ? [] : specialties1;
+        
+        mapview.getStore().populate(base, type, radius2, locationmap, specialties2);
+     //   mapview.getStore().populate(new google.maps.LatLng(6.897358, 79.863437), type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
+
+        this.getMapView().zoomMap(parseInt(radius2));
     }
 
 

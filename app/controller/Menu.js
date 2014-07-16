@@ -70,6 +70,7 @@ Ext.define('EasyTreatyApp.controller.Menu', {
     },
 
     onSearchRadiusChange: function (newRadius) {
+        console.log("on search radius change");
         this.getMapView().setSearchRadius(newRadius*1000);
     },
 

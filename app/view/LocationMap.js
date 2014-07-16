@@ -293,7 +293,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             }
         });
 
-        geo.updateLocation();
+      //  geo.updateLocation();
         this.setGeo(geo);
     },
 

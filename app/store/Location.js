@@ -74,15 +74,18 @@ Ext.define('EasyTreatyApp.store.Location', {
         console.log("inside store");
         console.log(keywords);
         console.log(this.getRange());
-
+        console.log("map:");
+        console.log(map);
+        console.log("type:" + type);
+        console.log("radius:" + radius);
         this.storeClear();
 
         var request;
         var service = new google.maps.places.PlacesService(map.getMap());
         var me = this;
-
+        
         if (type == 'pharmacy' || keywords.length == 0) {        
-
+            console.log("pharmacy or zero keywords");
             service.radarSearch({
                 location: latLng,
                 radius: radius,
@@ -91,6 +94,8 @@ Ext.define('EasyTreatyApp.store.Location', {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
                     console.log("no of results: " + results.length);
                     me.getPlaceDetails(service, results, 0,searchCount);
+                } else {
+                    console.log("status:"); console.log(status);
                 }
 
             });

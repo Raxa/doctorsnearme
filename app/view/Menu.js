@@ -57,26 +57,27 @@ Ext.define('EasyTreatyApp.view.Menu', {
                               //  label: 'Hospitals',
                               labelWidth: '75%',
                               padding: '5 0 5 0',
+                              checked:true
                              
                           },
-                {
-                    //3
-                    xtype: 'radiofield',
-                    name: 'search',
-                    value: 'doctor',
-                    // label: 'Doctors',
-                    labelWidth: '75%',
-                    padding: '5 0 5 0'
-                },
-                {
-                    //4
-                    xtype: 'radiofield',
-                    name: 'search',
-                    value: 'pharmacy',
-                    // label: 'Pharmacies',
-                    labelWidth: '75%',
-                    padding: '5 0 5 0'
-                }
+                        {
+                            //3
+                            xtype: 'radiofield',
+                            name: 'search',
+                            value: 'doctor',
+                            // label: 'Doctors',
+                            labelWidth: '75%',
+                            padding: '5 0 5 0'
+                        },
+                        {
+                            //4
+                            xtype: 'radiofield',
+                            name: 'search',
+                            value: 'pharmacy',
+                            // label: 'Pharmacies',
+                            labelWidth: '75%',
+                            padding: '5 0 5 0'
+                        }
 
                     ]
                 },
@@ -360,11 +361,11 @@ Ext.define('EasyTreatyApp.view.Menu', {
     },
 
     getHospitalField: function () {
-        return this.getFieldSet().getComponent(1);
+        return this.getFieldSet().getComponent(0);
     },
 
     getDoctorField: function () {
-        return this.getFieldSet().getComponent(0);
+        return this.getFieldSet().getComponent(1);
     },
 
     getPharmacyField: function () {
