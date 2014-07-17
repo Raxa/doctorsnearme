@@ -46,7 +46,9 @@ Ext.application({
         '1496x2048': 'resources/startup/1496x2048.png'
     },
 
-    launch: function() {
+    launch: function () {
+
+        Ext.Viewport.innerElement.addCls('viewport-inner');
         // Destroy the #appLoadingIndicator element
         //Ext.fly('appLoadingIndicator').destroy();
         Ext.fly('splash').destroy();
