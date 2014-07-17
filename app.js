@@ -50,7 +50,7 @@ Ext.application({
         // Destroy the #appLoadingIndicator element
         //Ext.fly('appLoadingIndicator').destroy();
         Ext.fly('splash').destroy();
-        Ext.fly('circularG').destroy();
+        Ext.fly('bluespin').destroy();
         //var myMap = Ext.create('EasyTreatyApp.view.LocationMap');
         //Ext.Viewport.add(myMap);
         var menu = Ext.create('EasyTreatyApp.view.Menu');
