@@ -68,110 +68,7 @@
             right:5%;
         }
 
-        .load-icon-poistion{
-            top:70%;
-            left:47%;
-        }
-        #circularG {
-            position: relative;
-            width: 40px;
-            height: 40px;
-        }
-
-        .circularG {
-            position: absolute;
-            background-color: #000000;
-            width: 9px;
-            height: 9px;
-            -webkit-border-radius: 6px;
-            -webkit-animation-name: bounce_circularG;
-            -webkit-animation-duration: 1.04s;
-            -webkit-animation-iteration-count: infinite;
-            -webkit-animation-direction: linear;
-            border-radius: 6px;
-            animation-name: bounce_circularG;
-            animation-duration: 1.04s;
-            animation-iteration-count: infinite;
-            animation-direction: linear;
-        }
-
-        #circularG_1 {
-            left: 0;
-            top: 16px;
-            -webkit-animation-delay: 0.39s;
-            animation-delay: 0.39s;
-        }
-
-        #circularG_2 {
-            left: 4px;
-            top: 4px;
-            -webkit-animation-delay: 0.52s;
-            animation-delay: 0.52s;
-        }
-
-        #circularG_3 {
-            top: 0;
-            left: 16px;
-            -webkit-animation-delay: 0.65s;
-            animation-delay: 0.65s;
-        }
-
-        #circularG_4 {
-            right: 4px;
-            top: 4px;
-            -webkit-animation-delay: 0.78s;
-            animation-delay: 0.78s;
-        }
-
-        #circularG_5 {
-            right: 0;
-            top: 16px;
-            -webkit-animation-delay: 0.91s;
-            animation-delay: 0.91s;
-        }
-
-        #circularG_6 {
-            right: 4px;
-            bottom: 4px;
-            -webkit-animation-delay: 1.04s;
-            animation-delay: 1.04s;
-        }
-
-        #circularG_7 {
-            left: 16px;
-            bottom: 0;
-            -webkit-animation-delay: 1.17s;
-            animation-delay: 1.17s;
-        }
-
-        #circularG_8 {
-            left: 4px;
-            bottom: 4px;
-            -webkit-animation-delay: 1.3s;
-            animation-delay: 1.3s;
-        }
-
-        @-webkit-keyframes bounce_circularG {
-            0% {
-                -webkit-transform: scale(1);
-            }
-
-            100% {
-                -webkit-transform: scale(.3);
-            }
-        }
-
-        @keyframes bounce_circularG {
-            0% {
-                transform: scale(1);
-            }
-
-            100% {
-                transform: scale(.3);
-            }
-        }
-
-        /*I put these*/
+      
 
         /*another preloader*/
         /* Animation keyframes - you need to add prefixes */
@@ -225,7 +122,7 @@
     <!-- The line below must be kept intact for Sencha Command to build your application -->
     <link href="resources/css/app.css" rel="stylesheet" type="text/css" />
    <!-- <script id="microloader" type="text/javascript" src=".sencha/app/microloader/development.js"></script>-->
-    <script type="text/javascript" src="touch/sencha-touch-debug.js"></script>
+    <script type="text/javascript" src="touch/sencha-touch-all.js"></script>
     <script type="text/javascript" src="app.js"></script>
    <!-- <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>-->
     <!--Google places-->
@@ -234,30 +131,6 @@
     <script type="text/javascript" src="app/lang/si.js"></script>
 </head>
 <body>
-  <!--  <div id="appLoadingIndicator">
-        <div></div>
-        <div></div>
-        <div></div>
-    </div>-->
-    <!--    <div id="splash"></div>
-        <div id="circularG" class="load-icon-poistion">
-            <div id="circularG_1" class="circularG">
-            </div>
-            <div id="circularG_2" class="circularG">
-            </div>
-            <div id="circularG_3" class="circularG">
-            </div>
-            <div id="circularG_4" class="circularG">
-            </div>
-            <div id="circularG_5" class="circularG">
-            </div>
-            <div id="circularG_6" class="circularG">
-            </div>
-            <div id="circularG_7" class="circularG">
-            </div>
-            <div id="circularG_8" class="circularG">
-            </div>
-        </div>-->
 
     <!-- Loading animation container -->
     <div id="splash"></div>
