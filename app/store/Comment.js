@@ -9,7 +9,8 @@
     setTheProxy: function (locationid) {
         this.setProxy({
             type: 'ajax',
-            url: 'http://192.168.122.1:8888/getComments',
+            //  url: 'http://192.168.122.1:8888/getComments',
+            url:EasyTreatyApp.config.getRatingServerDomain()+'getComments',
             extraParams: {
                 location: locationid
             },

@@ -35,7 +35,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         this.callParent();
         console.log("inside initialize");
 
-        this.enableBubble(['getdirections', 'moredetails', 'togglefavorite','basechanged']);
+        this.enableBubble(['getdirections', 'moredetails', 'togglefavorite','basechanged','like']);
 
         this.setLocationOfTheUser();
         var me = this;
@@ -64,16 +64,25 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             //delegate: 'div.star',
             tap: function (event, node, options, eOpts) {
                 var button = Ext.get(node.id);
-
+                console.log("like tap");
+                console.log(button);
                 if (button.hasCls('like')) {
-                    button.removeCls("like");
-                    button.addCls("dislike");
+                    console.log("has class like");
+                    console.log(node.id);
+                    console.log(node.id.slice(0, -5));
+                    //button.removeCls("like");
+                    //button.addCls("dislike");
+                    me.fireEvent('like', true, node.id.slice(0, -5),button);
                    // me.fireEvent('togglefavorite', node.id.slice(0,-4),false);
                 }
                 else {
-                    button.removeCls("dislike");
-                    button.addCls("like");
-                  //  me.fireEvent('togglefavorite',node.id.slice(0,-4), true);
+                    console.log("doesnt have class like");
+                    console.log(node.id);
+                    console.log(node.id.slice(0, -5));
+                    //button.removeCls("dislike");
+                    //button.addCls("like");
+                    //  me.fireEvent('togglefavorite',node.id.slice(0,-4), true);
+                    me.fireEvent('like', false, node.id.slice(0, -5),button);
                 }                               
             }
         });
@@ -143,6 +152,8 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         google.maps.event.addListener(marker, 'click', function (pos) {
             var infowindow = new google.maps.InfoWindow();
 
+            console.log("on click");
+            console.log(me.getStore().getById('8f91f36edf442717340da17ad65e9b9a1304284f'));
             me.getStore().setDetailsForTheRecord(me, record,infowindow,marker);
            
         });

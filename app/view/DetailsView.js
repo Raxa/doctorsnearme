@@ -341,7 +341,13 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
            this.getLikeButton().on('tap', function () {
                console.log("clicked like");
-               me.fireEvent('like', me.getData());
+               if (me.getLikeButton().getCls()=='like') {
+                   me.fireEvent('like', true, me);
+               }
+               else {
+                   me.fireEvent('like',false, me);
+               }
+              // me.fireEvent('like', me.getData());
            });
 
            this.getReviewButton().on('tap', function () {

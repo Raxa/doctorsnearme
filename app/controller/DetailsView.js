@@ -59,41 +59,12 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
     },
 
 
-    like: function (data) {
+
+    //like: function (data) {
+    like: function (like,detailsView) {
         console.log("inside like");
-        var me = this;
-        var detailsView = this.getDetailsView();
-        var previouslyLiked = detailsView.getLiked();
-        Ext.Ajax.request({
-            // Ext.data.JsonP.request({
-            // url: 'http://192.168.122.1:8888/like',
-            url:EasyTreatyApp.config.getRatingServerDomain()+'like',
-            method: 'GET',
-            params: {
-                location: data.id,
-                user: EasyTreatyApp.config.getUser().get('personUuid'),
-                //like: 1
-                like:previouslyLiked==true?0:1
-            },
-            success: function (response, opts) {
 
-                console.log("success");
-                console.log(response);
-                if (previouslyLiked) {
-                    detailsView.toggleLikeButtonState(false);
-                    data.likeCount = data.likeCount - 1;
-                } else {
-                    detailsView.toggleLikeButtonState(true);
-                    data.likeCount = data.likeCount + 1;
-                }
-                detailsView.setData(data);
-
-            },
-            failure: function (response, opts) {
-                console.log("failure");
-                console.log(response);
-            }
-        });
+        this.getMapView().getStore().like(like, detailsView.getData().id, null, detailsView);       
     },
 
     comment: function (commentField, detailsView) {

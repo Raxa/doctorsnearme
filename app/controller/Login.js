@@ -147,6 +147,7 @@ Ext.define('EasyTreatyApp.controller.Login', {
             detailsView.toggleLikeComment(false);
         }
         this.proceed();
+        this.getMapView().getStore().setLikeForRecords();
     }
 
 })

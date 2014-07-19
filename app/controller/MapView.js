@@ -21,7 +21,8 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 showfavorites: "onShowFavorites",
                 basechanged: "onBaseChange",
                 backtomap: "onBackToMap",
-                textsearch:"onTextSearch"
+                textsearch: "onTextSearch",
+                like:"onLike"
             },
             detailsView: {
                 //after new design
@@ -33,6 +34,10 @@ Ext.define('EasyTreatyApp.controller.MapView', {
             }
         }
         
+    },
+
+    onLike: function (like, id, button) {
+        this.getMapView().getStore().like(like, id, button,null);
     },
 
     onTextSearch: function(searchField){
@@ -151,52 +156,17 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         
         detailsView.toggleLikeComment(!loggedIn);
 
-        if(loggedIn){
-            this.checkLiked(detailsView,record);
+        //if(loggedIn){
+        //    this.checkLiked(detailsView,record);
+        //}
+        //   detailsView.getLikeCount(detailsView.getData().id);
+        if (loggedIn) {
+            detailsView.toggleLikeButtonState(record.get('isLiked'));
         }
-     //   detailsView.getLikeCount(detailsView.getData().id);
 
         Ext.Viewport.add(detailsView);
         Ext.Viewport.setActiveItem(detailsView);
         
-    },
-
-    checkLiked: function (detailsView,record) {
-        var me = this;
-        Ext.Ajax.request({
-            // url: 'http://localhost:8888/checkLike',
-            // url: 'http://192.168.122.1:8888/checkLike',
-            url:EasyTreatyApp.config.getRatingServerDomain()+'checkLike',
-            method: 'GET',
-            params: {
-                location: record.get('id'),
-                user: EasyTreatyApp.config.getUser().get('personUuid')
-            },
-            success: function (response, opts) {
-               // Ext.Msg.alert("like success");
-                console.log("success");
-                console.log(response);
-                // var like = Ext.JSON.decode(response.responseText).likes;
-                var like = Ext.JSON.decode(response.responseText).data[0].status;
-                console.log("like: " + like);
-
-                if (like == 1) {
-                    console.log("like==1");
-                    detailsView.toggleLikeButtonState(true);
-                    detailsView.setLiked(true);
-                } else {
-                    console.log("like!=1");
-                    detailsView.toggleLikeButtonState(false);
-                    detailsView.setLiked(false);
-                }
-
-            },
-            failure: function (response, opts) {
-                Ext.Msg.alert("like failure");
-                console.log("failure");
-                console.log(response);
-            }
-        });
     },
 
     showMenu: function () {
