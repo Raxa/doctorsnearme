@@ -104,7 +104,6 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             case 2: markerImg = 'Pharmacies.png'
                 break;
         }
-        console.log("oh yeah location added!!!! ");
 
         var me = this;
         var record = this.getStore().last();
@@ -134,8 +133,6 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             var loc = record.get('geometry').location;
             var lat = parseFloat(loc.k);
             var lng = parseFloat(loc.A);
-            console.log("lat: " + lat);
-            console.log("lng: " + lng);
             latlng = new google.maps.LatLng(lat, lng);
         }
 
@@ -146,20 +143,73 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             icon: 'resources/icons/' + markerIcon
         });
 
-      
-        console.log("inside add location marker");
-
         google.maps.event.addListener(marker, 'click', function (pos) {
             var infowindow = new google.maps.InfoWindow();
 
-            console.log("on click");
-            console.log(me.getStore().getById('8f91f36edf442717340da17ad65e9b9a1304284f'));
-            me.getStore().setDetailsForTheRecord(me, record,infowindow,marker);
+            // me.getStore().setDetailsForTheRecord(me, record,infowindow,marker);
+
+            /////////////
+
+            lang = EasyTreatyApp.config.getLanguage();
+
+            var name = record.get('name');
+
+            if(name !=null)
+           {
+                me.setInfowindowContent(record, marker);
+                
+            } else {
+                me.getStore().setDetailsForTheRecord( record,marker);
+            }
            
         });
         this.getLocationMarkers().push(marker);
     },
 
+    setInfowindowContent: function (record,marker) {
+        var phoneNumber = record.get('international_phone_number');
+        var idString = record.get('id');
+
+        var name = record.get('name');
+        var userimg = '<img class="user-img" src="test.png">';
+
+        var moredetails = '<img class="more-details" id =' + idString + ' src = "resources/icons/i_30_30.png">';
+
+        var like = "";
+
+        if (EasyTreatyApp.config.getLoggedIn()) {
+
+            if (!record.get('isLiked')) {
+                console.log("not like");
+                like = '<button class="like-img like" id=' + idString + '-like>';
+            } else {
+                console.log("like");
+                like = '<button class="like-img dislike" id=' + idString + '-like>';
+            }
+        }
+
+        var call = "";
+        if (phoneNumber != null) {
+            call = '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="call"><a href="tel:' + phoneNumber + '">Call</a></button>';
+        }
+        var directions = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
+
+        var infowindow = new google.maps.InfoWindow();
+
+        var firstRow = '<div  class="inlineblock">' + userimg + '</div>' +
+                 '<div class="inlineblock">' +
+                       '<div class="inlineblock"><p class="wordstyle">' + name + '</p></div>' +
+                       '<div class="inlineblock">' + moredetails + '</div>' +
+                       '<div>' + like + '</div>' +
+                 '</div>';
+
+        var secondRow = '<div class="inlineblock">' + call + '</div>' +
+                       '<div class="inlineblock">' + directions + '</div>';
+        var tpl = '<div display="table-column-group">' + firstRow + '</div>' + '<div display="table-column-group">' + secondRow + '</div>';
+
+        infowindow.setContent(tpl);
+        infowindow.open(this.getMap(), marker);
+    },
 
     clearMarkers: function (markers) {
         Ext.Array.forEach(markers, function (marker) {

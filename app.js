@@ -56,6 +56,17 @@ Ext.application({
         Ext.fly('bluespin').destroy();
 
 
+        var store = Ext.create('EasyTreatyApp.store.OpenmrsLocation');
+
+        store.load();
+        store.on('load', function () {
+            console.log("store loaded");
+            //store.getRange().forEach(function (record) {
+            //    console.log(record.getData());
+            //});
+
+        });
+
        var menu = Ext.create('EasyTreatyApp.view.Menu');
         Ext.Viewport.add(menu);
 

@@ -54,9 +54,9 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         if (nextRecord == null) {
             nextRecord = store.getAt(0);
         }
-        store.setDetails(nextRecord);
 
-       // this.onLocationSelect(nextRecord);
+
+        this.onLocationSelect(nextRecord);
     },
 
     onLike: function (like, id, button) {
@@ -104,13 +104,11 @@ Ext.define('EasyTreatyApp.controller.MapView', {
     },
 
     onBaseChange: function (initialUserLocationSetting) {
-        console.log("in mapview controller :base changed");
         var currentSearch = this.getMapView().getCurrentSearch();
 
         if (currentSearch != null) {
             this.onChoice(currentSearch);
         } else if (initialUserLocationSetting) {
-            console.log("initial one");
             this.onChoice(0);
         }
     },
@@ -124,8 +122,7 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         var location;
         store.getRange().forEach(function (record) {
             location = Ext.JSON.decode(record.get('query'));
-            console.log("decoded...");
-            console.log(location);
+
             locationStore.addFavoriteItem(location);
         });
 

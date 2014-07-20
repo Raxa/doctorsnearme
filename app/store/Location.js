@@ -6,7 +6,8 @@ Ext.define('EasyTreatyApp.store.Location', {
 
     config: {
         model: 'EasyTreatyApp.model.Location',
-        service:null
+        service: null,
+        storeId: 'location-store'
     },
 
     textSearch: function (latLng, types, radius, map, query) {
@@ -25,6 +26,7 @@ Ext.define('EasyTreatyApp.store.Location', {
                 Ext.Array.forEach(results, function (place) {
                     me.addItem(place);
                 });
+                me.getPlaceDetails(results, 0);
             } else {
                 console.log("status:"); console.log(status);
             }
@@ -33,14 +35,7 @@ Ext.define('EasyTreatyApp.store.Location', {
     },
 
     radarSearch: function (latLng, type, radius, map, keywords) {
-        
-        console.log("inside store");
-        console.log(keywords);
-        console.log(this.getRange());
-        console.log("map:");
-        console.log(map);
-        console.log("type:" + type);
-        console.log("radius:" + radius);
+                
         this.storeClear();
 
         var request;
@@ -59,6 +54,8 @@ Ext.define('EasyTreatyApp.store.Location', {
                     Ext.Array.forEach(results, function (place) {
                         me.addItem(place);
                     });
+                    console.log(results[0]);
+                    me.getPlaceDetails(results, 0);
                 } else {
                     console.log("status:"); console.log(status);
                 }
@@ -80,6 +77,9 @@ Ext.define('EasyTreatyApp.store.Location', {
                         Ext.Array.forEach(results, function (place) {
                             me.addItem(place);
                         });
+
+                        //trying filling store early
+                        me.getPlaceDetails(results, 0);
                     }
 
                 });
@@ -99,10 +99,8 @@ Ext.define('EasyTreatyApp.store.Location', {
         //  if (this.isFavorite(record.reference)) {
         if (this.isFavorite(record.place_id)) {
             //place.isFavorite=true;
-            console.log("favorite found");
             this.last().set('isFavorite', true);
             //this.findRecord('reference', record.reference).set('isFavorite', true);
-            console.log(this.last());
         }
 
         if (EasyTreatyApp.config.getLoggedIn()) {
@@ -160,16 +158,15 @@ Ext.define('EasyTreatyApp.store.Location', {
 
     isFavorite:function(reference){
         var currentFav = EasyTreatyApp.config.getFavorites();
-        console.log("inside is favorite");
-        console.log(reference);
+
         var newArray = Ext.Array.filter(currentFav, function (item) {
-            console.log(item.reference);
+
             //if (item.reference == reference) {
             //    console.log("equal!!!!!!!!!!!!");
             //    return true;
             //}
             if (item.place_id == reference) {
-                console.log("equal!!!!!!!!!!!!");
+
                 return true;
             }
         });
@@ -180,6 +177,81 @@ Ext.define('EasyTreatyApp.store.Location', {
         }
     },
 
+    getPlaceDetails: function (results, i) {
+        var me = this;
+        
+        var service = this.getService();
+        service.getDetails(
+            {
+                placeId: results[i].place_id,
+                //key: 'AIzaSyCz2FbWnJQh8hez_0fQ7J-QvE7jzCvWSgw&'
+            }, function (place, status1) {
+                if (status1 == google.maps.places.PlacesServiceStatus.OK) {
+
+                 //   me.addItem(place);
+
+                    var record = me.findRecord('place_id', results[i].place_id);
+                    if (record != null) {
+                        record.set('name', place.name);
+                        record.set('formatted_address', place.formatted_address);
+                        record.set('international_phone_number', place.international_phone_number);
+                        record.set('reviews', place.reviews);
+                        record.set('opening_hours', place.opening_hours);
+                        record.set('types', place.types);
+                    }
+
+                }
+                else {
+                    console.log("failed");
+                    console.log(status1);
+                }
+
+            });
+        if (i < results.length - 1) {
+            //test
+            Ext.Function.defer(function () {
+                me.getPlaceDetails(results, i + 1)
+                //}, 290, me);
+            }, 290, me);
+            return;
+
+        }
+        else {
+            me.checkForRaxaDoctors();
+            return;
+        }
+    },
+
+    checkForRaxaDoctors: function () {
+        console.log("inside check for raxa doctors");
+        var raxaStore = Ext.data.StoreManager.lookup('raxadoctor-store');
+        var lat, lng, me = this;
+
+        console.log(raxaStore.getAllCount());
+        raxaStore.getRange().forEach(function (record) {
+            lat = record.get('latitude');
+            lng = record.get('longitude');
+
+            me.filterByDistance(lat, lng);
+
+            console.log(me.getAllCount());
+            if (me.getCount() > 0) {
+                console.log("count > 0");
+                me.filterByName(record.get('name'));
+            }
+            if (me.getCount() > 0) {
+                var rec = me.first();
+                rec.set('isRaxaDoctor', true);
+                rec.set('raxa_uuid',record.get('uuid'));
+            }
+            me.clearFilter();
+
+        });
+
+
+    },
+
+    //NOT USED NOW. THE EVENT INSIDE THIS IS NOW FIRED INSIDE setDetailsForTheRecord FUNCTION. IF YOU ARE GONNA USE THIS AGAIN PUT ANOTHER EVENT NAME
     //this was added to set details for the record before going to next location by the forward button in details view
     setDetails: function(record){
         var service = this.getService();
@@ -206,12 +278,14 @@ Ext.define('EasyTreatyApp.store.Location', {
                 }
                 else {
                     console.log("failed");
-                    console.log(status1);
+                    console.log(status);
                 }
             });
     },
+
+    //USED IF THERE IS A RECORD THAT HASN'T BEEN SET DUE TO OVER QUERY LIMIT
     //use if you are going to make the request when clicking on a marker
-    setDetailsForTheRecord: function (map, record, infowindow, marker) {
+    setDetailsForTheRecord: function (record,  marker) {
       //  var service = new google.maps.places.PlacesService(map.getMap());
         var service = this.getService();
         var me = this;
@@ -223,16 +297,8 @@ Ext.define('EasyTreatyApp.store.Location', {
             }, function (place, status) {
             
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
-                    //record.set('name', place.name);
-                    //record.set('formatted_address', place.formatted_address);
-                    //record.set('international_phone_number', place.international_phone_number);
-                    //record.set('reviews', place.reviews);
-                    //record.set('opening_hours', place.opening_hours);
-                    //record.set('types', place.types);
 
-              //  var idString = record.get('id');
-
-                lang = EasyTreatyApp.config.getLanguage();
+            /*    lang = EasyTreatyApp.config.getLanguage();
 
                 var name = place.name;
                 var phoneNumber = place.international_phone_number;
@@ -256,9 +322,7 @@ Ext.define('EasyTreatyApp.store.Location', {
                         like = '<button class="like-img dislike" id=' + idString + '-like>';
                     }
                 }
-                //check like
-               
-               // var like = '<button class="like-img like" id=like-' + idString + '>';
+
                 var call = "";
                 if (phoneNumber != null) {
                     call = '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="call"><a href="tel:' + phoneNumber + '">Call</a></button>';
@@ -266,8 +330,6 @@ Ext.define('EasyTreatyApp.store.Location', {
                 var directions = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
 
                 var infowindow = new google.maps.InfoWindow();
-
-               // var tpl = '<table><tr><td>' + userimg + '</td><td>' + doctorname + '</td></tr></table>' + '<table><tr><td>' + call + '</td>' + '<td>' + directions + '</td>' + '</tr>' + '</table>';
 
                 var firstRow = '<div  class="inlineblock">' + userimg + '</div>' +
                          '<div class="inlineblock">' +
@@ -281,15 +343,16 @@ Ext.define('EasyTreatyApp.store.Location', {
                 var tpl = '<div display="table-column-group">' + firstRow + '</div>' + '<div display="table-column-group">' + secondRow + '</div>';
 
                 infowindow.setContent(tpl);
-                infowindow.open(map.getMap(), marker);
+                infowindow.open(map.getMap(), marker);*/
 
-                    //Put these here to make infowindow popup soon.
                 record.set('name', place.name);
                 record.set('formatted_address', place.formatted_address);
                 record.set('international_phone_number', place.international_phone_number);
                 record.set('reviews', place.reviews);
                 record.set('opening_hours', place.opening_hours);
                 record.set('types', place.types);
+
+                me.fireEvent('detailsset', record, marker);
 
             }
             else {
@@ -358,6 +421,42 @@ Ext.define('EasyTreatyApp.store.Location', {
                 console.log(response);
             }
         });
+    },
+
+    filterByDistance: function (lat, lng) {
+        var recLat, recLng, distance,minDistance = 1;
+        this.filterBy(function (record, id) {
+            recLat = record.get('geometry').location.k;
+            recLng = record.get('geometry').location.B;
+            console.log(record);
+            console.log(lat + " " + lng);
+            console.log(recLat+" "+recLng);
+            distance = EasyTreatyApp.math.distanceCalculator(lat, lng, recLat, recLng, 'K');
+            console.log("distance: "+distance);
+            if (distance < minDistance) {
+                return true;
+            }
+        });
+    },
+
+    filterByName: function (raxaDoctorName) {
+
+        var name, splittedArray, designation;
+        var splitted = raxaDoctorName.split(" ", 5);
+        var firstName = splitted[1];
+        var lastName = splitted[splitted.length - 1];
+        this.filterBy(function (record, id) {
+            name = record.get('name');
+            splittedArray = name.split(" ", 5);
+            designation = splittedArray[0].toUpperCase();
+            if (designation == 'DR.' || designation == 'DR') {
+                if (splittedArray[1].toUpperCase() == firstName.toUpperCase() && splittedArray[splittedArray.length - 1].toUpperCase() == lastName.toUpperCase()) {
+                    return true;
+                }
+            }
+        })
     }
+
+
 
 });

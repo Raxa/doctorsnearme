@@ -83,24 +83,21 @@ Ext.define('EasyTreatyApp.view.MapView', {
     //        xtype: 'listview'
     //    });
     //},
-    onDetailsSet: function(record){
-        this.fireEvent('detailsset',record);
+    onDetailsSet: function(record,marker){
+        // this.fireEvent('detailsset',record);
+        this.getLocationMap().setInfowindowContent(record, marker);
     },
 
     onLocationAddition: function () {
-        console.log("map view onloactionaddition");
         this.down('locationmap').onLocationAddition(this.getCurrentSearch());
         this.down('listview').fillList();
 
     },
 
     zoomMap: function (radius) {
-        console.log("inside zoommap");
-        console.log("radius: " + radius);
         
 
         var map = this.down('locationmap');
-        console.log(map.getBaseLocation());
        
         var zoom=15;
         
@@ -149,9 +146,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
         var specialtyArray;
         this.getSpecialtySelectField().on('change', function (selectField, newValue, oldValue, eOpts) {
-            console.log("spec change");
-            console.log(newValue.length);
-            console.log(newValue);
+
             specialtyArray = [];
             Ext.Array.forEach(newValue, function (itemArray) {
                 Ext.Array.forEach(itemArray, function (keyword) {
@@ -160,7 +155,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
             });
 
             me.setSpecialties(specialtyArray);
-            console.log(specialtyArray);
+
         });
     },
 
@@ -257,7 +252,6 @@ Ext.define('EasyTreatyApp.view.MapView', {
     },
 
     updateSearchRadius: function () {
-        console.log("inside update search radius");
         var currentSearch = this.getCurrentSearch();
 
         if (currentSearch != null) {
@@ -282,7 +276,6 @@ Ext.define('EasyTreatyApp.view.MapView', {
     },
 
     resetLocation: function () {
-        console.log("inside reset");
         this.down('locationmap').getGeo().updateLocation();
     },
 

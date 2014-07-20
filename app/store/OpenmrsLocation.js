@@ -4,12 +4,13 @@
 
     config: {
         model: 'EasyTreatyApp.model.OpenmrsLocation',
+        storeId:'raxadoctor-store',
         proxy: {
             type: 'rest',
             url: 'https://api.raxa.io/ws/rest/v1/location/',
             extraParams: {
                 country: 'india',
-                limit: '200',
+              //  limit: '10',
                 v: 'full',
 
             },
@@ -24,5 +25,7 @@
         },
         autoload: false
     }
+
+
 
 });

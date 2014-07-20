@@ -18,7 +18,9 @@ Ext.define("EasyTreatyApp.model.Location", {
             { name: 'isFavorite', type: 'boolean' },
             { name: 'likeCount', type: 'int' },
             { name: 'isLiked', type: 'boolean' },
-            { name: 'place_id', type: 'string' }
+            { name: 'place_id', type: 'string' },
+            { name: 'isRaxaDoctor', type: 'boolean' },
+            { name: 'raxa_uuid', type: 'string' }
         ]
     }
 })
