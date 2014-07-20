@@ -61,6 +61,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
         store.on({
             locationadded: this.onLocationAddition,
             storecleared: this.onStoreClear,
+            detailsset: this.onDetailsSet,
             scope: this
         });
         //test
@@ -82,7 +83,10 @@ Ext.define('EasyTreatyApp.view.MapView', {
     //        xtype: 'listview'
     //    });
     //},
-    
+    onDetailsSet: function(record){
+        this.fireEvent('detailsset',record);
+    },
+
     onLocationAddition: function () {
         console.log("map view onloactionaddition");
         this.down('locationmap').onLocationAddition(this.getCurrentSearch());

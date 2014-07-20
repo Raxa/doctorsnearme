@@ -22,11 +22,13 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 basechanged: "onBaseChange",
                 backtomap: "onBackToMap",
                 textsearch: "onTextSearch",
-                like:"onLike"
+                like: "onLike",
+                detailsset:"onDetailsSet"
             },
             detailsView: {
                 //after new design
-                getdirections:"directToMapView"
+                getdirections: "directToMapView",
+                forward: "forwardToNextLocation"
             },
             listView: {
                 moredetails: "onMoreDetails",
@@ -36,8 +38,36 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         
     },
 
+    onDetailsSet: function(record){
+        this.onLocationSelect(record);
+    },
+
+    forwardToNextLocation: function(currentId){
+        var store = this.getMapView().getStore();
+        var index = store.findExact('id', currentId);
+
+
+
+        console.log("index:"+index);
+        var nextRecord = store.getAt(index + 1);
+        console.log(nextRecord);
+        if (nextRecord == null) {
+            nextRecord = store.getAt(0);
+        }
+        store.setDetails(nextRecord);
+
+       // this.onLocationSelect(nextRecord);
+    },
+
     onLike: function (like, id, button) {
-        this.getMapView().getStore().like(like, id, button,null);
+
+        var store = this.getMapView().getStore();
+
+        var placeId = store.getById(id).get('place_id');
+
+        store.like(like, placeId, button, null);
+
+       // this.getMapView().getStore().like(like, id, button, null);
     },
 
     onTextSearch: function(searchField){

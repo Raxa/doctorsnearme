@@ -189,7 +189,8 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
     onSwitchingToDetailsView: function () {
 
         var store = this.getReviewList().getStore();
-        store.setTheProxy(this.getData().id);
+        //store.setTheProxy(this.getData().id);
+        store.setTheProxy(this.getData().place_id);
 
         store.load();
 
@@ -305,6 +306,14 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         return this.getCommentContainer().getComponent(1);
     },
 
+    getImageContainer: function(){
+        return this.getComponent(1);
+    },
+
+    getForwardButton: function(){
+        return this.getImageContainer().getComponent(1);
+    },
+
     setDetails: function () {
         this.getDetailsContainer().setData(this.getData());
     },
@@ -336,7 +345,8 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                    me.getData().isFavorite = true;
                }
                 console.log("on save tap");
-                me.fireEvent('togglefavorite', me.getData().id, !saved);
+               //me.fireEvent('togglefavorite', me.getData().id, !saved);
+                me.fireEvent('togglefavorite', me.getData().place_id, !saved);
            });
 
            this.getLikeButton().on('tap', function () {
@@ -352,6 +362,10 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
            this.getReviewButton().on('tap', function () {
                me.fireEvent('comment', me.getCommentField(), me);
+           });
+
+           this.getForwardButton().on('tap', function () {
+               me.fireEvent('forward',me.getData().id);
            });
 
     },

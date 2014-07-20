@@ -25,12 +25,15 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
 
         }
     },
+
+
     onFavoriteToggle: function (recordId, isFavorite) {
         console.log("is favorite");
         console.log(isFavorite);
         var store = Ext.data.StoreManager.lookup('fav-store');
 
-        var record = this.getMapView().getStore().getById(recordId);
+        // var record = this.getMapView().getStore().getById(recordId);
+        var record = this.getMapView().getStore().findRecord('place_id',recordId);
 
         var string;
 
@@ -64,7 +67,9 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
     like: function (like,detailsView) {
         console.log("inside like");
 
-        this.getMapView().getStore().like(like, detailsView.getData().id, null, detailsView);       
+       // this.getMapView().getStore().like(like, detailsView.getData().id, null, detailsView);
+        this.getMapView().getStore().like(like, detailsView.getData().place_id, null, detailsView);
+
     },
 
     comment: function (commentField, detailsView) {
@@ -79,7 +84,8 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
                 url:EasyTreatyApp.config.getRatingServerDomain()+'comment',
                 method: 'GET',
                 params: {
-                    location: detailsView.getData().id,
+                    //  location: detailsView.getData().id,
+                    location: detailsView.getData().place_id,
                     user: EasyTreatyApp.config.getUser().get('personUuid'),
                     comment: commentField.getValue()
                 },

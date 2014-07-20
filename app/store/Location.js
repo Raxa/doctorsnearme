@@ -96,7 +96,8 @@ Ext.define('EasyTreatyApp.store.Location', {
 
     addItem: function(record){
         this.add(record);
-        if (this.isFavorite(record.reference)) {
+        //  if (this.isFavorite(record.reference)) {
+        if (this.isFavorite(record.place_id)) {
             //place.isFavorite=true;
             console.log("favorite found");
             this.last().set('isFavorite', true);
@@ -124,7 +125,8 @@ Ext.define('EasyTreatyApp.store.Location', {
             url: EasyTreatyApp.config.getRatingServerDomain() + 'checkLike',
             method: 'GET',
             params: {
-                location: record.id,
+                // location: record.id,
+                location: record.place_id,
                 user: EasyTreatyApp.config.getUser().get('personUuid')
             },
             success: function (response, opts) {
@@ -162,7 +164,11 @@ Ext.define('EasyTreatyApp.store.Location', {
         console.log(reference);
         var newArray = Ext.Array.filter(currentFav, function (item) {
             console.log(item.reference);
-            if (item.reference == reference) {
+            //if (item.reference == reference) {
+            //    console.log("equal!!!!!!!!!!!!");
+            //    return true;
+            //}
+            if (item.place_id == reference) {
                 console.log("equal!!!!!!!!!!!!");
                 return true;
             }
@@ -173,6 +179,37 @@ Ext.define('EasyTreatyApp.store.Location', {
             return true;
         }
     },
+
+    //this was added to set details for the record before going to next location by the forward button in details view
+    setDetails: function(record){
+        var service = this.getService();
+        var me = this;
+
+        service.getDetails(
+            {
+                //reference: record.get('reference')
+                placeId:record.get('place_id')
+            }, function (place, status) {
+
+                if (status == google.maps.places.PlacesServiceStatus.OK) {                 
+
+                    //Put these here to make infowindow popup soon.
+                    record.set('name', place.name);
+                    record.set('formatted_address', place.formatted_address);
+                    record.set('international_phone_number', place.international_phone_number);
+                    record.set('reviews', place.reviews);
+                    record.set('opening_hours', place.opening_hours);
+                    record.set('types', place.types);
+
+                    me.fireEvent('detailsset',record);
+
+                }
+                else {
+                    console.log("failed");
+                    console.log(status1);
+                }
+            });
+    },
     //use if you are going to make the request when clicking on a marker
     setDetailsForTheRecord: function (map, record, infowindow, marker) {
       //  var service = new google.maps.places.PlacesService(map.getMap());
@@ -181,24 +218,26 @@ Ext.define('EasyTreatyApp.store.Location', {
 
         service.getDetails(
             {
-                reference: record.get('reference')
+                //reference: record.get('reference')
+                placeId: record.get('place_id')
             }, function (place, status) {
             
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
-                    record.set('name', place.name);
-                    record.set('formatted_address', place.formatted_address);
-                    record.set('international_phone_number', place.international_phone_number);
-                    record.set('reviews', place.reviews);
-                    record.set('opening_hours', place.opening_hours);
-                    record.set('types', place.types);
+                    //record.set('name', place.name);
+                    //record.set('formatted_address', place.formatted_address);
+                    //record.set('international_phone_number', place.international_phone_number);
+                    //record.set('reviews', place.reviews);
+                    //record.set('opening_hours', place.opening_hours);
+                    //record.set('types', place.types);
 
-                var idString = record.get('id');
+              //  var idString = record.get('id');
 
                 lang = EasyTreatyApp.config.getLanguage();
 
                 var name = place.name;
                 var phoneNumber = place.international_phone_number;
-                var idString = place.id;
+                     var idString = place.id;
+               // var idString = place.place_id;
 
                 var userimg = '<img class="user-img" src="test.png">';
 
@@ -243,6 +282,15 @@ Ext.define('EasyTreatyApp.store.Location', {
 
                 infowindow.setContent(tpl);
                 infowindow.open(map.getMap(), marker);
+
+                    //Put these here to make infowindow popup soon.
+                record.set('name', place.name);
+                record.set('formatted_address', place.formatted_address);
+                record.set('international_phone_number', place.international_phone_number);
+                record.set('reviews', place.reviews);
+                record.set('opening_hours', place.opening_hours);
+                record.set('types', place.types);
+
             }
             else {
                 console.log("failed");
@@ -276,12 +324,13 @@ Ext.define('EasyTreatyApp.store.Location', {
             },
             success: function (response, opts) {
                 console.log("like success");
-                 record = me.getById(id);
-               // record = me.findRecord('internalId', id);
+                // record = me.getById(id);
+                record = me.findRecord('place_id', id);
                 console.log(record);
                 record.set('isLiked', like);
 
-                var likeButton = Ext.get(id + '-like');
+                // var likeButton = Ext.get(id + '-like');
+                var likeButton = Ext.get(record.get('id') + '-like');
                 if (like) {
                     if (detailsView != null) {
                         detailsView.toggleLikeButtonState(like);
