@@ -9,9 +9,9 @@ Ext.define('EasyTreatyApp.config.Runtime', {
 
         //ratingServerDomain: 'http://192.168.122.1:8888/',
         ratingServerDomain: 'http://192.168.56.1:8888/',
-        //openMRSUsername: 'jameskierkegaard',
+        openMRSUsername: 'jameskierkegaard',
 
-        //openMRSPassword: 'Hello123',
+        openMRSPassword: 'Hello123',
 
         user:null,
 

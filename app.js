@@ -24,9 +24,9 @@ Ext.application({
     
     controllers:['MapView','DetailsView','Menu','Login','Language'],
     
-    stores: ['Location','Memory','Comment'],
+    stores: ['Location', 'Memory', 'Comment'],
     
-    models: ['Location','Memory','Comment'],
+    models: ['Location', 'Memory', 'Comment'],
 
     icon: {
         '57': 'resources/icons/Icon.png',
@@ -49,13 +49,14 @@ Ext.application({
     launch: function () {
 
         Ext.Viewport.innerElement.addCls('viewport-inner');
+
         // Destroy the #appLoadingIndicator element
-        //Ext.fly('appLoadingIndicator').destroy();
+      
         Ext.fly('splash').destroy();
         Ext.fly('bluespin').destroy();
-        //var myMap = Ext.create('EasyTreatyApp.view.LocationMap');
-        //Ext.Viewport.add(myMap);
-        var menu = Ext.create('EasyTreatyApp.view.Menu');
+
+
+       var menu = Ext.create('EasyTreatyApp.view.Menu');
         Ext.Viewport.add(menu);
 
         var mapView = Ext.create('EasyTreatyApp.view.MapView');
@@ -73,8 +74,6 @@ Ext.application({
             currentFavorites.push(Ext.JSON.decode(record.get('query')));
         });
         
-        console.log("current favorites");
-        console.log(currentFavorites);
     },
 
     onUpdated: function() {
