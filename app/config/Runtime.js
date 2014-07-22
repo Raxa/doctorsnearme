@@ -5,7 +5,7 @@ Ext.define('EasyTreatyApp.config.Runtime', {
     singleton: true,
 
     config: {      
-        domain: 'https://api.raxa.io/ws/rest/v1/',
+        domain: 'http://api.raxa.io/ws/rest/v1/',
 
         //ratingServerDomain: 'http://192.168.122.1:8888/',
         ratingServerDomain: 'http://192.168.56.1:8888/',

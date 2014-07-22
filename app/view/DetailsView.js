@@ -8,19 +8,26 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
     
     config:
    {
+
        layout: 'vbox',
        styleHtmlContent: true,
+
        store: null,
+
+       /**
+        * cfg {Object} location data for the view 
+        */
        data: null,
-      // cls: 'profile',
+
        border: 3,
        style: 'border-color: gray; border-style: solid;background-color:#d3d3d3;',
-       scrollable:true,
-       commentsVisible: false,
-       liked: false,
-       //after new design
-       commentsStore:null,
+       scrollable: true,
 
+       /**
+        * cfg {Store} Store for comments for the review list
+        */
+       commentsStore:null,
+       liked:false,
        items: [
            {    //0
                xtype: 'toolbar',
@@ -69,8 +76,6 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
            },
              {  //3
                  xtype: 'toolbar',
-                 // top: '50%',
-                 //  height: '100%',
                  height:80,
                  width: '100%',
                  style: 'border-top:1px solid #0d66f2;border-right:1px solid #0d66f2;border-bottom:1px solid #0d66f2;border-left:1px solid #0d66f2;border-radius:0;',
@@ -78,39 +83,31 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                  items: [
                      {
                          xtype: 'button',
-                       //  text: '<div><img src = "resources/icons/Phone_40_40.png" style="height:30px;width:30px;"></br><a href="tel:' + phoneNumber + '"></div>',
-                      //   width: '20%',
                          height:'100%'
                      },
                      {
-                         xtype:'spacer',
-                      //   width:'6%'
+                         xtype:'spacer'
                      },
                      {
                          xtype: 'button',
                          text: '<img src = "resources/icons/Arrow_40_40.png" style="height:30px;width:30px;"></br>Direct Me',
-                     //    width: '20%',
                          height:'100%'
                      },
                      {
-                         xtype: 'spacer',
-                      //   width: '6%'
+                         xtype: 'spacer'
                      },
                      {
+                         //save me
                          xtype: 'button',
-                        // text: '<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Save Me',
-                      //   width: '20%',
                          height: '100%'
                      },
                      {
                          xtype: 'spacer',
-                         //   width: '6%'
                          hidden: true
                      },
                      {
                          xtype: 'button',
                          cls: 'like',
-                      //   width: '20%',
                          hidden:true
                      }
                  ]
@@ -118,7 +115,6 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         {   //4
             xtype: 'container',
             layout: 'vbox',
-          //  docked: 'bottom',
              hidden: true,   
             style: 'border-radius:0;margin:8px 0 8px 0;',
             items: [
@@ -141,12 +137,10 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
             xtype:'label',
             html: 'Reviews',
             style: 'font-size:20px;padding:10px;border-bottom:0;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;margin:8px 8px 0 8px;color:grey;background-color:white;',
-         //   height:20
         },
        {    //6
            xtype: 'container',
            layout: 'fit',
-           //style: 'border:1px solid #d3d3d3;margin:8px auto auto auto;color:grey;',
            style: 'border-top:0;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;margin:0 auto auto auto;color:grey;',
            flex:1,
            items: [
@@ -162,13 +156,14 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
    },
 
+    /**
+     * Initialize
+     * @method
+    */
     initialize: function(){
         this.callParent();
 
-        //this.getTopToolbar().setTitle('<p style="color:#0d66f2;">' + this.getData().name+'</p>');
-
-       // this.setDetails();
-
+        //create store for comments
         var store = Ext.create('EasyTreatyApp.store.Comment');
         var me=this;
         store.on({
@@ -176,8 +171,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
             scope: me
         });
 
-        // this.setCommentsStore(store);
-
+        //set the comment store for the list
         this.getReviewList().setStore(store);
         
         this.setHandlers();
@@ -185,15 +179,21 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         
     },
 
-    //either when creating details view for the first time or not
+    /**
+     * Called either when creating details view for the first time or not
+     * @method
+     */
     onSwitchingToDetailsView: function () {
 
         var store = this.getReviewList().getStore();
-        //store.setTheProxy(this.getData().id);
+
+        //set proxy for the store according to the place_id
         store.setTheProxy(this.getData().place_id);
 
+        //load comment store
         store.load();
 
+        //set the phone number for the call button
         var phoneno = this.getData().international_phone_number;
         var callButton = this.getCallButton();
         this.getCallButton().setText('<div><img src = "resources/icons/Phone_40_40.png" style="height:30px;width:30px;"></br><a href="tel:' + phoneno + '">Call</div>');
@@ -205,15 +205,18 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
             callButton.setDisabled(false);
         }
 
+        //is the location a favorite?
         var isFavorite = this.getData().isFavorite;
-        console.log(this.getData().name);
-        console.log(this.getData().isFavorite);
 
+        //get saved button
         var saveBtn = this.getSaveButton();
+
+        //if not favorite is not already saved in local storage so set the class not-saved
         if (isFavorite == null || isFavorite == false) {
             saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Save Me');
             saveBtn.setCls('not-saved');
         }
+        //else ite is already saved in local storage so set the class saved
         else {
             saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Unsave Me');
             saveBtn.setCls('saved');
@@ -221,24 +224,35 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
 
     },
 
+    /**
+     * Reloads the comments store. Is called in DetailsView Controller when a new comment is added by user
+     * @method
+     * @public
+     */
     reloadCommentStore: function(){
         this.getReviewList().getStore().load();
     },
 
+    /**
+     * Called when comments store is loaded. 
+     * @method
+     * @private
+     */
     onStoreLoad: function (store) {
         console.log("on store load");
-      //  this.getReviewContainer().setMasked(false);
-        store.each(function (record) {
-            console.log(record);
-        });
 
-       // var data = this.collectData(store.getRange());
         var reviewlist = this.getReviewList();
-     //   reviewlist.setData(data);
+
+        // refresh the review list to show loaded items
         reviewlist.refresh();
         
     },
 
+    /**
+     * To extract data from store. 
+     * @method
+     * @private
+     */
     collectData: function (records) {
         var data = [];
 
@@ -249,91 +263,205 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         return data;
     },
 
+
+    /**
+     * Get the top tool bar component 
+     * @method
+     * @private
+     * @return {Ext.Toolbar}
+     */
     getTopToolbar: function () {
         return this.getComponent(0);
     },
 
+    /**
+     * Get the middle tool bar component 
+     * @method
+     * @private
+     * @return {Ext.Toolbar}
+     */
     getMiddleToolbar: function(){
         return this.getComponent(3);
     },
 
+    /**
+     * Get the call button 
+     * @method
+     * @private
+     * @return {Ext.Button}
+     */
     getCallButton: function(){
         return this.getMiddleToolbar().getComponent(0);
     },
 
+    /**
+     * Get the Direction button 
+     * @method
+     * @private
+     * @return {Ext.Button}
+     */
     getDirectionButton: function(){
         return this.getMiddleToolbar().getComponent(2);
     },
 
+    /**
+     * Get the Save button 
+     * @method
+     * @private
+     * @return {Ext.Button}
+     */
     getSaveButton: function(){
         return this.getMiddleToolbar().getComponent(4);
     },
 
+    /**
+     * Get the Like button 
+     * @method
+     * @private
+     * @return {Ext.Button}
+     */
     getLikeButton: function(){
         return this.getMiddleToolbar().getComponent(6);
     },
 
+    /**
+     * Get the Spacer after Like button 
+     * @method
+     * @private
+     * @return {Ext.Spacer}
+     */
     getLikeSpacer: function () {
         return this.getMiddleToolbar().getComponent(5);
     },
 
+    /**
+     * Get the Back button 
+     * @method
+     * @private
+     * @return {Ext.Button}
+     */
     getBackButton: function(){
         return this.getTopToolbar().getComponent(0);
     },
 
+    /**
+     * Get the container for location details 
+     * @method
+     * @private
+     * @return {Ext.Container}
+     */
     getDetailsContainer: function(){
         return this.getComponent(2);
     },
 
+    /**
+     * Get the container for reviews
+     * @method
+     * @private
+     * @return {Ext.Container}
+     */
     getReviewContainer: function () {
         console.log("review container");
         return this.getComponent(6);
     },
 
+    /**
+     * Get the Review List 
+     * @method
+     * @private
+     * @return {Ext.List}
+     */
     getReviewList:function(){
         return this.getReviewContainer().getComponent(0);
     },
 
+    /**
+     * Get the contianer of user comment 
+     * @method
+     * @private
+     * @return {Ext.Container}
+     */
     getCommentContainer: function(){
         return this.getComponent(4);
     },
 
+    /**
+     * Get the text field in comment container
+     * @method
+     * @private
+     * @return {Ext.Textfield}
+     */
     getCommentField:function(){
         return this.getCommentContainer().getComponent(0);
     },
 
+    /**
+     * Get the Review Button in user comment container 
+     * @method
+     * @private
+     * @return {Ext.Button}
+     */
     getReviewButton : function(){
         return this.getCommentContainer().getComponent(1);
     },
 
+    /**
+     * Get the container for the location image 
+     * @method
+     * @private
+     * @return {Ext.Container}
+     */
     getImageContainer: function(){
         return this.getComponent(1);
     },
 
+    /**
+     * Get the forward icon by clicking which user can go thorugh locations in the store
+     * @method
+     * @private
+     * @return {Ext.Image}
+     */
     getForwardButton: function(){
         return this.getImageContainer().getComponent(1);
     },
 
+    /**
+     * Is called inside updateData function when data of this view is updated
+     * @method
+     * @private
+     */
     setDetails: function () {
         this.getDetailsContainer().setData(this.getData());
     },
 
+    /**
+     * Set handlers
+     * @method
+     * @private
+     */
     setHandlers: function () {
         var me = this;
-        console.log("inside set handlers");
+        
+        //set back button handler
         this.getBackButton().on('tap', function () {
             me.fireEvent('back');
         });
 
+
+        //set direction button handler
         this.getDirectionButton().on('tap', function () {
             console.log("on direction tap");
             me.fireEvent('getdirections',me.getData().id);
         });
 
+        //set save button handler
         var saveBtn = this.getSaveButton();
-           saveBtn.on('tap', function () {
+        saveBtn.on('tap', function () {
+
+            //class for save button is set considering if this location is a favorite or not. So by checking the class
+            //we can decide what to do when user taps this button
                var saved = saveBtn.getCls() == 'saved' ? true : false;
-               console.log("saved:" + saved);
+
                if (saved) {
                    saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Save Me');
                    saveBtn.setCls('not-saved');
@@ -344,43 +472,63 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
                    saveBtn.setCls('saved');
                    me.getData().isFavorite = true;
                }
-                console.log("on save tap");
-               //me.fireEvent('togglefavorite', me.getData().id, !saved);
+
                 me.fireEvent('togglefavorite', me.getData().place_id, !saved);
            });
 
-           this.getLikeButton().on('tap', function () {
-               console.log("clicked like");
+        //set handler for like button. 
+        //Whenever details view is newly created or set as active item if user is logged in toggleLikeButtonStatus function is called
+        //after checking if the relevant record is liked. That sets either like class or dislike class. 
+        //So by checking the class can fire event accordingly
+            this.getLikeButton().on('tap', function () {
+
                if (me.getLikeButton().getCls()=='like') {
                    me.fireEvent('like', true, me);
                }
                else {
                    me.fireEvent('like',false, me);
                }
-              // me.fireEvent('like', me.getData());
            });
 
+        //set handler for review button
            this.getReviewButton().on('tap', function () {
                me.fireEvent('comment', me.getCommentField(), me);
            });
 
+        //set handler for forward icon
            this.getForwardButton().on('tap', function () {
                me.fireEvent('forward',me.getData().id);
            });
 
     },
 
-    //this is the data set at the creation of the details view or when going to details view from another view
+    /**
+     * Called when updating data config
+     * @method
+     * @private
+     */
     updateData: function () {
-        console.log("inside update data");
+
+        //data is updated at the creation of details view or being set as the active item. when that happens need 
+        //set details accordingly
         this.setDetails();
+
+        //when updating data set title accordingly
         this.getTopToolbar().setTitle('<p style="color:#0d66f2;">' + this.getData().name + '</p>');
+
+        //when updating data need to set proxy to the comment store and load relevant comments,
+        //set proper statuses for the save, like, call buttons
         this.onSwitchingToDetailsView();
     },
 
+    /**
+     * Called when going to detailsView(newly creation or setting as active item)
+     * @method
+     * @public
+     * @param {Boolean} value
+     */
     toggleLikeButtonState: function (value) {
-        // this.getLikeButton().setDisabled(value);
-        ////////////
+
         var likeButton = this.getLikeButton();
         if (value) {
             console.log("set class dislike");
@@ -394,6 +542,12 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         }
     },
 
+    /**
+     * Toggle the visiblity of like button and comment container
+     * @method
+     * @public
+     * @param {Boolean} value
+     */
     toggleLikeComment: function (value) {
         this.getLikeButton().setHidden(value);
         this.getLikeSpacer().setHidden(value);

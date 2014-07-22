@@ -10,12 +10,12 @@ Ext.define('EasyTreatyApp.controller.Menu', {
         {
             sideMenu: 'mainmenu',
             mapView: 'mapview',
-            userProfile:'userprofile'
+            userProfile: 'userprofile',
+            listView:'listview'
         },
         
         control: {            
             sideMenu: {
-                showprofile: "onShowProfile",
                 searchradiuschange: "onSearchRadiusChange",
                 specialtychange: "onSpecialtyChange",
                 choice: "onChoice",
@@ -31,15 +31,18 @@ Ext.define('EasyTreatyApp.controller.Menu', {
         store.load();
 
         var mapview = this.getMapView();
-        var locationStore = mapview.getStore();
-        locationStore.storeClear();
+        var listview = this.getListView();
+        var favStore = listview.getItemList().getStore();
+
         var location;
         store.getRange().forEach(function (record) {
             location = Ext.JSON.decode(record.get('query'));
             console.log("decoded...");
             console.log(location);
-            locationStore.addFavoriteItem(location);
+            favStore.add(location);
         });
+
+        listview.fillList();
 
         mapview.setActiveItem(1);
         mapview.getSearchField().setHidden(true);
@@ -53,20 +56,6 @@ Ext.define('EasyTreatyApp.controller.Menu', {
     onChoice: function (choice) {
         console.log("inside onchoice menu controller");
         this.getMapView().setCurrentSearch(choice);
-    },
-
-    onShowProfile: function () {
-        var profileView = this.getUserProfile();
-
-        if (profileView == null) {
-            profileView = Ext.create('EasyTreatyApp.view.UserProfile');
-            profileView.setData(EasyTreatyApp.config.getUser().getData());
-            console.log("user: ");
-            console.log(EasyTreatyApp.config.getUser().getData());
-            Ext.Viewport.add(profileView);
-        }
-
-        Ext.Viewport.setActiveItem(profileView);
     },
 
     onSearchRadiusChange: function (newRadius) {

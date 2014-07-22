@@ -11,12 +11,10 @@ Ext.define('EasyTreatyApp.view.Menu', {
 
     xtype: 'mainmenu',
     config: {
-        //cls: 'mainmenu',
+
         cls: 'menu',
-        //docked: 'left',
         docked: 'right',
         top: 0,
-        //left: 0,
         right: 0,
         bottom: 0,
         zIndex: 0,
@@ -39,14 +37,6 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     ui: 'menu',
                     cls:'name'
                 },
-                //{
-                //    //1
-                //    //saved
-                //    ui: 'menu',
-                //    padding: '5 0 5 0',
-                //    style: 'border-bottom:1px solid gray;border-radius:0;margin-left:0;marign-right:0;',
-                //    docked: 'top'
-                //},
                  {
                      //6
                      //   text: 'Log In',
@@ -118,14 +108,6 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     usePicker: false,
                     padding: '5 0 5 0'
                 },
-                 //{
-                 //    //6
-                 //    //   text: 'Log In',
-                 //    ui: 'menu',
-                 //    padding: '5 0 5 0',
-                 //    cls: 'menu-login',
-                 //    docked:'top'
-                 //},
                   {
                       //1
                       //saved
@@ -193,11 +175,6 @@ Ext.define('EasyTreatyApp.view.Menu', {
     */
     setHandlerFunctions: function () {
         var me = this;
-
-        this.getProfileButton().on('tap', function (button, e, eOpts) {
-            me.toggle();
-            me.fireEvent('showprofile');
-        });
 
         this.getSavedButton().on('tap', function (button, e, eOpts) {
             me.fireEvent('showfavorites');

@@ -3,7 +3,6 @@
  */
 Ext.define('EasyTreatyApp.controller.DetailsView', {
     extend: 'Ext.app.Controller',
-   // requires:'Ext.data.JsonP',
 
     config: {
         refs: {
@@ -26,13 +25,14 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
         }
     },
 
-
+    /**
+     * Called when user clicks save button in details view 
+     * @method
+     * @private
+     */
     onFavoriteToggle: function (recordId, isFavorite) {
-        console.log("is favorite");
-        console.log(isFavorite);
         var store = Ext.data.StoreManager.lookup('fav-store');
 
-        // var record = this.getMapView().getStore().getById(recordId);
         var record = this.getMapView().getStore().findRecord('place_id',recordId);
 
         var string;
@@ -61,17 +61,21 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
         this.getListView().fillList();
     },
 
-
-
-    //like: function (data) {
+    /**
+     * Called when user clicks on like button in details view 
+     * @method
+     * @private
+     */
     like: function (like,detailsView) {
-        console.log("inside like");
-
-       // this.getMapView().getStore().like(like, detailsView.getData().id, null, detailsView);
         this.getMapView().getStore().like(like, detailsView.getData().place_id, null, detailsView);
 
     },
 
+    /**
+     * Called when user put a comment and click on review button
+     * @method
+     * @private
+     */
     comment: function (commentField, detailsView) {
         console.log("inside comment");
         var me = this;
@@ -102,8 +106,13 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
             });
         } 
         
-    },  
-    
+    },
+
+    /**
+     * Called when user click on back button in details view 
+     * @method
+     * @private
+     */
     backToMapView: function () {
             var mapview = this.getMapView();
             Ext.Viewport.setActiveItem(mapview);

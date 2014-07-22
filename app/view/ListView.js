@@ -11,13 +11,11 @@ Ext.define('EasyTreatyApp.view.ListView', {
        
        layout: 'vbox',
        styleHtmlContent: true,
-       align: 'stretch',       
-       //cls: 'profile',
-       store:null,
+       align: 'stretch',
+
        items: [
            {
                xtype: 'list',
-               // itemTpl: '{name}<br>{formatted_address}<br>{isFavorite}',
                cls:'favorite-list',
                flex: 7,
                disableSelection:true
@@ -26,8 +24,15 @@ Ext.define('EasyTreatyApp.view.ListView', {
 
    },
 
+    /**
+     * Set handlers 
+     * @method
+     * @private
+     */
     setHandlers: function(){
         var me = this;
+
+        //listener for the direction button
         this.addListener({
             element: 'element',
             delegate: 'button.list-direction',
@@ -37,6 +42,7 @@ Ext.define('EasyTreatyApp.view.ListView', {
             }
         });
 
+        //listener for moredetails button
         this.addListener({
             element: 'element',
             //delegate: 'button.more-details',
@@ -46,59 +52,114 @@ Ext.define('EasyTreatyApp.view.ListView', {
             }
         });
 
+        //this.addListener({
+        //    element: 'element',
+        //    delegate: 'button.list-like-img',
+        //    //delegate: 'div.star',
+        //    tap: function (event, node, options, eOpts) {
+        //        var button = Ext.get(node.id);
+        //        console.log("like tap");
+        //        console.log(button);
+        //        if (button.hasCls('like')) {
+        //            console.log("has class like");
+        //            console.log(node.id);
+        //            console.log(node.id.slice(0, -5));
+        //            me.fireEvent('like', true, node.id.slice(0, -5), button);
+        //        }
+        //        else {
+        //            console.log("doesnt have class like");
+        //            console.log(node.id);
+        //            console.log(node.id.slice(0, -5));
+        //            me.fireEvent('like', false, node.id.slice(0, -5), button);
+        //        }
+        //    }
+        //});
+
 
     },
 
+    /**
+     * Set template for the list 
+     * @method
+     * @private
+     */
     setTemplate: function(){
 
         var lang = EasyTreatyApp.config.getLanguage();
 
-        var userimg = '<img class="list-user-img" src="test.png">';
+        var template = new Ext.XTemplate(
+            '<div display="table-column-group">',
+                '<div  class="inlineblock"><img class="list-user-img" src="test.png"></div>',
+                 '<div class="inlineblock">',
+                    '<div class="inlineblock docname"><p class="wordstyle">{name}</p></div>',
+                    '<div class="inlineblock"><img class="list-more-details" id ={id} src = "resources/icons/i_30_30.png"></div>',
+                    //'<tpl if="this.isLoggedIn()==true">',
+                    //    '<div>',
+                    //    '<tpl if="values.isLiked==true">',
+                    //        '<button class="list-like-img dislike" id={id}-like>',
+                    //    '</tpl>',
+                    //     '<tpl if="values.isLiked!=true">',
+                    //        '<button class="list-like-img like" id={id}-like>',
+                    //    '</tpl>',
+                    //    '</div>',
+                    //'</tpl>',
+                 '</div>',
+            '</div>',
+            '<div display="table-column-group">',
+                '<div class="inlineblock">',
+                    '<tpl if="values.international_phone_number!=null">',
+                        '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="list-call"><a href="tel:{international_phone_number}">Call</a></button>',
+                    '</tpl>',
+                '</div>',
+                '<div class="inlineblock">',
+                    '<button class="list-direction" id={id}><img class="direction-img" src = "resources/icons/Arrow_40_40.png">{[this.getDirectionsLabel()]}</button>',
+                '</div>',
+            '</div>'
+                
+          ,{
+              isLoggedIn: function () {
+                  console.log("template function is logged in");
+                  console.log(EasyTreatyApp.config.getLoggedIn());
+                  return EasyTreatyApp.config.getLoggedIn();
+              },
+              getDirectionsLabel: function () {
+                  return lang.GET_DIRECTIONS;
+              }
+          
+          });
 
-        var moredetails = '<img class="list-more-details" id ={id} src = "resources/icons/i_30_30.png">';
-        var like = '<img class="list-like-img" src = "resources/icons/Tellafriend.png">';
-        var doctorname = '<div  class="inlineblock">' + userimg + '</div>' +
-                         '<div class="inlineblock">' +
-                               '<div class="inlineblock docname"><p class="wordstyle">' + '{name}' + '</p></div>' +
-                               '<div class="inlineblock">' + moredetails + '</div>' +
-                              // '<br>' +
-                               '<div>' + like + '</div>' +
-                         '</div>';
-        var call = "";
-        
-            call = '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="list-call"><a href="tel:' + '{international_phone_number}' + '">Call</a></button>';
-        
-        var directions = '<button class="list-direction" id=' +'{id}' + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
-
-        //var tpl = '<table><tr><td>' + userimg + '</td><td>' + doctorname + '</td></tr></table>' + '<table><tr><td>' + call + '</td>' + '<td>' + directions + '</td>' + '</tr>' + '</table>';
-        var tpl = '<div>'+'<div display="table-column-group" class="list-first-row">' + doctorname + '</div>' + '<div display="table-column-group">' + call + directions + '</div>'+'</div>';
-
-        this.getItemList().setItemTpl(tpl);
+        this.getItemList().setItemTpl(template);
     },
 
     /*
     * Initialize
     */
     initialize: function () {
-        this.enableBubble(['backtomap']);
+        this.enableBubble(['backtomap','like']);
 
         this.callParent();
         this.setTemplate();
         var me = this;
-        //this.getItemList().on(
-        //   {
-        //       itemsingletap: this.onItemTap,
-        //       scope: this,
-        //   });
 
         this.addToolBar();
+
         this.setHandlers();
     },
 
+    /**
+     * Set the store for list. This is called inside mapview initialize function. 
+     * @method
+     * @public
+     */
     setListStore: function(store){
         this.getItemList().setStore(store);
     },
 
+    /**
+     * Refill the list from values from the store 
+     * @method
+     * @public
+     */
     fillList: function () {
         this.getItemList().refresh();
     },
@@ -120,17 +181,12 @@ Ext.define('EasyTreatyApp.view.ListView', {
     getItemList: function() {
         return this.getComponent(0);
     },
-    
-    /**
-    * Executed when an item is tapped in the list
-    * @method
-   */
-    onItemTap: function (list, index, target, record, e, eOpts) {
-        console.log("item select");
-        this.parent.fireEvent('itemselected', record);
-        //this.getItemList().setData(null);
-    },
 
+    /**
+     * Add the top toolbar 
+     * @method
+     * @private
+     */
     addToolBar: function () {
         var lang = EasyTreatyApp.config.getLanguage();
         var me = this;
@@ -153,10 +209,20 @@ Ext.define('EasyTreatyApp.view.ListView', {
         
     },
 
+    /**
+     * Get the toolbar 
+     * @method
+     * @private
+     */
     getToolBar: function(){
         return this.getComponent(1);
     },
 
+    /**
+     * Set language 
+     * @method
+     * @public
+     */
     setLanguage: function () {
 
         var lang = EasyTreatyApp.config.getLanguage();
