@@ -18,17 +18,16 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 itemselected: "onLocationSelect",
                 moredetails: "onMoreDetails",
                 getdirections: "onGetDirections",
-                showfavorites: "onShowFavorites",
                 basechanged: "onBaseChange",
                 backtomap: "onBackToMap",
                 textsearch: "onTextSearch",
-                like: "onLike",
-                detailsset:"onDetailsSet"
+                like: "onLike"
             },
             detailsView: {
                 //after new design
                 getdirections: "directToMapView",
-                forward: "forwardToNextLocation"
+                forward: "forwardToNextLocation",
+                //like: "onLike"
             },
             listView: {
                 moredetails: "onMoreDetails",
@@ -38,15 +37,20 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         
     },
 
-    onDetailsSet: function(record){
-        this.onLocationSelect(record);
-    },
-
+    /**
+     * Called when user clicks on forward icon in details view 
+     * @method
+     * @private
+     */
     forwardToNextLocation: function(currentId){
         var store = this.getMapView().getStore();
         var index = store.findExact('id', currentId);
 
-
+        //incase this is from favoritestore
+        if (index == -1) {
+            store = this.getListView().getItemList().getStore();
+            index = store.findExact('id', currentId);
+        }
 
         console.log("index:"+index);
         var nextRecord = store.getAt(index + 1);
@@ -59,17 +63,26 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         this.onLocationSelect(nextRecord);
     },
 
+    /**
+     * Called when usr clicks on like button in an infowindow 
+     * @method
+     * @private
+     */
     onLike: function (like, id, button) {
-
+        console.log(id);
         var store = this.getMapView().getStore();
 
         var placeId = store.getById(id).get('place_id');
 
         store.like(like, placeId, button, null);
 
-       // this.getMapView().getStore().like(like, id, button, null);
     },
 
+    /**
+     * Called when a user clicks on search icon in mapview 
+     * @method
+     * @private
+     */
     onTextSearch: function(searchField){
         console.log("inside on text search");
         var mapview = this.getMapView();
@@ -85,6 +98,11 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         this.getMapView().zoomMap(parseInt(radius2));
     },
 
+    /**
+     * Called when user clicks on get directions button in either detailsview or listview 
+     * @method
+     * @private
+     */
     directToMapView: function(id){
        
         var mapview = this.getMapView();
@@ -93,6 +111,11 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         this.onBackToMap();
     },
 
+    /**
+     * Make dearch, specialty, loactor visible and make location map active item 
+     * @method
+     * @private
+     */
     onBackToMap: function () {
         var mapview = this.getMapView();
 
@@ -103,6 +126,11 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         mapview.setActiveItem(0);
     },
 
+    /**
+     * Called on change of baselocation
+     * @method
+     * @private
+     */
     onBaseChange: function (initialUserLocationSetting) {
         var currentSearch = this.getMapView().getCurrentSearch();
 
@@ -111,26 +139,20 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         } else if (initialUserLocationSetting) {
             this.onChoice(0);
         }
-    },
+    },  
 
-    onShowFavorites: function(){
-        var store = Ext.data.StoreManager.lookup('fav-store');
-
-        store.load();
-        var locationStore = this.getMapView().getStore();
-        locationStore.storeClear();
-        var location;
-        store.getRange().forEach(function (record) {
-            location = Ext.JSON.decode(record.get('query'));
-
-            locationStore.addFavoriteItem(location);
-        });
-
-    },    
-
-    //onMoreDetails: function(map,recordId){
+    /**
+     * Called when user click on info icon on an infowindow
+     * @method
+     * @private
+     */
     onMoreDetails: function (recordId) {
         var record = this.getMapView().getStore().getById(recordId);
+
+        //that is incase this moredetails call is from listview
+        if (record == null) {
+            record = this.getListView().getItemList().getStore().getById(recordId);
+        }
 
         this.onLocationSelect(record);
     },
@@ -143,6 +165,11 @@ Ext.define('EasyTreatyApp.controller.MapView', {
     onGetDirections: function (map, recordId) {
         console.log(" onGetDirectionsButtonTap");
         var record = this.getMapView().getStore().getById(recordId);
+
+        //that is incase this moredetails call is from listview
+        if (record == null) {
+            record = this.getListView().getItemList().getStore().getById(recordId);
+        }
 
         //To fix the error that comes when getting directions from favorite list (list view)
         var latlng = record.get('geometry').location;
@@ -163,15 +190,7 @@ Ext.define('EasyTreatyApp.controller.MapView', {
   * Executed when an item is selected in List view
   */
     onLocationSelect: function (record) {
-        console.log("on location select");
-        console.log(record);
         var detailsView = this.getDetailsView();
-
-        //if (detailsView == undefined) {
-        //    detailsView = Ext.create('EasyTreatyApp.view.DetailsView', { data: record.getData() });
-        //} else {
-        //    detailsView.setData(record.getData());
-        //}
 
         if (detailsView == undefined) {
             detailsView = Ext.create('EasyTreatyApp.view.DetailsView');
@@ -183,10 +202,6 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         
         detailsView.toggleLikeComment(!loggedIn);
 
-        //if(loggedIn){
-        //    this.checkLiked(detailsView,record);
-        //}
-        //   detailsView.getLikeCount(detailsView.getData().id);
         if (loggedIn) {
             detailsView.toggleLikeButtonState(record.get('isLiked'));
         }

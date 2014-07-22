@@ -7,38 +7,74 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
     config: {
         layout: 'fit',
         
+        /**
+         * cfg {LatLng} the location of the user
+         */
         userLocation: null,
 
+        /**
+         * cfg {Marker} marker of current location of the user 
+         */
         userLocationMarker:null,
 
+        /**
+         * cfg {LatLng} the location relative to which search happens
+         */
         baseLocation: null,
 
+        /**
+         * cfg {Marker} marker of the location relative to which search happens 
+         */
         baseLocationMarker: null,
 
+        /**
+         * cfg [Marker] markers of the location relative to which search happens 
+         */
         locationMarkers: [],
 
+        /**
+         * cfg [Marker] markers of direction service 
+         */
         directionMarkers: [],
 
+        /**
+         * cfg [google.maps.DirectionsRenderer] routes of direction service 
+         */
         routes: [],
 
-        locations: null,
-
+        /**
+         * cfg {Store} locations store.  
+         */
         store: null,
 
+        /**
+         * cfg {Ext.util.Geolocation}   
+         */
         geo: null,
 
+        /**
+         * cfg {Boolean} To keep track of the initial userlocation setting
+         */
         initialUserLocationSetting: true
                       
     },
 
+    /**
+     * Initialize
+     * @method
+    */
     initialize: function(){
         this.callParent();
-        console.log("inside initialize");
 
+        //bubble these events to MapView
         this.enableBubble(['getdirections', 'moredetails', 'togglefavorite','basechanged','like']);
 
+        //set location of the user and also this keeps track of base changes
         this.setLocationOfTheUser();
+
         var me = this;
+
+        //handler for direction buttons on infowindows
         this.addListener({
             element: 'element',
             delegate: 'button.direction',
@@ -48,40 +84,28 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             }
         });
 
+        //handler for more details icons on infowindows
         this.addListener({
             element: 'element',
             //delegate: 'button.more-details',
             delegate: 'img.more-details',
             tap: function (event, node, options, eOpts) {
-                //me.fireEvent('moredetails', me, node.id);
                 me.fireEvent('moredetails', node.id);
             }
         });
 
+        //handler for like buttons on infowindows
         this.addListener({
             element: 'element',
             delegate: 'button.like-img',
-            //delegate: 'div.star',
             tap: function (event, node, options, eOpts) {
+
                 var button = Ext.get(node.id);
-                console.log("like tap");
-                console.log(button);
+
                 if (button.hasCls('like')) {
-                    console.log("has class like");
-                    console.log(node.id);
-                    console.log(node.id.slice(0, -5));
-                    //button.removeCls("like");
-                    //button.addCls("dislike");
                     me.fireEvent('like', true, node.id.slice(0, -5),button);
-                   // me.fireEvent('togglefavorite', node.id.slice(0,-4),false);
                 }
                 else {
-                    console.log("doesnt have class like");
-                    console.log(node.id);
-                    console.log(node.id.slice(0, -5));
-                    //button.removeCls("dislike");
-                    //button.addCls("like");
-                    //  me.fireEvent('togglefavorite',node.id.slice(0,-4), true);
                     me.fireEvent('like', false, node.id.slice(0, -5),button);
                 }                               
             }
@@ -89,14 +113,25 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         
 
     },
+
+    /**
+    * Clear all markers and routes when store is cleared
+    * @method
+    * @public
+    */
     onStoreClear: function(){
         this.clearMarkers(this.getLocationMarkers());
         this.clearMarkers(this.getDirectionMarkers());
         this.clearRoutes();
     },
 
+    /**
+    * Called when a location is added to the store
+    * @method
+    * @public
+    * @param {String} type
+    */
     onLocationAddition: function (type) {
-        // var markerImg = 'redmarker.png';
         var markerImg = 'Medical centers.png';
         switch (type) {
             case 1: markerImg = 'Doctors.png'
@@ -113,29 +148,22 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         me.addLocationMarker(record, markerImg);
 
     },
+
+
     /**
     * Add a Marker
     * @method
     * @private
-    * @param {Object} location
+    * @param {Object} record
     * @param {String} makerIcon
-    * @return {Marker} marker
     */
-
-    /// An alternative. What this does is sending a request only when the user clicks on a marker. But when viewing on
-    /// the list this is not possible because all the details 
-
     addLocationMarker: function (record, markerIcon) {
         var me = this;
 
-        var latlng = record.get('geometry').location;
-        if (record.get('isFavorite')) {
-            var loc = record.get('geometry').location;
-            var lat = parseFloat(loc.k);
-            var lng = parseFloat(loc.A);
-            latlng = new google.maps.LatLng(lat, lng);
-        }
+        //get the location
+        var latlng = record.get('geometry').location;       
 
+        //create a marker there
         var marker = new google.maps.Marker({
             map: me.getMap(),
             animation: null,
@@ -143,35 +171,50 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             icon: 'resources/icons/' + markerIcon
         });
 
+        //add a listener to the marker to open infowindow
         google.maps.event.addListener(marker, 'click', function (pos) {
             var infowindow = new google.maps.InfoWindow();
-
-            // me.getStore().setDetailsForTheRecord(me, record,infowindow,marker);
-
-            /////////////
 
             lang = EasyTreatyApp.config.getLanguage();
 
             var name = record.get('name');
 
+            //if name is not null that means this record has been filled with 
+            //all the data            
             if(name !=null)
-           {
+            {
+                //then just set the infowindow content with record's data
                 me.setInfowindowContent(record, marker);
                 
-            } else {
-                me.getStore().setDetailsForTheRecord( record,marker);
+            }
+           //if name is null that means due to OVER_QUERY_LIMIT this record hasn't been filled with 
+           //all the data
+            else
+            {
+                //send a separate request to get details of the record
+                me.getStore().setDetailsForTheRecord(record,marker);
             }
            
         });
+
+        //push this marker to the array of location markers
         this.getLocationMarkers().push(marker);
     },
 
+
+    /**
+    * Set the contents of the infowindow
+    * @method
+    * @private
+    * @param {Object} record
+    * @param {Marker} marker
+    */
     setInfowindowContent: function (record,marker) {
         var phoneNumber = record.get('international_phone_number');
         var idString = record.get('id');
 
         var name = record.get('name');
-        var userimg = '<img class="user-img" src="test.png">';
+        var userimg = '<img class="user-img" src="resources/icons/empty.png">';
 
         var moredetails = '<img class="more-details" id =' + idString + ' src = "resources/icons/i_30_30.png">';
 
@@ -211,12 +254,23 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         infowindow.open(this.getMap(), marker);
     },
 
+    /**
+    * Clear the Markers
+    * @method
+    * @private
+    * @param [Marker} markers
+    */
     clearMarkers: function (markers) {
         Ext.Array.forEach(markers, function (marker) {
             marker.setMap(null);
         });
     },
 
+    /**
+    * Clear the routes
+    * @method
+    * @private
+    */
     clearRoutes: function () {
         var me = this;
         Ext.Array.forEach(me.getRoutes(), function (route) {
@@ -240,6 +294,10 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
                     var user = me.getUserLocationMarker();
                     var base = me.getBaseLocationMarker();
 
+                    //now this is a location update and auto update is set to false. 
+                    //Therefore location update only happens if user clicks on the locator.
+                    //In that case both user location and base location need to be updated.
+                    //Therefore existing ones are removed
                     if (user != null) {
                         user.setMap(null);
                     }
@@ -249,8 +307,11 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
                     var currentLat = geo.getLatitude();
                     var currentLng = geo.getLongitude();
+
+                    //get new location
                     var location = new google.maps.LatLng(currentLat, currentLng);
 
+                    //set new location
                     me.setUserLocation(location);
                     me.setBaseLocation(location);
 
@@ -259,26 +320,31 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
                         animation: null,
                         position: location,
                         draggable: true,
-                        //icon: 'resources/icons/bluemarker.png'
                         icon: 'resources/icons/bluedot.png'
                     });
-                    /////////////////
+
+                    //this event listener is for when user drags his marker to change the base location
                     google.maps.event.addListener(marker, 'dragend', function (event) {
-                        console.log("dragend");
-                        console.log(event);
                         me.setBaseLocation(me.getBaseLocationMarker().position);
+                        //need to fire basechanged event
                         me.fireEvent('basechanged');
                     });
-                    /////////////////
 
                     me.setMapOptions({
                         center: location,
                         zoom: 7
                     });
+
+                    //set markers at new locations
                     me.setUserLocationMarker(marker);
                     me.setBaseLocationMarker(marker);
 
+                    //fire basechanged event. If this is the initial location setting currentsearch config 
+                    //of mapview is null. Therefore in mapview controller this is checked and set the choice 
+                    //to 0
                     me.fireEvent('basechanged', me.getInitialUserLocationSetting());
+
+                    //after initial one this config is set to false
                     if (me.getInitialUserLocationSetting()) {
                         me.setInitialUserLocationSetting(false);
                     }
@@ -293,7 +359,6 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             }
         });
 
-      //  geo.updateLocation();
         this.setGeo(geo);
     },
 

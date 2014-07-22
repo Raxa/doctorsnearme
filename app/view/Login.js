@@ -84,6 +84,7 @@ Ext.define('EasyTreatyApp.view.Login', {
     },
 
     initialize: function () {
+
         var loginButton = this.getLoginButton();
         var cancelButton = this.getCancelButton();
         var me = this;
@@ -99,6 +100,11 @@ Ext.define('EasyTreatyApp.view.Login', {
      //   this.setLanguage();
     },
 
+    /**
+     * Get the values of the username and password field 
+     * @method
+     * @public
+     */
     getTheValues: function () {
         var fieldSet = this.getFieldSet();
 
@@ -108,7 +114,11 @@ Ext.define('EasyTreatyApp.view.Login', {
         return { userName: userName, password: password };
     },
 
-    
+    /**
+     * Set language 
+     * @method
+     * @public
+     */
     setLanguage: function () {
         var lang = EasyTreatyApp.config.getLanguage();
     }

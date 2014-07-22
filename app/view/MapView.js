@@ -3,7 +3,7 @@
  */
 Ext.define('EasyTreatyApp.view.MapView', {
     extend: 'Ext.Container',
-
+    requires:['Ext.data.Store'],
     xtype: 'mapview',
 
     config: {
@@ -12,26 +12,37 @@ Ext.define('EasyTreatyApp.view.MapView', {
             animation: 'pop'
         },
 
-        // currentSearch: null,
+        /**
+         * cfg {Integer} the current search selected by the user 
+         */
         currentSearch: null,
+
+        /**
+         * cfg {Integer} search radius 
+         */
         searchRadius: null,
-        //specialties:[],
+        
+        /**
+         * cfg [String] Specialties chosen for current search 
+         */
         specialties: null,
+
+
         border: 3,
         style: 'border-color: gray; border-style: solid;',
 
-        store: null,
-        
-        pharmacyStore: null,
-        doctorStore: null,
-        hospitalStore:null,
+        /**
+         * cfg {Store} store To store locations data from google places
+         */
+        store: null,        
 
         items: [
             {
               xtype:'locationmap'
             },
             {
-                xtype: 'listview'
+                xtype: 'listview',
+                data:[]
             }                
             ]
     },
@@ -43,12 +54,10 @@ Ext.define('EasyTreatyApp.view.MapView', {
     */
     initialize: function () {
 
-        //this.addToolBar();
         this.addSpecialtyMenu();
         this.addSearchBox();
         this.addLocator();
 
-      //  this.addItems();
         this.callParent();
         
 
@@ -56,46 +65,62 @@ Ext.define('EasyTreatyApp.view.MapView', {
         this.setStore(store);
         this.down('locationmap').setStore(store);
 
-        this.down('listview').setListStore(store);
+        //store to put favorites when they are needed to be shown in list view once Saved button clicked
+        var favoriteStore = Ext.create('Ext.data.Store', { model: 'EasyTreatyApp.model.Location' });
 
+        //set the favorites store as the store for the list view
+        this.down('listview').setListStore(favoriteStore);
+
+        //events for the locations store
         store.on({
+            //this is fired when a location is added to store
             locationadded: this.onLocationAddition,
+
+            //this is fired when the store is emptied. fired in location store class
             storecleared: this.onStoreClear,
+
+            //this is fired when details are set to a given record. 
             detailsset: this.onDetailsSet,
             scope: this
         });
-        //test
+
+        //set the google places service to the locations store
         store.setService(new google.maps.places.PlacesService(this.down('locationmap').getMap()));
 
+        //set the language
         var lang = EasyTreatyApp.config.getLanguage();
         this.setLanguage(lang, lang);
 
-        //to search soon at startup
-      //  this.setCurrentSearch(0);
     },
 
-    //addItems: function(){
-    //    this.add({
-    //        xtype: 'locationmap'
-    //    });
-
-    //    this.add({
-    //        xtype: 'listview'
-    //    });
-    //},
+    /**
+     * This is used only in such a case that data for a given record is not set due to a OVER_QUERY_LIMIT 
+     * but user clicks on a marker so a separate request is sent for the details
+     * @method
+     * @private
+     */
     onDetailsSet: function(record,marker){
-        // this.fireEvent('detailsset',record);
         this.getLocationMap().setInfowindowContent(record, marker);
     },
 
+
+    /**
+     * Executed when a location is added to the store
+     * @method
+     * @private
+     */
     onLocationAddition: function () {
         this.down('locationmap').onLocationAddition(this.getCurrentSearch());
-        this.down('listview').fillList();
-
+        //this.down('listview').fillList();
     },
 
-    zoomMap: function (radius) {
-        
+    /**
+     * Zoom the map. Called inside mapview controller when a new search 
+     * @method
+     * @param {Integer} radius
+     * @public
+     */
+    zoomMap: function (radius) {        
 
         var map = this.down('locationmap');
        
@@ -121,17 +146,25 @@ Ext.define('EasyTreatyApp.view.MapView', {
         });
     },
 
+    /**
+     * Called on storeclear event 
+     * @method
+     * @private
+     */
     onStoreClear: function(){
         this.down('locationmap').onStoreClear();
     },
 
+    /**
+     * Add the specialty menu to the view and add it's handler
+     * @method
+     * @private
+     */
     addSpecialtyMenu: function(){
         var me = this;
         var specStore = Ext.create('EasyTreatyApp.store.Specialization')
         this.add({
             xtype: 'multiselectfield',
-            // label: 'Specilty',
-            //  labelWidth: '45%',
             placeHolder: 'Choose a Specialty',
             autoSelect: false,
             hidden: false,
@@ -145,6 +178,8 @@ Ext.define('EasyTreatyApp.view.MapView', {
         });
 
         var specialtyArray;
+
+        //on a change of spacialty choice update specialties config
         this.getSpecialtySelectField().on('change', function (selectField, newValue, oldValue, eOpts) {
 
             specialtyArray = [];
@@ -159,6 +194,11 @@ Ext.define('EasyTreatyApp.view.MapView', {
         });
     },
 
+    /**
+     * Add the Search box to the view and add it's listners
+     * @method
+     * @private
+     */
     addSearchBox: function(){
         this.add({
             xtype: 'searchfield',
@@ -176,6 +216,8 @@ Ext.define('EasyTreatyApp.view.MapView', {
         });
 
         var me = this;
+
+        //listener to open the side menu
         this.addListener({
             element: 'element',
             delegate: 'img.more',
@@ -185,6 +227,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
             }
         });
 
+        //listener to perform text search
         this.addListener({
             element: 'element',
             delegate: 'img.list',
@@ -195,6 +238,11 @@ Ext.define('EasyTreatyApp.view.MapView', {
         })
     },
 
+    /**
+     * Add locator icon by clicking on which user can go back to his own location
+     * @method
+     * @private
+     */
     addLocator: function(){
         var locator = Ext.create('Ext.Img', {
             src: 'resources/icons/conpass_30_30.png',
@@ -207,7 +255,9 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
         this.add(locator);
 
-        var me = this; 
+        var me = this;
+
+        //handler
         locator.on('tap', function (locator, e, eOpts) {
             console.log("locator");
             me.resetLocation();
@@ -215,18 +265,29 @@ Ext.define('EasyTreatyApp.view.MapView', {
     },
 
 
-
+    /**
+     * Returns the Search field
+     * @method
+     * @return {Ext.field.SearchView}
+    */
     getSearchField:function(){
         return this.down('searchfield');
     },
     
+    /**
+     * Returns the Search field
+     * @method
+     * @return {Ext.field.SelectField}
+    */
     getSpecialtySelectField: function () {
-        // return this.getTopToolBar().getComponent(3);
-        //return this.getTopToolBar().getComponent(1);
-        // return this.getComponent(2);
         return this.down('multiselectfield');
     },
 
+    /**
+     * Returns the image
+     * @method
+     * @return {Ext.Image}
+    */
     getLocator: function(){
         return this.down('image');
     },
@@ -251,6 +312,11 @@ Ext.define('EasyTreatyApp.view.MapView', {
         return this.down('mainmenu');
     },
 
+    /**
+     * Called when searchRadius config is updated. 
+     * @method
+     * @private
+     */
     updateSearchRadius: function () {
         var currentSearch = this.getCurrentSearch();
 
@@ -261,6 +327,11 @@ Ext.define('EasyTreatyApp.view.MapView', {
         }
     },
 
+    /**
+     * Called when specialties config is updated. 
+     * @method
+     * @private
+     */
     updateSpecialties: function(){
         var currentSearch = this.getCurrentSearch();
 
@@ -271,14 +342,29 @@ Ext.define('EasyTreatyApp.view.MapView', {
         }
     },
 
+    /**
+     * Called when currentSearch config is updated. 
+     * @method
+     * @private
+     */
     updateCurrentSearch: function (newValue, oldValue) {
         this.fireEvent('choicedone', newValue);
     },
 
+    /**
+     * Called when user clicks on locator to reset his location 
+     * @method
+     * @private
+     */
     resetLocation: function () {
         this.down('locationmap').getGeo().updateLocation();
     },
 
+    /**
+     * Set language 
+     * @method
+     * @public
+     */
     setLanguage: function (newLang,oldLang) {
         var lang = EasyTreatyApp.config.getLanguage();
 

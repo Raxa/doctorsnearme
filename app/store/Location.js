@@ -55,7 +55,7 @@ Ext.define('EasyTreatyApp.store.Location', {
                         me.addItem(place);
                     });
                     console.log(results[0]);
-                    me.getPlaceDetails(results, 0);
+                    me.getPlaceDetails(results, 0,type);
                 } else {
                     console.log("status:"); console.log(status);
                 }
@@ -79,7 +79,7 @@ Ext.define('EasyTreatyApp.store.Location', {
                         });
 
                         //trying filling store early
-                        me.getPlaceDetails(results, 0);
+                        me.getPlaceDetails(results, 0,type);
                     }
 
                 });
@@ -161,10 +161,6 @@ Ext.define('EasyTreatyApp.store.Location', {
 
         var newArray = Ext.Array.filter(currentFav, function (item) {
 
-            //if (item.reference == reference) {
-            //    console.log("equal!!!!!!!!!!!!");
-            //    return true;
-            //}
             if (item.place_id == reference) {
 
                 return true;
@@ -177,7 +173,7 @@ Ext.define('EasyTreatyApp.store.Location', {
         }
     },
 
-    getPlaceDetails: function (results, i) {
+    getPlaceDetails: function (results, i,type) {
         var me = this;
         
         var service = this.getService();
@@ -187,8 +183,6 @@ Ext.define('EasyTreatyApp.store.Location', {
                 //key: 'AIzaSyCz2FbWnJQh8hez_0fQ7J-QvE7jzCvWSgw&'
             }, function (place, status1) {
                 if (status1 == google.maps.places.PlacesServiceStatus.OK) {
-
-                 //   me.addItem(place);
 
                     var record = me.findRecord('place_id', results[i].place_id);
                     if (record != null) {
@@ -210,14 +204,16 @@ Ext.define('EasyTreatyApp.store.Location', {
         if (i < results.length - 1) {
             //test
             Ext.Function.defer(function () {
-                me.getPlaceDetails(results, i + 1)
+                me.getPlaceDetails(results, i + 1,type)
                 //}, 290, me);
             }, 290, me);
             return;
 
         }
         else {
-            me.checkForRaxaDoctors();
+            if (type == 'doctor') {
+                me.checkForRaxaDoctors();
+            }               
             return;
         }
     },
@@ -297,53 +293,6 @@ Ext.define('EasyTreatyApp.store.Location', {
             }, function (place, status) {
             
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
-
-            /*    lang = EasyTreatyApp.config.getLanguage();
-
-                var name = place.name;
-                var phoneNumber = place.international_phone_number;
-                     var idString = place.id;
-               // var idString = place.place_id;
-
-                var userimg = '<img class="user-img" src="test.png">';
-
-                var moredetails = '<img class="more-details" id =' + idString + ' src = "resources/icons/i_30_30.png">';
-
-                var like="";
-
-                //check like
-                if (EasyTreatyApp.config.getLoggedIn()) {
-
-                    if (!record.get('isLiked')) {
-                        console.log("not like");
-                        like = '<button class="like-img like" id=' + idString + '-like>';
-                    } else {
-                        console.log("like");
-                        like = '<button class="like-img dislike" id=' + idString + '-like>';
-                    }
-                }
-
-                var call = "";
-                if (phoneNumber != null) {
-                    call = '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="call"><a href="tel:' + phoneNumber + '">Call</a></button>';
-                }
-                var directions = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
-
-                var infowindow = new google.maps.InfoWindow();
-
-                var firstRow = '<div  class="inlineblock">' + userimg + '</div>' +
-                         '<div class="inlineblock">' +
-                               '<div class="inlineblock"><p class="wordstyle">' + name + '</p></div>' +
-                               '<div class="inlineblock">' + moredetails + '</div>' +
-                               '<div>' + like + '</div>' +
-                         '</div>';
-
-                var secondRow = '<div class="inlineblock">' + call + '</div>' +
-                               '<div class="inlineblock">' + directions + '</div>';
-                var tpl = '<div display="table-column-group">' + firstRow + '</div>' + '<div display="table-column-group">' + secondRow + '</div>';
-
-                infowindow.setContent(tpl);
-                infowindow.open(map.getMap(), marker);*/
 
                 record.set('name', place.name);
                 record.set('formatted_address', place.formatted_address);
