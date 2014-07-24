@@ -67,7 +67,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         this.callParent();
 
         //bubble these events to MapView
-        this.enableBubble(['getdirections', 'moredetails', 'togglefavorite','basechanged','like']);
+        this.enableBubble(['getdirections', 'moredetails', 'togglefavorite', 'basechanged', 'like', 'cityreceived']);
 
         //set location of the user and also this keeps track of base changes
         this.setLocationOfTheUser();
@@ -443,6 +443,32 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
             stepDisplay.setContent('<div>' + text + '</div>');
             stepDisplay.open(map, marker);
         });
-    }
+    },
+
+    /**
+     * Reverse geocode and get city
+     * @method
+     * @public
+     */
+    getCity: function () {
+        var latlng = this.getBaseLocation();
+        var geocoder = new google.maps.Geocoder();
+        var me = this;
+        geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[1]) {
+                    console.log("address:");
+                    console.log(results[1].address_components[1].long_name);
+                    me.fireEvent('cityreceived', true, results[1].address_components[1].long_name);
+                }
+            } else {
+                me.fireEvent('cityreceived', false, null);
+                console.log(status)
+            }
+            
+        });
+
+    },
+
     
 })

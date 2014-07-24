@@ -225,22 +225,11 @@ Ext.define('EasyTreatyApp.store.Location', {
 
         console.log(raxaStore.getAllCount());
         raxaStore.getRange().forEach(function (record) {
-            lat = record.get('latitude');
-            lng = record.get('longitude');
 
-            me.filterByDistance(lat, lng);
-
-            console.log(me.getAllCount());
             if (me.getCount() > 0) {
                 console.log("count > 0");
-                me.filterByName(record.get('name'));
+                me.findByName(record.get('name'),record.get('uuid'));
             }
-            if (me.getCount() > 0) {
-                var rec = me.first();
-                rec.set('isRaxaDoctor', true);
-                rec.set('raxa_uuid',record.get('uuid'));
-            }
-            me.clearFilter();
 
         });
 
@@ -372,7 +361,8 @@ Ext.define('EasyTreatyApp.store.Location', {
         });
     },
 
-    filterByDistance: function (lat, lng) {
+   //not used because search happens by sending city so all the results are not loaded.
+   /* filterByDistance: function (lat, lng) {
         var recLat, recLng, distance,minDistance = 1;
         this.filterBy(function (record, id) {
             recLat = record.get('geometry').location.k;
@@ -386,24 +376,34 @@ Ext.define('EasyTreatyApp.store.Location', {
                 return true;
             }
         });
-    },
+    },*/
 
-    filterByName: function (raxaDoctorName) {
+    findByName: function (raxaDoctorName,raxaUuid) {
 
         var name, splittedArray, designation;
         var splitted = raxaDoctorName.split(" ", 5);
         var firstName = splitted[1];
         var lastName = splitted[splitted.length - 1];
-        this.filterBy(function (record, id) {
+        this.findBy(function (record, id) {
             name = record.get('name');
-            splittedArray = name.split(" ", 5);
-            designation = splittedArray[0].toUpperCase();
-            if (designation == 'DR.' || designation == 'DR') {
-                if (splittedArray[1].toUpperCase() == firstName.toUpperCase() && splittedArray[splittedArray.length - 1].toUpperCase() == lastName.toUpperCase()) {
-                    return true;
+
+            //name can be null if by any chance record is not filled
+            if (name != null) {
+                splittedArray = name.split(" ", 5);
+                designation = splittedArray[0].toUpperCase();
+                if (designation == 'DR.' || designation == 'DR') {
+                    console.log("designation is DR");
+                    if (splittedArray[1].toUpperCase() == firstName.toUpperCase() && splittedArray[splittedArray.length - 1].toUpperCase() == lastName.toUpperCase()) {
+                        record.set('isRaxaDoctor', true);
+                        record.set('raxa_uuid', raxaUuid);
+                        return true;
+                    }
                 }
             }
-        })
+            
+        });
+
+
     }
 
 

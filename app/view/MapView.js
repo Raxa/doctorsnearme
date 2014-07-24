@@ -60,7 +60,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
         this.callParent();
         
-
+        var me = this;
         var store = Ext.create('EasyTreatyApp.store.Location');
         this.setStore(store);
         this.down('locationmap').setStore(store);
@@ -86,6 +86,15 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
         //set the google places service to the locations store
         store.setService(new google.maps.places.PlacesService(this.down('locationmap').getMap()));
+
+        //create openmrs store
+        var raxaDoctorStore = Ext.create('EasyTreatyApp.store.OpenmrsLocation');
+
+        //set handler for the load event
+        raxaDoctorStore.on('load', function (store) {
+            console.log("raxa doctors loaded");
+            console.log(store.getRange());
+        });
 
         //set the language
         var lang = EasyTreatyApp.config.getLanguage();

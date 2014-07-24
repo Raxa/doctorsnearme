@@ -21,7 +21,8 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 basechanged: "onBaseChange",
                 backtomap: "onBackToMap",
                 textsearch: "onTextSearch",
-                like: "onLike"
+                like: "onLike",
+                cityreceived: "onCityReceived"
             },
             detailsView: {
                 //after new design
@@ -35,6 +36,24 @@ Ext.define('EasyTreatyApp.controller.MapView', {
             }
         }
         
+    },
+
+    /**
+      * Called when response from openMRS API is received - in search accoring to city 
+      * @method
+      * @private
+      */
+    onCityReceived: function(requestSuccessful,city){
+        if (requestSuccessful) {
+            console.log("inside city received:" + city);
+            var raxaDoctorStore = Ext.data.StoreManager.lookup('raxadoctor-store');
+
+            //set the proxy according to the city
+            raxaDoctorStore.setProxyToTheStore(city);
+
+            //load the store
+            raxaDoctorStore.load();
+        }
     },
 
     /**
@@ -139,6 +158,18 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         } else if (initialUserLocationSetting) {
             this.onChoice(0);
         }
+
+        ////for get raxa doctors according to user location
+        var mapview = this.getMapView();
+        
+        //this will send request to get the city of the base location
+        //after city arrives the event cityreceived will be fired and
+        // that city will be used to set the proxy and raxa doctor store 
+        //will be loaded
+        mapview.getLocationMap().getCity();
+
+        
+         
     },  
 
     /**

@@ -55,13 +55,13 @@ Ext.application({
         Ext.fly('splash').destroy();
         Ext.fly('bluespin').destroy();
 
-        //create openmrs store
-        var store = Ext.create('EasyTreatyApp.store.OpenmrsLocation');
+        ////create openmrs store
+        //var store = Ext.create('EasyTreatyApp.store.OpenmrsLocation');
 
-        store.load();
-        store.on('load', function () {
-            console.log("store loaded");
-        });
+        //store.load();
+        //store.on('load', function () {
+        //    console.log("store loaded");
+        //});
 
        //create slide menu
        var menu = Ext.create('EasyTreatyApp.view.Menu');
