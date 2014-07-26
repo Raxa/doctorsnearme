@@ -102,19 +102,24 @@ Ext.define('EasyTreatyApp.controller.MapView', {
      * @method
      * @private
      */
-    onTextSearch: function(searchField){
+    onTextSearch: function (searchField) {
         console.log("inside on text search");
-        var mapview = this.getMapView();
-        var locationmap = mapview.getLocationMap();
-        var base = locationmap.getBaseLocation();
-        var types=['doctor','hospital','pharmacy'];       
 
-        var radius1 = mapview.getSearchRadius();
-        var radius2 = radius1 == null ? 2000 : radius1;
+        var searchString = searchField.getValue();
 
-        mapview.getStore().textSearch(base, types, radius2, locationmap, searchField.getValue());
+        if (searchString.replace(/\s/g, '').length) {
+            var mapview = this.getMapView();
+            var locationmap = mapview.getLocationMap();
+            var base = locationmap.getBaseLocation();
+            var types = ['doctor', 'hospital', 'pharmacy'];
 
-        this.getMapView().zoomMap(parseInt(radius2));
+            var radius1 = mapview.getSearchRadius();
+            var radius2 = radius1 == null ? 2000 : radius1;
+
+            mapview.getStore().textSearch(base, types, radius2, locationmap, searchField.getValue());
+
+            this.getMapView().zoomMap(parseInt(radius2));
+        }
     },
 
     /**
