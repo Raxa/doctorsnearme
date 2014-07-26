@@ -274,7 +274,7 @@ Ext.define('EasyTreatyApp.store.Location', {
             }
             else {
                 console.log("failed");
-                console.log(status1);
+                console.log(status);
             }
         });
     },

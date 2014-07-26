@@ -252,6 +252,47 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
         infowindow.setContent(tpl);
         infowindow.open(this.getMap(), marker);
+
+        //////////////
+     /*   var me = this;
+        var infoBubble2 = new InfoBubble({
+            map: me.getMap(),
+            content: tpl,
+            position: marker.position,
+            shadowStyle: 1,
+            padding: 0,
+            backgroundColor: 'white',
+            borderRadius: 0,
+            arrowSize: 0,
+            borderWidth: 1,
+            borderColor: 'white',
+            disableAutoPan: false,
+            hideCloseButton: false,
+            arrowPosition: 50,
+            //backgroundClassName: 'phoney',
+            arrowStyle: 2,
+            maxWidth: 800
+        });
+        infoBubble2.open();*/
+
+
+      /* var infobox = new InfoBox({
+            content: tpl,
+            disableAutoPan: false,
+            maxWidth: 150,
+            pixelOffset: new google.maps.Size(-140, 0),
+            zIndex: null,
+            boxStyle: {
+               // background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
+                background:'white',
+                opacity: 1,
+                width: "280px"
+            },
+            closeBoxMargin: "12px 4px 2px 2px",
+            closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+            infoBoxClearance: new google.maps.Size(1, 1)
+       });*/
+
     },
 
     /**
