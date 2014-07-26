@@ -5,14 +5,14 @@ Ext.define('EasyTreatyApp.view.ListView', {
     extend: 'Ext.Container',
 
     xtype: 'listview',
-
+    
     config:
    {
 
        layout: 'vbox',
        styleHtmlContent: true,
        align: 'stretch',
-
+       cls: 'list-view',
        items: [
            {
                xtype: 'list',
