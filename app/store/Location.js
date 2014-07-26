@@ -94,7 +94,8 @@ Ext.define('EasyTreatyApp.store.Location', {
         this.fireEvent('storecleared');
     },
 
-    addItem: function(record){
+    addItem: function (record) {
+        
         this.add(record);
         //  if (this.isFavorite(record.reference)) {
         if (this.isFavorite(record.place_id)) {
@@ -107,7 +108,7 @@ Ext.define('EasyTreatyApp.store.Location', {
             this.isLiked(record);
         }
 
-        this.fireEvent("locationadded");
+        this.fireEvent("locationadded");        
     },
 
     addFavoriteItem: function(record){
@@ -223,12 +224,12 @@ Ext.define('EasyTreatyApp.store.Location', {
         var raxaStore = Ext.data.StoreManager.lookup('raxadoctor-store');
         var lat, lng, me = this;
 
-        console.log(raxaStore.getAllCount());
+        console.log("count in eaxa doctor store:"+raxaStore.getAllCount());
         raxaStore.getRange().forEach(function (record) {
 
             if (me.getCount() > 0) {
                 console.log("count > 0");
-                me.findByName(record.get('name'),record.get('uuid'));
+                me.findByName(record);
             }
 
         });
@@ -378,30 +379,65 @@ Ext.define('EasyTreatyApp.store.Location', {
         });
     },*/
 
-    findByName: function (raxaDoctorName,raxaUuid) {
-
+    findByName: function (record) {
+        
         var name, splittedArray, designation;
+        var raxaDoctorName = record.get('name'),raxaUuid= record.get('uuid')
+        //split by space
         var splitted = raxaDoctorName.split(" ", 5);
+        console.log(raxaDoctorName);
         var firstName = splitted[1];
         var lastName = splitted[splitted.length - 1];
-        this.findBy(function (record, id) {
+        var value = this.findBy(function (record, id) {
             name = record.get('name');
-
             //name can be null if by any chance record is not filled
             if (name != null) {
                 splittedArray = name.split(" ", 5);
-                designation = splittedArray[0].toUpperCase();
-                if (designation == 'DR.' || designation == 'DR') {
-                    console.log("designation is DR");
-                    if (splittedArray[1].toUpperCase() == firstName.toUpperCase() && splittedArray[splittedArray.length - 1].toUpperCase() == lastName.toUpperCase()) {
-                        record.set('isRaxaDoctor', true);
-                        record.set('raxa_uuid', raxaUuid);
-                        return true;
+                if (splittedArray.length >= 3 && splitted.length>=3) {
+                    designation = splittedArray[0].toUpperCase();
+                    console.log("designation:" + designation);
+                    if (designation == 'DR.' || designation == 'DR') {
+                        console.log("designation is DR");
+                        if (splittedArray[1].toUpperCase() == firstName.toUpperCase() && splittedArray[splittedArray.length - 1].toUpperCase() == lastName.toUpperCase()) {
+                            record.set('isRaxaDoctor', true);
+                            record.set('raxa_uuid', raxaUuid);
+                            return true;
+                        }
                     }
                 }
+               
             }
             
         });
+
+        console.log("value:" + value);
+        var newRecord;
+
+        //if no merge happened
+        if (value == -1) {
+            console.log("value is -1");
+            newRecord = {
+                id: record.get('id'),
+                name: record.get('name'),
+                formatted_address: record.get('address1'),
+                geometry: {location:new google.maps.LatLng(record.get('latitude'), record.get('longitude'))},
+                international_phone_number: null,
+                reviews: null,
+                opening_hours: null,
+                types: 'doctor',
+                specialty: null,
+                isFavorite: false,
+                likeCount: 0,
+                isLiked: false,
+                place_id: record.get('uuid'),
+                isRaxaDoctor: true,
+                raxa_uuid: record.get('uuid')
+            };
+
+            console.log(newRecord);
+
+            this.addItem(newRecord);
+        }
 
 
     }

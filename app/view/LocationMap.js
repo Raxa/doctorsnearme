@@ -132,11 +132,12 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
     * @param {String} type
     */
     onLocationAddition: function (type) {
-        var markerImg = 'Medical centers.png';
+        
+        var markerImg = 'Medical centers_small.png';
         switch (type) {
-            case 1: markerImg = 'Doctors.png'
+            case 1: markerImg = 'Doctors_small.png'
                 break;
-            case 2: markerImg = 'Pharmacies.png'
+            case 2: markerImg = 'Pharmacies_small.png'
                 break;
         }
 
@@ -159,7 +160,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
     */
     addLocationMarker: function (record, markerIcon) {
         var me = this;
-
+        
         //get the location
         var latlng = record.get('geometry').location;       
 
