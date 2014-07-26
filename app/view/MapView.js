@@ -182,7 +182,15 @@ Ext.define('EasyTreatyApp.view.MapView', {
             top: '20%',
             style: 'border:2px solid grey;border-radius:8px;color:black;',
             store: specStore,
-            cls: 'spec-cls'
+            cls: 'spec-cls',
+            defaultTabletPickerConfig: {
+                height: '100%',
+                minHeight: '100%'
+            },
+            defaultPhonePickerConfig: {
+                height: '100%',
+                minHeight: '100%'
+            }
 
         });
 
