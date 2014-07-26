@@ -160,7 +160,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
      * @method
      * @private
      */
-    addSpecialtyMenu: function(){
+    addSpecialtyMenu: function () {
         var me = this;
         var specStore = Ext.create('EasyTreatyApp.store.Specialization')
         this.add({
@@ -173,7 +173,15 @@ Ext.define('EasyTreatyApp.view.MapView', {
             top: '20%',
             style: 'border:2px solid grey;border-radius:8px;color:black;',
             store: specStore,
-            cls: 'spec-cls'
+            cls: 'spec-cls',
+            defaultTabletPickerConfig: {
+                height: '100%',
+                minHeight: '100%'
+            },
+            defaultPhonePickerConfig: {
+                height: '100%',
+                minHeight: '100%'
+            }
 
         });
 
@@ -193,25 +201,25 @@ Ext.define('EasyTreatyApp.view.MapView', {
 
         });
     },
-
     /**
      * Add the Search box to the view and add it's listners
      * @method
      * @private
      */
-    addSearchBox: function(){
+    addSearchBox: function () {
         this.add({
             xtype: 'searchfield',
-            label: '<div><img class="list" src="resources/icons/User_30_30.png"><img class="more" src="resources/icons/moreArrow.png"></div>',
+            label: '<div class="search-box-images"><img class="list" src="resources/icons/User_30_30.png"><img class="more" src="resources/icons/moreArrow.png"></div>',
+            // label:'',
             labelAlign: 'right',
-            // labelWidth:'10%',
             labelWidth: '65px',
+            labelCls: 'searchbox-label',
             name: 'search',
             top: '3%',
             width: '85%',
-            height:'30px',
+            height: '30px',
             left: '5%',
-            cls:'search-box',
+            cls: 'search-box',
             style: 'border:0;border-radius:8px'
         });
 
@@ -233,7 +241,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
             delegate: 'img.list',
             tap: function (event, node, options, eOpts) {
                 console.log("text search");
-                me.fireEvent('textsearch',me.getSearchField());
+                me.fireEvent('textsearch', me.getSearchField());
             }
         })
     },
