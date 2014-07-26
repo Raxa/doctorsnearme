@@ -241,7 +241,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
         var firstRow = '<div  class="inlineblock">' + userimg + '</div>' +
                  '<div class="inlineblock">' +
-                       '<div class="inlineblock"><p class="wordstyle">' + name + '</p></div>' +
+                       '<div class="inlineblock"><p class="wordstyle">&nbsp;&nbsp;' + name + '</p></div>' +
                        '<div class="inlineblock">' + moredetails + '</div>' +
                        '<div>' + like + '</div>' +
                  '</div>';

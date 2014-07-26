@@ -280,17 +280,29 @@ margin:0;
 }
 
 
-.wordstyle{
-	word-wrap:break-word;
-	padding-left:10px;
+
+
+//list view
+
+.x-list .x-list-item .x-list-item-body, .x-list .x-list-item.x-list-item-tpl .x-innerhtml
+{
+padding-left:0;
+padding-right:0;
+} 
+
+.list-firstrow-div{
+height:50px;
 }
 
-//list view 
 .list-more-details{
 	vertical-align:middle;
 	height: 20px;
 	width:20px;
 	padding:2px;
+}
+
+.list-call-block{
+width:50%;
 }
 
 .list-call{
@@ -302,12 +314,29 @@ margin:0;
 	border: 1px solid #0d66f2;
 	background: #0d66f2;
 	height: 40px;
-	width:60px;
+	//width:60px;
+	width:75%;
 	margin:0;
   a{
   color:white;
   text-decoration: none;
 }
+}
+
+.list-call-img{
+	vertical-align:middle;
+	height:40px;
+	//width:40px;
+	width:25%;
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center;
+	border: 2px solid #0d66f2;
+	margin:0;
+}
+
+.list-direction-block{
+width:50%;
 }
 
 .list-direction{
@@ -320,11 +349,14 @@ margin:0;
 	background: white;
 	height: 40px;
 	margin:0;
+	//width:50%;
+	width:100%;
 }
 
 .list-user-img{
 	//vertical-align:middle;
-	height:70px;
+	//height:70px;
+	height:100%;
 	width:40px;
 	background-size: 20px 20px;
 	background-repeat: no-repeat;
@@ -333,20 +365,22 @@ margin:0;
 	margin:0;
 }
 
+.user-img-div{
+height:100%;
+}
+
 .list-like-img{
 //padding:5px;
 }
 
 .docname{
 height:20px;
+margin:5px;
 //width:100px;
 }
 
 .list-first-row{
 height:70px;
-}
-
-.list-call-img{
 }
 
 .x-form-fieldset .x-form-fieldset-inner{

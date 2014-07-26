@@ -226,15 +226,15 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         switch (choice) {
             case 0: type = 'hospital';
                 title = 'Medical Centers';
-                specialtyField.setHidden(false);
+               // specialtyField.setHidden(false);
                 break;
             case 1: type = 'doctor';
                 title = 'Doctors';
-                specialtyField.setHidden(false);
+               // specialtyField.setHidden(false);
                 break;
             case 2: type = 'pharmacy';
                 title = 'Pharmacies';
-                specialtyField.setHidden(true);
+               // specialtyField.setHidden(true);
                 break;
         }
 

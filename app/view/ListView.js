@@ -88,10 +88,11 @@ Ext.define('EasyTreatyApp.view.ListView', {
         var lang = EasyTreatyApp.config.getLanguage();
 
         var template = new Ext.XTemplate(
-            '<div display="table-column-group">',
-                '<div  class="inlineblock"><img class="list-user-img" src="test.png"></div>',
+            '<div display="block">',
+            '<div display="table-column-group" class="list-firstrow-div">',
+                '<div  class="inlineblock user-img-div"><img class="list-user-img" src="test.png"></div>',
                  '<div class="inlineblock">',
-                    '<div class="inlineblock docname"><p class="wordstyle">{name}</p></div>',
+                    '<div class="inlineblock docname"><p>{name}</p></div>',
                     '<div class="inlineblock"><img class="list-more-details" id ={id} src = "resources/icons/i_30_30.png"></div>',
                     //'<tpl if="this.isLoggedIn()==true">',
                     //    '<div>',
@@ -103,17 +104,23 @@ Ext.define('EasyTreatyApp.view.ListView', {
                     //    '</tpl>',
                     //    '</div>',
                     //'</tpl>',
+            '<br><br>',
                  '</div>',
             '</div>',
+            '</div>',
+            '<div display="block">',
             '<div display="table-column-group">',
-                '<div class="inlineblock">',
-                    '<tpl if="values.international_phone_number!=null">',
-                        '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="list-call"><a href="tel:{international_phone_number}">Call</a></button>',
-                    '</tpl>',
+                '<tpl if="values.international_phone_number!=null">',
+                '<div class="inlineblock list-call-block">',
+                   // '<tpl if="values.international_phone_number!=null">',
+                        '<img class="list-call-img" src = "resources/icons/Phone_40_40.png"><button class="list-call"><a href="tel:{international_phone_number}">Call</a></button>',
+                   // '</tpl>',
                 '</div>',
-                '<div class="inlineblock">',
+                '</tpl>',
+                '<div class="inlineblock list-direction-block">',
                     '<button class="list-direction" id={id}><img class="direction-img" src = "resources/icons/Arrow_40_40.png">{[this.getDirectionsLabel()]}</button>',
                 '</div>',
+            '</div>',
             '</div>'
                 
           ,{
