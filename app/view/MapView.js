@@ -211,10 +211,11 @@ Ext.define('EasyTreatyApp.view.MapView', {
     addSearchBox: function(){
         this.add({
             xtype: 'searchfield',
-            label: '<div><img class="list" src="resources/icons/User_30_30.png"><img class="more" src="resources/icons/moreArrow.png"></div>',
+            label: '<div class="search-box-images"><img class="list" src="resources/icons/User_30_30.png"><img class="more" src="resources/icons/moreArrow.png"></div>',
+           // label:'',
             labelAlign: 'right',
-            // labelWidth:'10%',
             labelWidth: '65px',
+            labelCls:'searchbox-label',
             name: 'search',
             top: '3%',
             width: '85%',

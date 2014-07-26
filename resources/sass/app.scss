@@ -355,10 +355,16 @@ border:0;
 
 .spec-cls{
 
+//this could change the height of the specialty field. But without & it doesnt. I think that is because x-field is not inside spec-cls but with it
+&.x-field{
+min-height:30px;
+}
+
 .x-field-input{
-background: -webkit-linear-gradient(grey, white);
+background: -webkit-linear-gradient(#B8B8B8, white);
 color:black;
 border:0;
+border-radius:4px; //this made the border of that inner part of sepacilty field doesnt go out of the outer part
 }
 
 color:black;
@@ -395,35 +401,71 @@ height:30px;
 }
 
 .x-input-el{
-min-height:30px;
+//min-height:30px; //changing this made height of the inside part smaller. That is the sentence inside goes up
+min-height:25px;
 border:1px;
 border-radius:8px;
-padding:1px;
+padding:5px;
 }
 
 
 input::-webkit-input-placeholder {
 
-color: black;
+color: #2B2B2B;
 font-weight:bold;
+padding-left:5px;
+padding-right:5px;
 background-image:url('images/dropDownArrow.png');
+background-size:15px 15px;
 background-position: right;
 background-repeat: no-repeat;
 }
 }
 
+.searchbox-label{
+//this made the two images on search box are properly placed
+ padding:.2em .6em .6em 1em;
 
+}
 .search-box{
 
+//this changes the height of that outer component of search field
+&.x-field{
+//min-height:30px;
+min-height:35px;
+}
+
 .x-field-input{
+	border:1px;//this solved the size mismatch of outer and inner components
 	border-radius:5px;
+	//height:30px; // this can change the search field height - there are two components in it. inside field and outside one. this changes inside
+	height:35px;
 	input::-webkit-input-placeholder {
 		background-image:url('images/search2.png');
 		background-size: 20px 20px;
 		background-position: left;
 		background-repeat: no-repeat;
+	}
+
+.x-input-el{
+min-height:0;
+padding: .4em .4em .4em .4em;
 }
 
+}
+
+.search-box-images{
+margin:1px;
+}
+
+.list{
+height:20px;
+width:20px;
+}
+
+.more{
+height:20px;
+width:20px;
 }
 }
 
