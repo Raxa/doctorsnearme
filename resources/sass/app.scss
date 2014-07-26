@@ -41,6 +41,110 @@ $list-active-color:#157efb;
 	color:#0d66f2;
 }
 
+.list-view{
+	.x-list .x-list-item .x-list-item-body, .x-list .x-list-item.x-list-item-tpl .x-innerhtml
+	{
+	padding-left:0;
+	padding-right:0;
+	}
+
+	.list-firstrow-div{
+		height:50px;
+	}
+
+	.list-more-details{
+		vertical-align:middle;
+		height: 20px;
+		width:20px;
+		padding:2px;
+	}
+
+	.list-call-block{
+		width:50%;
+	}
+
+	.list-call{
+		vertical-align:middle;
+		text-align:center;
+		color:white;
+		-webkit-border-radius: 0px;
+		border-radius:0px;
+		border: 1px solid #0d66f2;
+		background: #0d66f2;
+		height: 40px;
+		//width:60px;
+		width:75%;
+		margin:0;
+	  a{
+	  color:white;
+	  text-decoration: none;
+	}
+	}
+
+	.list-call-img{
+		vertical-align:middle;
+		height:40px;
+		//width:40px;
+		width:25%;
+		background-size: 20px 20px;
+		background-repeat: no-repeat;
+		background-position: center;
+		border: 2px solid #0d66f2;
+		margin:0;
+	}
+
+	.list-direction-block{
+		width:50%;
+	}
+
+	.list-direction{
+		vertical-align:middle;
+		text-align:center;
+		color:#0d66f2;
+		-webkit-border-radius: 0px;
+		border-radius:0px;
+		border: 1px solid #0d66f2;
+		background: white;
+		height: 40px;
+		margin:0;
+		//width:50%;
+		width:100%;
+	}
+
+	.list-user-img{
+		//vertical-align:middle;
+		//height:70px;
+		height:100%;
+		width:40px;
+		background-size: 20px 20px;
+		background-repeat: no-repeat;
+		background-position: center;
+		border: 1px solid black;
+		margin:0;
+	}
+
+	.user-img-div{
+		height:100%;
+	}
+
+	.list-like-img{
+		//padding:5px;
+	}
+
+	.docname{
+		height:20px;
+		margin:5px;
+		//width:100px;
+	}
+
+	.list-first-row{
+		height:70px;
+	}
+
+	.x-form-fieldset .x-form-fieldset-inner{
+		border:0;
+	}
+}
 //for the favorite list in new design
 .favorite-list{
 	background-color:white;
@@ -67,60 +171,60 @@ $list-active-color:#157efb;
 
 //new design login CSS
 .username-pwd{
-border:0;
-background-color:#FFCCFF;
-width:90%;
+	border:0;
+	background-color:#FFCCFF;
+	width:90%;
 }
 
 .signin-btn{
-background-color:#00CC66;
-border:0;border-radius:0;
-margin-left:5%;
-margin-right:5%;
-width:90%;
+	background-color:#00CC66;
+	border:0;border-radius:0;
+	margin-left:5%;
+	margin-right:5%;
+	width:90%;
 }
 
 .signin-label{
-color:white;
+	color:white;
 }
 
 .cancel-btn{
-border:0;
-background-color:#FFCCFF;
-margin-left:30%;
-margin-right:30%;
+	border:0;
+	background-color:#FFCCFF;
+	margin-left:30%;
+	margin-right:30%;
 }
 
 .cancel-label{
-color:black;
-margin-top:1%;
+	color:black;
+	margin-top:1%;
 }
 
 .signup-btn{
-background-color:#3366FF;
-border-radius:0;
-width:40%;
-margin-right:5%;
-margin-left:55%;
-margin-top:5%;
-color:white;
+	background-color:#3366FF;
+	border-radius:0;
+	width:40%;
+	margin-right:5%;
+	margin-left:55%;
+	margin-top:5%;
+	color:white;
 }
 
 .signup-label{
-color:white;
+	color:white;
 }
 
 .signin-fieldset-container{
-margin-left:30%;
-margin-top:5%;
-margin-left:5%;
-margin-right:5%;
+	margin-left:30%;
+	margin-top:5%;
+	margin-left:5%;
+	margin-right:5%;
 }
 
 .forgot-login{
-margin-left:50%;
-margin-top:1%;
-margin-bottom:2%;
+	margin-left:50%;
+	margin-top:1%;
+	margin-bottom:2%;
 }
 //new design login CSS
 
@@ -235,28 +339,28 @@ background-image:url('images/home.png');
 }
 
 .menu{
-color:#157efb;
+	color:#157efb;
 
 }
 
 .menu-heart{
-margin:4px;
+	margin:4px;
 }
 
 .x-button-menu {
-font-size: 1.1em;
-margin-top:5px;
-margin-bottom:5px;
-color:#157efb;
-border:0;
+	font-size: 1.1em;
+	margin-top:5px;
+	margin-bottom:5px;
+	color:#157efb;
+	border:0;
 }
 
 .menu-login{
-background-color:black;
-color:white;
-border:0;
-border-radius:0;
-margin-top:0
+	background-color:black;
+	color:white;
+	border:0;
+	border-radius:0;
+	margin-top:0
 }
 
 .viewport-inner {
@@ -272,11 +376,11 @@ margin-top:0
 }
 
 .name{
-color:black;
-backgorund-color:white;
-border:1px solid black;
-border-radius:0;
-margin:0;
+	color:black;
+	backgorund-color:white;
+	border:1px solid black;
+	border-radius:0;
+	margin:0;
 }
 
 
@@ -284,229 +388,128 @@ margin:0;
 
 //list view
 
-//.x-list .x-list-item .x-list-item-body, .x-list .x-list-item.x-list-item-tpl .x-innerhtml
-//{
-//padding-left:0;
-//padding-right:0;
-//} 
 
-.list-firstrow-div{
-height:50px;
-}
 
-.list-more-details{
-	vertical-align:middle;
-	height: 20px;
-	width:20px;
-	padding:2px;
-}
-
-.list-call-block{
-width:50%;
-}
-
-.list-call{
-	vertical-align:middle;
-	text-align:center;
-	color:white;
-	-webkit-border-radius: 0px;
-	border-radius:0px;
-	border: 1px solid #0d66f2;
-	background: #0d66f2;
-	height: 40px;
-	//width:60px;
-	width:75%;
-	margin:0;
-  a{
-  color:white;
-  text-decoration: none;
-}
-}
-
-.list-call-img{
-	vertical-align:middle;
-	height:40px;
-	//width:40px;
-	width:25%;
-	background-size: 20px 20px;
-	background-repeat: no-repeat;
-	background-position: center;
-	border: 2px solid #0d66f2;
-	margin:0;
-}
-
-.list-direction-block{
-width:50%;
-}
-
-.list-direction{
-	vertical-align:middle;
-	text-align:center;
-	color:#0d66f2;
-	-webkit-border-radius: 0px;
-	border-radius:0px;
-	border: 1px solid #0d66f2;
-	background: white;
-	height: 40px;
-	margin:0;
-	//width:50%;
-	width:100%;
-}
-
-.list-user-img{
-	//vertical-align:middle;
-	//height:70px;
-	height:100%;
-	width:40px;
-	background-size: 20px 20px;
-	background-repeat: no-repeat;
-	background-position: center;
-	border: 1px solid black;
-	margin:0;
-}
-
-.user-img-div{
-height:100%;
-}
-
-.list-like-img{
-//padding:5px;
-}
-
-.docname{
-height:20px;
-margin:5px;
-//width:100px;
-}
-
-.list-first-row{
-height:70px;
-}
-
-.x-form-fieldset .x-form-fieldset-inner{
-border:0;
-}
-
+//////SPECIALTY MENU////////////////////
 .spec-cls{
 
-//this could change the height of the specialty field. But without & it doesnt. I think that is because x-field is not inside spec-cls but with it
-&.x-field{
-min-height:30px;
-}
+	//this could change the height of the specialty field. But without & it doesnt. I think that is because x-field is not inside spec-cls but with it
+	&.x-field{
+		min-height:30px;
+	}
 
-.x-field-input{
-background: -webkit-linear-gradient(#B8B8B8, white);
-color:black;
-border:0;
-border-radius:4px; //this made the border of that inner part of sepacilty field doesnt go out of the outer part
-}
-
-color:black;
-
+	.x-field-input{
+		background: -webkit-linear-gradient(#B8B8B8, white);
+		color:black;
+		border:0;
+		border-radius:4px; //this made the border of that inner part of sepacilty field doesnt go out of the outer part
+	}
+	color:black;
 }
 
 .x-container .x-panel .x-sized .x-select-overlay .x-floating{
-height:100%;
+	height:100%;
 }
 
 //morearrow in mapview
 .more{
-//padding-bottom:20px;
-vertical-align:middle;
-height:20px;
-width:20px;
+	//padding-bottom:20px;
+	vertical-align:middle;
+	height:20px;
+	width:20px;
 }
 
 .list{
-//padding-bottom:20px;
-vertical-align:middle;
-align:left;
-margin:0;
+	//padding-bottom:20px;
+	vertical-align:middle;
+	align:left;
+	margin:0;
 }
 
 #ext-multiselectfield-1{
-.x-field-mask{
-border:0;
-border-radius:8px;
+		.x-field-mask{
+			border:0;
+			border-radius:8px;
+		}
+
+		.x-component-outer{
+		height:30px;
+		}
+
+		.x-input-el{
+		//min-height:30px; //changing this made height of the inside part smaller. That is the sentence inside goes up
+		min-height:25px;
+		border:1px;
+		border-radius:8px;
+		padding:5px;
+		}
+
+
+		input::-webkit-input-placeholder {
+			color: #2B2B2B;
+			font-weight:bold;
+			padding-left:5px;
+			padding-right:5px;
+			background-image:url('images/dropDownArrow.png');
+			background-size:15px 15px;
+			background-position: right;
+			background-repeat: no-repeat;
+		}
 }
+//////SPECIALTY MENU////////////////////
 
-.x-component-outer{
-height:30px;
-}
-
-.x-input-el{
-//min-height:30px; //changing this made height of the inside part smaller. That is the sentence inside goes up
-min-height:25px;
-border:1px;
-border-radius:8px;
-padding:5px;
-}
-
-
-input::-webkit-input-placeholder {
-
-color: #2B2B2B;
-font-weight:bold;
-padding-left:5px;
-padding-right:5px;
-background-image:url('images/dropDownArrow.png');
-background-size:15px 15px;
-background-position: right;
-background-repeat: no-repeat;
-}
-}
-
+////////////SEARCH BOX///////////////////////
 .searchbox-label{
 //this made the two images on search box are properly placed
  padding:.2em .6em .6em 1em;
-
 }
 .search-box{
 
-//this changes the height of that outer component of search field
-&.x-field{
-//min-height:30px;
-min-height:35px;
-}
-
-.x-field-input{
-	border:1px;//this solved the size mismatch of outer and inner components
-	border-radius:5px;
-	//height:30px; // this can change the search field height - there are two components in it. inside field and outside one. this changes inside
-	height:35px;
-	input::-webkit-input-placeholder {
-		background-image:url('images/search2.png');
-		background-size: 20px 20px;
-		background-position: left;
-		background-repeat: no-repeat;
+	//this changes the height of that outer component of search field
+	&.x-field{
+		min-height:35px;
 	}
 
-.x-input-el{
-min-height:0;
-padding: .4em .4em .4em .4em;
-}
+	.x-field-input{
+		border:1px;//this solved the size mismatch of outer and inner components
+		border-radius:5px;
+		height:35px; // this can change the search field height - there are two components in it. inside field and outside one. this changes inside
 
-}
+		input::-webkit-input-placeholder {
+			background-image:url('images/search2.png');
+			background-size: 20px 20px;
+			background-position: left;
+			background-repeat: no-repeat;
+		}
 
-.search-box-images{
-margin:1px;
-}
+		.x-input-el{
+			min-height:0;
+			padding: .4em .4em .4em .4em;
+		}
 
-.list{
-height:20px;
-width:20px;
-}
+	}
 
-.more{
-height:20px;
-width:20px;
-}
+	.search-box-images{
+		margin:1px;
+	}
+
+	.list{
+		height:20px;
+		width:20px;
+	}
+
+	.more{
+		height:20px;
+		width:20px;
+	}
 }
 
 
 .x-form-fieldset .x-field:before{
-border:0;
+	border:0;
 }
+
+////////////SEARCH BOX///////////////////////
 
 
 

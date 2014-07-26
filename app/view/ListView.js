@@ -12,7 +12,7 @@ Ext.define('EasyTreatyApp.view.ListView', {
        layout: 'vbox',
        styleHtmlContent: true,
        align: 'stretch',
-
+       cls:'list-view',
        items: [
            {
                xtype: 'list',
