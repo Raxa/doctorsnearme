@@ -266,7 +266,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
             src: 'resources/icons/conpass_30_30.png',
             height: 30,
             width: 30,
-            top: '40%',
+            top: '30%',
             right: '5%',
             id:'locator'
         });
