@@ -145,6 +145,7 @@ $list-active-color:#157efb;
 		border:0;
 	}
 }
+
 //for the favorite list in new design
 .favorite-list{
 	background-color:white;
@@ -170,6 +171,11 @@ $list-active-color:#157efb;
 
 
 //new design login CSS
+
+.x-form-fieldset .x-form-fieldset-inner{
+		border:0;
+}
+
 .username-pwd{
 	border:0;
 	background-color:#FFCCFF;
@@ -226,6 +232,7 @@ $list-active-color:#157efb;
 	margin-top:1%;
 	margin-bottom:2%;
 }
+
 //new design login CSS
 
 ////////////////////////
