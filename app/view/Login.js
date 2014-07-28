@@ -41,7 +41,7 @@ Ext.define('EasyTreatyApp.view.Login', {
             {//forgot login
                 xtype: 'label',
                 html: 'Forgot Login/pass?',
-                cls: 'forgot-login',
+                cls: 'forgot-login'
             },
             
             {
@@ -53,8 +53,8 @@ Ext.define('EasyTreatyApp.view.Login', {
                 xtype: 'button',
                 width: '40%',
                 cls:'cancel-btn',
-                text:'<span class="cancel-label">CANCEL</span>',
-            },
+                text:'<span class="cancel-label">CANCEL</span>'
+            }
             
         ]
     },

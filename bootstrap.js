@@ -19,7 +19,31 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js"
 });
 Ext.ClassManager.addNameAlternateMappings({
-  "EasyTreatyApp.view.Main": [],
+  "EasyTreatyApp.config.Runtime": [],
+  "EasyTreatyApp.controller.DetailsView": [],
+  "EasyTreatyApp.controller.Language": [],
+  "EasyTreatyApp.controller.Login": [],
+  "EasyTreatyApp.controller.MapView": [],
+  "EasyTreatyApp.controller.Menu": [],
+  "EasyTreatyApp.math.Algorithms": [],
+  "EasyTreatyApp.model.Comment": [],
+  "EasyTreatyApp.model.Location": [],
+  "EasyTreatyApp.model.Memory": [],
+  "EasyTreatyApp.model.User": [],
+  "EasyTreatyApp.store.Comment": [],
+  "EasyTreatyApp.store.Language": [],
+  "EasyTreatyApp.store.Location": [],
+  "EasyTreatyApp.store.Memory": [],
+  "EasyTreatyApp.store.Radius": [],
+  "EasyTreatyApp.store.Specialization": [],
+  "EasyTreatyApp.ux.Multiselect": [],
+  "EasyTreatyApp.view.DetailsView": [],
+  "EasyTreatyApp.view.ListView": [],
+  "EasyTreatyApp.view.LocationMap": [],
+  "EasyTreatyApp.view.Login": [],
+  "EasyTreatyApp.view.MapView": [],
+  "EasyTreatyApp.view.Menu": [],
+  "EasyTreatyApp.view.UserProfile": [],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],
   "Ext.AbstractPlugin": [],
@@ -643,8 +667,46 @@ Ext.ClassManager.addNameAlternateMappings({
   ]
 });
 Ext.ClassManager.addNameAliasMappings({
-  "EasyTreatyApp.view.Main": [
-    "widget.main"
+  "EasyTreatyApp.config.Runtime": [],
+  "EasyTreatyApp.controller.DetailsView": [],
+  "EasyTreatyApp.controller.Language": [],
+  "EasyTreatyApp.controller.Login": [],
+  "EasyTreatyApp.controller.MapView": [],
+  "EasyTreatyApp.controller.Menu": [],
+  "EasyTreatyApp.math.Algorithms": [],
+  "EasyTreatyApp.model.Comment": [],
+  "EasyTreatyApp.model.Location": [],
+  "EasyTreatyApp.model.Memory": [],
+  "EasyTreatyApp.model.User": [],
+  "EasyTreatyApp.store.Comment": [],
+  "EasyTreatyApp.store.Language": [],
+  "EasyTreatyApp.store.Location": [],
+  "EasyTreatyApp.store.Memory": [],
+  "EasyTreatyApp.store.Radius": [],
+  "EasyTreatyApp.store.Specialization": [],
+  "EasyTreatyApp.ux.Multiselect": [
+    "widget.multiselectfield"
+  ],
+  "EasyTreatyApp.view.DetailsView": [
+    "widget.detailsview"
+  ],
+  "EasyTreatyApp.view.ListView": [
+    "widget.listview"
+  ],
+  "EasyTreatyApp.view.LocationMap": [
+    "widget.locationmap"
+  ],
+  "EasyTreatyApp.view.Login": [
+    "widget.loginview"
+  ],
+  "EasyTreatyApp.view.MapView": [
+    "widget.mapview"
+  ],
+  "EasyTreatyApp.view.Menu": [
+    "widget.mainmenu"
+  ],
+  "EasyTreatyApp.view.UserProfile": [
+    "widget.userprofile"
   ],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],

@@ -55,6 +55,13 @@ Ext.application({
         Ext.fly('splash').destroy();
         Ext.fly('bluespin').destroy();
 
+        Ext.require('Ext.device.Connection');
+
+        if (Ext.device.Connection.getType() == 'NONE') {
+            Ext.Msg.alert("Please Connect to internet");
+        }
+        
+
        //create slide menu
        var menu = Ext.create('EasyTreatyApp.view.Menu');
        Ext.Viewport.add(menu);

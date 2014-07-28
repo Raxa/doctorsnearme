@@ -136,7 +136,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         {   //5
             xtype:'label',
             html: 'Reviews',
-            style: 'font-size:20px;padding:10px;border-bottom:0;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;margin:8px 8px 0 8px;color:grey;background-color:white;',
+            style: 'font-size:20px;padding:10px;border-bottom:0;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;margin:8px 8px 0 8px;color:grey;background-color:white;'
         },
        {    //6
            xtype: 'container',
@@ -552,7 +552,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         this.getLikeButton().setHidden(value);
         this.getLikeSpacer().setHidden(value);
         this.getCommentContainer().setHidden(value);
-    },
+    }
     
    
 

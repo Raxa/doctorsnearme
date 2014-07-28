@@ -90,7 +90,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
                     //maxValue: 1000000,
                     minValue: 1,
                     maxValue: 1000,
-                    labelWidth: '45%',
+                    labelWidth: '45%'
                 },
                 {
                     //4
