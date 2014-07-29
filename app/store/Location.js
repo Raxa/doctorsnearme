@@ -7,10 +7,13 @@ Ext.define('EasyTreatyApp.store.Location', {
     config: {
         model: 'EasyTreatyApp.model.Location',
         service: null,
-        storeId: 'location-store'
+        storeId: 'location-store',
+        searchCount:0
     },
 
     textSearch: function (latLng, types, radius, map, query) {
+        this.setSearchCount(this.getSearchCount() + 1);
+        var searchCount = this.getSearchCount();
         var service = new google.maps.places.PlacesService(map.getMap());
         var me = this;
 
@@ -26,7 +29,7 @@ Ext.define('EasyTreatyApp.store.Location', {
                 Ext.Array.forEach(results, function (place) {
                     me.addItem(place);
                 });
-                me.getPlaceDetails(results, 0);
+                me.getPlaceDetails(results, 0,searchCount);
             } else {
                 console.log("status:"); console.log(status);
             }
@@ -35,7 +38,8 @@ Ext.define('EasyTreatyApp.store.Location', {
     },
 
     radarSearch: function (latLng, type, radius, map, keywords) {
-                
+        this.setSearchCount(this.getSearchCount() + 1);
+        var searchCount = this.getSearchCount();
         this.storeClear();
 
         var request;
@@ -55,7 +59,7 @@ Ext.define('EasyTreatyApp.store.Location', {
                         me.addItem(place);
                     });
                     console.log(results[0]);
-                    me.getPlaceDetails(results, 0,type);
+                    me.getPlaceDetails(results, 0, type, searchCount);
                 } else {
                     console.log("status:"); console.log(status);
                 }
@@ -173,7 +177,8 @@ Ext.define('EasyTreatyApp.store.Location', {
         }
     },
 
-    getPlaceDetails: function (results, i,type) {
+    getPlaceDetails: function (results, i, type, searchCount) {
+        console.log("new one"+searchCount);
         var me = this;
         
         var service = this.getService();
@@ -201,10 +206,10 @@ Ext.define('EasyTreatyApp.store.Location', {
                 }
 
             });
-        if (i < results.length - 1) {
+        if (i < results.length - 1 && searchCount == this.getSearchCount()) {
             //test
             Ext.Function.defer(function () {
-                me.getPlaceDetails(results, i + 1,type)
+                me.getPlaceDetails(results, i + 1,type,searchCount)
                 //}, 290, me);
             }, 290, me);
             return;
