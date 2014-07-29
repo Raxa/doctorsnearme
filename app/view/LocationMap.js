@@ -378,7 +378,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
                     me.setMapOptions({
                         center: location,
-                        zoom: 7
+                        zoom: 15
                     });
 
                     //set markers at new locations
