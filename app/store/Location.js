@@ -275,6 +275,7 @@ Ext.define('EasyTreatyApp.store.Location', {
             });
     },
 
+    //OK I'm using again
     //USED IF THERE IS A RECORD THAT HASN'T BEEN SET DUE TO OVER QUERY LIMIT
     //use if you are going to make the request when clicking on a marker
     setDetailsForTheRecord: function (record,  marker) {
@@ -297,7 +298,7 @@ Ext.define('EasyTreatyApp.store.Location', {
                 record.set('opening_hours', place.opening_hours);
                 record.set('types', place.types);
 
-                me.fireEvent('detailsset', record, marker);
+                me.fireEvent('detailssetfordetailsview', record, marker);
 
             }
             else {

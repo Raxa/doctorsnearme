@@ -109,7 +109,12 @@ Ext.define('EasyTreatyApp.view.MapView', {
      * @private
      */
     onDetailsSet: function(record,marker){
-        this.getLocationMap().setInfowindowContent(record, marker);
+        if (marker != null) {
+            //marker will be null in case detailsseet event was fired after fetching details not for infowindow but for details view
+            this.getLocationMap().setInfowindowContent(record, marker);
+        } else {
+            this.fireEvent('detailsreadyfordetailsview', record);
+        }
     },
 
 
