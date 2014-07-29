@@ -67,8 +67,10 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         if (nextRecord.get('name') == null) {
             //marker is set to null. by this way we can reuse the function in store
             store.setDetailsForTheRecord(nextRecord, null);
+        } else {
+            this.onLocationSelect(nextRecord);
         }
-        this.onLocationSelect(nextRecord);
+        
     },
 
     /**
