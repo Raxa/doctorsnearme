@@ -194,6 +194,11 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
                 //send a separate request to get details of the record
                 me.getStore().setDetailsForTheRecord(record,marker);
             }
+
+            me.setMapOptions({
+                center: marker.position,
+                zoom: 20
+            });
            
         });
 

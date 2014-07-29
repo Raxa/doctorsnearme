@@ -55,11 +55,11 @@ Ext.application({
         Ext.fly('splash').destroy();
         Ext.fly('bluespin').destroy();
 
-        Ext.require('Ext.device.Connection');
+        //Ext.require('Ext.device.Connection');
 
-        if (Ext.device.Connection.getType() == 'NONE') {
-            Ext.Msg.alert("Please Connect to internet");
-        }
+        //if (Ext.device.Connection.getType() == 'NONE') {
+        //    Ext.Msg.alert("Please Connect to internet");
+        //}
         
 
        //create slide menu
