@@ -195,6 +195,11 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
                 //send a separate request to get details of the record
                 me.getStore().setDetailsForTheRecord(record,marker);
             }
+
+            me.setMapOptions({
+                center: marker.position,
+                zoom: 20
+            });
            
         });
 
@@ -242,7 +247,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
         var firstRow = '<div  class="inlineblock">' + userimg + '</div>' +
                  '<div class="inlineblock">' +
-                       '<div class="inlineblock"><p class="wordstyle">' + name + '</p></div>' +
+                       '<div class="inlineblock"><p class="wordstyle">&nbsp;&nbsp;&nbsp;' + name + '</p></div>' +
                        '<div class="inlineblock">' + moredetails + '</div>' +
                        '<div>' + like + '</div>' +
                  '</div>';

@@ -180,7 +180,7 @@ Ext.define('EasyTreatyApp.store.Location', {
         }
     },
 
-    getPlaceDetails: function (results, i,type) {
+    getPlaceDetails: function (results, i,type,searchCount) {
         var me = this;
         
         var service = this.getService();
