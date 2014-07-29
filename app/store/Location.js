@@ -219,7 +219,7 @@ Ext.define('EasyTreatyApp.store.Location', {
             return;
         }
     },
-
+    //OK Im using again
     //NOT USED NOW. THE EVENT INSIDE THIS IS NOW FIRED INSIDE setDetailsForTheRecord FUNCTION. IF YOU ARE GONNA USE THIS AGAIN PUT ANOTHER EVENT NAME
     //this was added to set details for the record before going to next location by the forward button in details view
     setDetails: function(record){
@@ -242,7 +242,7 @@ Ext.define('EasyTreatyApp.store.Location', {
                     record.set('opening_hours', place.opening_hours);
                     record.set('types', place.types);
 
-                    me.fireEvent('detailsset',record);
+                    me.fireEvent('detailssetfordetailsview',record);
 
                 }
                 else {

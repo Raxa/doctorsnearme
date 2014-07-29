@@ -21,7 +21,8 @@ Ext.define('EasyTreatyApp.controller.MapView', {
                 basechanged: "onBaseChange",
                 backtomap: "onBackToMap",
                 textsearch: "onTextSearch",
-                like: "onLike"
+                like: "onLike",
+                detailsreadyfordetailsview:"onDetailsReady"
             },
             detailsView: {
                 //after new design
@@ -35,6 +36,10 @@ Ext.define('EasyTreatyApp.controller.MapView', {
             }
         }
         
+    },
+
+    onDetailsReady: function(record){
+        this.onLocationSelect(record);
     },
 
     /**
@@ -59,7 +64,10 @@ Ext.define('EasyTreatyApp.controller.MapView', {
             nextRecord = store.getAt(0);
         }
 
-
+        if (nextRecord.get('name') == null) {
+            //marker is set to null. by this way we can reuse the function in store
+            store.setDetailsForTheRecord(nextRecord, null);
+        }
         this.onLocationSelect(nextRecord);
     },
 
