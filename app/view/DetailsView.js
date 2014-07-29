@@ -246,6 +246,12 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         // refresh the review list to show loaded items
         reviewlist.refresh();
         
+        if (store.getCount() == 0) {
+            this.getReviewLabel().setHtml("Be the first to review");
+        }
+        else {
+            this.getReviewLabel().setHtml("Reviews");
+        }
     },
 
     /**
@@ -352,6 +358,16 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
      */
     getDetailsContainer: function(){
         return this.getComponent(2);
+    },
+
+    /**
+     * Get the label above reviews container
+     * @method
+     * @private
+     * @return {Ext.Container}
+     */
+    getReviewLabel: function(){
+        return this.getComponent(5);
     },
 
     /**
