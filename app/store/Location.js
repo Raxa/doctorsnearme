@@ -59,7 +59,7 @@ Ext.define('EasyTreatyApp.store.Location', {
                         me.addItem(place);
                     });
                     console.log(results[0]);
-                    me.getPlaceDetails(results, 0, type, searchCount);
+                    me.getPlaceDetails(results, 0, searchCount);
                 } else {
                     console.log("status:"); console.log(status);
                 }
@@ -83,7 +83,7 @@ Ext.define('EasyTreatyApp.store.Location', {
                         });
 
                         //trying filling store early
-                        me.getPlaceDetails(results, 0,type);
+                        me.getPlaceDetails(results, 0,searchCount);
                     }
 
                 });
@@ -177,7 +177,7 @@ Ext.define('EasyTreatyApp.store.Location', {
         }
     },
 
-    getPlaceDetails: function (results, i, type, searchCount) {
+    getPlaceDetails: function (results, i,  searchCount) {
         console.log("new one"+searchCount);
         var me = this;
         
@@ -209,7 +209,7 @@ Ext.define('EasyTreatyApp.store.Location', {
         if (i < results.length - 1 && searchCount == this.getSearchCount()) {
             //test
             Ext.Function.defer(function () {
-                me.getPlaceDetails(results, i + 1,type,searchCount)
+                me.getPlaceDetails(results, i + 1,searchCount)
                 //}, 290, me);
             }, 290, me);
             return;

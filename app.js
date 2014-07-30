@@ -35,16 +35,17 @@ Ext.application({
         '144': 'resources/icons/AppIcon~ipad@2x.png'
     },
 
-    isIconPrecomposed: true,
-
     startupImage: {
         '320x460': 'resources/startup/320x460.jpg',
         '640x920': 'resources/startup/640x920.png',
         '768x1004': 'resources/startup/768x1004.png',
         '748x1024': 'resources/startup/748x1024.png',
         '1536x2008': 'resources/startup/1536x2008.png',
-        '1496x2048': 'resources/startup/1496x2048.png'
+        '1496x2048': 'resources/startup/1496x2048.png',
+        '640x1096': 'resources/startup/640x1096.png'
     },
+
+    isIconPrecomposed: true,
 
     launch: function () {
 
@@ -52,38 +53,46 @@ Ext.application({
 
         // Destroy the #appLoadingIndicator element
       
-        Ext.fly('splash').destroy();
-        Ext.fly('bluespin').destroy();
+        Ext.Function.defer(function () {
+            Ext.fly('splash').destroy();
+            Ext.fly('bluespin').destroy();
+
+            EasyTreatyApp.config.setLanguage(EN);
+
+            //create slide menu
+            var menu = Ext.create('EasyTreatyApp.view.Menu');
+            Ext.Viewport.add(menu);
+
+            //create mapview
+            var mapView = Ext.create('EasyTreatyApp.view.MapView');
+            Ext.Viewport.add(mapView);
+            Ext.Viewport.setActiveItem(mapView);
+
+            //create favorites store
+            var favoritesStore = Ext.create('EasyTreatyApp.store.Memory', {
+                storeId: 'fav-store'
+            });
+
+            //load from local storage
+            favoritesStore.load();
+
+            //store favorites from local storage in a runtime variable
+            var currentFavorites = EasyTreatyApp.config.getFavorites();
+            favoritesStore.getRange().forEach(function (record) {
+                currentFavorites.push(Ext.JSON.decode(record.get('query')));
+            });
+        }, 500);
+
+        
+        //Ext.fly('splash').destroy();
+        //Ext.fly('bluespin').destroy();
 
         //Ext.require('Ext.device.Connection');
 
         //if (Ext.device.Connection.getType() == 'NONE') {
         //    Ext.Msg.alert("Please Connect to internet");
         //}
-        
 
-       //create slide menu
-       var menu = Ext.create('EasyTreatyApp.view.Menu');
-       Ext.Viewport.add(menu);
-
-        //create mapview
-        var mapView = Ext.create('EasyTreatyApp.view.MapView');
-        Ext.Viewport.add(mapView);
-        Ext.Viewport.setActiveItem(mapView);
-
-        //create favorites store
-        var favoritesStore = Ext.create('EasyTreatyApp.store.Memory', {
-            storeId:'fav-store'
-        });
-
-        //load from local storage
-        favoritesStore.load();
-
-        //store favorites from local storage in a runtime variable
-        var currentFavorites = EasyTreatyApp.config.getFavorites();
-        favoritesStore.getRange().forEach(function (record) {
-            currentFavorites.push(Ext.JSON.decode(record.get('query')));
-        });
         
     },
 
