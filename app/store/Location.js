@@ -85,7 +85,7 @@ Ext.define('EasyTreatyApp.store.Location', {
                         });
 
                         //trying filling store early
-                        me.getPlaceDetails(results, 0,type);
+                        me.getPlaceDetails(results, 0,type,searchCount);
                     }
 
                 });
