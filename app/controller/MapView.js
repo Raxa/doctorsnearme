@@ -135,7 +135,7 @@ Ext.define('EasyTreatyApp.controller.MapView', {
     onBackToMap: function () {
         var mapview = this.getMapView();
 
-        mapview.getSearchField().setHidden(false);
+        mapview.getSearchToolbar().setHidden(false);
         mapview.getSpecialtySelectField().setHidden(false);
         mapview.getLocator().setHidden(false);
 

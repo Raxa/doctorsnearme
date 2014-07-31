@@ -319,6 +319,16 @@ Ext.define('EasyTreatyApp.view.MapView', {
     */
     getSearchField:function(){
         return this.down('searchfield');
+        //return this.getComponent(3);
+    },
+
+    /**
+      * Returns the Search Toolbar
+      * @method
+      * @return {Ext.Toolbar}
+     */
+    getSearchToolbar: function () {
+        return this.getComponent(3);
     },
     
     /**
