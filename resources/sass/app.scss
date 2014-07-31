@@ -410,6 +410,8 @@ background-image:url('images/home.png');
 	//	color:black;
 	//	border:0;
 	//	border-radius:4px; //this made the border of that inner part of sepacilty field doesnt go out of the outer part
+	border:0;
+	background:#f8f9f9;
 	}
 	color:black;
 }
@@ -453,7 +455,8 @@ background-image:url('images/home.png');
 
 
 		input::-webkit-input-placeholder {
-			color: #2B2B2B;
+			//color: #2B2B2B;
+			color: #0d66f2;
 			font-weight:bold;
 			padding-left:5px;
 			padding-right:5px;
