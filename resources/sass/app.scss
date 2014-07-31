@@ -171,7 +171,7 @@ $list-active-color:#157efb;
 
 
 //new design login CSS
-
+.login{
 .x-form-fieldset .x-form-fieldset-inner{
 		border:0;
 }
@@ -180,7 +180,12 @@ $list-active-color:#157efb;
 	border:0;
 	background-color:#FFCCFF;
 	width:90%;
+	height:50px;
+	padding:1em .6em .6em 1em;
+	font-family:Tw Cen MT;
+	font-weight:bold;
 }
+
 
 .signin-btn{
 	background-color:#00CC66;
@@ -188,10 +193,13 @@ $list-active-color:#157efb;
 	margin-left:5%;
 	margin-right:5%;
 	width:90%;
+	height:50px;
 }
 
 .signin-label{
 	color:white;
+	font-family:Tw Cen MT;
+	font-weight:bold;
 }
 
 .cancel-btn{
@@ -199,11 +207,14 @@ $list-active-color:#157efb;
 	background-color:#FFCCFF;
 	margin-left:30%;
 	margin-right:30%;
+	height:50px;
+	font-family:Tw Cen MT;
 }
 
 .cancel-label{
 	color:black;
 	margin-top:1%;
+	font-family:Tw Cen MT;
 }
 
 .signup-btn{
@@ -214,10 +225,15 @@ $list-active-color:#157efb;
 	margin-left:55%;
 	margin-top:5%;
 	color:white;
+	height:40px;
+	font-family:Tw Cen MT;
+	font-weight:bold;
 }
 
 .signup-label{
 	color:white;
+	font-family:Tw Cen MT;
+	font-weight:bold;
 }
 
 .signin-fieldset-container{
@@ -231,8 +247,20 @@ $list-active-color:#157efb;
 	margin-left:50%;
 	margin-top:1%;
 	margin-bottom:2%;
+	height:50px;
+	vertical-align:middle;
+	text-align:center;
+	font-family:Tw Cen MT;
+
+	.x-innerhtml{
+	vertical-align:middle;
+	}
 }
 
+.x-field-input{
+border:1px solid white;
+}
+}
 //new design login CSS
 
 ////////////////////////
@@ -348,6 +376,15 @@ background-image:url('images/home.png');
 .menu{
 	color:#157efb;
 
+	.x-field-input{
+		border-radius:5px;
+	}
+	border-radius:2px;
+	.x-form-fieldset .x-form-fieldset-inner{
+		border:0;
+	}
+
+
 }
 
 .menu-heart{
@@ -399,10 +436,16 @@ background-image:url('images/home.png');
 
 //////SPECIALTY MENU////////////////////
 .spec-cls{
-
+	body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td{
+		color: #0d66f2;
+	}
 	//this could change the height of the specialty field. But without & it doesnt. I think that is because x-field is not inside spec-cls but with it
 	&.x-field{
 		min-height:30px;
+	}
+
+	.x-component-outer{
+		background:white;
 	}
 
 	.x-field-input{
@@ -411,7 +454,8 @@ background-image:url('images/home.png');
 	//	border:0;
 	//	border-radius:4px; //this made the border of that inner part of sepacilty field doesnt go out of the outer part
 	border:0;
-	background:#f8f9f9;
+	//background:#f8f9f9;
+	background:white;
 	}
 	color:black;
 }
@@ -426,6 +470,7 @@ background-image:url('images/home.png');
 	vertical-align:middle;
 	height:20px;
 	width:20px;
+	margin:5px;
 }
 
 .list{
@@ -465,6 +510,18 @@ background-image:url('images/home.png');
 			background-position: right;
 			background-repeat: no-repeat;
 		}
+
+				input::input-placeholder {
+			//color: #2B2B2B;
+			color: #0d66f2;
+			font-weight:bold;
+			padding-left:5px;
+			padding-right:5px;
+			background-image:url('images/dropDownArrow.png');
+			background-size:15px 15px;
+			background-position: right;
+			background-repeat: no-repeat;
+		}
 }
 //////SPECIALTY MENU////////////////////
 
@@ -486,8 +543,8 @@ background-image:url('images/home.png');
 		height:35px; // this can change the search field height - there are two components in it. inside field and outside one. this changes inside
 
 		input::-webkit-input-placeholder {
-			background-image:url('images/search2.png');
-			background-size: 20px 20px;
+			background-image:url('images/search.png');
+			background-size: 19px 19px;
 			background-position: left;
 			background-repeat: no-repeat;
 		}
@@ -508,7 +565,7 @@ background-image:url('images/home.png');
 		width:20px;
 	}
 
-	.more{
+	.more{		
 		height:20px;
 		width:20px;
 	}

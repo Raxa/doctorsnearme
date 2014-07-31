@@ -11,12 +11,12 @@ Ext.define('EasyTreatyApp.view.Login', {
         cls: 'login',
         style:'background-color:#FFCCFF;',
         items: [
-            {
+            {//0
                 xtype: 'button',
                 cls:'signup-btn',
                 text: '<span class="signup-label">Sign up</span>'
             },            
-            {
+            {//1
                 xtype: 'container',
                 cls:'signin-fieldset-container',
                 items: [

@@ -176,9 +176,11 @@ Ext.define('EasyTreatyApp.view.MapView', {
             hidden: false,
             width: '80%',
             left: '7%',
-            top: '12%',
+            //top: '15%',
+            top: '6%',
             // style: 'border:2px solid grey;border-radius:8px;color:black;',
-            style: 'border:1px solid #0d66f2;border-radius:0;color:#0d66f2;',
+            //style: 'border:1px solid #0d66f2;border-radius:0;color:#0d66f2;',
+            style: 'border:1px solid #0d66f2;border-radius:0;color:white;',
             store: specStore,
             cls: 'spec-cls',
             defaultTabletPickerConfig: {
@@ -214,21 +216,51 @@ Ext.define('EasyTreatyApp.view.MapView', {
      * @private
      */
     addSearchBox: function () {
-        this.add({
-            xtype: 'searchfield',
-            label: '<div class="search-box-images"><img class="list" src="resources/icons/User_30_30.png"><img class="more" src="resources/icons/moreArrow.png"></div>',
-            // label:'',
+        //this.add({
+        //    xtype: 'searchfield',
+        //    label: '<div class="search-box-images"><img class="list" src="resources/icons/User_30_30.png"><img class="more" src="resources/icons/moreArrow.png"></div>',
+        //    // label:'',
+        //    labelAlign: 'right',
+        //    labelWidth: '65px',
+        //    labelCls: 'searchbox-label',
+        //    name: 'search',
+        //    top: '6%',
+        //    width: '85%',
+        //    height: '30px',
+        //    left: '5%',
+        //    cls: 'search-box',
+        //    style: 'border:0;border-radius:8px'
+        //});
+        var toolbar = Ext.create('Ext.Toolbar', { docked: 'top' });
+
+        var searchField = Ext.create('Ext.field.Search', {
             labelAlign: 'right',
             labelWidth: '65px',
             labelCls: 'searchbox-label',
             name: 'search',
-            top: '3%',
-            width: '85%',
-            height: '30px',
-            left: '5%',
+            width: '80%',
+            height: '90%',
             cls: 'search-box',
-            style: 'border:0;border-radius:8px'
+            style: 'border:0;border-radius:8px',
+            docked: 'left',
+            placeHolder: ' '
         });
+
+        var userLabel = Ext.create('Ext.Label', {
+            html: '<div class="search-box-images"><img class="list" src="resources/icons/User_30_30.png">',
+           // docked:'left'
+        });
+        var moreLabel = Ext.create('Ext.Label', {
+            html: '<img class="more" src="resources/icons/moreArrow.png">',
+           // docked:'left'
+        });
+
+        toolbar.add(searchField);
+        toolbar.add(userLabel);
+        toolbar.add(moreLabel);
+        
+
+        this.add(toolbar);
 
         var me = this;
 

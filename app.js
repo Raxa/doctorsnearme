@@ -53,7 +53,7 @@ Ext.application({
 
         // Destroy the #appLoadingIndicator element
       
-        Ext.Function.defer(function () {
+     /*   Ext.Function.defer(function () {
             Ext.fly('splash').destroy();
             Ext.fly('bluespin').destroy();
 
@@ -81,18 +81,9 @@ Ext.application({
             favoritesStore.getRange().forEach(function (record) {
                 currentFavorites.push(Ext.JSON.decode(record.get('query')));
             });
-        }, 500);
+        }, 500);*/
 
-        
-        //Ext.fly('splash').destroy();
-        //Ext.fly('bluespin').destroy();
-
-        //Ext.require('Ext.device.Connection');
-
-        //if (Ext.device.Connection.getType() == 'NONE') {
-        //    Ext.Msg.alert("Please Connect to internet");
-        //}
-
+        EasyTreatyApp.config.startApp();
         
     },
 
