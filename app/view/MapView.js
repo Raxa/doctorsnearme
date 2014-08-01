@@ -180,7 +180,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
             top: '6%',
             // style: 'border:2px solid grey;border-radius:8px;color:black;',
             //style: 'border:1px solid #0d66f2;border-radius:0;color:#0d66f2;',
-            style: 'border:1px solid #0d66f2;border-radius:0;color:white;',
+            style: 'border:1px solid #0d66f2;border-radius:8px;color:white;',
             store: specStore,
             cls: 'spec-cls',
             defaultTabletPickerConfig: {

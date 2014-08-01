@@ -133,6 +133,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
     */
     onLocationAddition: function (type) {
         var markerImg = 'Medical centers_small.png';
+        //var markerImg = 'hospital.png';
         switch (type) {
             case 1: markerImg = 'Doctors_small.png'
                 break;
@@ -361,12 +362,20 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
                     me.setUserLocation(location);
                     me.setBaseLocation(location);
 
+
+                    var markerIcon = {
+                        url: 'resources/icons/bluedot1.png',
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(70, 70),
+                        scaledSize: new google.maps.Size(140, 140)
+                    };
+
                     var marker = new google.maps.Marker({
                         map: me.getMap(),
                         animation: null,
                         position: location,
                         draggable: true,
-                        icon: 'resources/icons/bluedot.png'
+                        icon: markerIcon
                     });
 
                     //this event listener is for when user drags his marker to change the base location

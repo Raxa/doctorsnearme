@@ -442,10 +442,12 @@ background-image:url('images/home.png');
 	//this could change the height of the specialty field. But without & it doesnt. I think that is because x-field is not inside spec-cls but with it
 	&.x-field{
 		min-height:30px;
+		border-radius:8px
 	}
 
 	.x-component-outer{
 		background:white;
+		
 	}
 
 	.x-field-input{
@@ -454,6 +456,8 @@ background-image:url('images/home.png');
 	//	border:0;
 	//	border-radius:4px; //this made the border of that inner part of sepacilty field doesnt go out of the outer part
 	border:0;
+	
+		border-radius:8px;
 	//background:#f8f9f9;
 	background:white;
 	}
@@ -481,47 +485,55 @@ background-image:url('images/home.png');
 }
 
 #ext-multiselectfield-1{
-		.x-field-mask{
-			//border:0;
-			//border-radius:8px;
-		}
 
 		.x-component-outer{
 		height:30px;
+		-webkit-border-radius:8px;
 		}
 
 		.x-input-el{
-		//min-height:30px; //changing this made height of the inside part smaller. That is the sentence inside goes up
-		min-height:25px;
+		min-height:30px; //changing this made height of the inside part smaller. That is the sentence inside goes up
+		//min-height:25px;
 		border:1px;
-		border-radius:8px;
+		-webkit-border-radius:8px;
 		padding:5px;
 		}
 
-
-		input::-webkit-input-placeholder {
-			//color: #2B2B2B;
-			color: #0d66f2;
-			font-weight:bold;
+		input[placeholder] {
+		   color: #0d66f2;
+		   font-weight:bold;
 			padding-left:5px;
 			padding-right:5px;
-			background-image:url('images/dropDownArrow.png');
-			background-size:15px 15px;
+			background-image:url('images/dropdown_arrow.png');
+			//background-size:30px 20px;
 			background-position: right;
 			background-repeat: no-repeat;
+			border:0;
+			-webkit-border-radius:7px;
 		}
-
-				input::input-placeholder {
+		//input::-webkit-input-placeholder {
 			//color: #2B2B2B;
-			color: #0d66f2;
-			font-weight:bold;
-			padding-left:5px;
-			padding-right:5px;
-			background-image:url('images/dropDownArrow.png');
-			background-size:15px 15px;
-			background-position: right;
-			background-repeat: no-repeat;
-		}
+			//color: #0d66f2;
+			//font-weight:bold;
+			//padding-left:5px;
+			//padding-right:5px;
+			//background-image:url('images/dropDownArrow.png');
+			//background-size:15px 15px;
+			//background-position: right;
+			//background-repeat: no-repeat;
+		//}
+
+			//	input::input-placeholder {
+			//color: #2B2B2B;
+			//color: #0d66f2;
+			//font-weight:bold;
+			//padding-left:5px;
+			//padding-right:5px;
+			//background-image:url('images/dropDownArrow.png');
+			//background-size:15px 15px;
+			//background-position: right;
+			//background-repeat: no-repeat;
+		//}
 }
 //////SPECIALTY MENU////////////////////
 
@@ -541,12 +553,20 @@ background-image:url('images/home.png');
 		border:1px;//this solved the size mismatch of outer and inner components
 		border-radius:5px;
 		height:35px; // this can change the search field height - there are two components in it. inside field and outside one. this changes inside
+		padding-right:5px;
+		//input::-webkit-input-placeholder {
+			//background-image:url('images/search.png');
+			//background-size: 19px 19px;
+			//background-position: left;
+			//background-repeat: no-repeat;
+		//}
 
-		input::-webkit-input-placeholder {
+		input[placeholder] {
 			background-image:url('images/search.png');
 			background-size: 19px 19px;
-			background-position: left;
+			background-position: right;
 			background-repeat: no-repeat;
+			padding-right:5px;
 		}
 
 		.x-input-el{
