@@ -1,1 +1,1 @@
-This folder contains the views
+This folder contains the views.
