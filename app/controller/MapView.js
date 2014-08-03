@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define('EasyTreatyApp.controller.MapView', {
+Ext.define('DoctorsNearMe.controller.MapView', {
     extend: 'Ext.app.Controller',
     requires: ['Ext.device.Contacts'],
     config: {
@@ -209,12 +209,12 @@ Ext.define('EasyTreatyApp.controller.MapView', {
         var detailsView = this.getDetailsView();
 
         if (detailsView == undefined) {
-            detailsView = Ext.create('EasyTreatyApp.view.DetailsView');
+            detailsView = Ext.create('DoctorsNearMe.view.DetailsView');
         } 
         detailsView.setData(record.getData());
 
 
-        var loggedIn = EasyTreatyApp.config.getLoggedIn();
+        var loggedIn = DoctorsNearMe.config.getLoggedIn();
         
         detailsView.toggleLikeComment(!loggedIn);
 

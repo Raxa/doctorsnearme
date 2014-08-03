@@ -1,4 +1,4 @@
-﻿Ext.define('EasyTreatyApp.store.Specialization', {
+﻿Ext.define('DoctorsNearMe.store.Specialization', {
     extend: 'Ext.data.Store',
 
     config: {

@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define("EasyTreatyApp.view.LocationMap", {
+Ext.define("DoctorsNearMe.view.LocationMap", {
     extend: 'Ext.Map',
     xtype: 'locationmap',
     config: {
@@ -176,7 +176,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
         google.maps.event.addListener(marker, 'click', function (pos) {
             var infowindow = new google.maps.InfoWindow();
 
-            lang = EasyTreatyApp.config.getLanguage();
+            lang = DoctorsNearMe.config.getLanguage();
 
             var name = record.get('name');
 
@@ -226,7 +226,7 @@ Ext.define("EasyTreatyApp.view.LocationMap", {
 
         var like = "";
 
-        if (EasyTreatyApp.config.getLoggedIn()) {
+        if (DoctorsNearMe.config.getLoggedIn()) {
 
             if (!record.get('isLiked')) {
                 console.log("not like");

@@ -1,11 +1,11 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define('EasyTreatyApp.store.Location', {
+Ext.define('DoctorsNearMe.store.Location', {
     extend: 'Ext.data.Store',
 
     config: {
-        model: 'EasyTreatyApp.model.Location',
+        model: 'DoctorsNearMe.model.Location',
         service: null,
         storeId: 'location-store',
         searchCount:0
@@ -107,7 +107,7 @@ Ext.define('EasyTreatyApp.store.Location', {
             //this.findRecord('reference', record.reference).set('isFavorite', true);
         }
 
-        if (EasyTreatyApp.config.getLoggedIn()) {
+        if (DoctorsNearMe.config.getLoggedIn()) {
             this.isLiked(record);
         }
 
@@ -124,12 +124,12 @@ Ext.define('EasyTreatyApp.store.Location', {
         Ext.Ajax.request({
             // url: 'http://localhost:8888/checkLike',
             // url: 'http://192.168.122.1:8888/checkLike',
-            url: EasyTreatyApp.config.getRatingServerDomain() + 'checkLike',
+            url: DoctorsNearMe.config.getRatingServerDomain() + 'checkLike',
             method: 'GET',
             params: {
                 // location: record.id,
                 location: record.place_id,
-                user: EasyTreatyApp.config.getUser().get('personUuid')
+                user: DoctorsNearMe.config.getUser().get('personUuid')
             },
             success: function (response, opts) {
                 // Ext.Msg.alert("like success");
@@ -161,7 +161,7 @@ Ext.define('EasyTreatyApp.store.Location', {
     },
 
     isFavorite:function(reference){
-        var currentFav = EasyTreatyApp.config.getFavorites();
+        var currentFav = DoctorsNearMe.config.getFavorites();
 
         var newArray = Ext.Array.filter(currentFav, function (item) {
 
@@ -299,11 +299,11 @@ Ext.define('EasyTreatyApp.store.Location', {
         Ext.Ajax.request({
             // Ext.data.JsonP.request({
             // url: 'http://192.168.122.1:8888/like',
-            url: EasyTreatyApp.config.getRatingServerDomain() + 'like',
+            url: DoctorsNearMe.config.getRatingServerDomain() + 'like',
             method: 'GET',
             params: {
                 location: id,
-                user: EasyTreatyApp.config.getUser().get('personUuid'),
+                user: DoctorsNearMe.config.getUser().get('personUuid'),
                 //like: 1
                 like: like==true?1:0
             },

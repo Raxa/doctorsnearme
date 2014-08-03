@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define('EasyTreatyApp.view.DetailsView', {
+Ext.define('DoctorsNearMe.view.DetailsView', {
     extend:'Ext.Container',
 
     xtype: 'detailsview',
@@ -164,7 +164,7 @@ Ext.define('EasyTreatyApp.view.DetailsView', {
         this.callParent();
 
         //create store for comments
-        var store = Ext.create('EasyTreatyApp.store.Comment');
+        var store = Ext.create('DoctorsNearMe.store.Comment');
         var me=this;
         store.on({
             load: me.onStoreLoad,

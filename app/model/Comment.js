@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define("EasyTreatyApp.model.Comment", {
+Ext.define("DoctorsNearMe.model.Comment", {
     extend: 'Ext.data.Model',
     config: {
         fields: [

@@ -2,11 +2,11 @@
  * Authored by Amaya
  */
 
-Ext.define('EasyTreatyApp.view.Menu', {
+Ext.define('DoctorsNearMe.view.Menu', {
     extend: 'Ext.Container',
 
     requires: [
-       'EasyTreatyApp.ux.Multiselect'
+       'DoctorsNearMe.ux.Multiselect'
     ],
 
     xtype: 'mainmenu',
@@ -128,7 +128,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
     },
 
     setLanguage: function () {
-        var lang = EasyTreatyApp.config.getLanguage();
+        var lang = DoctorsNearMe.config.getLanguage();
         this.getProfileButton().setText(lang.HEALTH_PROFILE);
 
         this.getSavedButton().setText('<img class="menu-heart" src = "resources/icons/Heart_40_40.png" width=20px height=20px align=left style="margin-right:20px;margin-left:10px;"><p align=left>' + lang.SAVED + '<img class="menu-heart" src = "resources/icons/code3.png" width=20px height=20px align=right></p>');
@@ -143,7 +143,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
         this.getDoctorField().setLabel('<img src = "resources/icons/Doctors.png" width=35px height=35px align=top style="margin-right:20px;">' + lang.DOCTORS);
         this.getPharmacyField().setLabel('<img src = "resources/icons/Pharmacies.png" width=35px height=35px align=top style="margin-right:20px;">' + lang.PHARMACIES);
 
-        if (EasyTreatyApp.config.getLoggedIn()) {
+        if (DoctorsNearMe.config.getLoggedIn()) {
             this.getLogInButton().setText(lang.LOG_OUT);
         }
         else {
@@ -166,7 +166,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
     },
 
     setSelectFieldStores: function () {
-        this.getLanguageSelectField().setStore(Ext.create('EasyTreatyApp.store.Language'));
+        this.getLanguageSelectField().setStore(Ext.create('DoctorsNearMe.store.Language'));
     },
 
     /**
@@ -182,7 +182,7 @@ Ext.define('EasyTreatyApp.view.Menu', {
         });
 
         this.getLogInButton().on('tap', function (button, e, eOpts) {
-            if (!EasyTreatyApp.config.getLoggedIn()) {
+            if (!DoctorsNearMe.config.getLoggedIn()) {
                 me.toggle();
                 me.fireEvent('loginpagerequested');
             }

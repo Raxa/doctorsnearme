@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define('EasyTreatyApp.view.UserProfile', {
+Ext.define('DoctorsNearMe.view.UserProfile', {
     extend: 'Ext.Container',
     
     xtype: 'userprofile',
@@ -70,7 +70,7 @@ Ext.define('EasyTreatyApp.view.UserProfile', {
             '</table>', {
 
                 getString: function (string) {
-                    var lang = EasyTreatyApp.config.getLanguage();
+                    var lang = DoctorsNearMe.config.getLanguage();
                     switch (string) {
                         case 'profile': return lang.HEALTH_PROFILE;
                             break;
@@ -109,7 +109,7 @@ Ext.define('EasyTreatyApp.view.UserProfile', {
     },
 
     setLanguage: function () {
-        var lang = EasyTreatyApp.config.getLanguage();
+        var lang = DoctorsNearMe.config.getLanguage();
 
         this.getBackButton().setText(lang.BACK);
     },

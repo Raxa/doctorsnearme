@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define('EasyTreatyApp.config.Runtime', {
+Ext.define('DoctorsNearMe.config.Runtime', {
     singleton: true,
 
     config: {      
@@ -37,19 +37,19 @@ Ext.define('EasyTreatyApp.config.Runtime', {
             Ext.fly('splash').destroy();
             Ext.fly('bluespin').destroy();
 
-            EasyTreatyApp.config.setLanguage(EN);
+            DoctorsNearMe.config.setLanguage(EN);
 
             //create slide menu
-            var menu = Ext.create('EasyTreatyApp.view.Menu');
+            var menu = Ext.create('DoctorsNearMe.view.Menu');
             Ext.Viewport.add(menu);
 
             //create mapview
-            var mapView = Ext.create('EasyTreatyApp.view.MapView');
+            var mapView = Ext.create('DoctorsNearMe.view.MapView');
             Ext.Viewport.add(mapView);
             Ext.Viewport.setActiveItem(mapView);
 
             //create favorites store
-            var favoritesStore = Ext.create('EasyTreatyApp.store.Memory', {
+            var favoritesStore = Ext.create('DoctorsNearMe.store.Memory', {
                 storeId: 'fav-store'
             });
 
@@ -57,7 +57,7 @@ Ext.define('EasyTreatyApp.config.Runtime', {
             favoritesStore.load();
 
             //store favorites from local storage in a runtime variable
-            var currentFavorites = EasyTreatyApp.config.getFavorites();
+            var currentFavorites = DoctorsNearMe.config.getFavorites();
             favoritesStore.getRange().forEach(function (record) {
                 currentFavorites.push(Ext.JSON.decode(record.get('query')));
             });
@@ -67,6 +67,6 @@ Ext.define('EasyTreatyApp.config.Runtime', {
     
 
 }, function () {
-    EasyTreatyApp.config = this;
+    DoctorsNearMe.config = this;
 }
 );

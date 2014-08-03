@@ -1,4 +1,4 @@
-﻿Ext.define('EasyTreatyApp.store.Language', {
+﻿Ext.define('DoctorsNearMe.store.Language', {
     extend: 'Ext.data.Store',
 
     config: {

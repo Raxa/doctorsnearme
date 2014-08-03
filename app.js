@@ -12,19 +12,19 @@
 
 
 Ext.application({
-    name: 'EasyTreatyApp',
+    name: 'DoctorsNearMe',
 
     requires: [
         'Ext.MessageBox',
-        'EasyTreatyApp.config.Runtime',
-        'EasyTreatyApp.math.Algorithms'
+        'DoctorsNearMe.config.Runtime',
+        'DoctorsNearMe.math.Algorithms'
     ],
 
     views: ['LocationMap','MapView','Menu','ListView','DetailsView'],
     
     controllers:['MapView','DetailsView','Menu','Login','Language'],
     
-    stores: ['Location', 'Memory', 'Comment'],
+    stores: ['Location', 'Memory', 'Comment','Language','Specialization'],
     
     models: ['Location', 'Memory', 'Comment'],
 
@@ -57,19 +57,19 @@ Ext.application({
             Ext.fly('splash').destroy();
             Ext.fly('bluespin').destroy();
 
-            EasyTreatyApp.config.setLanguage(EN);
+            DoctorsNearMe.config.setLanguage(EN);
 
             //create slide menu
-            var menu = Ext.create('EasyTreatyApp.view.Menu');
+            var menu = Ext.create('DoctorsNearMe.view.Menu');
             Ext.Viewport.add(menu);
 
             //create mapview
-            var mapView = Ext.create('EasyTreatyApp.view.MapView');
+            var mapView = Ext.create('DoctorsNearMe.view.MapView');
             Ext.Viewport.add(mapView);
             Ext.Viewport.setActiveItem(mapView);
 
             //create favorites store
-            var favoritesStore = Ext.create('EasyTreatyApp.store.Memory', {
+            var favoritesStore = Ext.create('DoctorsNearMe.store.Memory', {
                 storeId: 'fav-store'
             });
 
@@ -77,13 +77,13 @@ Ext.application({
             favoritesStore.load();
 
             //store favorites from local storage in a runtime variable
-            var currentFavorites = EasyTreatyApp.config.getFavorites();
+            var currentFavorites = DoctorsNearMe.config.getFavorites();
             favoritesStore.getRange().forEach(function (record) {
                 currentFavorites.push(Ext.JSON.decode(record.get('query')));
             });
         }, 500);*/
 
-        EasyTreatyApp.config.startApp();
+        DoctorsNearMe.config.startApp();
         
     },
 

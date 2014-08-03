@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define("EasyTreatyApp.model.User", {
+Ext.define("DoctorsNearMe.model.User", {
     extend: 'Ext.data.Model',
     config: {
         fields: [

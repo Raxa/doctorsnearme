@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define('EasyTreatyApp.view.Login', {
+Ext.define('DoctorsNearMe.view.Login', {
     extend: 'Ext.Container',
     xtype: 'loginview',
     requires: ['Ext.Img', 'Ext.form.FieldSet', 'Ext.field.Email', 'Ext.field.Password', 'Ext.field.Checkbox'],
@@ -120,7 +120,7 @@ Ext.define('EasyTreatyApp.view.Login', {
      * @public
      */
     setLanguage: function () {
-        var lang = EasyTreatyApp.config.getLanguage();
+        var lang = DoctorsNearMe.config.getLanguage();
     }
 
 });

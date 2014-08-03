@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define('EasyTreatyApp.controller.Language', {
+Ext.define('DoctorsNearMe.controller.Language', {
     extend: 'Ext.app.Controller',
 
     config: {
@@ -36,7 +36,7 @@ Ext.define('EasyTreatyApp.controller.Language', {
                 break;
         }
 
-        EasyTreatyApp.config.setLanguage(language);
+        DoctorsNearMe.config.setLanguage(language);
 
         this.getSideMenu().setLanguage();
 

@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define('EasyTreatyApp.math.Algorithms', {
+Ext.define('DoctorsNearMe.math.Algorithms', {
     singleton: true,
     
     constructor: function (config) {
@@ -172,5 +172,5 @@ Ext.define('EasyTreatyApp.math.Algorithms', {
     }
 
 }, function() {
-    EasyTreatyApp.math = this;
+    DoctorsNearMe.math = this;
 })

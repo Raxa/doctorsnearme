@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define("EasyTreatyApp.model.Location", {
+Ext.define("DoctorsNearMe.model.Location", {
     extend: 'Ext.data.Model',
     config: {
         fields: [

@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define('EasyTreatyApp.view.ListView', {
+Ext.define('DoctorsNearMe.view.ListView', {
     extend: 'Ext.Container',
 
     xtype: 'listview',
@@ -85,7 +85,7 @@ Ext.define('EasyTreatyApp.view.ListView', {
      */
     setTemplate: function(){
 
-        var lang = EasyTreatyApp.config.getLanguage();
+        var lang = DoctorsNearMe.config.getLanguage();
 
         var template = new Ext.XTemplate(
             '<div display="block">',
@@ -126,8 +126,8 @@ Ext.define('EasyTreatyApp.view.ListView', {
           ,{
               isLoggedIn: function () {
                   console.log("template function is logged in");
-                  console.log(EasyTreatyApp.config.getLoggedIn());
-                  return EasyTreatyApp.config.getLoggedIn();
+                  console.log(DoctorsNearMe.config.getLoggedIn());
+                  return DoctorsNearMe.config.getLoggedIn();
               },
               getDirectionsLabel: function () {
                   return lang.GET_DIRECTIONS;
@@ -195,7 +195,7 @@ Ext.define('EasyTreatyApp.view.ListView', {
      * @private
      */
     addToolBar: function () {
-        var lang = EasyTreatyApp.config.getLanguage();
+        var lang = DoctorsNearMe.config.getLanguage();
         var me = this;
         var toolbar = Ext.create('Ext.Toolbar', {
             docked: 'top',
@@ -232,7 +232,7 @@ Ext.define('EasyTreatyApp.view.ListView', {
      */
     setLanguage: function () {
 
-        var lang = EasyTreatyApp.config.getLanguage();
+        var lang = DoctorsNearMe.config.getLanguage();
         this.getToolBar().setTitle('<p style="color:#0d66f2;">' + lang.SAVED + '</p>');
     }
 

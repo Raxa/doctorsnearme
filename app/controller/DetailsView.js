@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define('EasyTreatyApp.controller.DetailsView', {
+Ext.define('DoctorsNearMe.controller.DetailsView', {
     extend: 'Ext.app.Controller',
 
     config: {
@@ -42,19 +42,19 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
 
             string = Ext.JSON.encode(record.getData());
             store.storeTokenInLocalStorage(string);
-            EasyTreatyApp.config.getFavorites().push(record.getData());
+            DoctorsNearMe.config.getFavorites().push(record.getData());
         }
         else {
 
             string = Ext.JSON.encode(record.getData());
             store.removeTokenFromLocalStorage(string);
             record.set('isFavorite', false);
-            var newFav = Ext.Array.filter(EasyTreatyApp.config.getFavorites(), function (item) {
+            var newFav = Ext.Array.filter(DoctorsNearMe.config.getFavorites(), function (item) {
                 if (item.reference != record.get('reference')) {
                     return true;
                 };
             });
-            EasyTreatyApp.config.setFavorites(newFav);
+            DoctorsNearMe.config.setFavorites(newFav);
 
         }
 
@@ -85,12 +85,12 @@ Ext.define('EasyTreatyApp.controller.DetailsView', {
             Ext.Ajax.request({
                 // Ext.data.JsonP.request({
                 // url: 'http://192.168.122.1:8888/comment',
-                url:EasyTreatyApp.config.getRatingServerDomain()+'comment',
+                url:DoctorsNearMe.config.getRatingServerDomain()+'comment',
                 method: 'GET',
                 params: {
                     //  location: detailsView.getData().id,
                     location: detailsView.getData().place_id,
-                    user: EasyTreatyApp.config.getUser().get('personUuid'),
+                    user: DoctorsNearMe.config.getUser().get('personUuid'),
                     comment: commentField.getValue()
                 },
                 success: function (response, opts) {

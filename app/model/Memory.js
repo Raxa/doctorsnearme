@@ -1,4 +1,4 @@
-﻿Ext.define('EasyTreatyApp.model.Memory', {
+﻿Ext.define('DoctorsNearMe.model.Memory', {
     extend: 'Ext.data.Model',
     config: {
         identifier:'uuid',

@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define('EasyTreatyApp.view.MapView', {
+Ext.define('DoctorsNearMe.view.MapView', {
     extend: 'Ext.Container',
     requires:['Ext.data.Store'],
     xtype: 'mapview',
@@ -61,12 +61,12 @@ Ext.define('EasyTreatyApp.view.MapView', {
         this.callParent();
         
 
-        var store = Ext.create('EasyTreatyApp.store.Location');
+        var store = Ext.create('DoctorsNearMe.store.Location');
         this.setStore(store);
         this.down('locationmap').setStore(store);
 
         //store to put favorites when they are needed to be shown in list view once Saved button clicked
-        var favoriteStore = Ext.create('Ext.data.Store', { model: 'EasyTreatyApp.model.Location' });
+        var favoriteStore = Ext.create('Ext.data.Store', { model: 'DoctorsNearMe.model.Location' });
 
         //set the favorites store as the store for the list view
         this.down('listview').setListStore(favoriteStore);
@@ -88,7 +88,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
         store.setService(new google.maps.places.PlacesService(this.down('locationmap').getMap()));
 
         //set the language
-        var lang = EasyTreatyApp.config.getLanguage();
+        var lang = DoctorsNearMe.config.getLanguage();
         this.setLanguage(lang, lang);
 
     },
@@ -168,7 +168,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
      */
     addSpecialtyMenu: function () {
         var me = this;
-        var specStore = Ext.create('EasyTreatyApp.store.Specialization')
+        var specStore = Ext.create('DoctorsNearMe.store.Specialization')
         this.add({
             xtype: 'multiselectfield',
             placeHolder: 'Choose a Specialty',
@@ -423,7 +423,7 @@ Ext.define('EasyTreatyApp.view.MapView', {
      * @public
      */
     setLanguage: function (newLang,oldLang) {
-        var lang = EasyTreatyApp.config.getLanguage();
+        var lang = DoctorsNearMe.config.getLanguage();
 
         this.getSpecialtySelectField().setPlaceHolder(lang.CHOOSE_SPECIALTY);
 

@@ -1,4 +1,4 @@
-Ext.define('EasyTreatyApp.ux.Multiselect', {
+Ext.define('DoctorsNearMe.ux.Multiselect', {
     extend: 'Ext.field.Select',
     alias : 'widget.multiselectfield',
 

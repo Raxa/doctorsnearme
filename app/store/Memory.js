@@ -1,8 +1,8 @@
-﻿Ext.define('EasyTreatyApp.store.Memory', {
+﻿Ext.define('DoctorsNearMe.store.Memory', {
     extend: 'Ext.data.Store',
 
     config: {
-        model: 'EasyTreatyApp.model.Memory',
+        model: 'DoctorsNearMe.model.Memory',
 
         proxy: {
             type: 'localstorage',

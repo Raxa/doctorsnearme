@@ -1,8 +1,8 @@
-﻿Ext.define('EasyTreatyApp.store.Comment', {
+﻿Ext.define('DoctorsNearMe.store.Comment', {
     extend: 'Ext.data.Store',
 
     config: {
-        model: 'EasyTreatyApp.model.Comment',
+        model: 'DoctorsNearMe.model.Comment',
         autoLoad: false,
     },
 
@@ -10,7 +10,7 @@
         this.setProxy({
             type: 'ajax',
             //  url: 'http://192.168.122.1:8888/getComments',
-            url:EasyTreatyApp.config.getRatingServerDomain()+'getComments',
+            url:DoctorsNearMe.config.getRatingServerDomain()+'getComments',
             extraParams: {
                 location: locationid
             },

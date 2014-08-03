@@ -1,7 +1,7 @@
 ﻿/**
  * Authored by Amaya
  */
-Ext.define('EasyTreatyApp.controller.Menu', {
+Ext.define('DoctorsNearMe.controller.Menu', {
     extend: 'Ext.app.Controller',
     
     config: {
