@@ -41,5 +41,6 @@
     USER_OR_EMAIL: 'විද්‍යුත් තැපෑල',
     FORGOT: 'මුරපදය අමතකද?',
     SAVE_ME: 'ගබඩා කරන්න',
-    UNSAVE_ME: 'ඉවත් කරන්න'
+    UNSAVE_ME: 'ඉවත් කරන්න',
+    BE_THE_FIRST_TO_REVIEW:'පළමු වැන්නා වන්න'
 } 

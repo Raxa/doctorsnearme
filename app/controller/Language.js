@@ -68,6 +68,9 @@ Ext.define('DoctorsNearMe.controller.Language', {
 
         if (listview != null) {
             listview.setLanguage(language, prevLanguage);
+
+            //to refresh list to refresh template
+            listview.fillList();
         }
         
 

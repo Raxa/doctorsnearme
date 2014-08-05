@@ -41,6 +41,7 @@
         USER_OR_EMAIL: 'Username or Email',
         FORGOT: 'Forgot Password?',
         SAVE_ME: 'Save Me',
-        UNSAVE_ME:'Unsave Me'
+        UNSAVE_ME: 'Unsave Me',
+        BE_THE_FIRST_TO_REVIEW:'Be the first to review'
         
 }

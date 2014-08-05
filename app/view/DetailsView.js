@@ -248,8 +248,10 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
         // refresh the review list to show loaded items
         reviewlist.refresh();
         
+        var lang = DoctorsNearMe.config.getLanguage();
+
         if (store.getCount() == 0) {
-            this.getReviewLabel().setHtml("Be the first to review");
+            this.getReviewLabel().setHtml(lang.BE_THE_FIRST_TO_REVIEW);
         }
         else {
             this.getReviewLabel().setHtml("Reviews");

@@ -113,7 +113,7 @@ Ext.define('DoctorsNearMe.view.ListView', {
                 '<tpl if="values.international_phone_number!=null">',
                 '<div class="inlineblock list-call-block">',
                    // '<tpl if="values.international_phone_number!=null">',
-                        '<img class="list-call-img" src = "resources/icons/Phone_40_40.png"><button class="list-call"><a href="tel:{international_phone_number}">Call</a></button>',
+                        '<img class="list-call-img" src = "resources/icons/Phone_40_40.png"><button class="list-call"><a href="tel:{international_phone_number}">{[this.getCallLabel()]}</a></button>',
                    // '</tpl>',
                 '</div>',
                 '</tpl>',
@@ -131,6 +131,9 @@ Ext.define('DoctorsNearMe.view.ListView', {
               },
               getDirectionsLabel: function () {
                   return lang.GET_DIRECTIONS;
+              },
+              getCallLabel: function () {
+                  return lang.CALL;
               }
           
           });
