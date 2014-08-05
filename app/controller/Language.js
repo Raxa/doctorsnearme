@@ -10,7 +10,8 @@ Ext.define('DoctorsNearMe.controller.Language', {
             detailsView: 'detailsview',
             mapView: 'mapview',
             userProfile: 'userprofile',
-            listView:'listview'
+            listView: 'listview',
+            loginView: 'loginview'
         },
         control: {
             sideMenu: {
@@ -47,11 +48,10 @@ Ext.define('DoctorsNearMe.controller.Language', {
             detailsview.refreshTemplate();
         }
 
-        var profile = this.getUserProfile();
+        var loginview = this.getLoginView();
 
-        if (profile != null) {
-            profile.setLanguage();
-            profile.refreshTemplate();
+        if (loginview != null) {
+            loginview.setLanguage();
         }
         
         if (prevLanguage != null) {

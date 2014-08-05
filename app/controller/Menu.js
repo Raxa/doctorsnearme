@@ -20,8 +20,15 @@ Ext.define('DoctorsNearMe.controller.Menu', {
                 specialtychange: "onSpecialtyChange",
                 choice: "onChoice",
                 showfavorites: "onShowFavorites",
+                menutoggled:"onMenuToggle"
             }
         }
+    },
+
+    onMenuToggle: function () {
+        console.log("on menu toggle");
+        if (this.getMapView()!=null)
+        this.getMapView().toggleToolbarMoreImage();
     },
 
     onShowFavorites: function () {

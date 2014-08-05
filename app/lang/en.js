@@ -12,6 +12,7 @@
         DONE:'Done',
         GET_DIRECTIONS: 'Direct Me',
         MORE_DETAILS: 'More Details',
+        CALL:'Call',
         LIST: 'List',
         MAP: 'Map',
         BACK: 'Back',
@@ -27,7 +28,7 @@
         USER_NAME: 'Username',
         PASSWORD: 'Password',
         REMEMBER_ME: 'Keep me logged In',
-        CANCEL:'Cancel',
+        CANCEL:'CANCEL',
         LANGUAGE: 'Language',
         SINHALESE: 'Sinhalese',
         ENGLISH: 'English',
@@ -35,5 +36,11 @@
         VIEW_COMMENTS: 'View Comments',
         LIKE_COUNT: 'Number of people who like this place',
         CHOOSE_SPECIALTY: 'Choose a specialty',
-        SAVED:'Saved'
+        SAVED: 'Saved',
+        SIGNUP: 'Sign up',
+        USER_OR_EMAIL: 'Username or Email',
+        FORGOT: 'Forgot Password?',
+        SAVE_ME: 'Save Me',
+        UNSAVE_ME:'Unsave Me'
+        
 }

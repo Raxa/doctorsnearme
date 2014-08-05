@@ -14,7 +14,7 @@ Ext.define('DoctorsNearMe.view.Login', {
             {//0
                 xtype: 'button',
                 cls:'signup-btn',
-                text: '<span class="signup-label">Sign up</span>'
+               // text: '<span class="signup-label">Sign up</span>'
             },            
             {//1
                 xtype: 'container',
@@ -24,13 +24,13 @@ Ext.define('DoctorsNearMe.view.Login', {
                         xtype: 'textfield',
                         name: 'username',
                         required: true,
-                        label: 'Username or email',
+                       // label: 'Username or email',
                         labelAlign:'top',
                         labelCls: 'username-pwd'
                     },
                     {
                         xtype: 'passwordfield',
-                        label: 'Password',
+                       // label: 'Password',
                         labelAlign: 'top',
                         name: 'password',
                         required: true,
@@ -40,23 +40,27 @@ Ext.define('DoctorsNearMe.view.Login', {
             },
             {//forgot login
                 xtype: 'label',
-                html: 'Forgot Login/pass?',
+              //  html: 'Forgot Login/pass?',
                 cls: 'forgot-login'
             },
             
             {
                 xtype: 'button',
-                text: '<span class="signin-label">Sign In</span>',
+               // text: '<span class="signin-label">Sign In</span>',
                 cls:'signin-btn'
             },
             {
                 xtype: 'button',
                 width: '40%',
                 cls:'cancel-btn',
-                text:'<span class="cancel-label">CANCEL</span>'
+               // text:'<span class="cancel-label">CANCEL</span>'
             }
             
         ]
+    },
+
+    getSignUpButton: function(){
+        return this.getComponent(0);
     },
     
     getLoginButton: function(){
@@ -80,7 +84,7 @@ Ext.define('DoctorsNearMe.view.Login', {
     },
 
     getForgotLoginField: function(){
-
+        return this.getComponent(2);
     },
 
     initialize: function () {
@@ -97,7 +101,7 @@ Ext.define('DoctorsNearMe.view.Login', {
         });
 
         this.callParent();
-     //   this.setLanguage();
+       this.setLanguage();
     },
 
     /**
@@ -121,6 +125,13 @@ Ext.define('DoctorsNearMe.view.Login', {
      */
     setLanguage: function () {
         var lang = DoctorsNearMe.config.getLanguage();
+
+        this.getSignUpButton().setText('<span class="signup-label">' + lang.SIGNUP + '</span>');
+        this.getUsernameField().setLabel(lang.USER_OR_EMAIL);
+        this.getPasswordField().setLabel(lang.PASSWORD);
+        this.getForgotLoginField().setHtml(lang.FORGOT);
+        this.getLoginButton().setText('<span class="signin-label">' + lang.LOG_IN+'</span>');
+        this.getCancelButton().setText('<span class="cancel-label">' + lang.CANCEL+'</span>');
     }
 
 });

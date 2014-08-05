@@ -83,7 +83,7 @@ Ext.application({
             });
         }, 500);*/
 
-        DoctorsNearMe.config.startApp();
+            DoctorsNearMe.config.startApp();
         
     },
 

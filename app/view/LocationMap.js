@@ -111,8 +111,8 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
             }
         });
         
-
     },
+
 
     /**
     * Clear all markers and routes when store is cleared
@@ -239,7 +239,7 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
 
         var call = "";
         if (phoneNumber != null) {
-            call = '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="call"><a href="tel:' + phoneNumber + '">Call</a></button>';
+            call = '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="call"><a href="tel:' + phoneNumber + '">'+lang.CALL+'</a></button>';
         }
         var directions = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
 
@@ -435,7 +435,14 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
         var rendererOptions = {
             map: map
         };
-        var directionsDisplay = new google.maps.DirectionsRenderer(rendererOptions);
+
+        var polylineOptionsActual = new google.maps.Polyline({
+            strokeColor: 'green',
+            strokeOpacity: 1.0,
+            strokeWeight: 5
+        });
+
+        var directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: polylineOptionsActual,map:map });
 
         this.getRoutes().push(directionsDisplay);
 

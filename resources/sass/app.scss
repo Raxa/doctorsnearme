@@ -10,9 +10,9 @@ $base-color: #157efb;
 //$list-active-color:rgb(8, 73, 118);
 $list-active-color:#157efb;
 
+
 @import 'sencha-touch/cupertino';
 @import 'sencha-touch/cupertino/all';
-
 
 // Custom code goes here..
 
@@ -418,14 +418,14 @@ border:1px solid white;
   a{
   color:white;
   text-decoration: none;
-}
+} 
 }
 
 .call-img{
 	vertical-align:middle;
 	height:40px;
 	width:40px;
-	background-size: 20px 20px;
+	background-size: 40px 40px;
 	background-repeat: no-repeat;
 	background-position: center;
 	border: 2px solid #0d66f2;
@@ -506,10 +506,16 @@ background-image:url('images/home.png');
 
 //list view
 
-
+//to set the border radius of sepcialty menu
+	.x-panel.x-select-overlay{
+		border:1px solid white;
+		border-radius:3px;
+	}
 
 //////SPECIALTY MENU////////////////////
+
 .spec-cls{
+
 	body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td{
 		color: #0d66f2;
 	}
@@ -542,20 +548,43 @@ background-image:url('images/home.png');
 	height:100%;
 }
 
+
+
 //morearrow in mapview
+.arrow{
+vertical-align:middle;
+	height:20px;
+	width:20px;
+	margin-top:10px;
+}
+
+
+.single-line{
+	vertical-align:middle;
+	height:40px;
+	width:8px;
+	margin:1px;
+}
+
+.splitline{
+	height:40px;
+	width:25px;
+	margin:1px;
+}
 .more{
 	//padding-bottom:20px;
 	vertical-align:middle;
-	height:20px;
-	width:20px;
-	margin:5px;
+	//height:20px;
+	//width:20px;
+	//margin:5px;
 }
 
 .list{
 	//padding-bottom:20px;
 	vertical-align:middle;
 	align:left;
-	margin:0;
+	margin-bottom:0;
+	margin-top:4px;
 }
 
 #ext-multiselectfield-1{
@@ -665,12 +694,15 @@ background-image:url('images/home.png');
 	}
 }
 
+////////////SEARCH BOX///////////////////////
+
 
 .x-form-fieldset .x-field:before{
 	border:0;
 }
 
-////////////SEARCH BOX///////////////////////
+
+
 
 
 

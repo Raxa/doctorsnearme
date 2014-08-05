@@ -90,7 +90,7 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                      },
                      {
                          xtype: 'button',
-                         text: '<img src = "resources/icons/Arrow_40_40.png" style="height:30px;width:30px;"></br>Direct Me',
+                        // text: '<img src = "resources/icons/Arrow_40_40.png" style="height:30px;width:30px;"></br>Direct Me',
                          height:'100%'
                      },
                      {
@@ -196,7 +196,7 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
         //set the phone number for the call button
         var phoneno = this.getData().international_phone_number;
         var callButton = this.getCallButton();
-        this.getCallButton().setText('<div><img src = "resources/icons/Phone_40_40.png" style="height:30px;width:30px;"></br><a href="tel:' + phoneno + '">Call</div>');
+     //   this.getCallButton().setText('<div><img src = "resources/icons/Phone_40_40.png" style="height:30px;width:30px;"></br><a href="tel:' + phoneno + '">Call</div>');
 
         if (phoneno == null) {
             callButton.setDisabled(true);
@@ -212,16 +212,18 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
         var saveBtn = this.getSaveButton();
 
         //if not favorite is not already saved in local storage so set the class not-saved
-        if (isFavorite == null || isFavorite == false) {
-            saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Save Me');
-            saveBtn.setCls('not-saved');
-        }
-        //else ite is already saved in local storage so set the class saved
-        else {
-            saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Unsave Me');
-            saveBtn.setCls('saved');
-        }
+        //if (isFavorite == null || isFavorite == false) {
+        //    saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Save Me');
+        //    saveBtn.setCls('not-saved');
+        //}
+        ////else ite is already saved in local storage so set the class saved
+        //else {
+        //    saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Unsave Me');
+        //    saveBtn.setCls('saved');
+        //}
 
+        //this.getDirectionButton().setText('<img src = "resources/icons/Arrow_40_40.png" style="height:30px;width:30px;"></br>Direct Me')
+        this.setLanguage();
     },
 
     /**
@@ -568,6 +570,31 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
         this.getLikeButton().setHidden(value);
         this.getLikeSpacer().setHidden(value);
         this.getCommentContainer().setHidden(value);
+    },
+
+    setLanguage: function () {
+        var lang = DoctorsNearMe.config.getLanguage();
+
+        this.getCallButton().setText('<div><img src = "resources/icons/Phone_40_40.png" style="height:30px;width:30px;"></br><a href="tel:' + phoneno + '">'+lang.CALL+'</div>');
+
+        //is the location a favorite?
+        var isFavorite = this.getData().isFavorite;
+
+        //get saved button
+        var saveBtn = this.getSaveButton();
+
+        //if not favorite is not already saved in local storage so set the class not-saved
+        if (isFavorite == null || isFavorite == false) {
+            saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>'+lang.SAVE_ME);
+            saveBtn.setCls('not-saved');
+        }
+            //else ite is already saved in local storage so set the class saved
+        else {
+            saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>'+lang.UNSAVE_ME);
+            saveBtn.setCls('saved');
+        }
+
+        this.getDirectionButton().setText('<img src = "resources/icons/Arrow_40_40.png" style="height:30px;width:30px;"></br>' + lang.GET_DIRECTIONS);
     }
     
    

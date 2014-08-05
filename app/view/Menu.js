@@ -18,12 +18,13 @@ Ext.define('DoctorsNearMe.view.Menu', {
         right: 0,
         bottom: 0,
         zIndex: 0,
-        width: 266,
+        // width: 266,
+        width: 260,
         padding: '50 10 0 10',
         open: false,
         scrollable: 'vertical',
         defaultType: 'button',
-        border: 3,
+        border: 1,
         style: 'border-color: gray; border-style: solid;',
 
         items: [
@@ -91,6 +92,7 @@ Ext.define('DoctorsNearMe.view.Menu', {
                     minValue: 1,
                     maxValue: 1000,
                     labelWidth: '45%',
+                    labelAlign:'top',
                     maxWidth:'100%'
                 },
                 {
@@ -328,9 +330,15 @@ Ext.define('DoctorsNearMe.view.Menu', {
     toggle: function () {
         //console.log(this);
         this.setOpen(!this.getOpen());
+
+        //whenever menu is toggleed, need to toggle splitline and morearrow
+        //so this event is fired
     },
 
     updateOpen: function (open) {
+
+        console.log("menu toggled");
+        this.fireEvent('menutoggled');
         var targetEl,
             parentCt = this.up();
 

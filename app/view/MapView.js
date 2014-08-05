@@ -7,6 +7,7 @@ Ext.define('DoctorsNearMe.view.MapView', {
     xtype: 'mapview',
 
     config: {
+        cls: 'mapview',
         layout: {
             type: 'card',
             animation: 'pop'
@@ -183,13 +184,14 @@ Ext.define('DoctorsNearMe.view.MapView', {
             style: 'border:1px solid #0d66f2;border-radius:8px;color:white;',
             store: specStore,
             cls: 'spec-cls',
+            picker:false,
             defaultTabletPickerConfig: {
-                height: '100%',
-                minHeight: '100%'
-            },
-            defaultPhonePickerConfig: {
-                height: '100%',
-                minHeight: '100%'
+                top: '50px',
+                //height: '90%',
+                // minHeight: '90%',
+                width: '17em',
+                height: '70%'
+
             }
 
         });
@@ -246,18 +248,28 @@ Ext.define('DoctorsNearMe.view.MapView', {
             placeHolder: ' '
         });
 
+        var singleLine = Ext.create('Ext.Label', {
+            html: '<img class="single-line" src="resources/icons/splitOneLine.png">',
+            hidden: true,
+            docked:'right'
+        });
+
         var userLabel = Ext.create('Ext.Label', {
             html: '<div class="search-box-images"><img class="list" src="resources/icons/User_30_30.png">',
-           // docked:'left'
+            docked:'right'
         });
         var moreLabel = Ext.create('Ext.Label', {
-            html: '<img class="more" src="resources/icons/moreArrow.png">',
-           // docked:'left'
+            html: '<img class="more arrow" src="resources/icons/moreArrow.png">',
+            docked:'right'
         });
 
         toolbar.add(searchField);
-        toolbar.add(userLabel);
+
         toolbar.add(moreLabel);
+        toolbar.add(userLabel);
+        toolbar.add(singleLine);
+        
+        
         
 
         this.add(toolbar);
@@ -283,6 +295,19 @@ Ext.define('DoctorsNearMe.view.MapView', {
                 me.fireEvent('textsearch', me.getSearchField());
             }
         })
+    },
+
+    toggleToolbarMoreImage:function(){
+        var label = this.getSearchToolbar().getComponent(1);
+        var singleLineLabel = this.getSearchToolbar().getComponent(3);
+        if (label.getHtml() == '<img class="more arrow" src="resources/icons/moreArrow.png">') {
+            label.setHtml('<img class="more splitline" src="resources/icons/splitLine.png">');
+            singleLineLabel.setHidden(false);
+        } else {
+            label.setHtml('<img class="more arrow" src="resources/icons/moreArrow.png">')
+            singleLineLabel.setHidden(true);
+        }
+        
     },
 
     /**
