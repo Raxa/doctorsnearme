@@ -575,6 +575,7 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
     setLanguage: function () {
         var lang = DoctorsNearMe.config.getLanguage();
 
+        var phoneno = this.getData().international_phone_number;
         this.getCallButton().setText('<div><img src = "resources/icons/Phone_40_40.png" style="height:30px;width:30px;"></br><a href="tel:' + phoneno + '">'+lang.CALL+'</div>');
 
         //is the location a favorite?

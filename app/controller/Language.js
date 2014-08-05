@@ -45,7 +45,7 @@ Ext.define('DoctorsNearMe.controller.Language', {
 
         if(detailsview!=null){
             detailsview.setLanguage();
-            detailsview.refreshTemplate();
+           // detailsview.refreshTemplate();
         }
 
         var loginview = this.getLoginView();
