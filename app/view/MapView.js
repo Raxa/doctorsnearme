@@ -39,7 +39,13 @@ Ext.define('DoctorsNearMe.view.MapView', {
 
         items: [
             {
-              xtype:'locationmap'
+                xtype: 'locationmap',
+                mapOptions: {
+                    mapTypeControlOptions: {
+                        mapTypeIds:['ROADMAP']
+                    },
+                    streetViewControl:false
+                }
             },
             {
                 xtype: 'listview',
@@ -178,7 +184,7 @@ Ext.define('DoctorsNearMe.view.MapView', {
             width: '80%',
             left: '7%',
             //top: '15%',
-            top: '6%',
+            top: '3%',
             // style: 'border:2px solid grey;border-radius:8px;color:black;',
             //style: 'border:1px solid #0d66f2;border-radius:0;color:#0d66f2;',
             style: 'border:1px solid #0d66f2;border-radius:8px;color:white;',
@@ -320,8 +326,8 @@ Ext.define('DoctorsNearMe.view.MapView', {
             src: 'resources/icons/conpass_30_30.png',
             height: 30,
             width: 30,
-            top: '30%',
-            right: '5%',
+            top: '15%',
+            right: '15%',
             id:'locator'
         });
 

@@ -59,7 +59,7 @@ $list-active-color:#157efb;
         /* Loading animation container */
         .loading {
             position: absolute;
-            top: 60%;
+            top: 65%;
             left: 50%;
             width: 28px;
             height: 28px;
@@ -189,11 +189,12 @@ $list-active-color:#157efb;
 		//vertical-align:middle;
 		//height:70px;
 		height:100%;
-		width:40px;
+		width:50px;
 		background-size: 20px 20px;
 		background-repeat: no-repeat;
 		background-position: center;
-		border: 1px solid black;
+		//border: 1px solid black;
+		border: 1px solid white;
 		margin:0;
 	}
 
@@ -331,6 +332,15 @@ $list-active-color:#157efb;
 	}
 }
 
+	.app-link{
+	margin-left:75%;
+
+	  a{
+  color:white;
+  text-decoration: none;
+} 
+	}
+
 .x-field-input{
 border:1px solid white;
 }
@@ -346,7 +356,8 @@ border:1px solid white;
 	background-size: 20px 20px;
 	background-repeat: no-repeat;
 	background-position: center;
-	border: 1px solid black;
+	//border: 1px solid black;
+	border: 1px solid white;
 	margin:0;
 }
 
@@ -452,18 +463,40 @@ background-image:url('images/home.png');
 
 	.x-field-input{
 		border-radius:5px;
+		min-width:45px;
+		max-width:100px;
 	}
 	border-radius:2px;
 	.x-form-fieldset .x-form-fieldset-inner{
 		border:0;
 	}
 
+	.radio-set{
+	.x-field-input{
+		width:25px;
+		border-radius:5px;
+		min-width:45px;
+	}
+	}
+}
 
+.menu-place{
+font-size: 1em !important;
+color:#736f85;
+}
+
+.distance{
+text-align:center;
 }
 
 .menu-heart{
-	margin:4px;
+	margin:0;
 }
+
+.menu-forward{
+	margin-right:10px;
+}
+
 
 .x-button-menu {
 	font-size: 1.1em;
@@ -556,6 +589,8 @@ vertical-align:middle;
 	height:20px;
 	width:20px;
 	margin-top:10px;
+	margin-left:3px;
+	margin-right:3px;
 }
 
 

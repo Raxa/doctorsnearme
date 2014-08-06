@@ -90,7 +90,7 @@ Ext.define('DoctorsNearMe.view.ListView', {
         var template = new Ext.XTemplate(
             '<div display="block">',
             '<div display="table-column-group" class="list-firstrow-div">',
-                '<div  class="inlineblock user-img-div"><img class="list-user-img" src="test.png"></div>',
+                '<div  class="inlineblock user-img-div"><img class="list-user-img" src="resources/icons/empty3.png"></div>',
                  '<div class="inlineblock">',
                     '<div class="inlineblock docname"><p>{name}</p></div>',
                     '<div class="inlineblock"><img class="list-more-details" id ={id} src = "resources/icons/i_30_30.png"></div>',

@@ -52,16 +52,16 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                    {
                        xtype: 'image',
                        height: '100%',
-                       width: 50,
+                       width: 100,
                        centered:true,
-                       src: 'resources/icons/empty.png'
+                       src: 'resources/icons/empty4.png'
                    },
                    {
                        xtype: 'image',
                        docked:'right',
                        height: '100%',
                        width: 40,
-                       margin:5,
+                       margin:0,
                        centered: true,
                        src: 'resources/icons/forward.png'
                    }

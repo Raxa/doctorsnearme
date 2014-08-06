@@ -61,7 +61,7 @@ Ext.define('DoctorsNearMe.config.Runtime', {
             favoritesStore.getRange().forEach(function (record) {
                 currentFavorites.push(Ext.JSON.decode(record.get('query')));
             });
-        }, 200);
+        }, 10);
             
     }
     

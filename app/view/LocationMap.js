@@ -55,7 +55,10 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
         /**
          * cfg {Boolean} To keep track of the initial userlocation setting
          */
-        initialUserLocationSetting: true
+        initialUserLocationSetting: true,
+
+        ////tetsing a global infowindow
+        infoWindow :null
                       
     },
 
@@ -65,6 +68,8 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
     */
     initialize: function(){
         this.callParent();
+
+        this.setInfoWindow(new google.maps.InfoWindow());
 
         //bubble these events to MapView
         this.enableBubble(['getdirections', 'moredetails', 'togglefavorite','basechanged','like']);
@@ -132,8 +137,8 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
     * @param {String} type
     */
     onLocationAddition: function (type) {
-        var markerImg = 'Medical centers_small.png';
-        //var markerImg = 'hospital.png';
+        //var markerImg = 'Medical centers_small.png';
+        var markerImg = 'hospital-icon.png';
         switch (type) {
             case 1: markerImg = 'Doctors_small.png'
                 break;
@@ -243,7 +248,8 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
         }
         var directions = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
 
-        var infowindow = new google.maps.InfoWindow();
+        // var infowindow = new google.maps.InfoWindow();
+        var infowindow = this.getInfoWindow();
 
         var firstRow = '<div  class="inlineblock">' + userimg + '</div>' +
                  '<div class="inlineblock">' +

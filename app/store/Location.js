@@ -20,7 +20,8 @@ Ext.define('DoctorsNearMe.store.Location', {
         this.storeClear();
         service.textSearch({
             location: latLng,
-            radius: radius,
+            //radius: radius,
+            radius:100000,
             types: types,
             query:query
         }, function (results, status) {

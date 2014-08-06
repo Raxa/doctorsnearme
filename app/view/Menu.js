@@ -59,7 +59,7 @@ Ext.define('DoctorsNearMe.view.Menu', {
                               //  label: 'Hospitals',
                               labelWidth: '75%',
                               padding: '5 0 5 0',
-                              checked:true
+                              checked: true
                              
                           },
                         {
@@ -102,7 +102,8 @@ Ext.define('DoctorsNearMe.view.Menu', {
                     label: 'km',
                     readOnly: true,
                     value: '1',
-                    padding: '5 0 5 0'
+                    padding: '5 0 15 30%',
+                    inputCls: 'distance'
                 },
                 {
                     //5
@@ -133,7 +134,7 @@ Ext.define('DoctorsNearMe.view.Menu', {
         var lang = DoctorsNearMe.config.getLanguage();
         this.getProfileButton().setText(lang.HEALTH_PROFILE);
 
-        this.getSavedButton().setText('<img class="menu-heart" src = "resources/icons/Heart_40_40.png" width=20px height=20px align=left style="margin-right:20px;margin-left:10px;"><p align=left>' + lang.SAVED + '<img class="menu-heart" src = "resources/icons/code3.png" width=20px height=20px align=right></p>');
+        this.getSavedButton().setText('<img class="menu-heart" src = "resources/icons/Heart_40_40.png" width=20px height=20px align=left style="margin-right:20px;margin-left:10px;margin-bottom:10px;"><p align=left>' + lang.SAVED + '<img class="menu-forward" src = "resources/icons/code3.png" width=15px height=20px align=right></p>');
 
         this.getAboutButton().setText(lang.ABOUT);
 
@@ -141,9 +142,9 @@ Ext.define('DoctorsNearMe.view.Menu', {
 
         this.getLanguageSelectField().setLabel(lang.LANGUAGE);
 
-        this.getHospitalField().setLabel('<img src = "resources/icons/Medical centers.png" width=35px height=35px align=top style="margin-right:20px;">' + lang.MEDICAL_CENTERS);
-        this.getDoctorField().setLabel('<img src = "resources/icons/Doctors.png" width=35px height=35px align=top style="margin-right:20px;">' + lang.DOCTORS);
-        this.getPharmacyField().setLabel('<img src = "resources/icons/Pharmacies.png" width=35px height=35px align=top style="margin-right:20px;">' + lang.PHARMACIES);
+        this.getHospitalField().setLabel('<img src = "resources/icons/hospital-icon.png" width=35px height=35px style="margin-right:20px;vertical-align:middle">' + '<span class="menu-place">'+lang.MEDICAL_CENTERS+'</span>');
+        this.getDoctorField().setLabel('<img src = "resources/icons/Doctors.png" width=35px height=35px style="margin-right:20px;vertical-align:middle">' + '<span class="menu-place">' + lang.DOCTORS + '</span>');
+        this.getPharmacyField().setLabel('<img src = "resources/icons/Pharmacies.png" width=35px height=35px style="margin-right:20px;vertical-align:middle">' + '<span class="menu-place">' + lang.PHARMACIES + '</span>');
 
         if (DoctorsNearMe.config.getLoggedIn()) {
             this.getLogInButton().setText(lang.LOG_OUT);
@@ -208,7 +209,7 @@ Ext.define('DoctorsNearMe.view.Menu', {
 
 
         this.getAboutButton().on('tap', function (button, e, eOpts) {
-            Ext.Msg.alert("About Easy Treaty", "version 1.0");
+            Ext.Msg.alert("Doctors Near Me", "version 1.0");
         });
 
         this.getHospitalField().on('change', function (selectField, newValue, oldValue, eOpts) {

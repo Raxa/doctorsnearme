@@ -54,6 +54,11 @@ Ext.define('DoctorsNearMe.view.Login', {
                 width: '40%',
                 cls:'cancel-btn',
                // text:'<span class="cancel-label">CANCEL</span>'
+            },
+            {
+                xtype: 'label',
+                html: '<a href="https://play.google.com/store/apps/details?id=com.raxa.myRaxa&hl=en">Try myRaxa !</a>',
+                cls:'app-link'
             }
             
         ]
