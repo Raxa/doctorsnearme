@@ -3,6 +3,7 @@
  */
 var mysql = require('mysql');
 var config = require('./config.json');
+var respond = require('respond');
 
 function connect(){
     var connection = mysql.createConnection(({
@@ -19,9 +20,9 @@ function connect(){
     return connection;
 }
 
-function responseObject (success,data,message,error){
+/*function responseObject (success,data,message,error){
     return {success:success,data:data,message:message,error:error};
-}
+}*/
 
 function like(response, data){
 
@@ -34,7 +35,7 @@ function like(response, data){
     var strQuery = "INSERT INTO likes (openmrs_uuid, location_id, status) VALUES ('"+userId+"','"+ locationId+"',"+ like+") ON DUPLICATE KEY UPDATE status="+like;
 
     connection.query(strQuery, function(err, result){
-        respond(err,response,result,"Successful");
+        respond.respond(err,response,result,"Successful");
         connection.end();
 
     });
@@ -52,7 +53,7 @@ function comment(response,data){
     var strQuery ="INSERT INTO comments (openmrs_uuid, location_id, comment) VALUES ('"+userId+"','"+ locationId+"','"+ comment+"')";
 
     connection.query(strQuery, function(err, result){
-        respond(err,response,result,"Successful");
+        respond.respond(err,response,result,"Successful");
         connection.end();
 
     });
@@ -69,7 +70,7 @@ function getLikes(response,data){
 
     connection.query(strQuery, function(err, result){
         console.log("inside connectio.query");
-        respond(err,response,result,"Successful");
+        respond.respond(err,response,result,"Successful");
         connection.end();
 
     });
@@ -84,7 +85,7 @@ function getComments(response,data){
     var strQuery = "SELECT timestamp,comment FROM comments WHERE location_id ='"+ locationId+"'";
 
     connection.query(strQuery, function(err, result){
-        respond(err,response,result,"Successful");
+        respond.respond(err,response,result,"Successful");
         connection.end();
 
     });
@@ -100,13 +101,13 @@ function checkLike(response,data){
     var strQuery = "SELECT status FROM likes WHERE openmrs_uuid='"+userId+"' && location_id='"+locationId+"'";
 
     connection.query(strQuery, function(err, result){
-        respond(err,response,result,"Successful");
+        respond.respond(err,response,result,"Successful");
         connection.end();
 
     });
 }
 
-function respond(err,response,result,successMessage){
+/*function respond(err,response,result,successMessage){
     if(err){
         console.log("error..........");
         setResponseHeaders(response);
@@ -130,7 +131,7 @@ function setResponseHeaders(response){
     response.setHeader('Access-Control-Allow-Origin','*');
     response.setHeader('Access-Control-Allow-Headers', 'X-Requested-With');
     //response.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-}
+}*/
 
 exports.like = like;
 exports.comment=comment;
