@@ -1,0 +1,805 @@
+// The following two lines import the default Sencha Touch theme. If you are building
+// a new theme, remove them and the add your own CSS on top of the base CSS (which
+// is already included in your app.json file).
+
+$base-gradient:'glossy';
+//$base-color: rgb(8, 73, 118);
+//$base-color: rgb(17, 113, 178);
+$base-color: #157efb;
+
+//$list-active-color:rgb(8, 73, 118);
+$list-active-color:#157efb;
+
+
+@import 'sencha-touch/cupertino';
+@import 'sencha-touch/cupertino/all';
+
+// Custom code goes here..
+
+
+// Examples of using the icon mixin:
+// @include icon('user');
+   /**
+         * Example of an initial loading indicator.
+         * It is recommended to keep this as minimal as possible to provide instant feedback
+         * while other resources are still being loaded for the first time
+         */
+        html, body {
+            height: 100%;
+            background-color: white;
+        }
+
+
+        /*I put these*/
+
+        #splash {
+            position: absolute;
+            background-image: url('images/splash1.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 100% 100%;
+            width: 100%;
+            height: 100%;
+        }
+
+      
+
+        /*another preloader*/
+        /* Animation keyframes - you need to add prefixes */
+        @-webkit-keyframes spin {
+            from {
+                -webkit-transform: rotate(0deg);
+            }
+
+            to {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        /* Loading animation container */
+        .loading {
+            position: absolute;
+            top: 65%;
+            left: 50%;
+            width: 28px;
+            height: 28px;
+            margin: -14px 0 0 -14px;
+        }
+
+            /* Spinning circle (inner circle) */
+            .loading .maskedCircle {
+                width: 20px;
+                height: 20px;
+                border-radius: 12px;
+                border: 3px solid #0d66f2;
+            }
+
+            /* Spinning circle mask */
+            .loading .mask {
+                width: 12px;
+                height: 12px;
+                overflow: hidden;
+            }
+
+            /* Spinner */
+            .loading .spinner {
+                position: absolute;
+                left: 1px;
+                top: 1px;
+                width: 26px;
+                height: 26px;
+                -webkit-animation: spin 1s infinite linear;
+            }
+
+            /*another preloader*/
+/////////////////////////////////////////////////////////
+
+/////////////conatact panel///////////////////
+.contactitem{
+
+//.x-field .x-field-input, .x-field .x-input-el{
+//width:20%;
+//}
+
+.x-field .x-field-input, .x-field .x-input-el{
+	border:0;
+}
+
+.contact-email{
+font-size:0.9em;
+color:lightgray;
+}
+
+}
+
+.contact-list{
+
+.x-toolbar .x-title{
+padding-top:0.7em;
+}
+
+.x-toolbar.x-docked-top .x-button{
+padding-top:.7em;
+}
+
+.x-indexbar > div{
+font-size:0.8em;
+}
+
+.x-indexbar-pressed{
+background-color:white;
+}
+.x-toolbar .x-field-input{
+	border-radius:8px;
+}
+
+.search-toolbar{
+	background-color:lightgray;
+	border:0;
+}
+
+.x-toolbar .x-title{
+	font-weight:bold;
+}
+
+
+}
+
+//////////////contact panel//////////////////////
+
+
+.x-list-label{ 
+	   font-size: 1.1em ; 
+	   color:#157efb ; 
+}
+
+//to make the comment field border radius zero
+.x-field-input{
+	border-radius:0;
+}
+
+//to remove the padding in details view
+.x-inner{
+	padding:0;
+}
+
+
+.x-title{
+	color:#0d66f2;
+}
+
+.list-view{
+	.x-list .x-list-item .x-list-item-body, .x-list .x-list-item.x-list-item-tpl .x-innerhtml
+	{
+	padding-left:0;
+	padding-right:0;
+	}
+
+	.list-firstrow-div{
+		height:50px;
+	}
+
+	.list-more-details{
+		vertical-align:middle;
+		height: 20px;
+		width:20px;
+		padding:2px;
+	}
+
+	.list-call-block{
+		width:50%;
+	}
+
+	.list-call{
+		vertical-align:middle;
+		text-align:center;
+		color:white;
+		-webkit-border-radius: 0px;
+		border-radius:0px;
+		border: 1px solid #0d66f2;
+		background: #0d66f2;
+		height: 40px;
+		//width:60px;
+		width:75%;
+		margin:0;
+	  a{
+	  color:white;
+	  text-decoration: none;
+	}
+	}
+
+	.list-call-img{
+		vertical-align:middle;
+		height:40px;
+		//width:40px;
+		width:25%;
+		background-size: 20px 20px;
+		background-repeat: no-repeat;
+		background-position: center;
+		border: 2px solid #0d66f2;
+		margin:0;
+	}
+
+	.list-direction-block{
+		width:50%;
+	}
+
+	.list-direction{
+		vertical-align:middle;
+		text-align:center;
+		color:#0d66f2;
+		-webkit-border-radius: 0px;
+		border-radius:0px;
+		border: 1px solid #0d66f2;
+		background: white;
+		height: 40px;
+		margin:0;
+		//width:50%;
+		width:100%;
+	}
+
+	.list-user-img{
+		//vertical-align:middle;
+		//height:70px;
+		height:100%;
+		width:50px;
+		background-size: 20px 20px;
+		background-repeat: no-repeat;
+		background-position: center;
+		//border: 1px solid black;
+		border: 1px solid white;
+		margin:0;
+	}
+
+	.user-img-div{
+		height:100%;
+	}
+
+	.list-like-img{
+		//padding:5px;
+	}
+
+	.docname{
+		height:20px;
+		margin:5px;
+		//width:100px;
+	}
+
+	.list-first-row{
+		height:70px;
+	}
+
+	.x-form-fieldset .x-form-fieldset-inner{
+		border:0;
+	}
+}
+
+//for the favorite list in new design
+.favorite-list{
+	background-color:white;
+}
+
+//inline class
+.inlineblock{
+	display:inline-block;
+}
+
+.item{
+	font-weight:bold;
+	color:white;
+	//font-family:georgia;
+	text-align:center;
+	border-left:1px solid white;
+	border-right:1px solid white;
+	img{
+		height:50px;
+		width:50px;
+	}
+}
+
+
+//new design login CSS
+.login{
+.x-form-fieldset .x-form-fieldset-inner{
+		border:0;
+}
+
+.username-pwd{
+	border:0;
+	background-color:#FFCCFF;
+	width:90%;
+	height:50px;
+	padding:1em .6em .6em 1em;
+	font-family:Tw Cen MT;
+	font-weight:bold;
+}
+
+
+.signin-btn{
+	background-color:#00CC66;
+	border:0;border-radius:0;
+	margin-left:5%;
+	margin-right:5%;
+	width:90%;
+	height:50px;
+}
+
+.signin-label{
+	color:white;
+	font-family:Tw Cen MT;
+	font-weight:bold;
+}
+
+.cancel-btn{
+	border:0;
+	background-color:#FFCCFF;
+	margin-left:30%;
+	margin-right:30%;
+	height:50px;
+	font-family:Tw Cen MT;
+}
+
+.cancel-label{
+	color:black;
+	margin-top:1%;
+	font-family:Tw Cen MT;
+}
+
+.signup-btn{
+	background-color:#3366FF;
+	border-radius:0;
+	width:40%;
+	margin-right:5%;
+	margin-left:55%;
+	margin-top:5%;
+	color:white;
+	height:40px;
+	font-family:Tw Cen MT;
+	font-weight:bold;
+}
+
+.signup-label{
+	color:white;
+	font-family:Tw Cen MT;
+	font-weight:bold;
+}
+
+.signin-fieldset-container{
+	margin-left:30%;
+	margin-top:5%;
+	margin-left:5%;
+	margin-right:5%;
+}
+
+.forgot-login{
+	margin-left:50%;
+	margin-top:1%;
+	margin-bottom:2%;
+	height:50px;
+	vertical-align:middle;
+	text-align:center;
+	font-family:Tw Cen MT;
+
+	.x-innerhtml{
+	vertical-align:middle;
+	}
+}
+
+	.app-link{
+	margin-left:75%;
+
+	  a{
+  color:white;
+  text-decoration: none;
+} 
+	}
+
+.x-field-input{
+border:1px solid white;
+}
+}
+//new design login CSS
+
+////////////////////////
+
+.user-img{
+	vertical-align:middle;
+	height:80px;
+	width:40px;
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center;
+	//border: 1px solid black;
+	border: 1px solid white;
+	margin:0;
+}
+
+.direction-img{
+	vertical-align:middle;
+	 width:30px;
+	  height:30px;
+}
+
+.direction{
+	vertical-align:middle;
+	text-align:center;
+	color:#0d66f2;
+	-webkit-border-radius: 0px;
+	border-radius:0px;
+	border: 1px solid #0d66f2;
+	background: white;
+	height: 40px;
+	margin:0;
+}
+
+.more-details{
+	vertical-align:middle;
+	height: 20px;
+	width:20px;
+	padding:2px;
+}
+
+.like-img{
+	//vertical-align:middle;
+	//height: 20px;
+	//width:20px;
+	//padding:2px;
+}
+
+.like{
+	background-image:url('images/Tellafriend.png');
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	height:30px;
+	width:30px;
+	border:0;
+	background-color:white
+}
+
+.dislike{
+	background-image:url('images/dislike.png');
+	background-size: 30px 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	height:30px;
+	width:30px;
+	border:0;
+	background-color:white
+}
+
+.call{
+	vertical-align:middle;
+	text-align:center;
+	color:white;
+	-webkit-border-radius: 0px;
+	border-radius:0px;
+	border: 1px solid #0d66f2;
+	background: #0d66f2;
+	height: 40px;
+	width:60px;
+	margin:0;
+  a{
+  color:white;
+  text-decoration: none;
+} 
+}
+
+.call-img{
+	vertical-align:middle;
+	height:40px;
+	width:40px;
+	background-size: 40px 40px;
+	background-repeat: no-repeat;
+	background-position: center;
+	border: 2px solid #0d66f2;
+	margin:0;
+}
+
+.doctor{
+background-image:url('images/home.png');
+	height:20px;
+	width:20px;
+	background-size: 20px 20px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.menubtn{
+	background: white;
+	border-top:1px solid white;
+	
+}
+
+.menu{
+	color:#157efb;
+
+	.x-field-input{
+		border-radius:5px;
+		min-width:45px;
+		max-width:100px;
+	}
+	border-radius:2px;
+	.x-form-fieldset .x-form-fieldset-inner{
+		border:0;
+	}
+
+	.radio-set{
+	.x-field-input{
+		width:25px;
+		border-radius:5px;
+		min-width:45px;
+	}
+	}
+
+	.x-toolbar .x-button{
+		padding-top:.7em;
+	}
+}
+
+.menu-place{
+font-size: 1em !important;
+color:#736f85;
+}
+
+.distance{
+text-align:center;
+}
+
+.menu-heart{
+	margin:0;
+}
+
+.menu-forward{
+	margin-right:10px;
+}
+
+
+.x-button-menu {
+	font-size: 1.1em;
+	margin-top:5px;
+	margin-bottom:5px;
+	color:#157efb;
+	border:0;
+}
+
+.menu-login{
+	background-color:black;
+	color:white;
+	border:0;
+	border-radius:0;
+	margin-top:0
+}
+
+.viewport-inner {
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.name{
+	color:black;
+	backgorund-color:white;
+	border:1px solid black;
+	border-radius:0;
+	margin:0;
+}
+
+
+
+
+//list view
+
+//to set the border radius of sepcialty menu
+	.x-panel.x-select-overlay{
+		border:1px solid white;
+		border-radius:3px;
+	}
+
+//////SPECIALTY MENU////////////////////
+
+.spec-cls{
+
+	body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td{
+		color: #0d66f2;
+	}
+	//this could change the height of the specialty field. But without & it doesnt. I think that is because x-field is not inside spec-cls but with it
+	&.x-field{
+		min-height:30px;
+		border-radius:8px
+	}
+
+	.x-component-outer{
+		background:white;
+		
+	}
+
+	.x-field-input{
+	//	background: -webkit-linear-gradient(#B8B8B8, white);
+	//	color:black;
+	//	border:0;
+	//	border-radius:4px; //this made the border of that inner part of sepacilty field doesnt go out of the outer part
+	border:0;
+	
+		border-radius:8px;
+	//background:#f8f9f9;
+	background:white;
+	}
+	color:black;
+}
+
+.x-container .x-panel .x-sized .x-select-overlay .x-floating{
+	height:100%;
+}
+
+
+
+//morearrow in mapview
+.arrow{
+vertical-align:middle;
+	height:20px;
+	width:20px;
+	margin-top:10px;
+	margin-left:3px;
+	margin-right:3px;
+}
+
+
+.single-line{
+	vertical-align:middle;
+	height:40px;
+	width:8px;
+	margin:1px;
+}
+
+.splitline{
+	height:40px;
+	width:25px;
+	margin:1px;
+}
+.more{
+	//padding-bottom:20px;
+	vertical-align:middle;
+	//height:20px;
+	//width:20px;
+	//margin:5px;
+}
+
+.list{
+	//padding-bottom:20px;
+	vertical-align:middle;
+	align:left;
+	margin-bottom:0;
+	margin-top:4px;
+}
+
+#ext-multiselectfield-1{
+
+		.x-component-outer{
+		height:30px;
+		-webkit-border-radius:8px;
+		}
+
+		.x-input-el{
+		min-height:30px; //changing this made height of the inside part smaller. That is the sentence inside goes up
+		//min-height:25px;
+		border:1px;
+		-webkit-border-radius:8px;
+		padding:5px;
+		}
+
+		input[placeholder] {
+		   color: #0d66f2;
+		   font-weight:bold;
+			padding-left:5px;
+			padding-right:5px;
+			background-image:url('images/dropdown_arrow.png');
+			//background-size:30px 20px;
+			background-position: right;
+			background-repeat: no-repeat;
+			border:0;
+			-webkit-border-radius:7px;
+		}
+		//input::-webkit-input-placeholder {
+			//color: #2B2B2B;
+			//color: #0d66f2;
+			//font-weight:bold;
+			//padding-left:5px;
+			//padding-right:5px;
+			//background-image:url('images/dropDownArrow.png');
+			//background-size:15px 15px;
+			//background-position: right;
+			//background-repeat: no-repeat;
+		//}
+
+			//	input::input-placeholder {
+			//color: #2B2B2B;
+			//color: #0d66f2;
+			//font-weight:bold;
+			//padding-left:5px;
+			//padding-right:5px;
+			//background-image:url('images/dropDownArrow.png');
+			//background-size:15px 15px;
+			//background-position: right;
+			//background-repeat: no-repeat;
+		//}
+}
+//////SPECIALTY MENU////////////////////
+
+////////////SEARCH BOX///////////////////////
+.searchbox-label{
+//this made the two images on search box are properly placed
+ padding:.2em .6em .6em 1em;
+}
+.search-box{
+
+	//this changes the height of that outer component of search field
+	&.x-field{
+		min-height:35px;
+	}
+
+	.x-field-input{
+		border:1px;//this solved the size mismatch of outer and inner components
+		border-radius:5px;
+		height:35px; // this can change the search field height - there are two components in it. inside field and outside one. this changes inside
+		padding-right:5px;
+		//input::-webkit-input-placeholder {
+			//background-image:url('images/search.png');
+			//background-size: 19px 19px;
+			//background-position: left;
+			//background-repeat: no-repeat;
+		//}
+
+		input[placeholder] {
+			background-image:url('images/search.png');
+			background-size: 19px 19px;
+			background-position: right;
+			background-repeat: no-repeat;
+			padding-right:5px;
+		}
+
+		.x-input-el{
+			min-height:0;
+			padding: .4em .4em .4em .4em;
+		}
+
+	}
+
+	.search-box-images{
+		margin:1px;
+	}
+
+	.list{
+		height:20px;
+		width:20px;
+	}
+
+	.more{		
+		height:20px;
+		width:20px;
+	}
+}
+
+////////////SEARCH BOX///////////////////////
+
+
+.x-form-fieldset .x-field:before{
+	border:0;
+}
+
+
+
+
+
+
+
+
+
+
+
