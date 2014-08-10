@@ -2,7 +2,7 @@
     /**
      * The application's namespace, used by Sencha Command to generate classes
      */
-    "name": "EasyTreatyApp",
+    "name": "DoctorsNearMe",
 
     /**
      * The file path to this application's front HTML document, relative to this app.json file
@@ -39,6 +39,10 @@
      *      }
      */
     "js": [
+		{
+			"path": "cordova.js",
+			"remote": true
+		},
         {
             "path": "touch/sencha-touch.js",
             "x-bootstrap": true
@@ -51,6 +55,15 @@
             "path": "app.js",
             "bundle": true,  /* Indicates that all class dependencies are concatenated into this file when build */
             "update": "delta"
+        },
+        {
+            "path":"app/lang/en.js"
+        },
+        {
+            "path":"app/lang/si.js"
+        },
+        {
+            "path":"https://maps.googleapis.com/maps/api/js?key=AIzaSyCz2FbWnJQh8hez_0fQ7J-QvE7jzCvWSgw&libraries=places&sensor=true"
         }
     ],
 
@@ -105,7 +118,8 @@
     "resources": [
         "resources/images",
         "resources/icons",
-        "resources/startup"
+        "resources/startup",
+        "resources/css/images"
     ],
 
     /**
@@ -131,5 +145,5 @@
      * Uniquely generated id for this application, used as prefix for localStorage keys.
      * Normally you should never change this value.
      */
-    "id": "87494b1c-7dcf-4c35-8eae-ab2e4b3bc4b0"
+    "id": "c9e1ce72-386a-4395-9714-dee3884bc8b6"
 }
