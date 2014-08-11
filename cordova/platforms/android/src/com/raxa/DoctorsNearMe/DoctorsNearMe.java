@@ -32,6 +32,11 @@ public class DoctorsNearMe extends CordovaActivity
         // Set by <content src="index.html" /> in config.xml
         super.loadUrl(Config.getStartUrl());
         //super.loadUrl("file:///android_asset/www/index.html");
+		
+		////I put this
+		super.setIntegerProperty("splashscreen", R.drawable.splash);
+		super.loadUrl(Config.getStartUrl(), 5000);
+		// I put this
     }
 }
 

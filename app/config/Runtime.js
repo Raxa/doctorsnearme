@@ -34,9 +34,13 @@ Ext.define('DoctorsNearMe.config.Runtime', {
 
     startApp: function () {
 
-        Ext.Function.defer(function () {
+        //    Ext.Function.defer(function () {
+            navigator.splashscreen.hide();
+
             Ext.fly('splash').destroy();
             Ext.fly('bluespin').destroy();
+
+            
 
             DoctorsNearMe.config.setLanguage(EN);
 
@@ -69,7 +73,7 @@ Ext.define('DoctorsNearMe.config.Runtime', {
            
             //var store = Ext.create('DoctorsNearMe.store.Contact');
             //store.loadContacts();
-        }, 10);
+    //    }, 10);
 
         
 

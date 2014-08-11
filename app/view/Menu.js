@@ -166,9 +166,9 @@ Ext.define('DoctorsNearMe.view.Menu', {
             this.getLogInButton().setText(lang.LOG_IN);
         }
 
-        this.getTellaFriendButton().setText('<img src = "resources/icons/Tellafriend.png" width=20px height=20px align=left style="vertical-align:middle;"><span style="font-size:0.6em;vertical-align:middle;color:black;">&nbsp;' + lang.SHARE + '</span>');
+        this.getTellaFriendButton().setText('<img src = "resources/icons/Tellafriend1.png" width=20px height=20px align=left style="vertical-align:middle;"><span style="font-size:0.6em;vertical-align:middle;color:black;">&nbsp;' + lang.SHARE + '</span>');
 
-        this.getRateUsButton().setHtml('<img src = "resources/icons/Heart_40_40.png" width=20px height=20px align=left style="vertical-align:middle;"><a href="https://play.google.com/store/apps/details?id=com.raxa.myRaxa&hl=en" style="font-size:0.6em;vertical-align:middle;text-decoration: none;color:black;">&nbsp;' + lang.RATE_US + '</a>');
+        this.getRateUsButton().setHtml('<img src = "resources/icons/Heart_40_40_1.png" width=20px height=20px align=left style="vertical-align:middle;"><a href="https://play.google.com/store/apps/details?id=com.raxa.myRaxa&hl=en" style="font-size:0.6em;vertical-align:middle;text-decoration: none;color:black;">&nbsp;' + lang.RATE_US + '</a>');
 
     },
 
@@ -233,6 +233,10 @@ Ext.define('DoctorsNearMe.view.Menu', {
             me.toggle();
             me.fireEvent('share');
           
+        });
+
+        this.getRateUsButton().on('tap', function () {
+
         });
 
         this.getHospitalField().on('change', function (selectField, newValue, oldValue, eOpts) {

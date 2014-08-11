@@ -122,8 +122,12 @@ Ext.define('DoctorsNearMe.view.MapView', {
      * @method
      * @private
      */
-    onLocationAddition: function () {
-        this.down('locationmap').onLocationAddition(this.getCurrentSearch());
+    onLocationAddition: function (isTextSearch) {
+        var search = this.getCurrentSearch();
+        if (isTextSearch) {
+            search = 0;
+        }
+        this.down('locationmap').onLocationAddition(search);
         //this.down('listview').fillList();
     },
 

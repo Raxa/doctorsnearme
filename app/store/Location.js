@@ -28,7 +28,8 @@ Ext.define('DoctorsNearMe.store.Location', {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 console.log("no of results: " + results.length);
                 Ext.Array.forEach(results, function (place) {
-                    me.addItem(place);
+                    //second parameter is to say this is text search. this is needed to put the proper marker icon
+                    me.addItem(place, true);
                 });
                 me.getPlaceDetails(results, 0,searchCount);
             } else {
@@ -99,7 +100,7 @@ Ext.define('DoctorsNearMe.store.Location', {
         this.fireEvent('storecleared');
     },
 
-    addItem: function(record){
+    addItem: function(record,isTextSearch){
         this.add(record);
         //  if (this.isFavorite(record.reference)) {
         if (this.isFavorite(record.place_id)) {
@@ -112,7 +113,7 @@ Ext.define('DoctorsNearMe.store.Location', {
             this.isLiked(record);
         }
 
-        this.fireEvent("locationadded");
+        this.fireEvent("locationadded",isTextSearch);
     },
 
     addFavoriteItem: function(record){

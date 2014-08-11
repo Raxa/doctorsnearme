@@ -68,8 +68,30 @@ Ext.application({
 		
 	//	function onError(contactError) {
 	//		alert('onError!');
-	//	}	
-		DoctorsNearMe.config.startApp();	
+        //	}	
+		var appStart = true;
+		//Ext.Msg.alert(navigator.connection.type);
+		if (navigator.connection.type != Connection.NONE) {
+		    DoctorsNearMe.config.startApp();
+		}
+		else {
+
+		    Ext.Msg.setMinWidth('300px');
+		    Ext.Msg.alert("Please connect to internet");
+
+		    document.addEventListener("online", onOnline, false);
+
+		    function onOnline() {
+		        if (appStart) {
+		           // Ext.Function.defer(function () {
+		                window.location.reload(true);
+		          //  }, 1000);
+		            appStart = false;
+		        }
+		       
+		    }
+		}
+			
 			
     },
 

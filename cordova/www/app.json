@@ -1,0 +1,1 @@
+{"id":"c9e1ce72-386a-4395-9714-dee3884bc8b6","js":[{"path":"cordova.js","remote":true},{"path":"app.js","update":"delta"},{"path":"app/lang/en.js"},{"path":"app/lang/si.js"},{"path":"https://maps.googleapis.com/maps/api/js?key\u003dAIzaSyCz2FbWnJQh8hez_0fQ7J-QvE7jzCvWSgw\u0026libraries\u003dplaces\u0026sensor\u003dtrue"}],"css":[{"path":"resources/css/app.css","update":"delta"}]}
