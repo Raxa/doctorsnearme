@@ -10,7 +10,7 @@
                 return record.get('displayName').substr(0, 1);
             }
         },
-
+        data:[],
         //data: [
         //{
         //    id:'1',
@@ -78,7 +78,7 @@
         //],
     },
 
-    /*loadContacts: function () {
+   /* loadContacts: function () {
         var data = [{
             id: '1',
             displayName: 'Thurani'
@@ -148,7 +148,7 @@
         }, 5000);
      // this.setData(data);
     }*/
-    loadContacts: function () {
+    loadContacts: function (dataview) {
         var me = this;
         //Ext.Msg.alert("inside store");
         var options = new ContactFindOptions();
@@ -164,65 +164,23 @@
             if (contacts.length == 0) {
                 Ext.Msg.alert("nothing");
             } else {
-                //Ext.Msg.alert(contacts[20].id);
-                //me.setData(contacts);
-
-                //Ext.Array.forEach(contacts,function(contact){
-                //    array.push({ id: contact.id });
-                //    array.push(contact.id);
-
-                //    var record = Ext.create('DoctorsNearMe.model.Contact');
-                //    record.set('id', contact.id);
-                //    record.set('displayName', contact.displayName);
-                //    record.set('emails', contact.emails);
-                //    record.set('phoneNumbers', contact.phoneNumbers);
-
-                //    me.add(record);
-
-                //    i++;
-                //});
-                // Ext.Msg.alert(array.length);
-               
-
-               // Ext.Msg.alert(array.join(','));
-
-                //Ext.Msg.alert(me.getAllCount());
-                //alert(me.getAllCount());
-
-
-              /*  var record1 = Ext.create('DoctorsNearMe.model.Contact', {
-                    id: contacts[0].id,
-                    displayName: contacts[0].displayName,
-                    phoneNumbers:contacts[0].phoneNumbers,
-                    emails:contacts[0].emails
-                });
-                   
-                me.add(record1);
-
-                    record1 = Ext.create('DoctorsNearMe.model.Contact', {
-                        id: '2',
-                        displayName: 'Amaya',
-                        phoneNumbers: ['0718010490','1111676868'],
-                        emails: ['amaya.uom@gmail.com']
-                    });
-
-                    me.add(record1);*/
 
                 var i = 0;
 
                 for (i = 0; i < contacts.length; i++) {
-                    var record1 = Ext.create('DoctorsNearMe.model.Contact', {
-                        id: contacts[i].id,
-                        displayName: contacts[i].displayName,
-                        phoneNumbers: contacts[i].phoneNumbers,
-                        emails: contacts[i].emails
-                    });
-
-                    me.add(record1);
+                    if (contacts[i].displayName != null) {
+                        var record1 = Ext.create('DoctorsNearMe.model.Contact', {
+                            //id: contacts[i].id,
+                            displayName: String(contacts[i].name.formatted),
+                            // displayName: i+"Amaya",
+                            phoneNumbers: contacts[i].phoneNumbers,
+                            emails: contacts[i].emails
+                        });
+                        me.add(record1);
+                    }
                 }
+                
 
-
-               // Ext.Msg.alert("TEST");
             }
 
         }

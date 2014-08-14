@@ -724,7 +724,9 @@ Ext.ClassManager.addNameAliasMappings({
   "DoctorsNearMe.view.Menu": [
     "widget.mainmenu"
   ],
-  "DoctorsNearMe.view.SharingOptionsList": [],
+  "DoctorsNearMe.view.SharingOptionsList": [
+    "widget.sharelist"
+  ],
   "DoctorsNearMe.view.ThanksForSharing": [
     "widget.thanks"
   ],

@@ -109,7 +109,7 @@ Ext.define('DoctorsNearMe.controller.MapView', {
 
             mapview.getStore().textSearch(base, types, radius2, locationmap, searchField.getValue());
 
-            this.getMapView().zoomMap(parseInt(radius2));
+            this.getMapView().zoomMap(10000);
         } 
        
     },

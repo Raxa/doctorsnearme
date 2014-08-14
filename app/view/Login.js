@@ -11,9 +11,9 @@ Ext.define('DoctorsNearMe.view.Login', {
         cls: 'login',
         style: 'background-color:#FFCCFF;',
         hideAnimation: {
-            type: 'popOut',
+            type: 'popIn',
             duration: 250,
-            easing: 'ease-out'
+           // easing: 'ease-in'
         },
         items: [
             {//0
@@ -62,7 +62,7 @@ Ext.define('DoctorsNearMe.view.Login', {
             },
             {
                 xtype: 'label',
-                html: '<a href="https://play.google.com/store/apps/details?id=com.raxa.myRaxa&hl=en">Try myRaxa !</a>',
+                html: '<a href="market://details?id=com.raxa.EMR">Try Raxa App!</a>',
                 cls:'app-link'
             }
             

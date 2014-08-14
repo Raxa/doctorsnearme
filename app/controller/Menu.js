@@ -12,7 +12,8 @@ Ext.define('DoctorsNearMe.controller.Menu', {
             mapView: 'mapview',
             userProfile: 'userprofile',
             listView: 'listview',
-            contactList: 'contactlist'
+            contactList: 'contactlist',
+            shareList:'sharelist'
         },
         
         control: {            
@@ -23,12 +24,39 @@ Ext.define('DoctorsNearMe.controller.Menu', {
                 showfavorites: "onShowFavorites",
                 menutoggled: "onMenuToggle",
                 share:"share"
+            },
+            shareList: {
+                share:"tellFriends"
             }
         }
     },
 
+    tellFriends:function(type){
+        switch (type) {
+            case 'EMAIL': Ext.Viewport.setActiveItem(this.getContactList());
+                break;
+            case 'MESSAGE': Ext.Viewport.setActiveItem(this.getContactList());
+                break;
+            case 'FACEBOOK':
+                Ext.Msg.alert("facebook");
+                window.plugins.socialsharing.shareViaFacebook('Doctors near me Test', null, null, function () { console.log('share ok') }, function (errormsg) { alert(errormsg) });
+                break;
+            case 'TWITTER':
+                window.plugins.socialsharing.shareViaTwitter('Try Doctors Near Me!', null, 'http://www.test.com')
+                break;
+        }
+    },
+
     share: function(){
-        Ext.Viewport.setActiveItem(this.getContactList());
+        //  Ext.Viewport.setActiveItem(this.getContactList());
+
+        var sharelist= this.getShareList();
+        if (sharelist == null) {
+            sharelist = Ext.create('DoctorsNearMe.view.SharingOptionsList');
+            Ext.Viewport.add(sharelist);
+        }
+        
+        sharelist.show()
     },
 
     onMenuToggle: function () {

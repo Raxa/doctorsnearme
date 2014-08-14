@@ -71,10 +71,10 @@ Ext.application({
         //	}	
 		var appStart = true;
 		//Ext.Msg.alert(navigator.connection.type);
-		if (navigator.connection.type != Connection.NONE) {
+	//	if (navigator.connection.type != Connection.NONE) {
 		    DoctorsNearMe.config.startApp();
-		}
-		else {
+	//	}
+	/*	else {
 
 		    Ext.Msg.setMinWidth('300px');
 		    Ext.Msg.alert("Please connect to internet");
@@ -90,7 +90,7 @@ Ext.application({
 		        }
 		       
 		    }
-		}
+		}*/
 			
 			
     },

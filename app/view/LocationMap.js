@@ -85,6 +85,8 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
             delegate: 'button.direction',
             tap: function (event, node, options, eOpts) {
                 console.log("get directions");
+                me.clearRoutes();
+                node.disabled = true;
                 me.fireEvent('getdirections', me, node.id);
             }
         });
@@ -221,7 +223,7 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
     * @param {Marker} marker
     */
     setInfowindowContent: function (record,marker) {
-        var phoneNumber = record.get('international_phone_number');
+      /*  var phoneNumber = record.get('international_phone_number');
         var idString = record.get('id');
 
         var name = record.get('name');
@@ -243,10 +245,15 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
         }
 
         var call = "";
+        var directions;
         if (phoneNumber != null) {
             call = '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="call"><a href="tel:' + phoneNumber + '">'+lang.CALL+'</a></button>';
+            directions = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
         }
-        var directions = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
+        else {
+            directions = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
+
+        }
 
         // var infowindow = new google.maps.InfoWindow();
         var infowindow = this.getInfoWindow();
@@ -260,9 +267,96 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
 
         var secondRow = '<div class="inlineblock">' + call + '</div>' +
                        '<div class="inlineblock">' + directions + '</div>';
-        var tpl = '<div display="table-column-group">' + firstRow + '</div>' + '<div display="table-column-group">' + secondRow + '</div>';
+        var tpl = '<div display="table-row-group">' + firstRow + '</div>' + '<div display="table-row-group">' + secondRow + '</div>';*/
 
-        infowindow.setContent(tpl);
+        var infowindow = this.getInfoWindow();
+
+        var values = {
+            id: record.get('id'),
+            name: record.get('name'),
+            isLiked: record.get('isLiked'),
+            phoneNumber: record.get('international_phone_number'),
+            loggedIn:DoctorsNearMe.config.getLoggedIn()
+        }
+
+        var tpl = new Ext.XTemplate(
+            '<div>',
+                '<div display="table-row-group">',
+                    /*'<div class="inlineblock"><p class="wordstyle">&nbsp;&nbsp;{[this.getName(values.name)]}</p></div>',
+                    '<div class="inlineblock"><img class="more-details" id ={id} src = "resources/icons/i_30_30.png"></div>',*/
+                     '<p class="wordstyle">{[this.getName(values.name)]}<img class="more-details" id ={id} src = "resources/icons/i_30_30.png"></p>',
+                '</div>',
+                '<tpl if="values.loggedIn==true">',
+                     '<div display="table-row-group">',
+                            '<tpl if="values.isLiked!=true">',
+                                '<button class="like-img like" id={[this.getLikeId(values.id,"like")]}>',
+                            '</tpl>',
+                            '<tpl if="values.isLiked==true">',
+                                '<button class="like-img dislike" id={[this.getLikeId(values.id,"like")]}>',
+                            '</tpl>',
+                    '</div>',
+                '</tpl>',
+                '<tpl if="values.loggedIn!=true">',
+                     '<div display="table-row-group">',
+                            '<br>',
+                    '</div>',
+                '</tpl>',
+                '<tpl if="values.phoneNumber!=null">',
+                    '<div display="table-row-group">',
+                        '<div class="inlineblock">',
+                            '<button class="call" style="padding-left:1px;"><img class="call-img" src = "resources/icons/Phone_40_40.png"><a href="tel:{phoneNumber}">{[this.getCallLabel()]}</a></button>',
+                           // '<button class="call"><a href="tel:{phoneNumber}">{[this.getCallLabel()]}</a></button>',
+                    '</div>',
+                        '<div class="inlineblock">',
+                            '<button class="direction" id={id}><img class="direction-img" src = "resources/icons/Arrow_40_40.png">{[this.getDirectionsLabel()]}</button>',
+                        '</div>',
+                    '</div>',                    
+                '</tpl>',
+                 '<tpl if="values.phoneNumber==null">',
+                    '<div display="table-row-group">',
+                        '<div class="inlineblock">',
+                            '<button class="direction" id={id}><img class="direction-img" src = "resources/icons/Arrow_40_40.png">{[this.getDirectionsLabel()]}</button>',
+                        '</div>',
+                    '</div>',
+                '</tpl>',
+            '</div>', {
+                getLikeId: function (id,like) {
+                    return id + '-' + like;
+                },
+                getCallLabel: function () {
+                    return lang.CALL;
+                },
+                getDirectionsLabel: function () {
+                    return lang.GET_DIRECTIONS;
+                },
+                getName: function (name) {
+                    var i=0,j=0,firstRow="",secondRow="";
+                    if (name.length >= 28) {
+                        var splitted = name.split(" ");
+                        var noOfWords = splitted.length;                     
+
+                        var noOfSpaces = noOfWords - 1;
+                        if (noOfSpaces >= 4) {
+                            secondRow = splitted[noOfWords - 2] + " " + splitted[noOfWords-1];
+                            for (i = 0; i < noOfWords - 2; i++) {
+                                firstRow += splitted[i] + " ";
+                            }
+                            return firstRow + '<br>' + secondRow;
+                        } else {
+                            return name;
+                        }
+
+                        
+                    } else {
+                        return name;
+                    }
+                   
+                }
+            }
+
+            );
+
+        infowindow.setContent(tpl.apply(values));
         infowindow.open(this.getMap(), marker);
 
         //////////////
@@ -448,7 +542,8 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
             strokeWeight: 5
         });
 
-        var directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: polylineOptionsActual,map:map });
+        var directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: polylineOptionsActual, map: map });
+        console.log(directionsDisplay.polylineOptions);
 
         this.getRoutes().push(directionsDisplay);
 

@@ -176,7 +176,6 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
         
         this.setHandlers();
 
-        
     },
 
     /**

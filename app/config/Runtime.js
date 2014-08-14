@@ -7,9 +7,9 @@ Ext.define('DoctorsNearMe.config.Runtime', {
     config: {      
         domain: 'http://api.raxa.io/ws/rest/v1/',
 
-        //ratingServerDomain: 'http://192.168.122.1:8888/',
+        ratingServerDomain: 'http://192.168.122.1:8888/',
        // ratingServerDomain: 'http://192.168.56.1:8888/',
-        ratingServerDomain: 'http://192.168.1.2:8888/',
+       // ratingServerDomain: 'http://192.168.1.2:8888/',
         openMRSUsername: 'jameskierkegaard',
 
         openMRSPassword: 'Hello123',
@@ -35,7 +35,7 @@ Ext.define('DoctorsNearMe.config.Runtime', {
     startApp: function () {
 
         //    Ext.Function.defer(function () {
-            navigator.splashscreen.hide();
+           // navigator.splashscreen.hide();
 
             Ext.fly('splash').destroy();
             Ext.fly('bluespin').destroy();

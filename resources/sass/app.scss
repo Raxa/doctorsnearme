@@ -190,6 +190,17 @@ background-color:white;
 		width:50%;
 	}
 
+	.list-direction-block{
+	}
+
+	.half-length{
+		width:50%
+	}
+
+	.full-length{
+		width:100%
+	}
+
 	.list-call{
 		vertical-align:middle;
 		text-align:center;
@@ -220,7 +231,7 @@ background-color:white;
 		margin:0;
 	}
 
-	.list-direction-block{
+	.intion-block{
 		width:50%;
 	}
 
@@ -469,31 +480,34 @@ border:1px solid white;
 }
 
 .call{
+	padding-left:1px;
+	white-space:nowrap;
 	vertical-align:middle;
-	text-align:center;
+	text-align:right;
 	color:white;
 	-webkit-border-radius: 0px;
 	border-radius:0px;
 	border: 1px solid #0d66f2;
 	background: #0d66f2;
 	height: 40px;
-	width:60px;
+	width:100px;
 	margin:0;
   a{
   color:white;
   text-decoration: none;
+  margin-top:10px;
+  margin-left:15px;
+  float:left;
 } 
 }
 
 .call-img{
+	float:left;
 	vertical-align:middle;
-	height:40px;
-	width:40px;
-	background-size: 40px 40px;
-	background-repeat: no-repeat;
-	background-position: center;
-	border: 2px solid #0d66f2;
-	margin:0;
+	 width:40px;
+	// height:40px;
+	 padding-right:4px;
+	 padding-left:2px;
 }
 
 .doctor{
@@ -509,6 +523,25 @@ background-image:url('images/home.png');
 	background: white;
 	border-top:1px solid white;
 	
+}
+
+.share-label{
+	padding:10px;
+	color:#D0D0D0;
+	font-size:0.8em;
+	text-align :center;
+	background-color:#E8E8E8;
+}
+
+
+.x-sheet-action .x-button{
+	margin:0;
+	border-top:1px solid #D0D0D0;
+	border-radius:0;
+}
+
+.x-sheet-action{
+padding:0;
 }
 
 .menu{
@@ -645,9 +678,9 @@ text-align:center;
 vertical-align:middle;
 	height:20px;
 	width:20px;
-	margin-top:10px;
-	margin-left:3px;
-	margin-right:3px;
+	margin-top:12px;
+	margin-left:1px;
+	margin-right:8px;
 }
 
 
@@ -661,7 +694,8 @@ vertical-align:middle;
 .splitline{
 	height:40px;
 	width:25px;
-	margin:1px;
+	margin-top:1px;
+	margin-bottom:1px;
 }
 .more{
 	//padding-bottom:20px;
@@ -733,6 +767,35 @@ vertical-align:middle;
 //////SPECIALTY MENU////////////////////
 
 ////////////SEARCH BOX///////////////////////
+.x-toolbar.x-docked-top .x-button{
+padding-left:0;
+}
+
+.search-icon{
+.x-button-icon{
+width:3em;
+height:1.8em;
+color:white;
+background-color:gray;
+border:1px solid gray;
+//margin:1.5px;
+margin-top:1.7px;
+margin-left:1.5px;
+margin-right:1.5px;
+margin-bottom:1.5px;
+border-radius:3px;
+padding-top:5px;
+padding-bottom:5px;
+
+}
+
+
+}
+
+.search-button-label{
+		color:white;
+}
+
 .searchbox-label{
 //this made the two images on search box are properly placed
  padding:.2em .6em .6em 1em;
@@ -756,13 +819,14 @@ vertical-align:middle;
 			//background-repeat: no-repeat;
 		//}
 
-		input[placeholder] {
-			background-image:url('images/search.png');
-			background-size: 19px 19px;
-			background-position: right;
-			background-repeat: no-repeat;
-			padding-right:5px;
-		}
+		//This was removed after putting search iconCls for search button
+		//input[placeholder] {
+		//	background-image:url('images/search.png');
+		//	background-size: 19px 19px;
+		//	background-position: right;
+		//	background-repeat: no-repeat;
+		//	padding-right:5px;
+		//}
 
 		.x-input-el{
 			min-height:0;

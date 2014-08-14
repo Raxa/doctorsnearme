@@ -40,7 +40,7 @@ Ext.define('DoctorsNearMe.view.ContactList', {
 
         this.setStore(contactStore);
 
-         contactStore.loadContacts();
+         contactStore.loadContacts(this);
        
        // contactStore.setData(data);
 
@@ -98,7 +98,7 @@ Ext.define('DoctorsNearMe.view.ContactList', {
         //get the store and the value of the field
         var value = field.getValue(),
             store = this.getStore();
-
+        //Ext.Msg.alert(store.getCount());
         //first clear any current filters on thes tore
         store.clearFilter();
 
@@ -140,7 +140,10 @@ Ext.define('DoctorsNearMe.view.ContactList', {
                     return matched[0];
                 }
             });
+
+          //  Ext.Msg.alert("after: "+store.getCount());
         }
+
     },
 
     /**

@@ -27,7 +27,8 @@
     updateRecord: function(record) {
         var me = this;
         var valueObject;
-        var checkField =me.down('checkboxfield');
+        var checkField = me.down('checkboxfield');
+
         if (checkField != null) {
 
             if (record.get('emails') != null) {               

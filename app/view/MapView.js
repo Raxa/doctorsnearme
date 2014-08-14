@@ -141,7 +141,7 @@ Ext.define('DoctorsNearMe.view.MapView', {
 
         var map = this.down('locationmap');
        
-        var zoom=15;
+        var zoom=12;
         
 
         if (radius < 5000) {
@@ -189,9 +189,8 @@ Ext.define('DoctorsNearMe.view.MapView', {
             left: '7%',
             //top: '15%',
             top: '3%',
-            // style: 'border:2px solid grey;border-radius:8px;color:black;',
-            //style: 'border:1px solid #0d66f2;border-radius:0;color:#0d66f2;',
-            style: 'border:1px solid #0d66f2;border-radius:8px;color:white;',
+            style: 'border:0;border-radius:8px;color:white;',
+            //style: 'border:1px solid #0d66f2;border-radius:8px;color:white;',
             store: specStore,
             cls: 'spec-cls',
             picker:false,
@@ -202,6 +201,10 @@ Ext.define('DoctorsNearMe.view.MapView', {
                 width: '17em',
                 height: '70%'
 
+            },
+            showAnimation: {
+                type: 'fade',
+                duration:250
             }
 
         });
@@ -250,34 +253,55 @@ Ext.define('DoctorsNearMe.view.MapView', {
             labelWidth: '65px',
             labelCls: 'searchbox-label',
             name: 'search',
-            width: '80%',
+            width: '70%',
             height: '90%',
             cls: 'search-box',
             style: 'border:0;border-radius:8px',
             docked: 'left',
-            placeHolder: ' '
+            placeHolder: 'Search'
         });
 
         var singleLine = Ext.create('Ext.Label', {
             html: '<img class="single-line" src="resources/icons/splitOneLine.png">',
             hidden: true,
-            docked:'right'
+           // docked:'right'
         });
 
         var userLabel = Ext.create('Ext.Label', {
             html: '<div class="search-box-images"><img class="list" src="resources/icons/User_30_30.png">',
             docked:'right'
         });
+
+       /* var searchbutton = Ext.create('Ext.Button', {
+            labelCls: 'search-button-label',
+          //  docked: 'right',
+            // top:'10px',
+            //width:'20%',
+            text: 'Search',
+            style: 'background-color:gray;border-radius:3px;padding-bottom:5px;padding-top:5px;padding-left:3px;padding-right:3px;margin-top:6px;'
+        });*/
+
+
+        var searchbutton = Ext.create('Ext.Button', {
+            iconCls: 'search',
+            cls:'search-icon'
+            });
+
         var moreLabel = Ext.create('Ext.Label', {
-            html: '<img class="more arrow" src="resources/icons/moreArrow.png">',
+            html: '<img class="more arrow" src="resources/icons/list.png">',
             docked:'right'
         });
 
         toolbar.add(searchField);
 
-        toolbar.add(moreLabel);
-        toolbar.add(userLabel);
+        /*toolbar.add(moreLabel);
+        // toolbar.add(userLabel);
+        toolbar.add(searchbutton);
+        toolbar.add(singleLine);*/
+
         toolbar.add(singleLine);
+        toolbar.add(searchbutton);
+        toolbar.add(moreLabel);
         
         
         
@@ -297,24 +321,31 @@ Ext.define('DoctorsNearMe.view.MapView', {
         });
 
         //listener to perform text search
-        this.addListener({
+       /* this.addListener({
             element: 'element',
             delegate: 'img.list',
             tap: function (event, node, options, eOpts) {
                 console.log("text search");
                 me.fireEvent('textsearch', me.getSearchField());
             }
-        })
+        });*/
+
+        searchbutton.on('tap', function () {
+            console.log("text search");
+            me.fireEvent('textsearch', me.getSearchField());
+        });
+
+        
     },
 
     toggleToolbarMoreImage:function(){
-        var label = this.getSearchToolbar().getComponent(1);
-        var singleLineLabel = this.getSearchToolbar().getComponent(3);
-        if (label.getHtml() == '<img class="more arrow" src="resources/icons/moreArrow.png">') {
+        var label = this.getSearchToolbar().getComponent(3);
+        var singleLineLabel = this.getSearchToolbar().getComponent(1);
+        if (label.getHtml() == '<img class="more arrow" src="resources/icons/list.png">') {
             label.setHtml('<img class="more splitline" src="resources/icons/splitLine.png">');
             singleLineLabel.setHidden(false);
         } else {
-            label.setHtml('<img class="more arrow" src="resources/icons/moreArrow.png">')
+            label.setHtml('<img class="more arrow" src="resources/icons/list.png">')
             singleLineLabel.setHidden(true);
         }
         
@@ -330,7 +361,7 @@ Ext.define('DoctorsNearMe.view.MapView', {
             src: 'resources/icons/conpass_30_30.png',
             height: 30,
             width: 30,
-            top: '15%',
+            top: '85%',
             right: '15%',
             id:'locator'
         });

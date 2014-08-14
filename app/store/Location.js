@@ -155,7 +155,7 @@ Ext.define('DoctorsNearMe.store.Location', {
 
             },
             failure: function (response, opts) {
-                Ext.Msg.alert("like failure");
+               // Ext.Msg.alert("like failure");
                 console.log("failure");
                 console.log(response);
             }
@@ -190,7 +190,7 @@ Ext.define('DoctorsNearMe.store.Location', {
                 //key: 'AIzaSyCz2FbWnJQh8hez_0fQ7J-QvE7jzCvWSgw&'
             }, function (place, status1) {
                 if (status1 == google.maps.places.PlacesServiceStatus.OK) {
-
+                    //console.log(place);
                     var record = me.findRecord('place_id', results[i].place_id);
                     if (record != null) {
                         record.set('name', place.name);

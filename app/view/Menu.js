@@ -168,7 +168,9 @@ Ext.define('DoctorsNearMe.view.Menu', {
 
         this.getTellaFriendButton().setText('<img src = "resources/icons/Tellafriend1.png" width=20px height=20px align=left style="vertical-align:middle;"><span style="font-size:0.6em;vertical-align:middle;color:black;">&nbsp;' + lang.SHARE + '</span>');
 
-        this.getRateUsButton().setHtml('<img src = "resources/icons/Heart_40_40_1.png" width=20px height=20px align=left style="vertical-align:middle;"><a href="https://play.google.com/store/apps/details?id=com.raxa.myRaxa&hl=en" style="font-size:0.6em;vertical-align:middle;text-decoration: none;color:black;">&nbsp;' + lang.RATE_US + '</a>');
+      //  this.getRateUsButton().setHtml('<img src = "resources/icons/Heart_40_40_1.png" width=20px height=20px align=left style="vertical-align:middle;"><a href="https://play.google.com/store/apps/details?id=com.raxa.myRaxa&hl=en" style="font-size:0.6em;vertical-align:middle;text-decoration: none;color:black;">&nbsp;' + lang.RATE_US + '</a>');
+
+        this.getRateUsButton().setHtml('<img src = "resources/icons/Heart_40_40_1.png" width=20px height=20px align=left style="vertical-align:middle;"><a href="market://details?id=com.raxa.EMR" style="font-size:0.6em;vertical-align:middle;text-decoration: none;color:black;">&nbsp;' + lang.RATE_US + '</a>');
 
     },
 
@@ -236,7 +238,7 @@ Ext.define('DoctorsNearMe.view.Menu', {
         });
 
         this.getRateUsButton().on('tap', function () {
-
+            //var ref = window.open('market://details?id=com.raxa.EMR', '_blank', 'location=yes');
         });
 
         this.getHospitalField().on('change', function (selectField, newValue, oldValue, eOpts) {

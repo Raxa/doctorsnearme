@@ -34,9 +34,12 @@ Ext.define('DoctorsNearMe.controller.DetailsView', {
         var store = Ext.data.StoreManager.lookup('fav-store');
 
         var record = this.getMapView().getStore().findRecord('place_id',recordId);
+       // var record = this.getListView().getItemList().getStore().findRecord('place_id', recordId);
 
         var string;
 
+        //if the place is marked favorite, get it from store and mark it as favorite
+        //then store it in lcal storage
         if (isFavorite) {
             record.set('isFavorite', true);
 
@@ -44,19 +47,38 @@ Ext.define('DoctorsNearMe.controller.DetailsView', {
             store.storeTokenInLocalStorage(string);
             DoctorsNearMe.config.getFavorites().push(record.getData());
         }
+            //if not set it to false if it is in store(the mapview store)
         else {
 
-            string = Ext.JSON.encode(record.getData());
+          /*  string = Ext.JSON.encode(record.getData());
             store.removeTokenFromLocalStorage(string);
             record.set('isFavorite', false);
             var newFav = Ext.Array.filter(DoctorsNearMe.config.getFavorites(), function (item) {
-                if (item.reference != record.get('reference')) {
+                  if (item.reference != record.get('reference')) {
                     return true;
                 };
             });
-            DoctorsNearMe.config.setFavorites(newFav);
+            DoctorsNearMe.config.setFavorites(newFav);*/
 
+            if (record != null) {
+                record.set('isFavorite', false);
+            }
+
+
+            var newFav= Ext.Array.filter(DoctorsNearMe.config.getFavorites(), function (item) {
+                if (item.place_id != recordId) {
+                    return true;
+                }
+            });
+
+            DoctorsNearMe.config.setFavorites(newFav);
         }
+
+       var listStore = this.getListView().getItemList().getStore()
+       listStore.removeAll();
+        Ext.Array.forEach(DoctorsNearMe.config.getFavorites(), function (item) {
+            listStore.add(item);
+        })
 
         this.getListView().fillList();
     },
