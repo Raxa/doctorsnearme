@@ -29,7 +29,7 @@ Ext.define('DoctorsNearMe.view.MapView', {
         specialties: null,
 
 
-        border: 3,
+        border: 1,
         style: 'border-color: gray; border-style: solid;',
 
         /**
@@ -190,7 +190,7 @@ Ext.define('DoctorsNearMe.view.MapView', {
             //top: '15%',
             top: '3%',
             style: 'border:0;border-radius:8px;color:white;',
-            //style: 'border:1px solid #0d66f2;border-radius:8px;color:white;',
+            //style: 'border:1px solid #1081FB;border-radius:8px;color:white;',
             store: specStore,
             cls: 'spec-cls',
             picker:false,
@@ -263,7 +263,7 @@ Ext.define('DoctorsNearMe.view.MapView', {
 
         var singleLine = Ext.create('Ext.Label', {
             html: '<img class="single-line" src="resources/icons/splitOneLine.png">',
-            hidden: true,
+            hidden: true
            // docked:'right'
         });
 
@@ -492,6 +492,7 @@ Ext.define('DoctorsNearMe.view.MapView', {
         var lang = DoctorsNearMe.config.getLanguage();
 
         this.getSpecialtySelectField().setPlaceHolder(lang.CHOOSE_SPECIALTY);
+        this.getSearchField().setPlaceHolder(lang.SEARCH);
 
     }
 })

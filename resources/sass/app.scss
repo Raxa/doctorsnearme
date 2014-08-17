@@ -5,10 +5,10 @@
 $base-gradient:'glossy';
 //$base-color: rgb(8, 73, 118);
 //$base-color: rgb(17, 113, 178);
-$base-color: #157efb;
+$base-color: #1081FB;
 
 //$list-active-color:rgb(8, 73, 118);
-$list-active-color:#157efb;
+$list-active-color:#1081FB;
 
 
 @import 'sencha-touch/cupertino';
@@ -71,7 +71,7 @@ $list-active-color:#157efb;
                 width: 20px;
                 height: 20px;
                 border-radius: 12px;
-                border: 3px solid #0d66f2;
+                border: 3px solid #1081FB;
             }
 
             /* Spinning circle mask */
@@ -150,7 +150,7 @@ background-color:white;
 
 .x-list-label{ 
 	   font-size: 1.1em ; 
-	   color:#157efb ; 
+	   color:#1081FB ; 
 }
 
 //to make the comment field border radius zero
@@ -165,7 +165,7 @@ background-color:white;
 
 
 .x-title{
-	color:#0d66f2;
+	color:#1081FB;
 }
 
 .list-view{
@@ -207,8 +207,8 @@ background-color:white;
 		color:white;
 		-webkit-border-radius: 0px;
 		border-radius:0px;
-		border: 1px solid #0d66f2;
-		background: #0d66f2;
+		border: 2px solid #1081FB;
+		background: #1081FB;
 		height: 40px;
 		//width:60px;
 		width:75%;
@@ -227,7 +227,7 @@ background-color:white;
 		background-size: 20px 20px;
 		background-repeat: no-repeat;
 		background-position: center;
-		border: 2px solid #0d66f2;
+		border: 2px solid #1081FB;
 		margin:0;
 	}
 
@@ -238,10 +238,10 @@ background-color:white;
 	.list-direction{
 		vertical-align:middle;
 		text-align:center;
-		color:#0d66f2;
+		color:#1081FB;
 		-webkit-border-radius: 0px;
 		border-radius:0px;
-		border: 1px solid #0d66f2;
+		border: 2px solid #1081FB;
 		background: white;
 		height: 40px;
 		margin:0;
@@ -317,7 +317,7 @@ background-color:white;
 
 .username-pwd{
 	border:0;
-	background-color:#FFCCFF;
+	background-color:#F3E3E5;
 	width:90%;
 	height:50px;
 	padding:1em .6em .6em 1em;
@@ -327,7 +327,7 @@ background-color:white;
 
 
 .signin-btn{
-	background-color:#00CC66;
+	background-color: #73E283 ;
 	border:0;border-radius:0;
 	margin-left:5%;
 	margin-right:5%;
@@ -343,7 +343,7 @@ background-color:white;
 
 .cancel-btn{
 	border:0;
-	background-color:#FFCCFF;
+	background-color:#F3E3E5;
 	margin-left:30%;
 	margin-right:30%;
 	height:50px;
@@ -357,8 +357,9 @@ background-color:white;
 }
 
 .signup-btn{
-	background-color:#3366FF;
+	background-color:#6A9DE5;
 	border-radius:0;
+	border-color:#6A9DE5;
 	width:40%;
 	margin-right:5%;
 	margin-left:55%;
@@ -391,9 +392,18 @@ background-color:white;
 	text-align:center;
 	font-family:Tw Cen MT;
 
+	border:0;
+	background-color:#F3E3E5;
+
 	.x-innerhtml{
 	vertical-align:middle;
 	}
+}
+
+.forgotlogin-label{
+	color:black;
+	//margin-top:1%;
+	font-family:Tw Cen MT;
 }
 
 	.app-link{
@@ -434,13 +444,17 @@ border:1px solid white;
 .direction{
 	vertical-align:middle;
 	text-align:center;
-	color:#0d66f2;
+	color:#1081FB;
 	-webkit-border-radius: 0px;
 	border-radius:0px;
-	border: 1px solid #0d66f2;
+	border: 2px solid #1081FB;
 	background: white;
 	height: 40px;
 	margin:0;
+}
+
+.direction-full-width{
+	width:120px;
 }
 
 .more-details{
@@ -487,8 +501,8 @@ border:1px solid white;
 	color:white;
 	-webkit-border-radius: 0px;
 	border-radius:0px;
-	border: 1px solid #0d66f2;
-	background: #0d66f2;
+	border: 2px solid #1081FB;
+	background: #1081FB;
 	height: 40px;
 	width:100px;
 	margin:0;
@@ -527,10 +541,10 @@ background-image:url('images/home.png');
 
 .share-label{
 	padding:10px;
-	color:#D0D0D0;
+	color:#999999;
 	font-size:0.8em;
 	text-align :center;
-	background-color:#E8E8E8;
+	background-color:#D4D3E8;
 }
 
 
@@ -545,7 +559,7 @@ padding:0;
 }
 
 .menu{
-	color:#157efb;
+	color:#1081FB;
 
 	.x-field-input{
 		border-radius:5px;
@@ -592,7 +606,7 @@ text-align:center;
 	font-size: 1.1em;
 	margin-top:5px;
 	margin-bottom:5px;
-	color:#157efb;
+	color:#1081FB;
 	border:0;
 }
 
@@ -640,7 +654,7 @@ text-align:center;
 .spec-cls{
 
 	body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td{
-		color: #0d66f2;
+		color: #1081FB;
 	}
 	//this could change the height of the specialty field. But without & it doesnt. I think that is because x-field is not inside spec-cls but with it
 	&.x-field{
@@ -729,7 +743,7 @@ vertical-align:middle;
 		}
 
 		input[placeholder] {
-		   color: #0d66f2;
+		   color: #1081FB;
 		   font-weight:bold;
 			padding-left:5px;
 			padding-right:5px;
@@ -742,7 +756,7 @@ vertical-align:middle;
 		}
 		//input::-webkit-input-placeholder {
 			//color: #2B2B2B;
-			//color: #0d66f2;
+			//color: #1081FB;
 			//font-weight:bold;
 			//padding-left:5px;
 			//padding-right:5px;
@@ -754,7 +768,7 @@ vertical-align:middle;
 
 			//	input::input-placeholder {
 			//color: #2B2B2B;
-			//color: #0d66f2;
+			//color: #1081FB;
 			//font-weight:bold;
 			//padding-left:5px;
 			//padding-right:5px;

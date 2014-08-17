@@ -19,9 +19,41 @@ Ext.define('DoctorsNearMe.controller.Login', {
             },
             loginView: {
                 login: "authenticate",
-                
+                forgotpassword:"onForgotPassword",
                 cancel:"proceed"
             }
+        }
+    },
+
+    onForgotPassword:function(userName){
+        if (userName === '') {
+            Ext.Msg.alert('Field Required', 'Please fill in your Username or Email');
+        } else {
+            var urlParam = '';
+            if (! /.*@.*/.test(userName)) {
+                console.log('Resetting via username');
+                urlParam = 'resetUsername=' + userName;
+            } else {
+                console.log('Resetting via Email');
+                urlParam = 'resetEmail=' + userName;
+            }
+            Ext.Ajax.request({
+                scope: this,
+                url: DoctorsNearMe.config.getDomain()+'/raxacore/user?' + urlParam,
+                method: 'GET',
+                disableCaching: false,
+                headers: { 
+                    'Accept': 'application/json',
+                    'Content-type': 'application/json'
+                },
+                success: function (response) {
+                    var responseJSON = Ext.decode(response.responseText);
+                    Ext.Msg.alert(responseJSON.title, responseJSON.body);
+                },
+                failure: function () {
+                    Ext.Msg.alert('Error', 'Failed to Reset Password! Please contact support@raxa.io');
+                }
+            });
         }
     },
  
@@ -111,7 +143,7 @@ Ext.define('DoctorsNearMe.controller.Login', {
                 
             },
             failure: function (response, opts) {
-                 Ext.Msg.alert("failure:"+response.responseText);
+                 Ext.Msg.alert("Unable to login");
                 console.log("failure");
             },
             headers: {

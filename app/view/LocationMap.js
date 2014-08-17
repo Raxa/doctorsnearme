@@ -86,6 +86,7 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
             tap: function (event, node, options, eOpts) {
                 console.log("get directions");
                 me.clearRoutes();
+                me.clearMarkers(this.getDirectionMarkers());
                 node.disabled = true;
                 me.fireEvent('getdirections', me, node.id);
             }
@@ -183,7 +184,7 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
         google.maps.event.addListener(marker, 'click', function (pos) {
             var infowindow = new google.maps.InfoWindow();
 
-            lang = DoctorsNearMe.config.getLanguage();
+             lang = DoctorsNearMe.config.getLanguage();
 
             var name = record.get('name');
 
@@ -295,6 +296,7 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
                                 '<button class="like-img dislike" id={[this.getLikeId(values.id,"like")]}>',
                             '</tpl>',
                     '</div>',
+                    '<br>',
                 '</tpl>',
                 '<tpl if="values.loggedIn!=true">',
                      '<div display="table-row-group">',
@@ -315,7 +317,7 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
                  '<tpl if="values.phoneNumber==null">',
                     '<div display="table-row-group">',
                         '<div class="inlineblock">',
-                            '<button class="direction" id={id}><img class="direction-img" src = "resources/icons/Arrow_40_40.png">{[this.getDirectionsLabel()]}</button>',
+                            '<button class="direction direction-full-width" id={id}><img class="direction-img" src = "resources/icons/Arrow_40_40.png">{[this.getDirectionsLabel()]}</button>',
                         '</div>',
                     '</div>',
                 '</tpl>',
@@ -506,10 +508,10 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
 
                 },
                 locationerror: function (geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
-                    if (bTimeout)
+                   /* if (bTimeout)
                         Ext.Msg.alert('Timeout occurred', "Could not get current position");
                     else
-                        alert('Error occurred.');
+                        alert('Error occurred.');*/
                 }
             }
         });
@@ -555,6 +557,7 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
             travelMode: google.maps.TravelMode.DRIVING
         };
         var me = this;
+        var lang = DoctorsNearMe.config.getLanguage();
 
         directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {

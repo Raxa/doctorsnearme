@@ -33,7 +33,7 @@ Ext.define('DoctorsNearMe.store.Location', {
                 });
                 me.getPlaceDetails(results, 0,searchCount);
             } else {
-                console.log("status:"); console.log(status);
+                //console.log("status:"); console.log(status);
             }
 
         });
@@ -63,7 +63,7 @@ Ext.define('DoctorsNearMe.store.Location', {
                     console.log(results[0]);
                     me.getPlaceDetails(results, 0, searchCount);
                 } else {
-                    console.log("status:"); console.log(status);
+                   // console.log("status:"); console.log(status);
                 }
 
             });
@@ -156,8 +156,8 @@ Ext.define('DoctorsNearMe.store.Location', {
             },
             failure: function (response, opts) {
                // Ext.Msg.alert("like failure");
-                console.log("failure");
-                console.log(response);
+               // console.log("failure");
+                //console.log(response);
             }
         });
     },
@@ -186,7 +186,7 @@ Ext.define('DoctorsNearMe.store.Location', {
         var service = this.getService();
         service.getDetails(
             {
-                placeId: results[i].place_id,
+                placeId: results[i].place_id
                 //key: 'AIzaSyCz2FbWnJQh8hez_0fQ7J-QvE7jzCvWSgw&'
             }, function (place, status1) {
                 if (status1 == google.maps.places.PlacesServiceStatus.OK) {
@@ -203,8 +203,8 @@ Ext.define('DoctorsNearMe.store.Location', {
 
                 }
                 else {
-                    console.log("failed");
-                    console.log(status1);
+                   // console.log("failed");
+                   // console.log(status1);
                 }
 
             });

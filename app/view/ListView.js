@@ -179,7 +179,15 @@ Ext.define('DoctorsNearMe.view.ListView', {
     fillList: function () {
         this.getItemList().refresh();
     },
-    
+
+    /**
+     * Reset the template - used in language controller 
+     * @method
+     * @public
+     */
+    refreshTemplate: function(){
+         this.setTemplate();
+    },
     /*
     * Sets the top label
     * @method

@@ -52,7 +52,7 @@
         FACEBOOK: 'Facebook',
         TWITTER: 'Twitter',
         SIMPLE_CANCEL: 'Cancel',
-        CONTACTS: 'Contacts',
+        CONTACTS: 'My Contacts',
         SELECT_ALL: 'Select All',
         SEARCH: 'Search',
         REVIEW: 'Review'

@@ -135,7 +135,10 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                     xtype: 'button',
                     text: 'Review',
                     bubbleEvents: 'tap',
-                    style: 'border-radius:0;border:2px solid #1081FB;'
+                    height: '50px',
+                    //width: '50%',
+                    //left:'25%',
+                    style: 'border-radius:0;border:2px solid #1081FB;font-size:1.2em;'
                 }
             ]
         },
@@ -654,8 +657,8 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
 
         this.getDirectionButton().setText('<img src = "resources/icons/Arrow_40_40.png" style="height:30px;width:30px;"></br>' + lang.GET_DIRECTIONS);
 
-        this.getCommentField().setPlaceHolder(lang.REVIEW);
-        this.getReviewButton().setText(lang.COMMENT);
+        this.getCommentField().setPlaceHolder(lang.COMMENT); 
+        this.getReviewButton().setText(lang.REVIEW);
     }
     
    

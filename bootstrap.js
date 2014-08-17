@@ -42,7 +42,6 @@ Ext.ClassManager.addNameAlternateMappings({
   "DoctorsNearMe.store.Specialization": [],
   "DoctorsNearMe.ux.Multiselect": [],
   "DoctorsNearMe.view.Contact": [],
-  "DoctorsNearMe.view.ContactContainer": [],
   "DoctorsNearMe.view.ContactList": [],
   "DoctorsNearMe.view.DetailsView": [],
   "DoctorsNearMe.view.ListView": [],
@@ -702,7 +701,6 @@ Ext.ClassManager.addNameAliasMappings({
   "DoctorsNearMe.view.Contact": [
     "widget.contact"
   ],
-  "DoctorsNearMe.view.ContactContainer": [],
   "DoctorsNearMe.view.ContactList": [
     "widget.contactlist"
   ],

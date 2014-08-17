@@ -3,7 +3,7 @@
 
     config: {
         model: 'DoctorsNearMe.model.Comment',
-        autoLoad: false,
+        autoLoad: false
     },
 
     setTheProxy: function (locationid) {

@@ -11,7 +11,9 @@ Ext.define('DoctorsNearMe.controller.Language', {
             mapView: 'mapview',
             userProfile: 'userprofile',
             listView: 'listview',
-            loginView: 'loginview'
+            loginView: 'loginview',
+            shareOptionsList: 'sharelist',
+            contactList:'contactlist'
         },
         control: {
             sideMenu: {
@@ -70,7 +72,18 @@ Ext.define('DoctorsNearMe.controller.Language', {
             listview.setLanguage(language, prevLanguage);
 
             //to refresh list to refresh template
-            listview.fillList();
+           // listview.fillList();
+            listview.refreshTemplate();
+        }
+
+        var shareList = this.getShareOptionsList();
+        if (shareList != null) {
+            shareList.setLanguage();
+        }
+
+        var contactList = this.getContactList();
+        if (contactList != null) {
+            contactList.setLanguage();
         }
         
 

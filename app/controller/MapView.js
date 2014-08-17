@@ -27,7 +27,7 @@ Ext.define('DoctorsNearMe.controller.MapView', {
             detailsView: {
                 //after new design
                 getdirections: "directToMapView",
-                forward: "forwardToNextLocation",
+                forward: "forwardToNextLocation"
                 //like: "onLike"
             },
             listView: {

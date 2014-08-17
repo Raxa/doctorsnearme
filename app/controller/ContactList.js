@@ -13,7 +13,8 @@ Ext.define('DoctorsNearMe.controller.ContactList', {
         control: {
             contactList: {
                 cancel: "backToMapView",
-                share:"share"
+                shareviaemail: "shareViaEmail",
+                shareviamessage:"shareViaMessage"
             }
 
         }
@@ -30,32 +31,52 @@ Ext.define('DoctorsNearMe.controller.ContactList', {
 
     },
 
-    share: function (selectedEmailsArray) {
-        console.log("inside send mail");
+    shareViaMessage: function (selectedPhoneNumbersArray) {
+        this.backToMapView();
+        if (selectedPhoneNumbersArray.length > 0) {
 
-        var me = this;
-        var panel = me.getThankPanel();
-        if (panel == null) {
-            panel = Ext.create('DoctorsNearMe.view.ThanksForSharing');
-            Ext.Viewport.add(panel);
-        }
-        
-        var record;
-        Ext.Ajax.request({
-            url: DoctorsNearMe.config.getRatingServerDomain() + 'sendEmail',
-            method: 'GET',
-            params: {
-                emails: Ext.JSON.encode(selectedEmailsArray)
-            },
-            success: function (response, opts) {               
-            },
-            failure: function (response, opts) {
-                console.log("failure");
-                console.log(response);
+            var panel = this.getThankPanel();
+            if (panel == null) {
+                panel = Ext.create('DoctorsNearMe.view.ThanksForSharing');
+                Ext.Viewport.add(panel);
             }
-        });
+            var numbers = selectedPhoneNumbersArray.join(",");
+            
+            window.plugins.socialsharing.shareViaSMS('Doctors Near Me', numbers, function (msg) { console.log('ok: ' + msg) }, function (msg) { alert('error: ' + msg) })
 
-        Ext.Viewport.setActiveItem(me.getMapView());
-        panel.dissapear();
+            this.backToMapView();
+            panel.dissapear();
+        }
+   },
+
+    shareViaEmail: function (selectedEmailsArray) {
+        console.log("inside send mail");
+        if (selectedEmailsArray.length > 0) {
+            var me = this;
+            var panel = me.getThankPanel();
+            if (panel == null) {
+                panel = Ext.create('DoctorsNearMe.view.ThanksForSharing');
+                Ext.Viewport.add(panel);
+            }
+
+            var record;
+            Ext.Ajax.request({
+                url: DoctorsNearMe.config.getRatingServerDomain() + 'sendEmail',
+                method: 'GET',
+                params: {
+                    emails: Ext.JSON.encode(selectedEmailsArray)
+                },
+                success: function (response, opts) {
+                },
+                failure: function (response, opts) {
+                    console.log("failure");
+                    console.log(response);
+                }
+            });
+
+            //Ext.Viewport.setActiveItem(me.getMapView());
+            this.backToMapView();
+            panel.dissapear();
+        }
     }
 })

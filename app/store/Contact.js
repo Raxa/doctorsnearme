@@ -10,7 +10,7 @@
                 return record.get('displayName').substr(0, 1);
             }
         },
-        data:[],
+        data:[]
         //data: [
         //{
         //    id:'1',
@@ -78,7 +78,7 @@
         //],
     },
 
-   /* loadContacts: function () {
+  /*  loadContacts: function () {
         var data = [{
             id: '1',
             displayName: 'Thurani'
@@ -134,13 +134,31 @@
               displayName: 'Akila'
           },
           {
-              displayName: 'Devni'
+              displayName: 'Sanath'
           },
           {
               displayName: 'Devni'
           },
           {
-              displayName: 'Devni'
+              displayName: 'Veer'
+          },
+          {
+              displayName: 'Veer'
+          },
+          {
+              displayName: 'Veer'
+          },
+          {
+              displayName: 'Veer'
+          },
+          {
+              displayName: 'Veer'
+          },
+          {
+              displayName: 'Veer'
+          },
+          {
+              displayName: 'Weer'
           }];
         var me = this;
         Ext.Function.defer(function () {
@@ -171,7 +189,8 @@
                     if (contacts[i].displayName != null) {
                         var record1 = Ext.create('DoctorsNearMe.model.Contact', {
                             //id: contacts[i].id,
-                            displayName: String(contacts[i].name.formatted),
+                            // displayName: String(contacts[i].name.formatted),
+                            displayName: (contacts[i].name.formatted).toString(),
                             // displayName: i+"Amaya",
                             phoneNumbers: contacts[i].phoneNumbers,
                             emails: contacts[i].emails

@@ -7,6 +7,7 @@ Ext.define('DoctorsNearMe.view.ContactList', {
         defaultType: 'contact',
         useComponents: true,
         fullScreen: true,
+
         scrollable: {
             direction: 'vertical'
         },
@@ -20,11 +21,14 @@ Ext.define('DoctorsNearMe.view.ContactList', {
             duration: 250,
             easing: 'ease-out'
         },
+
+        // this is for keep track which sharing option user chose
+        activeType:null
     },
 
 
     initialize: function () {
-        this.callParent();
+       
 
         this.setTheStore();
         this.addTopToolBar();
@@ -33,6 +37,8 @@ Ext.define('DoctorsNearMe.view.ContactList', {
         this.addBottomToolbar();
 
         this.addIndexbar();
+        this.callParent();
+        this.setLanguage();
     },
 
     setTheStore: function(){
@@ -48,19 +54,33 @@ Ext.define('DoctorsNearMe.view.ContactList', {
 
     addIndexbar: function () {
         var me = this;
+        var panel = Ext.create('Ext.Panel', {
+            layout: 'fit',
+            width: '20px',
+            height: '100%',
+            right:'5px'
+        });
 
-        var indexbar = Ext.create('Ext.dataview.IndexBar', {
+        /*var indexbar = Ext.create('Ext.dataview.IndexBar', {
             right: '5px',
             height:'100%',
             width: '5px',
             zIndex:3
+        });*/
+
+        var indexbar = Ext.create('Ext.dataview.IndexBar', {
+            height: '100%',
+            width:'100%',
+            zIndex: 3
         });
 
         indexbar.on('index', function (indexbar, html, target, eOpts) {
             me.scrollToSelectedItem(html);
         })
 
-        this.add(indexbar);
+        panel.add(indexbar)
+        this.add(panel);
+       // this.add(indexbar);
     },
 
     addSearchBar: function () {
@@ -77,8 +97,8 @@ Ext.define('DoctorsNearMe.view.ContactList', {
                     placeHolder: 'Search...',
                     listeners: {
                         scope: this,
-                        clearicontap: me.onSearchClearIconTap,
-                        keyup: me.onSearchKeyUp
+                        clearicontap: me.onSearchClearIconTap
+                       // keyup: me.onSearchKeyUp
                     },
                     width:'100%'
                 }
@@ -87,6 +107,14 @@ Ext.define('DoctorsNearMe.view.ContactList', {
         });
 
         this.add(searchBar);
+        var searchField = searchBar.getComponent(0);
+        var task = Ext.create('Ext.util.DelayedTask', function () {
+            me.onSearchKeyUp(searchField);
+        });
+
+        searchField.on('keyup', function () {
+            task.delay(500);
+        })
     },
 
     /**
@@ -167,7 +195,17 @@ Ext.define('DoctorsNearMe.view.ContactList', {
         });
 
         doneButton.on('tap', function () {
-            me.fireEvent('share', me.getSelectedEmails());
+            var activeType = me.getActiveType();
+            switch (activeType) {
+                case 'E': me.fireEvent('shareviaemail', me.getSelectedEmails());
+                    break;
+                case 'M': me.fireEvent('shareviamessage', me.getSelectedPhoneNumbers());
+                    break;
+            }
+            me.getViewItems().forEach(function (item) {
+                item.getComponent(0).uncheck();
+            })
+            
         });
 
         var spacer = Ext.create('Ext.Spacer');
@@ -178,6 +216,9 @@ Ext.define('DoctorsNearMe.view.ContactList', {
 
         cancelButton.on('tap', function () {
             me.fireEvent('cancel');
+            me.getViewItems().forEach(function (item) {
+                item.getComponent(0).uncheck();
+            })
         })
 
         bottombar.add(cancelButton);
@@ -192,7 +233,7 @@ Ext.define('DoctorsNearMe.view.ContactList', {
 
         var topbar = Ext.create('Ext.Toolbar', {
             docked: 'top',
-            title: 'Contacts',
+            title: 'My Contacts',
             cls:'contacts-toptoolbar'
         });
 
@@ -216,6 +257,31 @@ Ext.define('DoctorsNearMe.view.ContactList', {
 
     },
 
+    getTopToolbar: function(){
+        return this.getComponent(0);
+    },
+
+    getSearchBar: function(){
+        return this.getComponent(1).getComponent(0);
+    },
+
+    getSelectAllButton: function(){
+        //return this.getTopToolbar().getComponent(0);
+        return this.getTopToolbar().down('button');
+    },
+
+    getBottomToolbar: function(){
+        return this.getComponent(2);
+    },
+
+    getDoneButton: function(){
+        return this.getBottomToolbar().getComponent(2);
+    },
+
+    getCancelButton: function(){
+        return this.getBottomToolbar().getComponent(0)
+    },
+
     scrollToSelectedItem: function (index) {
         var store = this.getStore();
 
@@ -223,14 +289,17 @@ Ext.define('DoctorsNearMe.view.ContactList', {
 
         console.log(groups);
 
+
         if (groups != undefined) {
             var first = groups.children[0].getData().id;
             console.log(first);
 
             var recordIndex = store.find('id', first);
-            console.log(recordIndex);
 
-            this.getScrollable().getScroller().scrollTo(0, recordIndex, true);
+            var y = this.getViewItems()[recordIndex].element.getY()
+
+            this.getScrollable().getScroller().scrollTo(0, y, true);
+            
         }
     },
 
@@ -240,7 +309,7 @@ Ext.define('DoctorsNearMe.view.ContactList', {
             if (item.getComponent(0).getChecked()) {
                 object = Ext.JSON.decode(item.getComponent(0).getValue());
                 if (object.emails != null) {
-                    valueObject = { name: object.name, email: object.emails[0] }
+                    valueObject = { name: object.name, email: object.emails[0].value }
                     array.push(valueObject);
                 }
                 
@@ -248,6 +317,31 @@ Ext.define('DoctorsNearMe.view.ContactList', {
         });
 
         return array;
+    },
+
+    getSelectedPhoneNumbers: function () {
+        var name, phoneNo, array = [], object, valueObject;
+        this.getViewItems().forEach(function (item) {
+            if (item.getComponent(0).getChecked()) {
+                object = Ext.JSON.decode(item.getComponent(0).getValue());
+                if (object.phoneNumbers != null) {
+                    array.push(String(object.phoneNumbers[0].value));
+                }
+
+            }
+        });
+
+        return array;
+    },
+
+    setLanguage: function () {
+        var lang = DoctorsNearMe.config.getLanguage();
+
+        this.getTopToolbar().setTitle(lang.CONTACTS);
+        this.getSelectAllButton().setText(lang.SELECT_ALL);
+        this.getDoneButton().setText(lang.DONE);
+        this.getCancelButton().setText(lang.SIMPLE_CANCEL);
+        this.getSearchBar().setPlaceHolder(lang.SEARCH);
     }
 
     

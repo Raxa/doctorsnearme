@@ -63,13 +63,21 @@ Ext.define('DoctorsNearMe.controller.DetailsView', {
             if (record != null) {
                 record.set('isFavorite', false);
             }
-
-
+            
+            var theItem;
             var newFav= Ext.Array.filter(DoctorsNearMe.config.getFavorites(), function (item) {
                 if (item.place_id != recordId) {
                     return true;
-                }
+                } 
             });
+
+            diffArray = Ext.Array.difference(DoctorsNearMe.config.getFavorites(), newFav);
+            if (diffArray != null && diffArray.length > 0) {
+                theItem = diffArray[0];
+                var string = Ext.JSON.encode(theItem);
+                store.removeTokenFromLocalStorage(string);
+            }
+            
 
             DoctorsNearMe.config.setFavorites(newFav);
         }

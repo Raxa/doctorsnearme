@@ -33,13 +33,19 @@ Ext.define('DoctorsNearMe.controller.Menu', {
 
     tellFriends:function(type){
         switch (type) {
-            case 'EMAIL': Ext.Viewport.setActiveItem(this.getContactList());
+            case 'EMAIL':
+                var contactList = this.getContactList();
+                contactList.setActiveType('E');
+                Ext.Viewport.setActiveItem(contactList);
                 break;
-            case 'MESSAGE': Ext.Viewport.setActiveItem(this.getContactList());
+            case 'MESSAGE':
+                var contactList = this.getContactList();
+                contactList.setActiveType('M');
+                Ext.Viewport.setActiveItem(contactList);
                 break;
             case 'FACEBOOK':
-                Ext.Msg.alert("facebook");
-                window.plugins.socialsharing.shareViaFacebook('Doctors near me Test', null, null, function () { console.log('share ok') }, function (errormsg) { alert(errormsg) });
+               // Ext.Msg.alert("facebook");
+                window.plugins.socialsharing.shareViaFacebook('Try Doctors Near Me!', null, null, function () { console.log('share ok') }, function (errormsg) { alert(errormsg) });
                 break;
             case 'TWITTER':
                 window.plugins.socialsharing.shareViaTwitter('Try Doctors Near Me!', null, 'http://www.test.com')

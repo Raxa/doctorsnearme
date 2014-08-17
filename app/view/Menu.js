@@ -127,7 +127,7 @@ Ext.define('DoctorsNearMe.view.Menu', {
                         {
                             xtype: 'button',
                             docked: 'left',
-                            ui:'menu',
+                            ui:'menu'
                           //  text: 'Tell a friend'
                         },
                         {

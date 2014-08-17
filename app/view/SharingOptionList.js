@@ -4,38 +4,40 @@
     config: {
         width: '95%',
         left: '2.5%',
-        right:'5%',
+        right: '2.5%',
+        style:'border:0;border-radius:3px;',
         items: [
-        {
+        {//0
             xtype: 'label',
-            html: 'Tell a friend about Raxa via...',
+           // html: 'Tell a friend about Raxa via...',
             ui: 'menu',
             cls: 'share-label'
         },
         {//1
-            text: 'Email',
+           // text: 'Email',
             ui: 'menu',
-            style: 'background-color:#E8E8E8;',          
+            style: 'background-color:#D4D3E8;border-color:#CCCCCC'
         },
         {//2
-            text: 'Message',
+           // text: 'Message',
             ui: 'menu',
-            style: 'background-color:#E8E8E8;',
+            style: 'background-color:#D4D3E8;border-color:#CCCCCC'
         },
         {//3
-            text: 'Facebook',
-            style: 'background-color:#E8E8E8;',
-            ui: 'menu',
+           // text: 'Facebook',
+            style: 'background-color:#D4D3E8;border-color:#CCCCCC',
+            ui: 'menu'
         },
         {//4
-            text: 'Twitter',
+           // text: 'Twitter',
             ui: 'menu',
-            style: 'background-color:#E8E8E8;',
+            style: 'background-color:#D4D3E8;border-color:#CCCCCC'
         },
         {//5
-            text: 'Cancel',
+          //  text: 'Cancel',
             ui: 'menu',
-            style: 'border-top:8px solid #D0D0D0;background-color:#E8E8E8;'
+            style: 'border-top:8px solid #D0D0D0;background-color:#D4D3E8;padding-top:8px;padding-bottom:8px;border-color:#999999',
+            height:'50px'
         }
         ]
     },
@@ -44,6 +46,12 @@
         this.callParent();
 
         this.sethandlers();
+
+        this.setLanguage();
+    },
+
+    getTopLabel: function(){
+        return this.getComponent(0);
     },
 
     getEmailButton:function(){
@@ -96,6 +104,17 @@
 
     shareHandler: function (type) {
         this.fireEvent('share', type);
+    },
+
+    setLanguage: function () {
+        var lang = DoctorsNearMe.config.getLanguage();
+
+        this.getTopLabel().setHtml(lang.SHARE_VIA);
+        this.getEmailButton().setText(lang.EMAIL);
+        this.getMessageButton().setText(lang.MESSAGE);
+        this.getFacebookButton().setText(lang.FACEBOOK);
+        this.getTwitterButton().setText(lang.TWITTER);
+        this.getCancelButton().setText(lang.SIMPLE_CANCEL);
     }
     
 });
