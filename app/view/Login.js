@@ -9,16 +9,16 @@ Ext.define('DoctorsNearMe.view.Login', {
         layout: 'vbox',
         scrollable:'vertical',
         cls: 'login',
-        style: 'background-color:#FFCCFF;',
+        style: 'background-color:#F3E3E5;',
         hideAnimation: {
             type: 'popIn',
             duration: 250,
-           // easing: 'ease-in'
+            easing: 'ease-in'
         },
         items: [
             {//0
                 xtype: 'button',
-                cls:'signup-btn',
+                cls:'signup-btn'
                // text: '<span class="signup-label">Sign up</span>'
             },            
             {//1
@@ -44,11 +44,11 @@ Ext.define('DoctorsNearMe.view.Login', {
                 ]
             },
             {//forgot login
-                xtype: 'label',
-              //  html: 'Forgot Login/pass?',
-                cls: 'forgot-login'
+                xtype: 'button',
+                //  html: 'Forgot Login/pass?',
+                cls: 'forgot-login',
+                labelCls: 'forgotlogin-label'
             },
-            
             {
                 xtype: 'button',
                // text: '<span class="signin-label">Sign In</span>',
@@ -57,7 +57,7 @@ Ext.define('DoctorsNearMe.view.Login', {
             {
                 xtype: 'button',
                 width: '40%',
-                cls:'cancel-btn',
+                cls:'cancel-btn'
                // text:'<span class="cancel-label">CANCEL</span>'
             },
             {
@@ -111,7 +111,18 @@ Ext.define('DoctorsNearMe.view.Login', {
         });
 
         this.callParent();
-       this.setLanguage();
+        this.setLanguage();
+
+        this.setPasswordForgotHandler();
+    },
+
+    setPasswordForgotHandler: function(){
+        var me= this;
+        this.getForgotLoginField().on('tap', function () {
+            me.fireEvent('forgotpassword', me.getUsernameField().getValue());
+            console.log("tapped");
+            // var newValue = Ext.getCmp('usernameEmailForgot').getValue();
+        });
     },
 
     /**

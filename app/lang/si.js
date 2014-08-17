@@ -35,7 +35,7 @@
     COMMENT: 'ප්‍රතිචාර දක්වන්න',
     VIEW_COMMENTS: 'ප්‍රතිචාර පෙන්වන්න',
     LIKE_COUNT: 'මෙම ස්ථානයට කැමති සංඛ්‍යාව',
-    CHOOSE_SPECIALTY: 'විශේෂඥ වෛද්‍යවරයෙක් තෝරාගන්න',
+    CHOOSE_SPECIALTY: 'විශේෂඥවරයෙක් තෝරන්න',
     SAVED: 'ගබඩා කල',
     SIGNUP: 'ආරම්භ කරන්න',
     USER_OR_EMAIL: 'විද්‍යුත් තැපෑල',
@@ -44,5 +44,16 @@
     UNSAVE_ME: 'ඉවත් කරන්න',
     BE_THE_FIRST_TO_REVIEW: 'පළමු වැන්නා වන්න',
     SHARE: 'බෙදා ගන්න',
-    RATE_US:'ඇගැයුම'
+    RATE_US: 'ඇගැයුම',
+    REVIEWS: 'ප්‍රතිචාර',
+    SHARE_VIA: 'මිතුරෙකුට පවසන්න...',
+    EMAIL: 'විද්‍යුත් තැපෑල',
+    MESSAGE: 'කෙටි පණිවුඩ',
+    FACEBOOK: 'මුහුණු පොත',
+    TWITTER: 'ට්විටර්',
+    SIMPLE_CANCEL: 'අවලංගු කරන්න',
+    CONTACTS: 'සම්බන්ධතා',
+    SELECT_ALL: 'සියල්ල තෝරන්න',
+    SEARCH: 'සොයන්න',
+    REVIEW:'ප්‍රතිචාර දක්වන්න'
 } 

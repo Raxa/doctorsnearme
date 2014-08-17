@@ -113,7 +113,8 @@ Ext.define('DoctorsNearMe.controller.DetailsView', {
                     //  location: detailsView.getData().id,
                     location: detailsView.getData().place_id,
                     user: DoctorsNearMe.config.getUser().get('personUuid'),
-                    comment: commentField.getValue()
+                    comment: commentField.getValue(),
+                    userName: DoctorsNearMe.config.getUser().get('display')
                 },
                 success: function (response, opts) {
                     console.log("success");

@@ -2,8 +2,10 @@ C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cor
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\ant-build\classes\com\raxa\DoctorsNearMe\BuildConfig.class \
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\ant-build\classes\com\raxa\DoctorsNearMe\DoctorsNearMe.class \
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\ant-build\classes\com\raxa\DoctorsNearMe\R$attr.class \
+C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\ant-build\classes\com\raxa\DoctorsNearMe\R$color.class \
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\ant-build\classes\com\raxa\DoctorsNearMe\R$drawable.class \
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\ant-build\classes\com\raxa\DoctorsNearMe\R$string.class \
+C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\ant-build\classes\com\raxa\DoctorsNearMe\R$style.class \
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\ant-build\classes\com\raxa\DoctorsNearMe\R$xml.class \
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\ant-build\classes\com\raxa\DoctorsNearMe\R.class \
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\ant-build\classes\nl\xservices\plugins\SocialSharing$1.class \

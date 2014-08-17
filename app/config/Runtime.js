@@ -24,7 +24,7 @@ Ext.define('DoctorsNearMe.config.Runtime', {
 
         userName: null,
 
-        password:null
+        password: null
 
     },
 

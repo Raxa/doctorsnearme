@@ -29,6 +29,7 @@ C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cor
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\res\drawable-xxhdpi\ic_action_previous_item.png \
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\res\drawable-xxhdpi\ic_action_remove.png \
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\res\values\strings.xml \
+C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\res\values\themes.xml \
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\res\xml\config.xml \
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\ant-build\res\drawable\icon.png \
 C:\Users\TOSHIBA\Documents\Visual Studio 2013\Projects\GSoC2014\GSoC2014\DNM\cordova\platforms\android\ant-build\res\drawable-hdpi\icon.png \

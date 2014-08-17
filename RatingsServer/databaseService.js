@@ -47,10 +47,11 @@ function comment(response,data){
     var userId = data.user;
     var locationId = data.location;
     var comment = data.comment;
+    var name = data.userName;
 
     var connection = connect();
 
-    var strQuery ="INSERT INTO comments (openmrs_uuid, location_id, comment) VALUES ('"+userId+"','"+ locationId+"','"+ comment+"')";
+    var strQuery ="INSERT INTO comments (openmrs_uuid, location_id, comment,name) VALUES ('"+userId+"','"+ locationId+"','"+ comment+"','"+ name+"')";
 
     connection.query(strQuery, function(err, result){
         respond.respond(err,response,result,"Successful");
@@ -82,7 +83,7 @@ function getComments(response,data){
     var connection = connect();
 
     //var strQuery = "SELECT comment FROM comments WHERE location_id ='"+ locationId+"'";
-    var strQuery = "SELECT timestamp,comment FROM comments WHERE location_id ='"+ locationId+"'";
+    var strQuery = "SELECT timestamp,comment,name FROM comments WHERE location_id ='"+ locationId+"'";
 
     connection.query(strQuery, function(err, result){
         respond.respond(err,response,result,"Successful");

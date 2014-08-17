@@ -11,6 +11,16 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
 
        layout: 'vbox',
        styleHtmlContent: true,
+       showAnimation: {
+           type: 'popIn',
+           duration: 250,
+           easing: 'ease-out'
+       },
+       hideAnimation: {
+           type: 'popOut',
+           duration: 250,
+           easing: 'ease-out'
+       },
 
        store: null,
 
@@ -32,7 +42,7 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
            {    //0
                xtype: 'toolbar',
                docked: 'top',
-               style: 'border:2px solid #0d66f2;border-radius:0;',
+               style: 'border:2px solid #1081FB;border-radius:0;',
                items: [
                    {
                        xtype: 'button',
@@ -47,38 +57,33 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                height: 100,
                padding: 0,
                //margin: 0,
-               style: 'background-color:white;margin:8px 0 0 0;',
+               //style: 'background-color:white;margin:8px 0 0 0;',
+			   style: 'background-color:white;margin:0 0 0 0;',
                items: [
-                   {
-                       xtype: 'image',
-                       height: '100%',
-                       width: 100,
-                       centered:true,
-                       src: 'resources/icons/empty4.png'
+                   {    //0
+                       xtype: 'container',
+                       layout: 'fit',
+                       data: {},
+                       style: 'background-color:white;padding:20px;border:0;border-radius:0',
+                       tpl: '{name}<br>{formatted_address}',
+                       centered: true
                    },
-                   {
+                   {    //1
                        xtype: 'image',
                        docked:'right',
                        height: '100%',
-                       width: 40,
+                       width: 30,
                        margin:0,
-                       centered: true,
+                       //centered: true,
                        src: 'resources/icons/forward.png'
                    }
                ]
            },
-           {    //2
-               xtype: 'container',
-               layout: 'fit',
-               data: {},
-               style: 'background-color:white;padding:20px;border:1px solid #d3d3d3;border-radius:0',
-               tpl: '{name}<br>{formatted_address}'
-           },
-             {  //3
+             {  //2
                  xtype: 'toolbar',
                  height:80,
                  width: '100%',
-                 style: 'border-top:1px solid #0d66f2;border-right:1px solid #0d66f2;border-bottom:1px solid #0d66f2;border-left:1px solid #0d66f2;border-radius:0;',
+                 style: 'border-top:2px solid #1081FB;border-right:2px solid #1081FB;border-bottom:2px solid #1081FB;border-left:2px solid #1081FB;border-radius:0;',
               //   docked:'bottom',
                  items: [
                      {
@@ -108,11 +113,12 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                      {
                          xtype: 'button',
                          cls: 'like',
+                         text:'like',
                          hidden:true
                      }
                  ]
              },
-        {   //4
+        {   //3
             xtype: 'container',
             layout: 'vbox',
              hidden: true,   
@@ -129,16 +135,16 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                     xtype: 'button',
                     text: 'Review',
                     bubbleEvents: 'tap',
-                    style: 'border-radius:0;'
+                    style: 'border-radius:0;border:2px solid #1081FB;'
                 }
             ]
         },
-        {   //5
+        {   //4
             xtype:'label',
             html: 'Reviews',
             style: 'font-size:20px;padding:10px;border-bottom:0;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;margin:8px 8px 0 8px;color:grey;background-color:white;'
         },
-       {    //6
+       {    //5
            xtype: 'container',
            layout: 'fit',
            style: 'border-top:0;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;margin:0 auto auto auto;color:grey;',
@@ -163,6 +169,7 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
     initialize: function(){
         this.callParent();
 
+        this.setListTemplate();
         //create store for comments
         var store = Ext.create('DoctorsNearMe.store.Comment');
         var me=this;
@@ -176,6 +183,52 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
         
         this.setHandlers();
 
+    },
+
+    /*
+    * Set itemTpl for the list
+    * @method
+    */
+    setListTemplate: function(){
+        var tpl = new Ext.XTemplate(
+            '<span style="font-weight:bold;color:black;font-size:0.9em">{name}</span></br><span style="color:grey;font-size:0.8em">{[this.getFormattedDate(values.timestamp)]}</span></br><span style="color:grey;font-size:1em">{comment}<span>',
+            {
+                getFormattedDate: function (timestamp) {
+                    var today = new Date();
+
+                    var thisYear = today.getFullYear();
+                    var thisMonth = today.getMonth();
+                    var thisDate = today.getDate();
+
+                    var commentedYear = timestamp.getFullYear();
+                    var commentedMonth =  timestamp.getMonth();
+                    var commentedDate = timestamp.getDate();
+
+                    if (commentedYear < thisYear) {
+                        if ( thisYear - commentedYear > 1) {
+                            return (thisYear - commentedYear) + " years ago";
+                        } else {
+                            return "An year ago";
+                        }
+                    } else if (commentedMonth < thisMonth) {
+                        if (thisMonth - commentedMonth > 1) {
+                            return (thisMonth - commentedMonth) + " months ago";
+                        } else {
+                            return "A month ago"
+                        }
+                    } else if (commentedDate < thisDate) {
+                        if (thisDate - commentedDate > 1) {
+                            return (thisDate - commentedDate) + " days ago"
+                        } else {
+                            return "A day ago"
+                        }
+                    } else {
+                        return "today"
+                    }
+                }
+            });
+
+        this.getReviewList().setItemTpl(tpl);
     },
 
     /**
@@ -250,10 +303,12 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
         var lang = DoctorsNearMe.config.getLanguage();
 
         if (store.getCount() == 0) {
+            //This need not be set in setLanguage funciton because changing the language cannot be done
+            //without going out of details view and when coming back anyways store load will happen
             this.getReviewLabel().setHtml(lang.BE_THE_FIRST_TO_REVIEW);
         }
         else {
-            this.getReviewLabel().setHtml("Reviews");
+            this.getReviewLabel().setHtml(lang.REVIEWS);
         }
     },
 
@@ -290,7 +345,7 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
      * @return {Ext.Toolbar}
      */
     getMiddleToolbar: function(){
-        return this.getComponent(3);
+        return this.getComponent(2);
     },
 
     /**
@@ -360,7 +415,8 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
      * @return {Ext.Container}
      */
     getDetailsContainer: function(){
-        return this.getComponent(2);
+        //  return this.getComponent(2);
+        return this.getImageContainer().getComponent(0);
     },
 
     /**
@@ -370,7 +426,7 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
      * @return {Ext.Container}
      */
     getReviewLabel: function(){
-        return this.getComponent(5);
+        return this.getComponent(4);
     },
 
     /**
@@ -381,7 +437,7 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
      */
     getReviewContainer: function () {
         console.log("review container");
-        return this.getComponent(6);
+        return this.getComponent(5);
     },
 
     /**
@@ -401,7 +457,7 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
      * @return {Ext.Container}
      */
     getCommentContainer: function(){
-        return this.getComponent(4);
+        return this.getComponent(3);
     },
 
     /**
@@ -533,7 +589,7 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
         this.setDetails();
 
         //when updating data set title accordingly
-        this.getTopToolbar().setTitle('<p style="color:#0d66f2;">' + this.getData().name + '</p>');
+        this.getTopToolbar().setTitle('<p style="color:#1081FB;">' + this.getData().name + '</p>');
 
         //when updating data need to set proxy to the comment store and load relevant comments,
         //set proper statuses for the save, like, call buttons
@@ -577,7 +633,7 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
         var lang = DoctorsNearMe.config.getLanguage();
 
         var phoneno = this.getData().international_phone_number;
-        this.getCallButton().setText('<div><img src = "resources/icons/Phone_40_40.png" style="height:30px;width:30px;"></br><a href="tel:' + phoneno + '">'+lang.CALL+'</div>');
+        this.getCallButton().setText('<div><img src = "resources/icons/Phone_40_40_transparent.png" style="height:30px;width:30px;"></br><a style="text-decoration: none;color:#1081FB;" href="tel:' + phoneno + '">' + lang.CALL + '</div>');
 
         //is the location a favorite?
         var isFavorite = this.getData().isFavorite;
@@ -597,6 +653,9 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
         }
 
         this.getDirectionButton().setText('<img src = "resources/icons/Arrow_40_40.png" style="height:30px;width:30px;"></br>' + lang.GET_DIRECTIONS);
+
+        this.getCommentField().setPlaceHolder(lang.REVIEW);
+        this.getReviewButton().setText(lang.COMMENT);
     }
     
    

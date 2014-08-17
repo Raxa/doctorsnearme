@@ -44,5 +44,17 @@
         UNSAVE_ME: 'Unsave Me',
         BE_THE_FIRST_TO_REVIEW:'Be the first to review',
         SHARE: 'Tell A friend',
-        RATE_US:'Rate us'
+        RATE_US: 'Rate us',
+        REVIEWS: 'Reviews',
+        SHARE_VIA: 'Tell a friend about Raxa via...',
+        EMAIL: 'Email',
+        MESSAGE: 'Message',
+        FACEBOOK: 'Facebook',
+        TWITTER: 'Twitter',
+        SIMPLE_CANCEL: 'Cancel',
+        CONTACTS: 'Contacts',
+        SELECT_ALL: 'Select All',
+        SEARCH: 'Search',
+        REVIEW: 'Review'
+        
 }
