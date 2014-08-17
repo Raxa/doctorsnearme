@@ -3,6 +3,7 @@
  */
 Ext.define('DoctorsNearMe.config.Runtime', {
     singleton: true,
+    requires:'Ext.data.proxy.LocalStorage',
 
     config: {      
         domain: 'http://api.raxa.io/ws/rest/v1/',

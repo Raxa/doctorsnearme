@@ -33,8 +33,7 @@ Ext.define('DoctorsNearMe.controller.DetailsView', {
     onFavoriteToggle: function (recordId, isFavorite) {
         var store = Ext.data.StoreManager.lookup('fav-store');
 
-        var record = this.getMapView().getStore().findRecord('place_id',recordId);
-       // var record = this.getListView().getItemList().getStore().findRecord('place_id', recordId);
+        var record = this.getMapView().getStore().findRecord('place_id', recordId);
 
         var string;
 
@@ -49,16 +48,6 @@ Ext.define('DoctorsNearMe.controller.DetailsView', {
         }
             //if not set it to false if it is in store(the mapview store)
         else {
-
-          /*  string = Ext.JSON.encode(record.getData());
-            store.removeTokenFromLocalStorage(string);
-            record.set('isFavorite', false);
-            var newFav = Ext.Array.filter(DoctorsNearMe.config.getFavorites(), function (item) {
-                  if (item.reference != record.get('reference')) {
-                    return true;
-                };
-            });
-            DoctorsNearMe.config.setFavorites(newFav);*/
 
             if (record != null) {
                 record.set('isFavorite', false);

@@ -3,7 +3,7 @@
  */
 Ext.define('DoctorsNearMe.view.MapView', {
     extend: 'Ext.Container',
-    requires:['Ext.data.Store'],
+    requires: ['Ext.data.Store', 'Ext.field.Search', 'Ext.Img'],
     xtype: 'mapview',
 
     config: {
@@ -125,6 +125,7 @@ Ext.define('DoctorsNearMe.view.MapView', {
     onLocationAddition: function (isTextSearch) {
         var search = this.getCurrentSearch();
         if (isTextSearch) {
+            //to put  hospital icon for text search results
             search = 0;
         }
         this.down('locationmap').onLocationAddition(search);
@@ -187,17 +188,13 @@ Ext.define('DoctorsNearMe.view.MapView', {
             hidden: false,
             width: '80%',
             left: '7%',
-            //top: '15%',
             top: '3%',
             style: 'border:0;border-radius:8px;color:white;',
-            //style: 'border:1px solid #1081FB;border-radius:8px;color:white;',
             store: specStore,
             cls: 'spec-cls',
             picker:false,
             defaultTabletPickerConfig: {
                 top: '50px',
-                //height: '90%',
-                // minHeight: '90%',
                 width: '17em',
                 height: '70%'
 
@@ -231,21 +228,7 @@ Ext.define('DoctorsNearMe.view.MapView', {
      * @private
      */
     addSearchBox: function () {
-        //this.add({
-        //    xtype: 'searchfield',
-        //    label: '<div class="search-box-images"><img class="list" src="resources/icons/User_30_30.png"><img class="more" src="resources/icons/moreArrow.png"></div>',
-        //    // label:'',
-        //    labelAlign: 'right',
-        //    labelWidth: '65px',
-        //    labelCls: 'searchbox-label',
-        //    name: 'search',
-        //    top: '6%',
-        //    width: '85%',
-        //    height: '30px',
-        //    left: '5%',
-        //    cls: 'search-box',
-        //    style: 'border:0;border-radius:8px'
-        //});
+
         var toolbar = Ext.create('Ext.Toolbar', { docked: 'top' });
 
         var searchField = Ext.create('Ext.field.Search', {
@@ -264,23 +247,12 @@ Ext.define('DoctorsNearMe.view.MapView', {
         var singleLine = Ext.create('Ext.Label', {
             html: '<img class="single-line" src="resources/icons/splitOneLine.png">',
             hidden: true
-           // docked:'right'
         });
 
         var userLabel = Ext.create('Ext.Label', {
             html: '<div class="search-box-images"><img class="list" src="resources/icons/User_30_30.png">',
             docked:'right'
         });
-
-       /* var searchbutton = Ext.create('Ext.Button', {
-            labelCls: 'search-button-label',
-          //  docked: 'right',
-            // top:'10px',
-            //width:'20%',
-            text: 'Search',
-            style: 'background-color:gray;border-radius:3px;padding-bottom:5px;padding-top:5px;padding-left:3px;padding-right:3px;margin-top:6px;'
-        });*/
-
 
         var searchbutton = Ext.create('Ext.Button', {
             iconCls: 'search',
@@ -293,11 +265,6 @@ Ext.define('DoctorsNearMe.view.MapView', {
         });
 
         toolbar.add(searchField);
-
-        /*toolbar.add(moreLabel);
-        // toolbar.add(userLabel);
-        toolbar.add(searchbutton);
-        toolbar.add(singleLine);*/
 
         toolbar.add(singleLine);
         toolbar.add(searchbutton);
@@ -319,16 +286,6 @@ Ext.define('DoctorsNearMe.view.MapView', {
                 me.fireEvent('showmenu');
             }
         });
-
-        //listener to perform text search
-       /* this.addListener({
-            element: 'element',
-            delegate: 'img.list',
-            tap: function (event, node, options, eOpts) {
-                console.log("text search");
-                me.fireEvent('textsearch', me.getSearchField());
-            }
-        });*/
 
         searchbutton.on('tap', function () {
             console.log("text search");
@@ -385,7 +342,6 @@ Ext.define('DoctorsNearMe.view.MapView', {
     */
     getSearchField:function(){
         return this.down('searchfield');
-        //return this.getComponent(3);
     },
 
     /**

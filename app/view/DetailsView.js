@@ -3,7 +3,7 @@
  */
 Ext.define('DoctorsNearMe.view.DetailsView', {
     extend:'Ext.Container',
-
+    requires:'Ext.Label',
     xtype: 'detailsview',
     
     config:
@@ -46,7 +46,6 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                items: [
                    {
                        xtype: 'button',
-                       //  text: 'Back',
                        ui: 'back'
                    }
                ]
@@ -56,8 +55,6 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                layout: 'hbox',
                height: 100,
                padding: 0,
-               //margin: 0,
-               //style: 'background-color:white;margin:8px 0 0 0;',
 			   style: 'background-color:white;margin:0 0 0 0;',
                items: [
                    {    //0
@@ -74,7 +71,6 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                        height: '100%',
                        width: 30,
                        margin:0,
-                       //centered: true,
                        src: 'resources/icons/forward.png'
                    }
                ]
@@ -84,7 +80,6 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                  height:80,
                  width: '100%',
                  style: 'border-top:2px solid #1081FB;border-right:2px solid #1081FB;border-bottom:2px solid #1081FB;border-left:2px solid #1081FB;border-radius:0;',
-              //   docked:'bottom',
                  items: [
                      {
                          xtype: 'button',
@@ -94,8 +89,8 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                          xtype:'spacer'
                      },
                      {
+                         //direct me
                          xtype: 'button',
-                        // text: '<img src = "resources/icons/Arrow_40_40.png" style="height:30px;width:30px;"></br>Direct Me',
                          height:'100%'
                      },
                      {
@@ -113,7 +108,6 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                      {
                          xtype: 'button',
                          cls: 'like',
-                         text:'like',
                          hidden:true
                      }
                  ]
@@ -136,8 +130,6 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                     text: 'Review',
                     bubbleEvents: 'tap',
                     height: '50px',
-                    //width: '50%',
-                    //left:'25%',
                     style: 'border-radius:0;border:2px solid #1081FB;font-size:1.2em;'
                 }
             ]
@@ -150,6 +142,7 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
        {    //5
            xtype: 'container',
            layout: 'fit',
+           height:'200px',
            style: 'border-top:0;border-left:1px solid #d3d3d3;border-right:1px solid #d3d3d3;margin:0 auto auto auto;color:grey;',
            flex:1,
            items: [
@@ -251,7 +244,6 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
         //set the phone number for the call button
         var phoneno = this.getData().international_phone_number;
         var callButton = this.getCallButton();
-     //   this.getCallButton().setText('<div><img src = "resources/icons/Phone_40_40.png" style="height:30px;width:30px;"></br><a href="tel:' + phoneno + '">Call</div>');
 
         if (phoneno == null) {
             callButton.setDisabled(true);
@@ -266,18 +258,6 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
         //get saved button
         var saveBtn = this.getSaveButton();
 
-        //if not favorite is not already saved in local storage so set the class not-saved
-        //if (isFavorite == null || isFavorite == false) {
-        //    saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Save Me');
-        //    saveBtn.setCls('not-saved');
-        //}
-        ////else ite is already saved in local storage so set the class saved
-        //else {
-        //    saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Unsave Me');
-        //    saveBtn.setCls('saved');
-        //}
-
-        //this.getDirectionButton().setText('<img src = "resources/icons/Arrow_40_40.png" style="height:30px;width:30px;"></br>Direct Me')
         this.setLanguage();
     },
 
@@ -534,19 +514,21 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
 
         //set save button handler
         var saveBtn = this.getSaveButton();
+        
+        var lang;
         saveBtn.on('tap', function () {
-
+            lang = DoctorsNearMe.config.getLanguage();
             //class for save button is set considering if this location is a favorite or not. So by checking the class
             //we can decide what to do when user taps this button
                var saved = saveBtn.getCls() == 'saved' ? true : false;
 
                if (saved) {
-                   saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Save Me');
+                   saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>'+lang.SAVE_ME);
                    saveBtn.setCls('not-saved');
                    me.getData().isFavorite = false;
                }
                else {
-                   saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>Unsave Me');
+                   saveBtn.setText('<img src = "resources/icons/Heart_40_40.png" style="height:30px;width:30px;"></br>'+lang.UNSAVE_ME);
                    saveBtn.setCls('saved');
                    me.getData().isFavorite = true;
                }

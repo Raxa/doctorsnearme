@@ -1,4 +1,6 @@
-﻿
+﻿/**
+ * Authored by Amaya
+ */
 Ext.define('DoctorsNearMe.view.ContactList', {
     extend: 'Ext.dataview.DataView',
     xtype:'contactlist',
@@ -22,7 +24,9 @@ Ext.define('DoctorsNearMe.view.ContactList', {
             easing: 'ease-out'
         },
 
-        // this is for keep track which sharing option user chose
+        /**
+         * cfg {String} sharing option of user
+         */
         activeType:null
     },
 
@@ -46,9 +50,7 @@ Ext.define('DoctorsNearMe.view.ContactList', {
 
         this.setStore(contactStore);
 
-         contactStore.loadContacts(this);
-       
-       // contactStore.setData(data);
+         contactStore.loadContacts(this);       
 
     },
 
@@ -60,13 +62,6 @@ Ext.define('DoctorsNearMe.view.ContactList', {
             height: '100%',
             right:'5px'
         });
-
-        /*var indexbar = Ext.create('Ext.dataview.IndexBar', {
-            right: '5px',
-            height:'100%',
-            width: '5px',
-            zIndex:3
-        });*/
 
         var indexbar = Ext.create('Ext.dataview.IndexBar', {
             height: '100%',
@@ -80,7 +75,6 @@ Ext.define('DoctorsNearMe.view.ContactList', {
 
         panel.add(indexbar)
         this.add(panel);
-       // this.add(indexbar);
     },
 
     addSearchBar: function () {
@@ -98,7 +92,6 @@ Ext.define('DoctorsNearMe.view.ContactList', {
                     listeners: {
                         scope: this,
                         clearicontap: me.onSearchClearIconTap
-                       // keyup: me.onSearchKeyUp
                     },
                     width:'100%'
                 }
@@ -126,8 +119,7 @@ Ext.define('DoctorsNearMe.view.ContactList', {
         //get the store and the value of the field
         var value = field.getValue(),
             store = this.getStore();
-        //Ext.Msg.alert(store.getCount());
-        //first clear any current filters on thes tore
+        //first clear any current filters on the store
         store.clearFilter();
 
         //check if a value is set first, as if it isnt we dont have to do anything
@@ -168,8 +160,6 @@ Ext.define('DoctorsNearMe.view.ContactList', {
                     return matched[0];
                 }
             });
-
-          //  Ext.Msg.alert("after: "+store.getCount());
         }
 
     },
@@ -266,7 +256,6 @@ Ext.define('DoctorsNearMe.view.ContactList', {
     },
 
     getSelectAllButton: function(){
-        //return this.getTopToolbar().getComponent(0);
         return this.getTopToolbar().down('button');
     },
 

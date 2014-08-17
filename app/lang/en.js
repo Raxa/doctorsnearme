@@ -55,6 +55,7 @@
         CONTACTS: 'My Contacts',
         SELECT_ALL: 'Select All',
         SEARCH: 'Search',
-        REVIEW: 'Review'
+        REVIEW: 'Review',
+        THANKS:'Thanks for Sharing!'
         
 }

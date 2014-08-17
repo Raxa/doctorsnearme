@@ -1,4 +1,7 @@
-﻿Ext.define('DoctorsNearMe.view.ThanksForSharing', {
+﻿/**
+ * Authored by Amaya
+ */
+Ext.define('DoctorsNearMe.view.ThanksForSharing', {
     extend: 'Ext.Panel',
 
     xtype: 'thanks',
@@ -17,8 +20,15 @@
         },
         centered: true,
         styleHtmlContentL: true,
-        html: '<span style="color:#1081FB;background-color:transparent"><b>Thanks for sharing !</b><span>',
-        style: 'border:1px solid #1081FB;margin:1px;padding:4px;background-color:white'
+     //   html: '<span style="color:#1081FB;background-color:transparent"><b>' + DoctorsNearMe.config.getLanguage().THANKS+ '</b><span>',
+     //    html: '<span style="color:#1081FB;background-color:transparent"><b>Thanks for sharing!</b><span>',
+        style: 'border:2px solid #1081FB;margin:1px;padding:4px;background-color:white'
+    },
+
+    initialize: function(){
+        this.callParent();
+
+        this.setHtml('<span style="color:#1081FB;background-color:transparent"><b>' + DoctorsNearMe.config.getLanguage().THANKS + '</b></span>');
     },
 
     dissapear: function () {

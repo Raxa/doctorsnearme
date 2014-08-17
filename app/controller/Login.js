@@ -62,8 +62,7 @@ Ext.define('DoctorsNearMe.controller.Login', {
         var encodedString = "Basic " + btoa(DoctorsNearMe.config.getUserName() + ":" + DoctorsNearMe.config.setPassword());
 
         Ext.Ajax.request({
-             url: 'http://api.raxa.io/ws/rest/v1/session',
-           // url:DoctorsNearMe.config.getDomain()+'session',
+            url:DoctorsNearMe.config.getDomain()+'session',
             method: 'DELETE',
             success: function (response, opts) {
                 console.log("success");
@@ -132,13 +131,10 @@ Ext.define('DoctorsNearMe.controller.Login', {
 
         var me = this;
         Ext.Ajax.request({
-            url: 'http://api.raxa.io/ws/rest/v1/raxacore/login',
-          // url:DoctorsNearMe.config.getDomain()+'raxacore/login',
+           url:DoctorsNearMe.config.getDomain()+'raxacore/login',
             method: 'GET',
-           // withCredentials: true,
             success: function (response, opts) {
                 console.log("success");
-               // Ext.Msg.alert("success");
                 me.logInSuccess(Ext.JSON.decode(response.responseText),values);
                 
             },
@@ -150,9 +146,6 @@ Ext.define('DoctorsNearMe.controller.Login', {
                 'Accept': 'application/json',
                 'Content-type': 'application/json',
                 'Authorization': encodedString
-                //'Authorization': 'Basic Z2FyaXBwYS5oYXJvdW46YXNkZg=='
-                //'Authorization': 'Basic YW1heWE6ZWFzeXRyZWF0eTM0MjE'
-                //'Authorization': 'Basic amFtZXNraWVya2VnYWFyZDpIZWxsbzEyMw=='
             }
         });
     },

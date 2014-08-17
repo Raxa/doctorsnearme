@@ -20,7 +20,6 @@ Ext.define('DoctorsNearMe.store.Location', {
         this.storeClear();
         service.textSearch({
             location: latLng,
-            //radius: radius,
             radius:100000,
             types: types,
             query:query
@@ -102,11 +101,11 @@ Ext.define('DoctorsNearMe.store.Location', {
 
     addItem: function(record,isTextSearch){
         this.add(record);
-        //  if (this.isFavorite(record.reference)) {
+
         if (this.isFavorite(record.place_id)) {
-            //place.isFavorite=true;
+
             this.last().set('isFavorite', true);
-            //this.findRecord('reference', record.reference).set('isFavorite', true);
+
         }
 
         if (DoctorsNearMe.config.getLoggedIn()) {
@@ -124,8 +123,7 @@ Ext.define('DoctorsNearMe.store.Location', {
     isLiked: function(record){
         var me = this;
         Ext.Ajax.request({
-            // url: 'http://localhost:8888/checkLike',
-            // url: 'http://192.168.122.1:8888/checkLike',
+
             url: DoctorsNearMe.config.getRatingServerDomain() + 'checkLike',
             method: 'GET',
             params: {
@@ -134,10 +132,10 @@ Ext.define('DoctorsNearMe.store.Location', {
                 user: DoctorsNearMe.config.getUser().get('personUuid')
             },
             success: function (response, opts) {
-                // Ext.Msg.alert("like success");
+
                 console.log("success");
                 console.log(response);
-                // var like = Ext.JSON.decode(response.responseText).likes;
+
                 var like = null;
                 var data = Ext.JSON.decode(response.responseText).data[0];
                 if (data != null) {
@@ -146,18 +144,17 @@ Ext.define('DoctorsNearMe.store.Location', {
                 console.log("like: " + like);
 
                 if (like == 1) {
-                    //record.set('isLiked', true);
+
                     record.isLiked = true;
                 } else {
-                    // record.set('isLiked', false);
+
                     record.isLiked = false;
                 }
 
             },
             failure: function (response, opts) {
-               // Ext.Msg.alert("like failure");
+
                // console.log("failure");
-                //console.log(response);
             }
         });
     },
@@ -187,10 +184,10 @@ Ext.define('DoctorsNearMe.store.Location', {
         service.getDetails(
             {
                 placeId: results[i].place_id
-                //key: 'AIzaSyCz2FbWnJQh8hez_0fQ7J-QvE7jzCvWSgw&'
+
             }, function (place, status1) {
                 if (status1 == google.maps.places.PlacesServiceStatus.OK) {
-                    //console.log(place);
+
                     var record = me.findRecord('place_id', results[i].place_id);
                     if (record != null) {
                         record.set('name', place.name);
@@ -204,15 +201,14 @@ Ext.define('DoctorsNearMe.store.Location', {
                 }
                 else {
                    // console.log("failed");
-                   // console.log(status1);
                 }
 
             });
         if (i < results.length - 1 && searchCount == this.getSearchCount()) {
-            //test
+
             Ext.Function.defer(function () {
-                me.getPlaceDetails(results, i + 1,searchCount)
-                //}, 290, me);
+                me.getPlaceDetails(results, i + 1, searchCount)
+
             }, 290, me);
             return;
 
@@ -230,7 +226,6 @@ Ext.define('DoctorsNearMe.store.Location', {
 
         service.getDetails(
             {
-                //reference: record.get('reference')
                 placeId:record.get('place_id')
             }, function (place, status) {
 
@@ -256,14 +251,13 @@ Ext.define('DoctorsNearMe.store.Location', {
 
     //USED IF THERE IS A RECORD THAT HASN'T BEEN SET DUE TO OVER QUERY LIMIT
     //use if you are going to make the request when clicking on a marker
-    setDetailsForTheRecord: function (record,  marker) {
-      //  var service = new google.maps.places.PlacesService(map.getMap());
+    setDetailsForTheRecord: function (record, marker) {
+
         var service = this.getService();
         var me = this;
 
         service.getDetails(
             {
-                //reference: record.get('reference')
                 placeId: record.get('place_id')
             }, function (place, status) {
             
@@ -299,8 +293,6 @@ Ext.define('DoctorsNearMe.store.Location', {
         var me = this;
         var record;
         Ext.Ajax.request({
-            // Ext.data.JsonP.request({
-            // url: 'http://192.168.122.1:8888/like',
             url: DoctorsNearMe.config.getRatingServerDomain() + 'like',
             method: 'GET',
             params: {
@@ -311,12 +303,10 @@ Ext.define('DoctorsNearMe.store.Location', {
             },
             success: function (response, opts) {
                 console.log("like success");
-                // record = me.getById(id);
                 record = me.findRecord('place_id', id);
                 console.log(record);
                 record.set('isLiked', like);
 
-                // var likeButton = Ext.get(id + '-like');
                 var likeButton = Ext.get(record.get('id') + '-like');
                 if (like) {
                     if (detailsView != null) {

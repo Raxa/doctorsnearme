@@ -10,7 +10,6 @@ Ext.define('DoctorsNearMe.controller.Menu', {
         {
             sideMenu: 'mainmenu',
             mapView: 'mapview',
-            userProfile: 'userprofile',
             listView: 'listview',
             contactList: 'contactlist',
             shareList:'sharelist'
@@ -44,7 +43,6 @@ Ext.define('DoctorsNearMe.controller.Menu', {
                 Ext.Viewport.setActiveItem(contactList);
                 break;
             case 'FACEBOOK':
-               // Ext.Msg.alert("facebook");
                 window.plugins.socialsharing.shareViaFacebook('Try Doctors Near Me!', null, null, function () { console.log('share ok') }, function (errormsg) { alert(errormsg) });
                 break;
             case 'TWITTER':
@@ -54,7 +52,6 @@ Ext.define('DoctorsNearMe.controller.Menu', {
     },
 
     share: function(){
-        //  Ext.Viewport.setActiveItem(this.getContactList());
 
         var sharelist= this.getShareList();
         if (sharelist == null) {
@@ -92,7 +89,6 @@ Ext.define('DoctorsNearMe.controller.Menu', {
         listview.fillList();
 
         mapview.setActiveItem(1);
-        //  mapview.getSearchField().setHidden(true);
         mapview.getSearchToolbar().setHidden(true);
         mapview.getSpecialtySelectField().setHidden(true);
         mapview.getLocator().setHidden(true);

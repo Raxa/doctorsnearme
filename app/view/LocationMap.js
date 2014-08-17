@@ -57,7 +57,7 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
          */
         initialUserLocationSetting: true,
 
-        ////tetsing a global infowindow
+        //a global infowindow
         infoWindow :null
                       
     },
@@ -224,51 +224,6 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
     * @param {Marker} marker
     */
     setInfowindowContent: function (record,marker) {
-      /*  var phoneNumber = record.get('international_phone_number');
-        var idString = record.get('id');
-
-        var name = record.get('name');
-        var userimg = '<img class="user-img" src="resources/icons/empty.png">';
-
-        var moredetails = '<img class="more-details" id =' + idString + ' src = "resources/icons/i_30_30.png">';
-
-        var like = "";
-
-        if (DoctorsNearMe.config.getLoggedIn()) {
-
-            if (!record.get('isLiked')) {
-                console.log("not like");
-                like = '<button class="like-img like" id=' + idString + '-like>';
-            } else {
-                console.log("like");
-                like = '<button class="like-img dislike" id=' + idString + '-like>';
-            }
-        }
-
-        var call = "";
-        var directions;
-        if (phoneNumber != null) {
-            call = '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="call"><a href="tel:' + phoneNumber + '">'+lang.CALL+'</a></button>';
-            directions = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
-        }
-        else {
-            directions = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
-
-        }
-
-        // var infowindow = new google.maps.InfoWindow();
-        var infowindow = this.getInfoWindow();
-
-        var firstRow = '<div  class="inlineblock">' + userimg + '</div>' +
-                 '<div class="inlineblock">' +
-                       '<div class="inlineblock"><p class="wordstyle">&nbsp;&nbsp;' + name + '</p></div>' +
-                       '<div class="inlineblock">' + moredetails + '</div>' +
-                       '<div>' + like + '</div>' +
-                 '</div>';
-
-        var secondRow = '<div class="inlineblock">' + call + '</div>' +
-                       '<div class="inlineblock">' + directions + '</div>';
-        var tpl = '<div display="table-row-group">' + firstRow + '</div>' + '<div display="table-row-group">' + secondRow + '</div>';*/
 
         var infowindow = this.getInfoWindow();
 
@@ -283,8 +238,6 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
         var tpl = new Ext.XTemplate(
             '<div>',
                 '<div display="table-row-group">',
-                    /*'<div class="inlineblock"><p class="wordstyle">&nbsp;&nbsp;{[this.getName(values.name)]}</p></div>',
-                    '<div class="inlineblock"><img class="more-details" id ={id} src = "resources/icons/i_30_30.png"></div>',*/
                      '<p class="wordstyle">{[this.getName(values.name)]}<img class="more-details" id ={id} src = "resources/icons/i_30_30.png"></p>',
                 '</div>',
                 '<tpl if="values.loggedIn==true">',
@@ -307,7 +260,6 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
                     '<div display="table-row-group">',
                         '<div class="inlineblock">',
                             '<button class="call" style="padding-left:1px;"><img class="call-img" src = "resources/icons/Phone_40_40.png"><a href="tel:{phoneNumber}">{[this.getCallLabel()]}</a></button>',
-                           // '<button class="call"><a href="tel:{phoneNumber}">{[this.getCallLabel()]}</a></button>',
                     '</div>',
                         '<div class="inlineblock">',
                             '<button class="direction" id={id}><img class="direction-img" src = "resources/icons/Arrow_40_40.png">{[this.getDirectionsLabel()]}</button>',
@@ -360,46 +312,6 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
 
         infowindow.setContent(tpl.apply(values));
         infowindow.open(this.getMap(), marker);
-
-        //////////////
-     /*   var me = this;
-        var infoBubble2 = new InfoBubble({
-            map: me.getMap(),
-            content: tpl,
-            position: marker.position,
-            shadowStyle: 1,
-            padding: 0,
-            backgroundColor: 'white',
-            borderRadius: 0,
-            arrowSize: 0,
-            borderWidth: 1,
-            borderColor: 'white',
-            disableAutoPan: false,
-            hideCloseButton: false,
-            arrowPosition: 50,
-            //backgroundClassName: 'phoney',
-            arrowStyle: 2,
-            maxWidth: 800
-        });
-        infoBubble2.open();*/
-
-
-      /* var infobox = new InfoBox({
-            content: tpl,
-            disableAutoPan: false,
-            maxWidth: 150,
-            pixelOffset: new google.maps.Size(-140, 0),
-            zIndex: null,
-            boxStyle: {
-               // background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
-                background:'white',
-                opacity: 1,
-                width: "280px"
-            },
-            closeBoxMargin: "12px 4px 2px 2px",
-            closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
-            infoBoxClearance: new google.maps.Size(1, 1)
-       });*/
 
     },
 

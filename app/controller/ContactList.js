@@ -23,7 +23,6 @@ Ext.define('DoctorsNearMe.controller.ContactList', {
     /**
      * Called when user click on cancel button in contact list 
      * @method
-     * @private
      */
     backToMapView: function () {
         var mapview = this.getMapView();
@@ -31,6 +30,10 @@ Ext.define('DoctorsNearMe.controller.ContactList', {
 
     },
 
+    /**
+     * Called when user click on message button in contact list 
+     * @method
+     */
     shareViaMessage: function (selectedPhoneNumbersArray) {
         this.backToMapView();
         if (selectedPhoneNumbersArray.length > 0) {
@@ -44,11 +47,14 @@ Ext.define('DoctorsNearMe.controller.ContactList', {
             
             window.plugins.socialsharing.shareViaSMS('Doctors Near Me', numbers, function (msg) { console.log('ok: ' + msg) }, function (msg) { alert('error: ' + msg) })
 
-            this.backToMapView();
             panel.dissapear();
         }
    },
 
+    /**
+     * Called when user click on email button in contact list 
+     * @method
+     */
     shareViaEmail: function (selectedEmailsArray) {
         console.log("inside send mail");
         if (selectedEmailsArray.length > 0) {
@@ -75,8 +81,9 @@ Ext.define('DoctorsNearMe.controller.ContactList', {
             });
 
             //Ext.Viewport.setActiveItem(me.getMapView());
-            this.backToMapView();
+            
             panel.dissapear();
         }
+        this.backToMapView();
     }
 })

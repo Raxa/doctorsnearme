@@ -1,5 +1,9 @@
-﻿Ext.define('DoctorsNearMe.view.SharingOptionsList', {
+﻿/**
+ * Authored by Amaya
+ */
+Ext.define('DoctorsNearMe.view.SharingOptionsList', {
     extend: 'Ext.ActionSheet',
+    requires:['Ext.Label'],
     xtype: 'sharelist',
     config: {
         width: '95%',
@@ -9,32 +13,31 @@
         items: [
         {//0
             xtype: 'label',
-           // html: 'Tell a friend about Raxa via...',
             ui: 'menu',
             cls: 'share-label'
         },
         {//1
-           // text: 'Email',
+           // Email',
             ui: 'menu',
             style: 'background-color:#D4D3E8;border-color:#CCCCCC'
         },
         {//2
-           // text: 'Message',
+           // Message
             ui: 'menu',
             style: 'background-color:#D4D3E8;border-color:#CCCCCC'
         },
         {//3
-           // text: 'Facebook',
+           // Facebook
             style: 'background-color:#D4D3E8;border-color:#CCCCCC',
             ui: 'menu'
         },
         {//4
-           // text: 'Twitter',
+           //Twitter
             ui: 'menu',
             style: 'background-color:#D4D3E8;border-color:#CCCCCC'
         },
         {//5
-          //  text: 'Cancel',
+          //  Cancel
             ui: 'menu',
             style: 'border-top:8px solid #D0D0D0;background-color:#D4D3E8;padding-top:8px;padding-bottom:8px;border-color:#999999',
             height:'50px'

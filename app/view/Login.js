@@ -4,7 +4,7 @@
 Ext.define('DoctorsNearMe.view.Login', {
     extend: 'Ext.Container',
     xtype: 'loginview',
-    requires: ['Ext.Img', 'Ext.form.FieldSet', 'Ext.field.Email', 'Ext.field.Password', 'Ext.field.Checkbox'],
+    requires: ['Ext.form.FieldSet', 'Ext.field.Email', 'Ext.field.Password', 'Ext.field.Checkbox', 'Ext.Label'],
     config: {
         layout: 'vbox',
         scrollable:'vertical',
@@ -19,7 +19,6 @@ Ext.define('DoctorsNearMe.view.Login', {
             {//0
                 xtype: 'button',
                 cls:'signup-btn'
-               // text: '<span class="signup-label">Sign up</span>'
             },            
             {//1
                 xtype: 'container',
@@ -29,13 +28,11 @@ Ext.define('DoctorsNearMe.view.Login', {
                         xtype: 'textfield',
                         name: 'username',
                         required: true,
-                       // label: 'Username or email',
                         labelAlign:'top',
                         labelCls: 'username-pwd'
                     },
                     {
                         xtype: 'passwordfield',
-                       // label: 'Password',
                         labelAlign: 'top',
                         name: 'password',
                         required: true,
@@ -45,20 +42,17 @@ Ext.define('DoctorsNearMe.view.Login', {
             },
             {//forgot login
                 xtype: 'button',
-                //  html: 'Forgot Login/pass?',
                 cls: 'forgot-login',
                 labelCls: 'forgotlogin-label'
             },
             {
                 xtype: 'button',
-               // text: '<span class="signin-label">Sign In</span>',
                 cls:'signin-btn'
             },
             {
                 xtype: 'button',
                 width: '40%',
                 cls:'cancel-btn'
-               // text:'<span class="cancel-label">CANCEL</span>'
             },
             {
                 xtype: 'label',
@@ -121,7 +115,6 @@ Ext.define('DoctorsNearMe.view.Login', {
         this.getForgotLoginField().on('tap', function () {
             me.fireEvent('forgotpassword', me.getUsernameField().getValue());
             console.log("tapped");
-            // var newValue = Ext.getCmp('usernameEmailForgot').getValue();
         });
     },
 
