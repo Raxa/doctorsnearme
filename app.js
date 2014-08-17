@@ -46,35 +46,13 @@ Ext.application({
 
     launch: function() {
 		Ext.Viewport.innerElement.addCls('viewport-inner');
-		/* if(Ext.browser.is.PhoneGap) {
-            alert(device.uuid);
-        } else {
-            alert('Error: No PhoneGap.');
-        }*/
-			
-	//    var options = new ContactFindOptions();
-
-    //    var fields = ["displayName", "name"];
-    //    navigator.contacts.find(fields, onSuccess, onError, options);
-		
-	//	function onSuccess(contacts) {
-	//		if(contacts.length==0){
-	//			Ext.Msg.alert("nothing");
-	//		}else{
-	//			 Ext.Msg.alert("Display Name = " + contacts[0].displayName);
-	//		}
-           
-    //}
-		
-	//	function onError(contactError) {
-	//		alert('onError!');
-        //	}	
+				
 		var appStart = true;
-		//Ext.Msg.alert(navigator.connection.type);
-	//	if (navigator.connection.type != Connection.NONE) {
+
+		if (navigator.connection.type != Connection.NONE) {
 		    DoctorsNearMe.config.startApp();
-	//	}
-	/*	else {
+		}
+		else {
 
 		    Ext.Msg.setMinWidth('300px');
 		    Ext.Msg.alert("Please connect to internet");
@@ -83,14 +61,12 @@ Ext.application({
 
 		    function onOnline() {
 		        if (appStart) {
-		           // Ext.Function.defer(function () {
 		                window.location.reload(true);
-		          //  }, 1000);
 		            appStart = false;
 		        }
 		       
 		    }
-		}*/
+		}
 			
 			
     },
