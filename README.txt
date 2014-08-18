@@ -1,3 +1,83 @@
+===========================DOCTORS NEAR ME===============================================
+1. Overview
+Doctors Near Me is an opensource mobile application implemented using Sencha Touch mobile
+web application framework. The Sencha Touch version used is 2.3.0. It is licensed under 
+GNU General Public License V3. Instructionsto build the application are given below and 
+in order to see the full functionality, you need to install the nodeJS server which is 
+included in the repository and create a mySQL database with appropriate tables or import 
+the sql file inside the repository.
+
+2. Features
+
+->Searching hospitals
+->Searching doctors
+->Searching pharmacies
+->Filtering results
+->Liking and commenting
+->Marking and saving favorites
+->Logging in
+->Language support
+->Sharing the app via email, sms and social networks
+
+
+3. Building the app for android
+
+->Clone this project from GitHub
+
+->Install Sencha cmd version 4.0.4.84 or higher. Please refer to this link and 
+get the environment setup for Sencha 
+http://docs.sencha.com/touch/2.3.0/#!/guide/getting_started
+
+(If you install a higher version of Sencha cmd you will have to upgrade the app. 
+For information on how to upgrade please refer this link.
+http://docs.sencha.com/cmd/5.x/cmd_upgrade.html)
+
+
+->Install nodeJS 
+http://nodejs.org/download/
+
+->Install cordova
+http://cordova.apache.org/docs/en/3.5.0/guide_cli_index.md.html#The%20Command-Line%20Interface
+
+->Download Sencha sdk and put it in any folder you like
+http://www.sencha.com/products/touch/
+
+The below link would really help if you have questions
+http://vimeo.com/76568053
+
+->download android sdk
+Please refer to following link and follow "Install Cordova Shell Tools" topic
+http://cordova.apache.org/docs/en/3.5.0/guide_platforms_android_index.md.html#Android%20Platform%20Guide
+
+
+->Now go inside the project folder and run 
+sencha app build native
+
+this will create a debug version of the app inside, 
+your-roject-folder/cordova/platforms/android/ant-build
+
+-> Now you can install the app in your android phone but to see like and comment functionality works,
+you need to import the given mysql database(ratingsdb.sql) and run the nodeJS server.
+
+To run the nodeJS server, go to the folder "RatingsServer" inside the project-folder and run,
+node index.js
+
+Then you need to open your-project-folder/app/config/Runtime.js and change the "RatingsServerDomain"
+config.
+
+->Now you are ready to go except that to login to the app you need a raxa patient account. You can
+install raxa patient app(https://play.google.com/store/apps/details?id=com.raxa.EMR&hl=en) and create
+an account. Anyway loggin in is required only to put comments and likes. 
+
+->Note that, since the server is not deployed properly, for liking and commenting functionality to
+work server and the client need to be in the same local network.
+
+
+
+
+4. License
+
+
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 
