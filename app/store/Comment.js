@@ -9,6 +9,10 @@ Ext.define('DoctorsNearMe.store.Comment', {
         autoLoad: false
     },
 
+    /**
+     * Set the proxy according to location ID
+     * @method
+     */
     setTheProxy: function (locationid) {
         this.setProxy({
             type: 'ajax',

@@ -15,100 +15,11 @@ Ext.define('DoctorsNearMe.store.Contact', {
         data:[]       
     },
 
-  /*  loadContacts: function () {
-        var data = [{
-            id: '1',
-            displayName: 'Thurani'
-        },
-          {
-              id: '2',
-              displayName: 'Hansani'
-          },
-          {
-              id: '3',
-              displayName: 'Devni',
-              emails: ['devni@gmail.com', 'devni@yahoo.com']
-          },
-          {
-              id: '4',
-              displayName: 'Devni'
-          },
-          {
-              id: '5',
-              displayName: 'Devni'
-          },
-          {
-              id: '6',
-              displayName: 'Devni'
-          },
-          {
-              id: '7',
-              displayName: 'Devni'
-          },
-          {
-              id: '8',
-              displayName: 'Devni'
-          },
-          {
-              displayName: 'Devni'
-          }, {
-              displayName: 'Devni'
-          },
-          {
-              displayName: 'Devni'
-          },
-          {
-              displayName: 'Devni'
-          },
-          {
-              displayName: 'Devni'
-          },
-          {
-              displayName: 'Amaya',
-              emails: ['amaya.uom@gmail.com']
-          },
-          {
-              displayName: 'Akila'
-          },
-          {
-              displayName: 'Sanath'
-          },
-          {
-              displayName: 'Devni'
-          },
-          {
-              displayName: 'Veer'
-          },
-          {
-              displayName: 'Veer'
-          },
-          {
-              displayName: 'Veer'
-          },
-          {
-              displayName: 'Veer'
-          },
-          {
-              displayName: 'Veer'
-          },
-          {
-              displayName: 'Veer'
-          },
-          {
-              displayName: 'Weer'
-          }];
-        var me = this;
-        Ext.Function.defer(function () {
-            me.setData(data);
-        }, 5000);
-     // this.setData(data);
-    }*/
-
     /**
      * Loads device contacts
      * @method
      */
-    loadContacts: function (dataview) {
+    loadContacts: function () {
         var me = this;
         //Ext.Msg.alert("inside store");
         var options = new ContactFindOptions();

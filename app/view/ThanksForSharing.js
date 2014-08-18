@@ -19,9 +19,7 @@ Ext.define('DoctorsNearMe.view.ThanksForSharing', {
             easing: 'ease-out'
         },
         centered: true,
-        styleHtmlContentL: true,
-     //   html: '<span style="color:#1081FB;background-color:transparent"><b>' + DoctorsNearMe.config.getLanguage().THANKS+ '</b><span>',
-     //    html: '<span style="color:#1081FB;background-color:transparent"><b>Thanks for sharing!</b><span>',
+        styleHtmlContent: true,
         style: 'border:2px solid #1081FB;margin:1px;padding:4px;background-color:white'
     },
 
@@ -31,6 +29,11 @@ Ext.define('DoctorsNearMe.view.ThanksForSharing', {
         this.setHtml('<span style="color:#1081FB;background-color:transparent"><b>' + DoctorsNearMe.config.getLanguage().THANKS + '</b></span>');
     },
 
+    /*
+    * Disspear after 1 second
+    * @method
+    * @public
+    */
     dissapear: function () {
         var me = this;
         Ext.Function.defer(function () {

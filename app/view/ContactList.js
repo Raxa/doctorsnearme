@@ -7,6 +7,8 @@ Ext.define('DoctorsNearMe.view.ContactList', {
     config: {
         cls:'contact-list',
         defaultType: 'contact',
+
+        //this is a dataview with checkbox components
         useComponents: true,
         fullScreen: true,
 
@@ -33,7 +35,6 @@ Ext.define('DoctorsNearMe.view.ContactList', {
 
     initialize: function () {
        
-
         this.setTheStore();
         this.addTopToolBar();
 
@@ -50,12 +51,20 @@ Ext.define('DoctorsNearMe.view.ContactList', {
 
         this.setStore(contactStore);
 
-         contactStore.loadContacts(this);       
+        //load contacts from device
+         contactStore.loadContacts();       
 
     },
 
+    /*
+    * Adds indexbar
+    * @method
+    * @private
+    */
     addIndexbar: function () {
         var me = this;
+
+        //index bar was put inside a panel because otherwise when touching an index items get selected
         var panel = Ext.create('Ext.Panel', {
             layout: 'fit',
             width: '20px',
@@ -77,6 +86,11 @@ Ext.define('DoctorsNearMe.view.ContactList', {
         this.add(panel);
     },
 
+    /*
+    * Adds searchbar
+    * @method
+    * @private
+    */
     addSearchBar: function () {
 
         var me = this;
@@ -173,6 +187,11 @@ Ext.define('DoctorsNearMe.view.ContactList', {
         this.getStore().clearFilter();
     },
 
+    /*
+    * Adds the tool bar at bottom
+    * @method
+    * @private
+    */
     addBottomToolbar: function () {
         var me = this;
         var bottombar = Ext.create('Ext.Toolbar', {
@@ -218,6 +237,11 @@ Ext.define('DoctorsNearMe.view.ContactList', {
         this.add(bottombar);
     },
 
+    /*
+    * Adds top tool bar
+    * @method
+    * @private
+    */
     addTopToolBar: function () {
         var me = this;
 
@@ -271,6 +295,11 @@ Ext.define('DoctorsNearMe.view.ContactList', {
         return this.getBottomToolbar().getComponent(0)
     },
 
+    /*
+    * When an index is tapped on index bar scrolls to the first item which has the index
+    * @method
+    * @private
+    */
     scrollToSelectedItem: function (index) {
         var store = this.getStore();
 
@@ -285,13 +314,22 @@ Ext.define('DoctorsNearMe.view.ContactList', {
 
             var recordIndex = store.find('id', first);
 
-            var y = this.getViewItems()[recordIndex].element.getY()
+            //had to do this way because there was no other easy way for a dataview unlike a list
+            //get Y coordinate
+            var y = this.getViewItems()[recordIndex].element.getY();
 
+            //scroll to Y coordinate
             this.getScrollable().getScroller().scrollTo(0, y, true);
             
         }
     },
 
+    /*
+    * Returns the email addresses and names of selected contacts
+    * @method
+    * @private
+    * @return [Object]
+    */
     getSelectedEmails: function () {
         var name, email, array=[],object,valueObject;
         this.getViewItems().forEach(function (item) {
@@ -308,6 +346,12 @@ Ext.define('DoctorsNearMe.view.ContactList', {
         return array;
     },
 
+    /*
+    * Returns the phone numbers of selected contacts
+    * @method
+    * @private
+    * @return [String]
+    */
     getSelectedPhoneNumbers: function () {
         var name, phoneNo, array = [], object, valueObject;
         this.getViewItems().forEach(function (item) {
@@ -323,6 +367,11 @@ Ext.define('DoctorsNearMe.view.ContactList', {
         return array;
     },
 
+    /*
+    * Sets language
+    * @method
+    * @public
+    */
     setLanguage: function () {
         var lang = DoctorsNearMe.config.getLanguage();
 

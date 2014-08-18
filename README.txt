@@ -7,8 +7,6 @@ in order to see the full functionality, you need to install the nodeJS server wh
 included in the repository and create a mySQL database with appropriate tables or import 
 the sql file inside the repository.
 
-Please find the project wiki here
-https://raxaemr.atlassian.net/wiki/display/RAXAJSS/Doctors+Near+Me
 
 2. Features
 
@@ -21,6 +19,9 @@ https://raxaemr.atlassian.net/wiki/display/RAXAJSS/Doctors+Near+Me
 ->Logging in
 ->Language support
 ->Sharing the app via email, sms and social networks
+
+Please find the project wiki here
+https://raxaemr.atlassian.net/wiki/display/RAXAJSS/Doctors+Near+Me
 
 
 3. Building the app for android

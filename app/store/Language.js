@@ -1,4 +1,7 @@
-﻿Ext.define('DoctorsNearMe.store.Language', {
+﻿/**
+ * Authored by Amaya
+ */
+Ext.define('DoctorsNearMe.store.Language', {
     extend: 'Ext.data.Store',
 
     config: {

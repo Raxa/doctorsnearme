@@ -1,4 +1,7 @@
-﻿Ext.define('DoctorsNearMe.store.Specialization', {
+﻿/**
+ * Authored by Amaya
+ */
+Ext.define('DoctorsNearMe.store.Specialization', {
     extend: 'Ext.data.Store',
 
     config: {

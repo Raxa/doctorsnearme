@@ -25,6 +25,11 @@ Ext.define('DoctorsNearMe.controller.Login', {
         }
     },
 
+    /**
+     * Resets password
+     * @method
+     * @private
+     */
     onForgotPassword:function(userName){
         if (userName === '') {
             Ext.Msg.alert('Field Required', 'Please fill in your Username or Email');
@@ -56,7 +61,12 @@ Ext.define('DoctorsNearMe.controller.Login', {
             });
         }
     },
- 
+
+    /**
+     * Called when user clicks log out
+     * @method
+     * @private
+     */
     onLogout: function (sideMenu) {
         var me = this;
         var encodedString = "Basic " + btoa(DoctorsNearMe.config.getUserName() + ":" + DoctorsNearMe.config.setPassword());
@@ -82,6 +92,11 @@ Ext.define('DoctorsNearMe.controller.Login', {
 
     },
 
+    /**
+     * Called if log out is successful 
+     * @method
+     * @private
+     */
     logoutSuccess: function () {
 
         var lang = DoctorsNearMe.config.getLanguage();
@@ -102,14 +117,24 @@ Ext.define('DoctorsNearMe.controller.Login', {
         DoctorsNearMe.config.setUserName(null);
         DoctorsNearMe.config.setPassword(null);
     },
-    
+
+    /**
+     * Go back to mapview 
+     * @method
+     * @private
+     */
     proceed: function() {
         var mapview = this.getMapView();
 
         Ext.Viewport.add(mapview);
         Ext.Viewport.setActiveItem(mapview);
     },
-    
+
+    /**
+     * Called when user clicks login to go to login view 
+     * @method
+     * @private
+     */
     onLogInPageRequest: function () {
         var loginView = this.getLoginView();
 
@@ -123,6 +148,11 @@ Ext.define('DoctorsNearMe.controller.Login', {
         
     },
 
+    /**
+     * Sends request to log in
+     * @method
+     * @private
+     */
     authenticate: function () {
 
         var values = this.getLoginView().getTheValues();
@@ -150,6 +180,11 @@ Ext.define('DoctorsNearMe.controller.Login', {
         });
     },
 
+    /**
+     * Called if authntication is successful 
+     * @method
+     * @private
+     */
     logInSuccess: function (loginResponse,values) {
         DoctorsNearMe.config.setLoggedIn(true);
         var lang = DoctorsNearMe.config.getLanguage();

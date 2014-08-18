@@ -23,6 +23,11 @@ Ext.define('DoctorsNearMe.controller.Language', {
         }
     },
 
+    /**
+     * Convert the language in each view 
+     * @method
+     * @private
+     */
     onLanguageChange: function (newLang, oldLang) {
         var language,prevLanguage;
         switch (newLang) {

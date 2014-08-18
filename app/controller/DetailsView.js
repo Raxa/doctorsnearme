@@ -54,12 +54,15 @@ Ext.define('DoctorsNearMe.controller.DetailsView', {
             }
             
             var theItem;
+
+            //filter out the removed one
             var newFav= Ext.Array.filter(DoctorsNearMe.config.getFavorites(), function (item) {
                 if (item.place_id != recordId) {
                     return true;
                 } 
             });
 
+            //get the removed one and remove it from local storage too
             diffArray = Ext.Array.difference(DoctorsNearMe.config.getFavorites(), newFav);
             if (diffArray != null && diffArray.length > 0) {
                 theItem = diffArray[0];
@@ -67,16 +70,18 @@ Ext.define('DoctorsNearMe.controller.DetailsView', {
                 store.removeTokenFromLocalStorage(string);
             }
             
-
+            //set new favorites 
             DoctorsNearMe.config.setFavorites(newFav);
         }
 
+       //add the new favorites to listview store  
        var listStore = this.getListView().getItemList().getStore()
        listStore.removeAll();
         Ext.Array.forEach(DoctorsNearMe.config.getFavorites(), function (item) {
             listStore.add(item);
         })
 
+        //refresh list view
         this.getListView().fillList();
     },
 
@@ -100,6 +105,7 @@ Ext.define('DoctorsNearMe.controller.DetailsView', {
         var me = this;
         var comment = commentField.getValue();
 
+        //check if comment is blank
         if (comment.replace(/\s/g, '').length) {
             Ext.Ajax.request({
                 // Ext.data.JsonP.request({

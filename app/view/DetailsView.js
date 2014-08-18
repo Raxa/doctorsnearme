@@ -108,7 +108,8 @@ Ext.define('DoctorsNearMe.view.DetailsView', {
                      {
                          xtype: 'button',
                          cls: 'like',
-                         hidden:true
+                         hidden:true,
+                         height:'3em'
                      }
                  ]
              },

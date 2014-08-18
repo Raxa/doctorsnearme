@@ -3,7 +3,6 @@
  */
 Ext.define('DoctorsNearMe.controller.MapView', {
     extend: 'Ext.app.Controller',
-    requires: ['Ext.device.Contacts'],
     config: {
         refs: {
             mapView: 'mapview',
@@ -36,6 +35,11 @@ Ext.define('DoctorsNearMe.controller.MapView', {
         
     },
 
+    /**
+     * In case a separate request is sent for get place details, after getting details this will be called
+     * @method
+     * @private
+     */
     onDetailsReady: function(record){
         this.onLocationSelect(record);
     },
@@ -208,8 +212,11 @@ Ext.define('DoctorsNearMe.controller.MapView', {
     },
 
     /*
-  * Executed when an item is selected in List view
-  */
+     * Executed when an item is selected in List view
+     * @method
+     * @param {Object} record
+     * @private
+     */
     onLocationSelect: function (record) {
         var detailsView = this.getDetailsView();
 
@@ -232,10 +239,21 @@ Ext.define('DoctorsNearMe.controller.MapView', {
         
     },
 
+    /*
+     * Shows the side menu
+     * @method
+     * @private
+     */
     showMenu: function () {
         this.getMenu().toggle();
     },
 
+    /*
+     * Executed when a new search is initiated
+     * @method
+     * @param {Integer} the search choice of the user
+     * @private
+     */
     onChoice: function (choice) {
         console.log("inside on choice");
         var mapview = this.getMapView();
@@ -260,10 +278,14 @@ Ext.define('DoctorsNearMe.controller.MapView', {
 
         var radius1 = mapview.getSearchRadius();
 
-        console.log("radius: "+radius1)
+        console.log("radius: " + radius1)
+
+        //if radius is null set it to 2km
         var radius2 = radius1 == null ? 2000 : radius1;
 
         var specialties1 = mapview.getSpecialties();
+
+        //if specialties are null set it to empty array
         var specialties2 = specialties1 == null ? [] : specialties1;
         
         mapview.getStore().radarSearch(base, type, radius2, locationmap, specialties2);

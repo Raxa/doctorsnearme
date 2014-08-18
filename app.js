@@ -49,6 +49,7 @@ Ext.application({
 				
 		var appStart = true;
 
+        //Check for internet connection
 		if (navigator.connection.type != Connection.NONE) {
 		    DoctorsNearMe.config.startApp();
 		}
@@ -67,7 +68,6 @@ Ext.application({
 		       
 		    }
 		}
-			
 			
     },
 

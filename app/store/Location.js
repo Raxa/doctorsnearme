@@ -6,11 +6,24 @@ Ext.define('DoctorsNearMe.store.Location', {
 
     config: {
         model: 'DoctorsNearMe.model.Location',
+        /**
+         * cfg {PlacesService} Google places service 
+         */
         service: null,
         storeId: 'location-store',
+
+        /**
+         * cfg {Integer} This is to keep track of how many times search happened. If user performs a search
+         *  while a set of detailed requests are going on inside callback function this is incremented and
+         * the older requests set will terminate 
+         */
         searchCount:0
     },
 
+    /*
+    * Free text search. Uses Google places free text search option
+    * @method
+    */
     textSearch: function (latLng, types, radius, map, query) {
         this.setSearchCount(this.getSearchCount() + 1);
         var searchCount = this.getSearchCount();
@@ -30,6 +43,7 @@ Ext.define('DoctorsNearMe.store.Location', {
                     //second parameter is to say this is text search. this is needed to put the proper marker icon
                     me.addItem(place, true);
                 });
+                //details are filled in the background 
                 me.getPlaceDetails(results, 0,searchCount);
             } else {
                 //console.log("status:"); console.log(status);
@@ -38,6 +52,10 @@ Ext.define('DoctorsNearMe.store.Location', {
         });
     },
 
+    /*
+    * Radar search. Uses Google places radar search option
+    * @method
+    */
     radarSearch: function (latLng, type, radius, map, keywords) {
         this.setSearchCount(this.getSearchCount() + 1);
         var searchCount = this.getSearchCount();
@@ -47,6 +65,7 @@ Ext.define('DoctorsNearMe.store.Location', {
         var service = new google.maps.places.PlacesService(map.getMap());
         var me = this;
 
+        //if its pharmacy no need of specialty filters therefore no keywords
         if (type == 'pharmacy' || keywords.length == 0) {
             console.log("pharmacy or zero keywords");
             service.radarSearch({
@@ -59,7 +78,7 @@ Ext.define('DoctorsNearMe.store.Location', {
                     Ext.Array.forEach(results, function (place) {
                         me.addItem(place);
                     });
-                    console.log(results[0]);
+                    //details are filled in the background 
                     me.getPlaceDetails(results, 0, searchCount);
                 } else {
                    // console.log("status:"); console.log(status);
@@ -68,7 +87,7 @@ Ext.define('DoctorsNearMe.store.Location', {
             });
         } else {
             console.log("inside else");
-
+            //if its not pharmacy a search should happen for each keyword
             Ext.Array.forEach(keywords, function (keyword) {
 
                 service.radarSearch({
@@ -83,7 +102,7 @@ Ext.define('DoctorsNearMe.store.Location', {
                             me.addItem(place);
                         });
 
-                        //trying filling store early
+                        //details are filled in the background 
                         me.getPlaceDetails(results, 0,searchCount);
                     }
 
@@ -93,12 +112,20 @@ Ext.define('DoctorsNearMe.store.Location', {
         }
     },
 
+    /*
+    * Clear the store
+    * @method
+    */
     storeClear: function(){
         this.removeAll();
         console.log(this.getRange());
         this.fireEvent('storecleared');
     },
 
+    /*
+    * Add an item to the store. 
+    * @method
+    */
     addItem: function(record,isTextSearch){
         this.add(record);
 
@@ -120,6 +147,10 @@ Ext.define('DoctorsNearMe.store.Location', {
         this.fireEvent("locationadded");
     },
 
+    /*
+    * Sends a request to the ratingsServer to see if this place has been liked
+    * @method
+    */
     isLiked: function(record){
         var me = this;
         Ext.Ajax.request({
@@ -159,6 +190,10 @@ Ext.define('DoctorsNearMe.store.Location', {
         });
     },
 
+    /*
+    * Check inside the favorites to see if this item is a favorite
+    * @method
+    */
     isFavorite:function(reference){
         var currentFav = DoctorsNearMe.config.getFavorites();
 
@@ -176,6 +211,11 @@ Ext.define('DoctorsNearMe.store.Location', {
         }
     },
 
+    /*
+    * Runs in background after a search happens, to fill the details of the items in the store.
+    * Recursively runs itself with a time delay to avoid overquery limit
+    * @method
+    */
     getPlaceDetails: function (results, i,  searchCount) {
         console.log("new one"+searchCount);
         var me = this;
@@ -217,40 +257,11 @@ Ext.define('DoctorsNearMe.store.Location', {
             return;
         }
     },
-    //OK Im using again
-    //NOT USED NOW. THE EVENT INSIDE THIS IS NOW FIRED INSIDE setDetailsForTheRecord FUNCTION. IF YOU ARE GONNA USE THIS AGAIN PUT ANOTHER EVENT NAME
-    //this was added to set details for the record before going to next location by the forward button in details view
-    setDetails: function(record){
-        var service = this.getService();
-        var me = this;
 
-        service.getDetails(
-            {
-                placeId:record.get('place_id')
-            }, function (place, status) {
-
-                if (status == google.maps.places.PlacesServiceStatus.OK) {                 
-
-                    //Put these here to make infowindow popup soon.
-                    record.set('name', place.name);
-                    record.set('formatted_address', place.formatted_address);
-                    record.set('international_phone_number', place.international_phone_number);
-                    record.set('reviews', place.reviews);
-                    record.set('opening_hours', place.opening_hours);
-                    record.set('types', place.types);
-
-                    me.fireEvent('detailssetfordetailsview',record);
-
-                }
-                else {
-                    console.log("failed");
-                    console.log(status);
-                }
-            });
-    },
-
-    //USED IF THERE IS A RECORD THAT HASN'T BEEN SET DUE TO OVER QUERY LIMIT
-    //use if you are going to make the request when clicking on a marker
+    /*
+    * Used when filling record separately which had been missed due to OVER_QUERY_LIMIT but needed later
+    * @method
+    */
     setDetailsForTheRecord: function (record, marker) {
 
         var service = this.getService();
@@ -280,7 +291,10 @@ Ext.define('DoctorsNearMe.store.Location', {
         });
     },
 
-    //this is called when logging in
+    /*
+    * Called when logging in, to set liked status
+    * @method
+    */
     setLikeForRecords: function () {
         var me = this;
         this.getRange().forEach(function (record) {
@@ -288,6 +302,10 @@ Ext.define('DoctorsNearMe.store.Location', {
         })
     },
 
+    /*
+    * Called when a user likes a place
+    * @method
+    */
     like: function (like,id,button,detailsView) {
         console.log("inside like");
         var me = this;

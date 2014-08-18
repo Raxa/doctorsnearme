@@ -12,16 +12,34 @@ Ext.define('DoctorsNearMe.config.Runtime', {
        // ratingServerDomain: 'http://192.168.56.1:8888/',
        // ratingServerDomain: 'http://192.168.1.2:8888/',
 
+        /**
+         * cfg {Object} set once user logs in 
+         */
         user:null,
 
+        /**
+         * cfg {Boolean} If the user has logged in or not 
+         */
         loggedIn: false,
 
+        /**
+         * cfg [Object] At app start this is set after loading from local storage 
+         */
         favorites: [],
 
+        /**
+         * cfg {Object} Current language 
+         */
         language: null,
 
+        /**
+         * cfg {String} set once user logs in 
+         */
         userName: null,
 
+        /**
+         * cfg {String} set once user logs in 
+         */
         password: null
 
     },
@@ -30,16 +48,17 @@ Ext.define('DoctorsNearMe.config.Runtime', {
         this.initConfig(config);
     },
 
+    /*
+    * Called inside app.js
+    * @method
+    * @public
+    */
     startApp: function () {
 
-        //    Ext.Function.defer(function () {
-           // navigator.splashscreen.hide();
-
+            //destroy splash image and loading indicator
             Ext.fly('splash').destroy();
             Ext.fly('bluespin').destroy();
-
-            
-
+         
             DoctorsNearMe.config.setLanguage(EN);
 
             //create slide menu

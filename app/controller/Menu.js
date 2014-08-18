@@ -30,6 +30,12 @@ Ext.define('DoctorsNearMe.controller.Menu', {
         }
     },
 
+    /*
+     * Executed when an option is selected from sharing option list
+     * @method
+     * @param {String} type
+     * @private
+     */
     tellFriends:function(type){
         switch (type) {
             case 'EMAIL':
@@ -51,6 +57,11 @@ Ext.define('DoctorsNearMe.controller.Menu', {
         }
     },
 
+    /*
+     * Executed when user clicks tell a friend button on menu
+     * @method
+     * @private
+     */
     share: function(){
 
         var sharelist= this.getShareList();
@@ -62,12 +73,22 @@ Ext.define('DoctorsNearMe.controller.Menu', {
         sharelist.show()
     },
 
+    /*
+     * Toggle split lines and horizontal lines on toolbar
+     * @method
+     * @private
+     */
     onMenuToggle: function () {
         console.log("on menu toggle");
         if (this.getMapView()!=null)
         this.getMapView().toggleToolbarMoreImage();
     },
 
+    /*
+     * Executed when clicking on saved button
+     * @method
+     * @private
+     */
     onShowFavorites: function () {
         console.log("on show favorites");
         var store = Ext.data.StoreManager.lookup('fav-store');
@@ -97,16 +118,34 @@ Ext.define('DoctorsNearMe.controller.Menu', {
 
     },
 
+    /*
+     * Executed when a check box is checked on menu(hospital,doctors or pharmacy)
+     * @method
+     * @param {Integer} choice
+     * @private
+     */
     onChoice: function (choice) {
         console.log("inside onchoice menu controller");
         this.getMapView().setCurrentSearch(choice);
     },
 
+    /*
+     * Executed when a slider value changes
+     * @method
+     * @param {Integer} newRadius
+     * @private
+     */
     onSearchRadiusChange: function (newRadius) {
         console.log("on search radius change");
         this.getMapView().setSearchRadius(newRadius*1000);
     },
 
+    /*
+     * Executed when specialty choice changes
+     * @method
+     * @param [String] newSpecialtyArray
+     * @private
+     */
     onSpecialtyChange: function (newSpecialtyArray) {
         this.getMapView().setSpecialties(newSpecialtyArray);
     }
