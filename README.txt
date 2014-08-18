@@ -7,6 +7,9 @@ in order to see the full functionality, you need to install the nodeJS server wh
 included in the repository and create a mySQL database with appropriate tables or import 
 the sql file inside the repository.
 
+Please find the project wiki here
+https://raxaemr.atlassian.net/wiki/display/RAXAJSS/Doctors+Near+Me
+
 2. Features
 
 ->Searching hospitals
