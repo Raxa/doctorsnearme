@@ -54,11 +54,11 @@ Please refer to following link and follow "Install Cordova Shell Tools" topic
 http://cordova.apache.org/docs/en/3.5.0/guide_platforms_android_index.md.html#Android%20Platform%20Guide
 
 
-->Now go inside the project folder and run 
+->Now go inside the project folder and run (in command line)
 sencha app build native
 
 this will create a debug version of the app inside, 
-your-roject-folder/cordova/platforms/android/ant-build
+your-project-folder/cordova/platforms/android/ant-build
 
 -> Now you can install the app in your android phone but to see like and comment functionality works,
 you need to import the given mysql database(ratingsdb.sql) and run the nodeJS server.
