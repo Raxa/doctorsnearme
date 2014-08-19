@@ -11,23 +11,23 @@ the sql file inside the repository.
 
 ## 2. Features
 
-->Searching hospitals
+* Searching hospitals
 
-->Searching doctors
+* Searching doctors
 
-->Searching pharmacies
+* Searching pharmacies
 
-->Filtering results
+* Filtering results
 
-->Liking and commenting
+* Liking and commenting
 
-->Marking and saving favorites
+* Marking and saving favorites
 
-->Logging in
+* Logging in
 
-->Language support
+* Language support
 
-->Sharing the app via email, sms and social networks
+* Sharing the app via email, sms and social networks
 
 Please find the project wiki here
 https://raxaemr.atlassian.net/wiki/display/RAXAJSS/Doctors+Near+Me
