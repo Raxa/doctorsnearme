@@ -1,4 +1,4 @@
-===========================DOCTORS NEAR ME===============================================
+======================DOCTORS NEAR ME=====================================
 
 1. Overview
 Doctors Near Me is an opensource mobile application implemented using Sencha Touch mobile
@@ -12,13 +12,21 @@ the sql file inside the repository.
 2. Features
 
 ->Searching hospitals
+
 ->Searching doctors
+
 ->Searching pharmacies
+
 ->Filtering results
+
 ->Liking and commenting
+
 ->Marking and saving favorites
+
 ->Logging in
+
 ->Language support
+
 ->Sharing the app via email, sms and social networks
 
 Please find the project wiki here
