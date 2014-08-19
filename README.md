@@ -1,12 +1,10 @@
+![alt text](https://raw.githubusercontent.com/Raxa/doctorsnearme/cordova/resources/icons/AppIcon@2x.png)
+
 #DOCTORS NEAR ME
 
 ## 1. Overview
-Doctors Near Me is an opensource mobile application implemented using Sencha Touch mobile
-web application framework. The Sencha Touch version used is 2.3.0. It is licensed under 
-GNU General Public License V3. Instructionsto build the application are given below and 
-in order to see the full functionality, you need to install the nodeJS server which is 
-included in the repository and create a mySQL database with appropriate tables or import 
-the sql file inside the repository.
+Doctors Near Me is an opensource mobile application implemented using Sencha Touch mobile web application framework. The Sencha Touch version used is 2.3.0. It is licensed under GNU General Public License V3. Instructionsto build the application are given below and in order to see the full functionality, you need to install the nodeJS server which is 
+included in the repository and create a mySQL database with appropriate tables or import the sql file inside the repository.
 
 
 ## 2. Features
