@@ -33,6 +33,16 @@
         this.removeAt(this.findExact('query', token));
 
         this.sync();
+    },
+
+    clearLocalStorage: function () {
+        this.load();
+
+        this.removeAll();
+
+        this.sync();
     }
+
+
 
 });

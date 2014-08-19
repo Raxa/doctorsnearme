@@ -65,8 +65,8 @@ Ext.define('DoctorsNearMe.config.Runtime', {
             var menu = Ext.create('DoctorsNearMe.view.Menu');
             Ext.Viewport.add(menu);
 
-            var contactList = Ext.create('DoctorsNearMe.view.ContactList');
-            Ext.Viewport.add(contactList);
+           // var contactList = Ext.create('DoctorsNearMe.view.ContactList');
+            //Ext.Viewport.add(contactList);
 
             //create mapview
             var mapView = Ext.create('DoctorsNearMe.view.MapView');
