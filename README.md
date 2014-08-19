@@ -1,6 +1,6 @@
-======================DOCTORS NEAR ME=====================================
+#DOCTORS NEAR ME
 
-1. Overview
+## 1. Overview
 Doctors Near Me is an opensource mobile application implemented using Sencha Touch mobile
 web application framework. The Sencha Touch version used is 2.3.0. It is licensed under 
 GNU General Public License V3. Instructionsto build the application are given below and 
@@ -9,7 +9,7 @@ included in the repository and create a mySQL database with appropriate tables o
 the sql file inside the repository.
 
 
-2. Features
+## 2. Features
 
 ->Searching hospitals
 
@@ -33,7 +33,7 @@ Please find the project wiki here
 https://raxaemr.atlassian.net/wiki/display/RAXAJSS/Doctors+Near+Me
 
 
-3. Building the app for android
+## 3. Building the app for android
 
 ->Clone this project from GitHub
 
@@ -88,7 +88,7 @@ work server and the client need to be in the same local network.
 
 
 
-4. License
+## 4. License
 
 
                     GNU GENERAL PUBLIC LICENSE
