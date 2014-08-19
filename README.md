@@ -62,7 +62,7 @@ http://cordova.apache.org/docs/en/3.5.0/guide_platforms_android_index.md.html#An
 
 
 * Now go inside the project folder and run (in command line)
-sencha app build native
+`sencha app build native`
 
 this will create a debug version of the app inside, 
 your-project-folder/cordova/platforms/android/ant-build
@@ -71,7 +71,7 @@ your-project-folder/cordova/platforms/android/ant-build
 you need to import the given mysql database(ratingsdb.sql) and run the nodeJS server.
 
 To run the nodeJS server, go to the folder "RatingsServer" inside the project-folder and run,
-node index.js
+`node index.js`
 
 Then you need to open your-project-folder/app/config/Runtime.js and change the "RatingsServerDomain"
 config.
