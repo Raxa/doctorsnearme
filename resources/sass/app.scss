@@ -5,10 +5,10 @@
 $base-gradient:'glossy';
 //$base-color: rgb(8, 73, 118);
 //$base-color: rgb(17, 113, 178);
-$base-color: #157efb;
+$base-color: #1081FB;
 
 //$list-active-color:rgb(8, 73, 118);
-$list-active-color:#157efb;
+$list-active-color:#1081FB;
 
 
 @import 'sencha-touch/cupertino';
@@ -26,7 +26,7 @@ $list-active-color:#157efb;
          */
         html, body {
             height: 100%;
-            background-color: white;
+            background-color: transparent; 
         }
 
 
@@ -71,7 +71,7 @@ $list-active-color:#157efb;
                 width: 20px;
                 height: 20px;
                 border-radius: 12px;
-                border: 3px solid #0d66f2;
+                border: 3px solid #1081FB;
             }
 
             /* Spinning circle mask */
@@ -94,10 +94,63 @@ $list-active-color:#157efb;
             /*another preloader*/
 /////////////////////////////////////////////////////////
 
+/////////////conatact panel///////////////////
+.contactitem{
+
+//.x-field .x-field-input, .x-field .x-input-el{
+//width:20%;
+//}
+
+.x-field .x-field-input, .x-field .x-input-el{
+	border:0;
+}
+
+.contact-email{
+font-size:0.9em;
+color:lightgray;
+}
+
+}
+
+.contact-list{
+
+.x-toolbar .x-title{
+padding-top:0.7em;
+}
+
+.x-toolbar.x-docked-top .x-button{
+padding-top:.7em;
+}
+
+.x-indexbar > div{
+font-size:0.8em;
+}
+
+.x-indexbar-pressed{
+background-color:white;
+}
+.x-toolbar .x-field-input{
+	border-radius:8px;
+}
+
+.search-toolbar{
+	background-color:lightgray;
+	border:0;
+}
+
+.x-toolbar .x-title{
+	font-weight:bold;
+}
+
+
+}
+
+//////////////contact panel//////////////////////
+
 
 .x-list-label{ 
 	   font-size: 1.1em ; 
-	   color:#157efb ; 
+	   color:#1081FB ; 
 }
 
 //to make the comment field border radius zero
@@ -112,7 +165,7 @@ $list-active-color:#157efb;
 
 
 .x-title{
-	color:#0d66f2;
+	color:#1081FB;
 }
 
 .list-view{
@@ -137,14 +190,25 @@ $list-active-color:#157efb;
 		width:50%;
 	}
 
+	.list-direction-block{
+	}
+
+	.half-length{
+		width:50%
+	}
+
+	.full-length{
+		width:100%
+	}
+
 	.list-call{
 		vertical-align:middle;
 		text-align:center;
 		color:white;
 		-webkit-border-radius: 0px;
 		border-radius:0px;
-		border: 1px solid #0d66f2;
-		background: #0d66f2;
+		border: 2px solid #1081FB;
+		background: #1081FB;
 		height: 40px;
 		//width:60px;
 		width:75%;
@@ -163,21 +227,21 @@ $list-active-color:#157efb;
 		background-size: 20px 20px;
 		background-repeat: no-repeat;
 		background-position: center;
-		border: 2px solid #0d66f2;
+		border: 2px solid #1081FB;
 		margin:0;
 	}
 
-	.list-direction-block{
+	.intion-block{
 		width:50%;
 	}
 
 	.list-direction{
 		vertical-align:middle;
 		text-align:center;
-		color:#0d66f2;
+		color:#1081FB;
 		-webkit-border-radius: 0px;
 		border-radius:0px;
-		border: 1px solid #0d66f2;
+		border: 2px solid #1081FB;
 		background: white;
 		height: 40px;
 		margin:0;
@@ -253,7 +317,7 @@ $list-active-color:#157efb;
 
 .username-pwd{
 	border:0;
-	background-color:#FFCCFF;
+	background-color:#F3E3E5;
 	width:90%;
 	height:50px;
 	padding:1em .6em .6em 1em;
@@ -263,7 +327,7 @@ $list-active-color:#157efb;
 
 
 .signin-btn{
-	background-color:#00CC66;
+	background-color: #73E283 ;
 	border:0;border-radius:0;
 	margin-left:5%;
 	margin-right:5%;
@@ -279,7 +343,7 @@ $list-active-color:#157efb;
 
 .cancel-btn{
 	border:0;
-	background-color:#FFCCFF;
+	background-color:#F3E3E5;
 	margin-left:30%;
 	margin-right:30%;
 	height:50px;
@@ -293,8 +357,9 @@ $list-active-color:#157efb;
 }
 
 .signup-btn{
-	background-color:#3366FF;
+	background-color:#6A9DE5;
 	border-radius:0;
+	border-color:#6A9DE5;
 	width:40%;
 	margin-right:5%;
 	margin-left:55%;
@@ -327,9 +392,18 @@ $list-active-color:#157efb;
 	text-align:center;
 	font-family:Tw Cen MT;
 
+	border:0;
+	background-color:#F3E3E5;
+
 	.x-innerhtml{
 	vertical-align:middle;
 	}
+}
+
+.forgotlogin-label{
+	color:black;
+	//margin-top:1%;
+	font-family:Tw Cen MT;
 }
 
 	.app-link{
@@ -370,13 +444,17 @@ border:1px solid white;
 .direction{
 	vertical-align:middle;
 	text-align:center;
-	color:#0d66f2;
+	color:#1081FB;
 	-webkit-border-radius: 0px;
 	border-radius:0px;
-	border: 1px solid #0d66f2;
+	border: 2px solid #1081FB;
 	background: white;
 	height: 40px;
 	margin:0;
+}
+
+.direction-full-width{
+	width:120px;
 }
 
 .more-details{
@@ -395,7 +473,7 @@ border:1px solid white;
 
 .like{
 	background-image:url('images/Tellafriend.png');
-	background-size: 30px 30px;
+	//background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;
 	height:30px;
@@ -406,7 +484,7 @@ border:1px solid white;
 
 .dislike{
 	background-image:url('images/dislike.png');
-	background-size: 30px 30px;
+	//background-size: 30px 30px;
 	background-repeat: no-repeat;
 	background-position: center;
 	height:30px;
@@ -416,31 +494,34 @@ border:1px solid white;
 }
 
 .call{
+	padding-left:1px;
+	white-space:nowrap;
 	vertical-align:middle;
-	text-align:center;
+	text-align:right;
 	color:white;
 	-webkit-border-radius: 0px;
 	border-radius:0px;
-	border: 1px solid #0d66f2;
-	background: #0d66f2;
+	border: 2px solid #1081FB;
+	background: #1081FB;
 	height: 40px;
-	width:60px;
+	width:100px;
 	margin:0;
   a{
   color:white;
   text-decoration: none;
+  margin-top:10px;
+  margin-left:15px;
+  float:left;
 } 
 }
 
 .call-img{
+	float:left;
 	vertical-align:middle;
-	height:40px;
-	width:40px;
-	background-size: 40px 40px;
-	background-repeat: no-repeat;
-	background-position: center;
-	border: 2px solid #0d66f2;
-	margin:0;
+	 width:40px;
+	// height:40px;
+	 padding-right:4px;
+	 padding-left:2px;
 }
 
 .doctor{
@@ -458,8 +539,27 @@ background-image:url('images/home.png');
 	
 }
 
+.share-label{
+	padding:10px;
+	color:#999999;
+	font-size:0.8em;
+	text-align :center;
+	background-color:#D4D3E8;
+}
+
+
+.x-sheet-action .x-button{
+	margin:0;
+	border-top:1px solid #D0D0D0;
+	border-radius:0;
+}
+
+.x-sheet-action{
+padding:0;
+}
+
 .menu{
-	color:#157efb;
+	color:#1081FB;
 
 	.x-field-input{
 		border-radius:5px;
@@ -477,6 +577,10 @@ background-image:url('images/home.png');
 		border-radius:5px;
 		min-width:45px;
 	}
+	}
+
+	.x-toolbar .x-button{
+		padding-top:.7em;
 	}
 }
 
@@ -502,7 +606,7 @@ text-align:center;
 	font-size: 1.1em;
 	margin-top:5px;
 	margin-bottom:5px;
-	color:#157efb;
+	color:#1081FB;
 	border:0;
 }
 
@@ -550,7 +654,7 @@ text-align:center;
 .spec-cls{
 
 	body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td{
-		color: #0d66f2;
+		color: #1081FB;
 	}
 	//this could change the height of the specialty field. But without & it doesnt. I think that is because x-field is not inside spec-cls but with it
 	&.x-field{
@@ -588,9 +692,9 @@ text-align:center;
 vertical-align:middle;
 	height:20px;
 	width:20px;
-	margin-top:10px;
-	margin-left:3px;
-	margin-right:3px;
+	margin-top:12px;
+	margin-left:1px;
+	margin-right:8px;
 }
 
 
@@ -604,7 +708,8 @@ vertical-align:middle;
 .splitline{
 	height:40px;
 	width:25px;
-	margin:1px;
+	margin-top:1px;
+	margin-bottom:1px;
 }
 .more{
 	//padding-bottom:20px;
@@ -638,7 +743,7 @@ vertical-align:middle;
 		}
 
 		input[placeholder] {
-		   color: #0d66f2;
+		   color: #1081FB;
 		   font-weight:bold;
 			padding-left:5px;
 			padding-right:5px;
@@ -651,7 +756,7 @@ vertical-align:middle;
 		}
 		//input::-webkit-input-placeholder {
 			//color: #2B2B2B;
-			//color: #0d66f2;
+			//color: #1081FB;
 			//font-weight:bold;
 			//padding-left:5px;
 			//padding-right:5px;
@@ -663,7 +768,7 @@ vertical-align:middle;
 
 			//	input::input-placeholder {
 			//color: #2B2B2B;
-			//color: #0d66f2;
+			//color: #1081FB;
 			//font-weight:bold;
 			//padding-left:5px;
 			//padding-right:5px;
@@ -676,6 +781,35 @@ vertical-align:middle;
 //////SPECIALTY MENU////////////////////
 
 ////////////SEARCH BOX///////////////////////
+.x-toolbar.x-docked-top .x-button{
+padding-left:0;
+}
+
+.search-icon{
+.x-button-icon{
+width:3em;
+height:1.8em;
+color:white;
+background-color:gray;
+border:1px solid gray;
+//margin:1.5px;
+margin-top:1.7px;
+margin-left:1.5px;
+margin-right:1.5px;
+margin-bottom:1.5px;
+border-radius:3px;
+padding-top:5px;
+padding-bottom:5px;
+
+}
+
+
+}
+
+.search-button-label{
+		color:white;
+}
+
 .searchbox-label{
 //this made the two images on search box are properly placed
  padding:.2em .6em .6em 1em;
@@ -699,13 +833,14 @@ vertical-align:middle;
 			//background-repeat: no-repeat;
 		//}
 
-		input[placeholder] {
-			background-image:url('images/search.png');
-			background-size: 19px 19px;
-			background-position: right;
-			background-repeat: no-repeat;
-			padding-right:5px;
-		}
+		//This was removed after putting search iconCls for search button
+		//input[placeholder] {
+		//	background-image:url('images/search.png');
+		//	background-size: 19px 19px;
+		//	background-position: right;
+		//	background-repeat: no-repeat;
+		//	padding-right:5px;
+		//}
 
 		.x-input-el{
 			min-height:0;

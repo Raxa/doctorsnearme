@@ -10,7 +10,6 @@
     will need to resolve manually.
 */
 
-
 Ext.application({
     name: 'DoctorsNearMe',
 
@@ -20,13 +19,13 @@ Ext.application({
         'DoctorsNearMe.math.Algorithms'
     ],
 
-    views: ['LocationMap','MapView','Menu','ListView','DetailsView'],
-    
-    controllers:['MapView','DetailsView','Menu','Login','Language'],
-    
-    stores: ['Location', 'Memory', 'Comment','Language','Specialization'],
-    
-    models: ['Location', 'Memory', 'Comment'],
+    views: ['LocationMap', 'MapView', 'Menu', 'ListView', 'DetailsView','Contact','ContactList'],
+
+    controllers: ['MapView', 'DetailsView', 'Menu', 'Login', 'Language', 'ContactList'],
+
+    stores: ['Location', 'Memory', 'Comment', 'Language', 'Specialization', 'Contact'],
+
+    models: ['Location', 'Memory', 'Comment', 'Contact'],
 
     icon: {
         '57': 'resources/icons/AppIcon.png',
@@ -34,6 +33,7 @@ Ext.application({
         '114': 'resources/icons/AppIcon@2x.png',
         '144': 'resources/icons/AppIcon~ipad@2x.png'
     },
+    isIconPrecomposed: true,
 
     startupImage: {
         '320x460': 'resources/startup/320x460.jpg',
@@ -41,50 +41,34 @@ Ext.application({
         '768x1004': 'resources/startup/768x1004.png',
         '748x1024': 'resources/startup/748x1024.png',
         '1536x2008': 'resources/startup/1536x2008.png',
-        '1496x2048': 'resources/startup/1496x2048.png',
-        '640x1096': 'resources/startup/640x1096.png'
+        '1496x2048': 'resources/startup/1496x2048.png'
     },
 
-    isIconPrecomposed: true,
+    launch: function() {
+		Ext.Viewport.innerElement.addCls('viewport-inner');
+				
+		var appStart = true;
 
-    launch: function () {
+        //Check for internet connection
+		if (navigator.connection.type != Connection.NONE) {
+		    DoctorsNearMe.config.startApp();
+		}
+		else {
 
-        Ext.Viewport.innerElement.addCls('viewport-inner');
+		    Ext.Msg.setMinWidth('300px');
+		    Ext.Msg.alert("Please connect to internet");
 
-        // Destroy the #appLoadingIndicator element
-      
-     /*   Ext.Function.defer(function () {
-            Ext.fly('splash').destroy();
-            Ext.fly('bluespin').destroy();
+		    document.addEventListener("online", onOnline, false);
 
-            DoctorsNearMe.config.setLanguage(EN);
-
-            //create slide menu
-            var menu = Ext.create('DoctorsNearMe.view.Menu');
-            Ext.Viewport.add(menu);
-
-            //create mapview
-            var mapView = Ext.create('DoctorsNearMe.view.MapView');
-            Ext.Viewport.add(mapView);
-            Ext.Viewport.setActiveItem(mapView);
-
-            //create favorites store
-            var favoritesStore = Ext.create('DoctorsNearMe.store.Memory', {
-                storeId: 'fav-store'
-            });
-
-            //load from local storage
-            favoritesStore.load();
-
-            //store favorites from local storage in a runtime variable
-            var currentFavorites = DoctorsNearMe.config.getFavorites();
-            favoritesStore.getRange().forEach(function (record) {
-                currentFavorites.push(Ext.JSON.decode(record.get('query')));
-            });
-        }, 500);*/
-
-            DoctorsNearMe.config.startApp();
-        
+		    function onOnline() {
+		        if (appStart) {
+		                window.location.reload(true);
+		            appStart = false;
+		        }
+		       
+		    }
+		}
+			
     },
 
     onUpdated: function() {

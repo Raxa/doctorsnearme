@@ -57,7 +57,7 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
          */
         initialUserLocationSetting: true,
 
-        ////tetsing a global infowindow
+        //a global infowindow
         infoWindow :null
                       
     },
@@ -85,6 +85,9 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
             delegate: 'button.direction',
             tap: function (event, node, options, eOpts) {
                 console.log("get directions");
+                me.clearRoutes();
+                me.clearMarkers(this.getDirectionMarkers());
+                node.disabled = true;
                 me.fireEvent('getdirections', me, node.id);
             }
         });
@@ -181,7 +184,7 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
         google.maps.event.addListener(marker, 'click', function (pos) {
             var infowindow = new google.maps.InfoWindow();
 
-            lang = DoctorsNearMe.config.getLanguage();
+             lang = DoctorsNearMe.config.getLanguage();
 
             var name = record.get('name');
 
@@ -221,89 +224,94 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
     * @param {Marker} marker
     */
     setInfowindowContent: function (record,marker) {
-        var phoneNumber = record.get('international_phone_number');
-        var idString = record.get('id');
 
-        var name = record.get('name');
-        var userimg = '<img class="user-img" src="resources/icons/empty.png">';
-
-        var moredetails = '<img class="more-details" id =' + idString + ' src = "resources/icons/i_30_30.png">';
-
-        var like = "";
-
-        if (DoctorsNearMe.config.getLoggedIn()) {
-
-            if (!record.get('isLiked')) {
-                console.log("not like");
-                like = '<button class="like-img like" id=' + idString + '-like>';
-            } else {
-                console.log("like");
-                like = '<button class="like-img dislike" id=' + idString + '-like>';
-            }
-        }
-
-        var call = "";
-        if (phoneNumber != null) {
-            call = '<img class="call-img" src = "resources/icons/Phone_40_40.png"><button class="call"><a href="tel:' + phoneNumber + '">'+lang.CALL+'</a></button>';
-        }
-        var directions = '<button class="direction" id=' + idString + '><img class="direction-img" src = "resources/icons/Arrow_40_40.png">' + lang.GET_DIRECTIONS + '</button>';
-
-        // var infowindow = new google.maps.InfoWindow();
         var infowindow = this.getInfoWindow();
 
-        var firstRow = '<div  class="inlineblock">' + userimg + '</div>' +
-                 '<div class="inlineblock">' +
-                       '<div class="inlineblock"><p class="wordstyle">&nbsp;&nbsp;' + name + '</p></div>' +
-                       '<div class="inlineblock">' + moredetails + '</div>' +
-                       '<div>' + like + '</div>' +
-                 '</div>';
+        var values = {
+            id: record.get('id'),
+            name: record.get('name'),
+            isLiked: record.get('isLiked'),
+            phoneNumber: record.get('international_phone_number'),
+            loggedIn:DoctorsNearMe.config.getLoggedIn()
+        }
 
-        var secondRow = '<div class="inlineblock">' + call + '</div>' +
-                       '<div class="inlineblock">' + directions + '</div>';
-        var tpl = '<div display="table-column-group">' + firstRow + '</div>' + '<div display="table-column-group">' + secondRow + '</div>';
+        var tpl = new Ext.XTemplate(
+            '<div>',
+                '<div display="table-row-group">',
+                     '<p class="wordstyle">{[this.getName(values.name)]}<img class="more-details" id ={id} src = "resources/icons/i_30_30.png"></p>',
+                '</div>',
+                '<tpl if="values.loggedIn==true">',
+                     '<div display="table-row-group">',
+                            '<tpl if="values.isLiked!=true">',
+                                '<button class="like-img like" id={[this.getLikeId(values.id,"like")]}>',
+                            '</tpl>',
+                            '<tpl if="values.isLiked==true">',
+                                '<button class="like-img dislike" id={[this.getLikeId(values.id,"like")]}>',
+                            '</tpl>',
+                    '</div>',
+                    '<br>',
+                '</tpl>',
+                '<tpl if="values.loggedIn!=true">',
+                     '<div display="table-row-group">',
+                            '<br>',
+                    '</div>',
+                '</tpl>',
+                '<tpl if="values.phoneNumber!=null">',
+                    '<div display="table-row-group">',
+                        '<div class="inlineblock">',
+                            '<button class="call" style="padding-left:1px;"><img class="call-img" src = "resources/icons/Phone_40_40.png"><a href="tel:{phoneNumber}">{[this.getCallLabel()]}</a></button>',
+                    '</div>',
+                        '<div class="inlineblock">',
+                            '<button class="direction" id={id}><img class="direction-img" src = "resources/icons/Arrow_40_40.png">{[this.getDirectionsLabel()]}</button>',
+                        '</div>',
+                    '</div>',                    
+                '</tpl>',
+                 '<tpl if="values.phoneNumber==null">',
+                    '<div display="table-row-group">',
+                        '<div class="inlineblock">',
+                            '<button class="direction direction-full-width" id={id}><img class="direction-img" src = "resources/icons/Arrow_40_40.png">{[this.getDirectionsLabel()]}</button>',
+                        '</div>',
+                    '</div>',
+                '</tpl>',
+            '</div>', {
+                getLikeId: function (id,like) {
+                    return id + '-' + like;
+                },
+                getCallLabel: function () {
+                    return lang.CALL;
+                },
+                getDirectionsLabel: function () {
+                    return lang.GET_DIRECTIONS;
+                },
+                getName: function (name) {
+                    var i=0,j=0,firstRow="",secondRow="";
+                    if (name.length >= 28) {
+                        var splitted = name.split(" ");
+                        var noOfWords = splitted.length;                     
 
-        infowindow.setContent(tpl);
+                        var noOfSpaces = noOfWords - 1;
+                        if (noOfSpaces >= 4) {
+                            secondRow = splitted[noOfWords - 2] + " " + splitted[noOfWords-1];
+                            for (i = 0; i < noOfWords - 2; i++) {
+                                firstRow += splitted[i] + " ";
+                            }
+                            return firstRow + '<br>' + secondRow;
+                        } else {
+                            return name;
+                        }
+
+                        
+                    } else {
+                        return name;
+                    }
+                   
+                }
+            }
+
+            );
+
+        infowindow.setContent(tpl.apply(values));
         infowindow.open(this.getMap(), marker);
-
-        //////////////
-     /*   var me = this;
-        var infoBubble2 = new InfoBubble({
-            map: me.getMap(),
-            content: tpl,
-            position: marker.position,
-            shadowStyle: 1,
-            padding: 0,
-            backgroundColor: 'white',
-            borderRadius: 0,
-            arrowSize: 0,
-            borderWidth: 1,
-            borderColor: 'white',
-            disableAutoPan: false,
-            hideCloseButton: false,
-            arrowPosition: 50,
-            //backgroundClassName: 'phoney',
-            arrowStyle: 2,
-            maxWidth: 800
-        });
-        infoBubble2.open();*/
-
-
-      /* var infobox = new InfoBox({
-            content: tpl,
-            disableAutoPan: false,
-            maxWidth: 150,
-            pixelOffset: new google.maps.Size(-140, 0),
-            zIndex: null,
-            boxStyle: {
-               // background: "url('http://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/examples/tipbox.gif') no-repeat",
-                background:'white',
-                opacity: 1,
-                width: "280px"
-            },
-            closeBoxMargin: "12px 4px 2px 2px",
-            closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
-            infoBoxClearance: new google.maps.Size(1, 1)
-       });*/
 
     },
 
@@ -412,10 +420,10 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
 
                 },
                 locationerror: function (geo, bTimeout, bPermissionDenied, bLocationUnavailable, message) {
-                    if (bTimeout)
+                   /* if (bTimeout)
                         Ext.Msg.alert('Timeout occurred', "Could not get current position");
                     else
-                        alert('Error occurred.');
+                        alert('Error occurred.');*/
                 }
             }
         });
@@ -448,7 +456,8 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
             strokeWeight: 5
         });
 
-        var directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: polylineOptionsActual,map:map });
+        var directionsDisplay = new google.maps.DirectionsRenderer({ polylineOptions: polylineOptionsActual, map: map });
+        console.log(directionsDisplay.polylineOptions);
 
         this.getRoutes().push(directionsDisplay);
 
@@ -460,6 +469,7 @@ Ext.define("DoctorsNearMe.view.LocationMap", {
             travelMode: google.maps.TravelMode.DRIVING
         };
         var me = this;
+        var lang = DoctorsNearMe.config.getLanguage();
 
         directionsService.route(request, function(response, status) {
             if (status == google.maps.DirectionsStatus.OK) {

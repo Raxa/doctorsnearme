@@ -31,13 +31,17 @@ function sendEmail(response,data) {
     var successCount=0;
     var message;
     console.log("no of emails:"+array.length);
+    console.log(array);
     for (var i = 0; i < array.length; i++) {
         smtpTransport.sendMail(mailOptionsObject(array[i].email, array[i].name), function (error, result) {
+            console.log(error);
             triedCount++;
             if(!error){
                 successCount++;
+                console.log("success count:"+successCount);
             }
             message = successCount+" out of "+triedCount+" successfully sent";
+            console.log(message);
             if(triedCount== array.length){
                 respond.emailRespond(response, message);
             }

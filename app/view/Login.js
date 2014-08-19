@@ -4,17 +4,21 @@
 Ext.define('DoctorsNearMe.view.Login', {
     extend: 'Ext.Container',
     xtype: 'loginview',
-    requires: ['Ext.Img', 'Ext.form.FieldSet', 'Ext.field.Email', 'Ext.field.Password', 'Ext.field.Checkbox'],
+    requires: ['Ext.form.FieldSet', 'Ext.field.Email', 'Ext.field.Password', 'Ext.field.Checkbox', 'Ext.Label'],
     config: {
         layout: 'vbox',
         scrollable:'vertical',
         cls: 'login',
-        style:'background-color:#FFCCFF;',
+        style: 'background-color:#F3E3E5;',
+        hideAnimation: {
+            type: 'popIn',
+            duration: 250,
+            easing: 'ease-in'
+        },
         items: [
             {//0
                 xtype: 'button',
-                cls:'signup-btn',
-               // text: '<span class="signup-label">Sign up</span>'
+                cls:'signup-btn'
             },            
             {//1
                 xtype: 'container',
@@ -24,13 +28,11 @@ Ext.define('DoctorsNearMe.view.Login', {
                         xtype: 'textfield',
                         name: 'username',
                         required: true,
-                       // label: 'Username or email',
                         labelAlign:'top',
                         labelCls: 'username-pwd'
                     },
                     {
                         xtype: 'passwordfield',
-                       // label: 'Password',
                         labelAlign: 'top',
                         name: 'password',
                         required: true,
@@ -39,25 +41,22 @@ Ext.define('DoctorsNearMe.view.Login', {
                 ]
             },
             {//forgot login
-                xtype: 'label',
-              //  html: 'Forgot Login/pass?',
-                cls: 'forgot-login'
+                xtype: 'button',
+                cls: 'forgot-login',
+                labelCls: 'forgotlogin-label'
             },
-            
             {
                 xtype: 'button',
-               // text: '<span class="signin-label">Sign In</span>',
                 cls:'signin-btn'
             },
             {
                 xtype: 'button',
                 width: '40%',
-                cls:'cancel-btn',
-               // text:'<span class="cancel-label">CANCEL</span>'
+                cls:'cancel-btn'
             },
             {
                 xtype: 'label',
-                html: '<a href="https://play.google.com/store/apps/details?id=com.raxa.myRaxa&hl=en">Try myRaxa !</a>',
+                html: '<a href="market://details?id=com.raxa.EMR">Try Raxa App!</a>',
                 cls:'app-link'
             }
             
@@ -106,7 +105,17 @@ Ext.define('DoctorsNearMe.view.Login', {
         });
 
         this.callParent();
-       this.setLanguage();
+        this.setLanguage();
+
+        this.setPasswordForgotHandler();
+    },
+
+    setPasswordForgotHandler: function(){
+        var me= this;
+        this.getForgotLoginField().on('tap', function () {
+            me.fireEvent('forgotpassword', me.getUsernameField().getValue());
+            console.log("tapped");
+        });
     },
 
     /**

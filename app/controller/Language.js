@@ -9,9 +9,11 @@ Ext.define('DoctorsNearMe.controller.Language', {
             sideMenu: 'mainmenu',
             detailsView: 'detailsview',
             mapView: 'mapview',
-            userProfile: 'userprofile',
             listView: 'listview',
-            loginView: 'loginview'
+            loginView: 'loginview',
+            shareOptionsList: 'sharelist',
+            contactList: 'contactlist',
+            thankPanel: 'thanks'
         },
         control: {
             sideMenu: {
@@ -21,6 +23,11 @@ Ext.define('DoctorsNearMe.controller.Language', {
         }
     },
 
+    /**
+     * Convert the language in each view 
+     * @method
+     * @private
+     */
     onLanguageChange: function (newLang, oldLang) {
         var language,prevLanguage;
         switch (newLang) {
@@ -45,7 +52,6 @@ Ext.define('DoctorsNearMe.controller.Language', {
 
         if(detailsview!=null){
             detailsview.setLanguage();
-           // detailsview.refreshTemplate();
         }
 
         var loginview = this.getLoginView();
@@ -69,11 +75,23 @@ Ext.define('DoctorsNearMe.controller.Language', {
         if (listview != null) {
             listview.setLanguage(language, prevLanguage);
 
-            //to refresh list to refresh template
-            listview.fillList();
+            listview.refreshTemplate();
+        }
+
+        var shareList = this.getShareOptionsList();
+        if (shareList != null) {
+            shareList.setLanguage();
+        }
+
+        var contactList = this.getContactList();
+        if (contactList != null) {
+            contactList.setLanguage();
         }
         
-
+        var thankPanel = this.getThankPanel();
+        if (thankPanel != null) {
+            thankPanel.setHtml('<span style="color:#1081FB;background-color:transparent"><b>' + DoctorsNearMe.config.getLanguage().THANKS + '</b></span>');
+        }
     }
 
 })

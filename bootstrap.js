@@ -5,7 +5,8 @@
  * metadata-driven class system features 
  */
 Ext.Loader.addClassPathMappings({
-  "EasyTreatyApp": "app",
+  "DoctorsNearMe": "app",
+  "DoctorsNearMe.view.SharingOptionsList": "app/view/SharingOptionList.js",
   "Ext": "touch/src",
   "Ext.device.Purchases.Product": "touch/src/device/purchases/Sencha.js",
   "Ext.device.filesystem.DirectoryEntry": "touch/src/device/filesystem/HTML5.js",
@@ -19,31 +20,38 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js"
 });
 Ext.ClassManager.addNameAlternateMappings({
-  "EasyTreatyApp.config.Runtime": [],
-  "EasyTreatyApp.controller.DetailsView": [],
-  "EasyTreatyApp.controller.Language": [],
-  "EasyTreatyApp.controller.Login": [],
-  "EasyTreatyApp.controller.MapView": [],
-  "EasyTreatyApp.controller.Menu": [],
-  "EasyTreatyApp.math.Algorithms": [],
-  "EasyTreatyApp.model.Comment": [],
-  "EasyTreatyApp.model.Location": [],
-  "EasyTreatyApp.model.Memory": [],
-  "EasyTreatyApp.model.User": [],
-  "EasyTreatyApp.store.Comment": [],
-  "EasyTreatyApp.store.Language": [],
-  "EasyTreatyApp.store.Location": [],
-  "EasyTreatyApp.store.Memory": [],
-  "EasyTreatyApp.store.Radius": [],
-  "EasyTreatyApp.store.Specialization": [],
-  "EasyTreatyApp.ux.Multiselect": [],
-  "EasyTreatyApp.view.DetailsView": [],
-  "EasyTreatyApp.view.ListView": [],
-  "EasyTreatyApp.view.LocationMap": [],
-  "EasyTreatyApp.view.Login": [],
-  "EasyTreatyApp.view.MapView": [],
-  "EasyTreatyApp.view.Menu": [],
-  "EasyTreatyApp.view.UserProfile": [],
+  "DoctorsNearMe.config.Runtime": [],
+  "DoctorsNearMe.controller.ContactList": [],
+  "DoctorsNearMe.controller.DetailsView": [],
+  "DoctorsNearMe.controller.Language": [],
+  "DoctorsNearMe.controller.Login": [],
+  "DoctorsNearMe.controller.MapView": [],
+  "DoctorsNearMe.controller.Menu": [],
+  "DoctorsNearMe.math.Algorithms": [],
+  "DoctorsNearMe.model.Comment": [],
+  "DoctorsNearMe.model.Contact": [],
+  "DoctorsNearMe.model.Location": [],
+  "DoctorsNearMe.model.Memory": [],
+  "DoctorsNearMe.model.User": [],
+  "DoctorsNearMe.store.Comment": [],
+  "DoctorsNearMe.store.Contact": [],
+  "DoctorsNearMe.store.Language": [],
+  "DoctorsNearMe.store.Location": [],
+  "DoctorsNearMe.store.Memory": [],
+  "DoctorsNearMe.store.Radius": [],
+  "DoctorsNearMe.store.Specialization": [],
+  "DoctorsNearMe.ux.Multiselect": [],
+  "DoctorsNearMe.view.Contact": [],
+  "DoctorsNearMe.view.ContactList": [],
+  "DoctorsNearMe.view.DetailsView": [],
+  "DoctorsNearMe.view.ListView": [],
+  "DoctorsNearMe.view.LocationMap": [],
+  "DoctorsNearMe.view.Login": [],
+  "DoctorsNearMe.view.MapView": [],
+  "DoctorsNearMe.view.Menu": [],
+  "DoctorsNearMe.view.SharingOptionsList": [],
+  "DoctorsNearMe.view.ThanksForSharing": [],
+  "DoctorsNearMe.view.UserProfile": [],
   "Ext.AbstractComponent": [],
   "Ext.AbstractManager": [],
   "Ext.AbstractPlugin": [],
@@ -667,45 +675,60 @@ Ext.ClassManager.addNameAlternateMappings({
   ]
 });
 Ext.ClassManager.addNameAliasMappings({
-  "EasyTreatyApp.config.Runtime": [],
-  "EasyTreatyApp.controller.DetailsView": [],
-  "EasyTreatyApp.controller.Language": [],
-  "EasyTreatyApp.controller.Login": [],
-  "EasyTreatyApp.controller.MapView": [],
-  "EasyTreatyApp.controller.Menu": [],
-  "EasyTreatyApp.math.Algorithms": [],
-  "EasyTreatyApp.model.Comment": [],
-  "EasyTreatyApp.model.Location": [],
-  "EasyTreatyApp.model.Memory": [],
-  "EasyTreatyApp.model.User": [],
-  "EasyTreatyApp.store.Comment": [],
-  "EasyTreatyApp.store.Language": [],
-  "EasyTreatyApp.store.Location": [],
-  "EasyTreatyApp.store.Memory": [],
-  "EasyTreatyApp.store.Radius": [],
-  "EasyTreatyApp.store.Specialization": [],
-  "EasyTreatyApp.ux.Multiselect": [
+  "DoctorsNearMe.config.Runtime": [],
+  "DoctorsNearMe.controller.ContactList": [],
+  "DoctorsNearMe.controller.DetailsView": [],
+  "DoctorsNearMe.controller.Language": [],
+  "DoctorsNearMe.controller.Login": [],
+  "DoctorsNearMe.controller.MapView": [],
+  "DoctorsNearMe.controller.Menu": [],
+  "DoctorsNearMe.math.Algorithms": [],
+  "DoctorsNearMe.model.Comment": [],
+  "DoctorsNearMe.model.Contact": [],
+  "DoctorsNearMe.model.Location": [],
+  "DoctorsNearMe.model.Memory": [],
+  "DoctorsNearMe.model.User": [],
+  "DoctorsNearMe.store.Comment": [],
+  "DoctorsNearMe.store.Contact": [],
+  "DoctorsNearMe.store.Language": [],
+  "DoctorsNearMe.store.Location": [],
+  "DoctorsNearMe.store.Memory": [],
+  "DoctorsNearMe.store.Radius": [],
+  "DoctorsNearMe.store.Specialization": [],
+  "DoctorsNearMe.ux.Multiselect": [
     "widget.multiselectfield"
   ],
-  "EasyTreatyApp.view.DetailsView": [
+  "DoctorsNearMe.view.Contact": [
+    "widget.contact"
+  ],
+  "DoctorsNearMe.view.ContactList": [
+    "widget.contactlist"
+  ],
+  "DoctorsNearMe.view.DetailsView": [
     "widget.detailsview"
   ],
-  "EasyTreatyApp.view.ListView": [
+  "DoctorsNearMe.view.ListView": [
     "widget.listview"
   ],
-  "EasyTreatyApp.view.LocationMap": [
+  "DoctorsNearMe.view.LocationMap": [
     "widget.locationmap"
   ],
-  "EasyTreatyApp.view.Login": [
+  "DoctorsNearMe.view.Login": [
     "widget.loginview"
   ],
-  "EasyTreatyApp.view.MapView": [
+  "DoctorsNearMe.view.MapView": [
     "widget.mapview"
   ],
-  "EasyTreatyApp.view.Menu": [
+  "DoctorsNearMe.view.Menu": [
     "widget.mainmenu"
   ],
-  "EasyTreatyApp.view.UserProfile": [
+  "DoctorsNearMe.view.SharingOptionsList": [
+    "widget.sharelist"
+  ],
+  "DoctorsNearMe.view.ThanksForSharing": [
+    "widget.thanks"
+  ],
+  "DoctorsNearMe.view.UserProfile": [
     "widget.userprofile"
   ],
   "Ext.AbstractComponent": [],

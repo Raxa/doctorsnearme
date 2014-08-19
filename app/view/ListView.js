@@ -18,7 +18,8 @@ Ext.define('DoctorsNearMe.view.ListView', {
                xtype: 'list',
                cls:'favorite-list',
                flex: 7,
-               disableSelection:true
+               disableSelection: true,
+               emptyText:'No saved places'
            }
        ]
 
@@ -51,31 +52,6 @@ Ext.define('DoctorsNearMe.view.ListView', {
                 me.fireEvent('moredetails', node.id);
             }
         });
-
-        //this.addListener({
-        //    element: 'element',
-        //    delegate: 'button.list-like-img',
-        //    //delegate: 'div.star',
-        //    tap: function (event, node, options, eOpts) {
-        //        var button = Ext.get(node.id);
-        //        console.log("like tap");
-        //        console.log(button);
-        //        if (button.hasCls('like')) {
-        //            console.log("has class like");
-        //            console.log(node.id);
-        //            console.log(node.id.slice(0, -5));
-        //            me.fireEvent('like', true, node.id.slice(0, -5), button);
-        //        }
-        //        else {
-        //            console.log("doesnt have class like");
-        //            console.log(node.id);
-        //            console.log(node.id.slice(0, -5));
-        //            me.fireEvent('like', false, node.id.slice(0, -5), button);
-        //        }
-        //    }
-        //});
-
-
     },
 
     /**
@@ -90,20 +66,9 @@ Ext.define('DoctorsNearMe.view.ListView', {
         var template = new Ext.XTemplate(
             '<div display="block">',
             '<div display="table-column-group" class="list-firstrow-div">',
-                '<div  class="inlineblock user-img-div"><img class="list-user-img" src="resources/icons/empty3.png"></div>',
                  '<div class="inlineblock">',
                     '<div class="inlineblock docname"><p>{name}</p></div>',
                     '<div class="inlineblock"><img class="list-more-details" id ={id} src = "resources/icons/i_30_30.png"></div>',
-                    //'<tpl if="this.isLoggedIn()==true">',
-                    //    '<div>',
-                    //    '<tpl if="values.isLiked==true">',
-                    //        '<button class="list-like-img dislike" id={id}-like>',
-                    //    '</tpl>',
-                    //     '<tpl if="values.isLiked!=true">',
-                    //        '<button class="list-like-img like" id={id}-like>',
-                    //    '</tpl>',
-                    //    '</div>',
-                    //'</tpl>',
             '<br><br>',
                  '</div>',
             '</div>',
@@ -112,12 +77,15 @@ Ext.define('DoctorsNearMe.view.ListView', {
             '<div display="table-column-group">',
                 '<tpl if="values.international_phone_number!=null">',
                 '<div class="inlineblock list-call-block">',
-                   // '<tpl if="values.international_phone_number!=null">',
                         '<img class="list-call-img" src = "resources/icons/Phone_40_40.png"><button class="list-call"><a href="tel:{international_phone_number}">{[this.getCallLabel()]}</a></button>',
-                   // '</tpl>',
                 '</div>',
                 '</tpl>',
-                '<div class="inlineblock list-direction-block">',
+                '<tpl if="values.international_phone_number!=null">',
+                '<div class="inlineblock list-direction-block half-length">',
+                '</tpl>',
+                '<tpl if="values.international_phone_number==null">',
+                '<div class="inlineblock list-direction-block full-length">',
+                '</tpl>',
                     '<button class="list-direction" id={id}><img class="direction-img" src = "resources/icons/Arrow_40_40.png">{[this.getDirectionsLabel()]}</button>',
                 '</div>',
             '</div>',
@@ -125,7 +93,7 @@ Ext.define('DoctorsNearMe.view.ListView', {
                 
           ,{
               isLoggedIn: function () {
-                  console.log("template function is logged in");
+                  console.log("template function, is logged in");
                   console.log(DoctorsNearMe.config.getLoggedIn());
                   return DoctorsNearMe.config.getLoggedIn();
               },
@@ -173,7 +141,15 @@ Ext.define('DoctorsNearMe.view.ListView', {
     fillList: function () {
         this.getItemList().refresh();
     },
-    
+
+    /**
+     * Reset the template - used in language controller 
+     * @method
+     * @public
+     */
+    refreshTemplate: function(){
+         this.setTemplate();
+    },
     /*
     * Sets the top label
     * @method

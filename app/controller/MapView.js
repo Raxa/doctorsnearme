@@ -3,7 +3,6 @@
  */
 Ext.define('DoctorsNearMe.controller.MapView', {
     extend: 'Ext.app.Controller',
-    requires: ['Ext.device.Contacts'],
     config: {
         refs: {
             mapView: 'mapview',
@@ -25,10 +24,8 @@ Ext.define('DoctorsNearMe.controller.MapView', {
                 detailsreadyfordetailsview:"onDetailsReady"
             },
             detailsView: {
-                //after new design
                 getdirections: "directToMapView",
-                forward: "forwardToNextLocation",
-                //like: "onLike"
+                forward: "forwardToNextLocation"
             },
             listView: {
                 moredetails: "onMoreDetails",
@@ -38,6 +35,11 @@ Ext.define('DoctorsNearMe.controller.MapView', {
         
     },
 
+    /**
+     * In case a separate request is sent for get place details, after getting details this will be called
+     * @method
+     * @private
+     */
     onDetailsReady: function(record){
         this.onLocationSelect(record);
     },
@@ -109,7 +111,9 @@ Ext.define('DoctorsNearMe.controller.MapView', {
 
             mapview.getStore().textSearch(base, types, radius2, locationmap, searchField.getValue());
 
-            this.getMapView().zoomMap(parseInt(radius2));
+            this.getMapView().zoomMap(10000);
+
+            this.getMenu().unCheckRadioButtons();
         } 
        
     },
@@ -188,23 +192,31 @@ Ext.define('DoctorsNearMe.controller.MapView', {
         }
 
         //To fix the error that comes when getting directions from favorite list (list view)
-        var latlng = record.get('geometry').location;
-        if (record.get('isFavorite')) {
-            var loc = record.get('geometry').location;
-            var lat = parseFloat(loc.k);
-            var lng = parseFloat(loc.B);//I dunno what on earth is this! first its A now B you pumpkin head google maps
-            console.log("lat: " + lat);
-            console.log("lng: " + lng);
-            latlng = new google.maps.LatLng(lat, lng);
-        }
-        map.calcRoute(map.getBaseLocation(), latlng, map.getMap());
-        //map.calcRoute(map.getBaseLocation(), record.get('geometry').location, map.getMap());
+        var geometry = record.get('geometry');
+
+        if (geometry != null) {
+            var latlng = geometry.location;
+
+            if (record.get('isFavorite')) {
+                var loc = record.get('geometry').location;
+                var lat = parseFloat(loc.k);
+                var lng = parseFloat(loc.B);//I dunno what on earth is this! first its A now B you pumpkin head google maps
+                console.log("lat: " + lat);
+                console.log("lng: " + lng);
+                latlng = new google.maps.LatLng(lat, lng);
+            }
+            map.calcRoute(map.getBaseLocation(), latlng, map.getMap());
+        } 
+       
 
     },
 
     /*
-  * Executed when an item is selected in List view
-  */
+     * Executed when an item is selected in List view
+     * @method
+     * @param {Object} record
+     * @private
+     */
     onLocationSelect: function (record) {
         var detailsView = this.getDetailsView();
 
@@ -227,10 +239,21 @@ Ext.define('DoctorsNearMe.controller.MapView', {
         
     },
 
+    /*
+     * Shows the side menu
+     * @method
+     * @private
+     */
     showMenu: function () {
         this.getMenu().toggle();
     },
 
+    /*
+     * Executed when a new search is initiated
+     * @method
+     * @param {Integer} the search choice of the user
+     * @private
+     */
     onChoice: function (choice) {
         console.log("inside on choice");
         var mapview = this.getMapView();
@@ -242,31 +265,30 @@ Ext.define('DoctorsNearMe.controller.MapView', {
         switch (choice) {
             case 0: type = 'hospital';
                 title = 'Medical Centers';
-               // specialtyField.setHidden(false);
                 break;
             case 1: type = 'doctor';
                 title = 'Doctors';
-               // specialtyField.setHidden(false);
                 break;
             case 2: type = 'pharmacy';
                 title = 'Pharmacies';
-               // specialtyField.setHidden(true);
                 break;
         }
-
-        //new design
-        // mapview.getBottomBar().setTitle(title);
 
         console.log("inside mapview controller, base: " + base);
 
         var radius1 = mapview.getSearchRadius();
+
+        console.log("radius: " + radius1)
+
+        //if radius is null set it to 2km
         var radius2 = radius1 == null ? 2000 : radius1;
 
         var specialties1 = mapview.getSpecialties();
+
+        //if specialties are null set it to empty array
         var specialties2 = specialties1 == null ? [] : specialties1;
         
         mapview.getStore().radarSearch(base, type, radius2, locationmap, specialties2);
-        //mapview.getStore().populate(new google.maps.LatLng(6.897358, 79.863437), type, mapview.getSearchRadius(), locationmap, mapview.getSpecialties());
 
         this.getMapView().zoomMap(parseInt(radius2));
     }

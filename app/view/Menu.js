@@ -6,7 +6,7 @@ Ext.define('DoctorsNearMe.view.Menu', {
     extend: 'Ext.Container',
 
     requires: [
-       'DoctorsNearMe.ux.Multiselect'
+       'DoctorsNearMe.ux.Multiselect', 'Ext.form.FieldSet', 'Ext.field.Radio', 'Ext.field.Slider'
     ],
 
     xtype: 'mainmenu',
@@ -18,7 +18,6 @@ Ext.define('DoctorsNearMe.view.Menu', {
         right: 0,
         bottom: 0,
         zIndex: 0,
-        // width: 266,
         width: 260,
         padding: '50 10 0 10',
         open: false,
@@ -30,8 +29,6 @@ Ext.define('DoctorsNearMe.view.Menu', {
         items: [
                 {
                     //0
-                    // text: 'My Health Profile',
-                    //ui: 'mainmenu',
                     hidden: true,
                     padding: '5 0 5 0',
                     docked:'top',
@@ -40,7 +37,6 @@ Ext.define('DoctorsNearMe.view.Menu', {
                 },
                  {
                      //6
-                     //   text: 'Log In',
                      ui: 'menu',
                      padding: '5 0 5 0',
                      cls: 'menu-login',
@@ -56,7 +52,6 @@ Ext.define('DoctorsNearMe.view.Menu', {
                               xtype: 'radiofield',
                               name: 'search',
                               value: 'hospital',
-                              //  label: 'Hospitals',
                               labelWidth: '75%',
                               padding: '5 0 5 0',
                               checked: true
@@ -67,7 +62,6 @@ Ext.define('DoctorsNearMe.view.Menu', {
                             xtype: 'radiofield',
                             name: 'search',
                             value: 'doctor',
-                            // label: 'Doctors',
                             labelWidth: '75%',
                             padding: '5 0 5 0'
                         },
@@ -76,7 +70,6 @@ Ext.define('DoctorsNearMe.view.Menu', {
                             xtype: 'radiofield',
                             name: 'search',
                             value: 'pharmacy',
-                            // label: 'Pharmacies',
                             labelWidth: '75%',
                             padding: '5 0 5 0'
                         }
@@ -86,9 +79,7 @@ Ext.define('DoctorsNearMe.view.Menu', {
                 {
                     //3
                     xtype: 'sliderfield',
-                    value: 50,
-                    //minValue: 1000,
-                    //maxValue: 1000000,
+                    value: 2,
                     minValue: 1,
                     maxValue: 1000,
                     labelWidth: '45%',
@@ -101,7 +92,7 @@ Ext.define('DoctorsNearMe.view.Menu', {
                     labelAlign: 'right',
                     label: 'km',
                     readOnly: true,
-                    value: '1',
+                    value: '2',
                     padding: '5 0 15 30%',
                     inputCls: 'distance'
                 },
@@ -121,11 +112,23 @@ Ext.define('DoctorsNearMe.view.Menu', {
                       docked: 'top'
                   },
                 {
-                    //7
-                    // text: 'About',
-                    ui: 'menu',
-                    padding: '5 0 5 0'
-                },
+                    xtype: 'toolbar',
+                    docked: 'bottom',
+                    items: [
+                        {
+                            xtype: 'button',
+                            docked: 'left',
+                            ui:'menu'
+                        },
+                        {
+                            xtype: 'button',
+                            docked: 'right',
+                            ui:'menu',
+                            text: 'Rate us'
+                        }
+                    ]
+
+                }
 
         ]
     },
@@ -135,8 +138,6 @@ Ext.define('DoctorsNearMe.view.Menu', {
         this.getProfileButton().setText(lang.HEALTH_PROFILE);
 
         this.getSavedButton().setText('<img class="menu-heart" src = "resources/icons/Heart_40_40.png" width=20px height=20px align=left style="margin-right:20px;margin-left:10px;margin-bottom:10px;"><p align=left>' + lang.SAVED + '<img class="menu-forward" src = "resources/icons/code3.png" width=15px height=20px align=right></p>');
-
-        this.getAboutButton().setText(lang.ABOUT);
 
         this.getDistanceSelectField().setLabel(lang.DISTANCE);
 
@@ -152,6 +153,11 @@ Ext.define('DoctorsNearMe.view.Menu', {
         else {
             this.getLogInButton().setText(lang.LOG_IN);
         }
+
+        this.getTellaFriendButton().setText('<img src = "resources/icons/Tellafriend1.png" width=20px height=20px align=left style="vertical-align:middle;"><span style="font-size:0.6em;vertical-align:middle;color:black;">&nbsp;' + lang.SHARE + '</span>');
+
+        this.getRateUsButton().setHtml('<img src = "resources/icons/Heart_40_40_1.png" width=20px height=20px align=left style="vertical-align:middle;"><a href="market://details?id=com.raxa.EMR" style="font-size:0.6em;vertical-align:middle;text-decoration: none;color:black;">&nbsp;' + lang.RATE_US + '</a>');
+
     },
 
     /**
@@ -166,11 +172,19 @@ Ext.define('DoctorsNearMe.view.Menu', {
         this.setLanguage();
 
         this.setSelectFieldStores();
+       
+    },
+
+    unCheckRadioButtons: function () {
+        this.getHospitalField().uncheck();
+        this.getDoctorField().uncheck();
+        this.getPharmacyField().uncheck();
     },
 
     setSelectFieldStores: function () {
         this.getLanguageSelectField().setStore(Ext.create('DoctorsNearMe.store.Language'));
     },
+   
 
     /**
      * Sets button handlers
@@ -196,7 +210,6 @@ Ext.define('DoctorsNearMe.view.Menu', {
         });
 
         this.getDistanceSelectField().on('change', function (selectField, newValue, oldValue, eOpts) {
-            //  me.fireEvent('searchradiuschange',parseInt(newValue));
             me.fireEvent('searchradiuschange', this.getValue()[0]);
             me.getDistaceField().setValue(this.getValue()[0]);
             console.log(this.getValue()[0]);
@@ -208,8 +221,10 @@ Ext.define('DoctorsNearMe.view.Menu', {
         });
 
 
-        this.getAboutButton().on('tap', function (button, e, eOpts) {
-            Ext.Msg.alert("Doctors Near Me", "version 1.0");
+        this.getTellaFriendButton().on('tap', function (button, e, eOpts) {
+            me.toggle();
+            me.fireEvent('share');
+          
         });
 
         this.getHospitalField().on('change', function (selectField, newValue, oldValue, eOpts) {
@@ -256,10 +271,17 @@ Ext.define('DoctorsNearMe.view.Menu', {
      * @method
      * @return {Button}
     */
-    getAboutButton: function () {
+    getMenuToolbar: function () {
         return this.getComponent(7);
     },
 
+    getTellaFriendButton:function(){
+        return this.getMenuToolbar().getComponent(0);
+    },
+
+    getRateUsButton: function(){
+        return this.getMenuToolbar().getComponent(1);
+    },
     /**
      * Returns the Log In button
      * @private
@@ -267,7 +289,6 @@ Ext.define('DoctorsNearMe.view.Menu', {
      * @return {Button}
     */
     getLogInButton: function () {
-        //return this.getComponent(6);
         return this.getComponent(1);
     },
 
@@ -283,7 +304,6 @@ Ext.define('DoctorsNearMe.view.Menu', {
     },
 
     getSavedButton: function () {
-        //return this.getComponent(1);
         return this.getComponent(6);
     },
     /**
@@ -306,7 +326,6 @@ Ext.define('DoctorsNearMe.view.Menu', {
             zIndex: 5000,
             hidden: true,
             width: 9999,
-            //left    : this.getWidth(),
             right: this.getWidth(),
             bottom: 0
         });
@@ -329,11 +348,8 @@ Ext.define('DoctorsNearMe.view.Menu', {
     },
 
     toggle: function () {
-        //console.log(this);
         this.setOpen(!this.getOpen());
 
-        //whenever menu is toggleed, need to toggle splitline and morearrow
-        //so this event is fired
     },
 
     updateOpen: function (open) {
@@ -350,7 +366,6 @@ Ext.define('DoctorsNearMe.view.Menu', {
         targetEl = parentCt.innerElement;
 
         if (open) {
-            //targetEl.translate(this.getWidth(), 0, 0);
             targetEl.translate(-this.getWidth(), 0, 0);
             this.maskCmp.show();
         }
